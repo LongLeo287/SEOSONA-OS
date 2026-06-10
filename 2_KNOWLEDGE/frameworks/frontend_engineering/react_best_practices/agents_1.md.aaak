@@ -1,0 +1,100 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: agents_1.md
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+# React Best Practices
+## Abstract
+## Table of Contents
+## 1. Eliminating Waterfalls
+### 1.1 Defer Await Until Needed
+### 1.2 Dependency-Based Parallelization
+import { all } from 'better-all'
+### 1.3 Prevent Waterfall Chains in API Routes
+export async function GET(request: Request) {
+export async function GET(request: Request) {
+### 1.4 Promise.all() for Independent Operations
+### 1.5 Strategic Suspense Boundaries
+## 2. Bundle Size Optimization
+### 2.1 Avoid Barrel File Imports
+import { Check, X, Menu } from 'lucide-react'
+import { Button, TextField } from '@mui/material'
+import Check from 'lucide-react/dist/esm/icons/check'
+import X from 'lucide-react/dist/esm/icons/x'
+import Menu from 'lucide-react/dist/esm/icons/menu'
+import Button from '@mui/material/Button'
+import TextField from '@mui/material/TextField'
+import { Check, X, Menu } from 'lucide-react'
+### 2.2 Conditional Module Loading
+### 2.3 Defer Non-Critical Third-Party Libraries
+import { Analytics } from '@vercel/analytics/react'
+export default function RootLayout({ children }) {
+import dynamic from 'next/dynamic'
+export default function RootLayout({ children }) {
+### 2.4 Dynamic Imports for Heavy Components
+import { MonacoEditor } from './monaco-editor'
+import dynamic from 'next/dynamic'
+### 2.5 Preload Based on User Intent
+## 3. Server-Side Performance
+### 3.1 Cross-Request LRU Caching
+import { LRUCache } from 'lru-cache'
+export async function getUser(id: string) {
+### 3.2 Minimize Serialization at RSC Boundaries
+### 3.3 Parallel Data Fetching with Component Composition
+export default async function Page() {
+export default function Page() {
+export default function Page() {
+### 3.4 Per-Request Deduplication with React.cache()
+import { cache } from 'react'
+export const getCurrentUser = cache(async () => {
+### 3.5 Use after() for Non-Blocking Operations
+import { logUserAction } from '@/app/utils'
+export async function POST(request: Request) {
+import { after } from 'next/server'
+import { headers, cookies } from 'next/headers'
+import { logUserAction } from '@/app/utils'
+export async function POST(request: Request) {
+## 4. Client-Side Data Fetching
+### 4.1 Deduplicate Global Event Listeners
+import useSWRSubscription from 'swr/subscription'
+### 4.2 Use SWR for Automatic Deduplication
+import useSWR from 'swr'
+import { useImmutableSWR } from '@/lib/swr'
+import { useSWRMutation } from 'swr/mutation'
+## 5. Re-render Optimization
+### 5.1 Defer State Reads to Usage Point
+### 5.2 Extract to Memoized Components
+### 5.3 Narrow Effect Dependencies
+### 5.4 Subscribe to Derived State
+### 5.5 Use Functional setState Updates
+### 5.6 Use Lazy State Initialization
+### 5.7 Use Transitions for Non-Urgent Updates
+import { startTransition } from 'react'
+## 6. Rendering Performance
+### 6.1 Animate SVG Wrapper Instead of SVG Element
+### 6.2 CSS content-visibility for Long Lists
+### 6.3 Hoist Static JSX Elements
+### 6.4 Optimize SVG Precision
+### 6.5 Prevent Hydration Mismatch Without Flickering
+### 6.6 Use Activity Component for Show/Hide
+import { Activity } from 'react'
+### 6.7 Use Explicit Conditional Rendering
+## 7. JavaScript Performance
+### 7.1 Batch DOM CSS Changes
+### 7.2 Build Index Maps for Repeated Lookups
+### 7.3 Cache Property Access in Loops
+### 7.4 Cache Repeated Function Calls
+### 7.5 Cache Storage API Calls
+### 7.6 Combine Multiple Array Iterations
+### 7.7 Early Length Check for Array Comparisons
+### 7.8 Early Return from Functions
+### 7.9 Hoist RegExp Creation
+### 7.10 Use Loop for Min/Max Instead of Sort
+interface Project {
+### 7.11 Use Set/Map for O(1) Lookups
+### 7.12 Use toSorted() Instead of sort() for Immutability
+## 8. Advanced Patterns
+### 8.1 Store Event Handlers in Refs
+import { useEffectEvent } from 'react'
+### 8.2 useLatest for Stable Callback Refs
+## References
+
+// COMPRESSION COMPLETE.

@@ -1,0 +1,111 @@
+{
+  "name": "short-form",
+  "description": "TikTok, Reels, and YouTube Shorts video template",
+  "type": "social-short",
+  "defaultAspectRatio": "9:16",
+  "defaultDuration": 8,
+  "platforms": ["tiktok", "reels", "youtube-shorts"],
+  "structure": {
+    "scenes": [
+      {
+        "name": "hook",
+        "duration": 1,
+        "description": "Pattern interrupt - stop the scroll"
+      },
+      {
+        "name": "content",
+        "duration": 5,
+        "description": "Rapid value delivery with visual variety"
+      },
+      {
+        "name": "payoff",
+        "duration": 1.5,
+        "description": "Satisfying conclusion or reveal"
+      },
+      {
+        "name": "cta",
+        "duration": 0.5,
+        "description": "Quick call to action"
+      }
+    ]
+  },
+  "promptTemplate": "Trending short-form social video:\n\nVisual: {user_prompt}\nSetting: Eye-catching, visually interesting\nStyle: Trendy, energetic, native social media feel\nCamera: Dynamic angles, quick pacing, engaging\nLighting: Bright, attention-grabbing\n\nAudio:\n- Brief hook or no dialogue\n- SFX: Punchy transitions, notifications\n- Music: Trending style, energetic beat\n\nTechnical: 8 seconds, 9:16 vertical, 1080x1920, mobile-optimized",
+  "audioConfig": {
+    "dialogue": {
+      "enabled": false,
+      "alternative": "text overlays"
+    },
+    "music": "trending, energetic, beat-driven",
+    "sfx": ["whoosh", "impact", "notification", "pop"]
+  },
+  "styleGuide": {
+    "lighting": "bright, high contrast",
+    "colorGrade": "vibrant, saturated",
+    "cameraMovement": "dynamic, energetic",
+    "pacing": "fast, attention-grabbing"
+  },
+  "hooks": {
+    "types": [
+      "controversial statement",
+      "surprising fact",
+      "visual shock",
+      "question",
+      "POV setup"
+    ],
+    "timing": "first 1 second critical"
+  },
+  "textOverlays": {
+    "enabled": true,
+    "style": "bold, readable at small size",
+    "captions": "essential for sound-off viewing"
+  },
+  "variations": [
+    {
+      "name": "short-form-15s",
+      "duration": 15,
+      "scenes": ["hook", "point-1", "point-2", "payoff", "cta"]
+    },
+    {
+      "name": "short-form-30s",
+      "duration": 30,
+      "scenes": ["hook", "setup", "point-1", "point-2", "point-3", "payoff", "cta"]
+    },
+    {
+      "name": "short-form-60s",
+      "duration": 60,
+      "scenes": [
+        "hook",
+        "intro",
+        "setup",
+        "content-1",
+        "content-2",
+        "content-3",
+        "content-4",
+        "payoff",
+        "cta"
+      ]
+    }
+  ],
+  "trendingFormats": [
+    {
+      "name": "POV",
+      "description": "Point of view storytelling"
+    },
+    {
+      "name": "Tutorial",
+      "description": "Quick how-to with text overlays"
+    },
+    {
+      "name": "Before/After",
+      "description": "Transformation reveal"
+    },
+    {
+      "name": "Day in Life",
+      "description": "Behind the scenes format"
+    },
+    {
+      "name": "Storytime",
+      "description": "Narrative hook with payoff"
+    }
+  ]
+}

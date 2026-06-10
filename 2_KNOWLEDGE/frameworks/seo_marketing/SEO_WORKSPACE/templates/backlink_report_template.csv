@@ -1,0 +1,2 @@
+source_domain,target_url,anchor_text,link_type,domain_rating_est,source_type,category,date_discovered,status,notes
+[linking site domain],[https://yourdomain.com/page],[anchor text here],[dofollow|nofollow],[0-100],[editorial|directory|social|guest_post|forum],[News|Blog|Business|Social],[YYYY-MM-DD],[active|lost|broken],[Any notes]

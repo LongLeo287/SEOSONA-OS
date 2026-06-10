@@ -1,0 +1,457 @@
+﻿"""
+SKILL: context_compression â€” Python implementation scaffold
+SOURCE: Derived from chopratejas/headroom (Apache 2.0)
+ACTIVATION: Import this when building the actual compression module
+
+This file contains the ready-to-run Python implementation.
+Copy to SEOSONASystem and adapt as needed.
+"""
+
+import hashlib
+import json
+import re
+from dataclasses import dataclass, field
+from enum import Enum
+from typing import Any
+
+
+# â”€â”€â”€ Content Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+class ContentType(Enum):
+    JSON       = "json"
+    CODE       = "code"
+    LOG        = "log"
+    DIFF       = "diff"
+    MARKDOWN   = "markdown"
+    TEXT       = "text"
+    UNKNOWN    = "unknown"
+
+
+# â”€â”€â”€ Result Dataclass â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+@dataclass
+class CompressionResult:
+    original:          str
+    compressed:        str
+    content_type:      ContentType
+    tokens_before:     int
+    tokens_after:      int
+    handler_used:      str
+    ccr_key:           str | None = None
+    metadata:          dict = field(default_factory=dict)
+
+    @property
+    def compression_ratio(self) -> float:
+        if self.tokens_before == 0:
+            return 1.0
+        return self.tokens_after / self.tokens_before
+
+    @property
+    def tokens_saved(self) -> int:
+        return max(0, self.tokens_before - self.tokens_after)
+
+    @property
+    def savings_pct(self) -> float:
+        if self.tokens_before == 0:
+            return 0.0
+        return (self.tokens_saved / self.tokens_before) * 100
+
+
+# â”€â”€â”€ Token Estimator â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+def estimate_tokens(text: str) -> int:
+    """Fast token estimation without tiktoken.
+    English prose: ~4 chars/token. Code: ~2.5 chars/token.
+    """
+    code_signals = ["def ", "function ", "class ", "import ", "const ", "var "]
+    if any(s in text for s in code_signals):
+        return max(1, len(text) // 2)
+    return max(1, len(text) // 4)
+
+
+# â”€â”€â”€ Content Type Detector â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+def detect_content_type(text: str) -> ContentType:
+    """Heuristic content detection (no ML dependency, ~0ms latency)."""
+    t = text.strip()
+    if not t:
+        return ContentType.UNKNOWN
+
+    # JSON
+    if (t.startswith("{") and t.endswith("}")) or (t.startswith("[") and t.endswith("]")):
+        try:
+            json.loads(t)
+            return ContentType.JSON
+        except (json.JSONDecodeError, ValueError):
+            pass
+
+    # Diff
+    if t.startswith("---") or t.startswith("+++") or re.search(r'^@@.*@@', t, re.MULTILINE):
+        return ContentType.DIFF
+
+    # Logs (timestamp pattern)
+    if re.search(r'\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}', t):
+        return ContentType.LOG
+
+    # Code (keyword density)
+    code_signals = ["def ", "function ", "class ", "import ", "const ", "var ", "=>", "return ", "if ("]
+    code_score = sum(1 for sig in code_signals if sig in t)
+    if code_score >= 2:
+        return ContentType.CODE
+
+    # Markdown
+    if re.search(r'^#{1,6} ', t, re.MULTILINE) or "```" in t or "**" in t:
+        return ContentType.MARKDOWN
+
+    return ContentType.TEXT
+
+
+# â”€â”€â”€ Algorithm 1: SmartCrusher (JSON) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+def compress_json(data: str, target_ratio: float = 0.2) -> str:
+    """Extract JSON schema + sample. 70-90% reduction."""
+    try:
+        obj = json.loads(data)
+    except (json.JSONDecodeError, ValueError):
+        return data  # Not valid JSON, return as-is
+
+    def extract_schema(v: Any, depth: int = 0) -> Any:
+        if depth > 3:
+            return f"<{type(v).__name__}>"
+        if isinstance(v, dict):
+            # Keep all keys, but compress values
+            return {k: extract_schema(val, depth + 1) for k, val in list(v.items())[:20]}
+        if isinstance(v, list):
+            if len(v) == 0:
+                return []
+            # Keep first + last item as sample
+            sample = [extract_schema(v[0], depth + 1)]
+            if len(v) > 1:
+                sample.append(f"... ({len(v) - 2} more items) ...")
+                sample.append(extract_schema(v[-1], depth + 1))
+            return sample
+        if isinstance(v, str) and len(v) > 100:
+            return v[:80] + f"...<{len(v) - 80} chars>"
+        return v
+
+    compressed = extract_schema(obj)
+    result = json.dumps(compressed, ensure_ascii=False, separators=(",", ":"))
+    return result
+
+
+# â”€â”€â”€ Algorithm 2: CodeCompressor (AST-lite) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+def compress_code(code: str) -> str:
+    """Extract signatures only â€” function/class defs, imports, docstrings."""
+    lines = code.split("\n")
+    kept = []
+    in_body = False
+    body_indent = 0
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+        stripped = line.strip()
+
+        # Always keep imports
+        if stripped.startswith(("import ", "from ", "require(", "use ")):
+            kept.append(line)
+            i += 1
+            continue
+
+        # Keep class/function/method definitions
+        is_def = re.match(
+            r'^(\s*)(def |async def |class |function |const \w+ = |export function |export default )',
+            line
+        )
+        if is_def:
+            kept.append(line)
+            # Check if next line is a docstring
+            if i + 1 < len(lines):
+                next_stripped = lines[i + 1].strip()
+                if next_stripped.startswith('"""') or next_stripped.startswith("'''"):
+                    # Include docstring
+                    j = i + 1
+                    while j < len(lines):
+                        kept.append(lines[j])
+                        if j > i + 1 and (lines[j].strip().endswith('"""') or lines[j].strip().endswith("'''")):
+                            break
+                        j += 1
+                    i = j + 1
+                else:
+                    kept.append(f"{is_def.group(1)}    ...")
+                    i += 1
+            else:
+                i += 1
+            continue
+
+        # Keep decorator lines
+        if stripped.startswith("@"):
+            kept.append(line)
+            i += 1
+            continue
+
+        i += 1
+
+    return "\n".join(kept)
+
+
+# â”€â”€â”€ Algorithm 3: LogCompressor â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+def compress_logs(logs: str, keep_head: int = 15, keep_tail: int = 15) -> str:
+    """Deduplicate log lines. Keep ERROR/FATAL always. Head+tail strategy."""
+    lines = logs.split("\n")
+    lines = [l for l in lines if l.strip()]  # Remove blanks
+
+    CRITICAL_PATTERNS = re.compile(
+        r'\b(ERROR|FATAL|EXCEPTION|CRITICAL|PANIC|FAIL)\b', re.IGNORECASE
+    )
+
+    # Always keep critical lines
+    critical = [l for l in lines if CRITICAL_PATTERNS.search(l)]
+
+    # Deduplicate similar patterns (same log prefix)
+    seen_patterns: dict[str, int] = {}
+    deduped = []
+    for line in lines:
+        # Strip timestamp/pid for pattern key
+        pattern = re.sub(r'\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}[\.,\d]*\s*', '', line)
+        pattern = re.sub(r'\b\d{4,}\b', 'N', pattern)  # Replace long numbers
+        key = pattern[:60]
+        if key in seen_patterns:
+            seen_patterns[key] += 1
+        else:
+            seen_patterns[key] = 1
+            deduped.append(line)
+
+    # Add suppression notes
+    suppressed = len(lines) - len(deduped)
+    
+    # Head + tail strategy
+    if len(deduped) > keep_head + keep_tail:
+        head = deduped[:keep_head]
+        tail = deduped[-keep_tail:]
+        middle_count = len(deduped) - keep_head - keep_tail
+        result_lines = head + [f"... [{middle_count} similar lines omitted] ..."] + tail
+    else:
+        result_lines = deduped
+
+    # Inject critical lines that may have been cut
+    for crit in critical:
+        if crit not in result_lines:
+            result_lines.insert(0, f"[CRITICAL] {crit}")
+
+    if suppressed > 0:
+        result_lines.append(f"[Compression: {suppressed} duplicate lines removed]")
+
+    return "\n".join(result_lines)
+
+
+# â”€â”€â”€ Algorithm 4: Text Summarizer (TF-IDF, no model) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+def compress_text(text: str, target_ratio: float = 0.4) -> str:
+    """Extractive summarization using simple sentence scoring."""
+    import math
+    sentences = re.split(r'(?<=[.!?])\s+', text)
+    if len(sentences) <= 3:
+        return text  # Too short to summarize
+
+    # TF-IDF-like scoring
+    # Term frequency per sentence
+    words_per_sent = [re.findall(r'\b\w+\b', s.lower()) for s in sentences]
+    all_words = [w for ws in words_per_sent for w in ws]
+    
+    # Document frequency
+    word_set_per_sent = [set(ws) for ws in words_per_sent]
+    df = {}
+    for ws in word_set_per_sent:
+        for w in ws:
+            df[w] = df.get(w, 0) + 1
+
+    n = len(sentences)
+    
+    def score_sentence(words: list[str]) -> float:
+        if not words:
+            return 0.0
+        tf = {}
+        for w in words:
+            tf[w] = tf.get(w, 0) + 1
+        score = 0.0
+        for w, count in tf.items():
+            idf = math.log(n / (1 + df.get(w, 0)))
+            score += (count / len(words)) * idf
+        return score
+
+    scores = [score_sentence(words) for words in words_per_sent]
+    
+    # Keep top N sentences by score
+    target_count = max(2, int(len(sentences) * target_ratio))
+    
+    # Get indices of top-scoring sentences
+    ranked = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)
+    keep_indices = sorted(ranked[:target_count])  # Re-sort by original order
+    
+    return " ".join(sentences[i] for i in keep_indices)
+
+
+# â”€â”€â”€ CCR: Compressed Context Repository â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+class CCRStore:
+    """In-memory reversible compression store.
+    Stores originals keyed by content hash.
+    """
+    def __init__(self):
+        self._store: dict[str, str] = {}
+
+    def put(self, content: str) -> str:
+        """Store content, return retrieval key."""
+        key = hashlib.sha256(content.encode()).hexdigest()[:16]
+        self._store[key] = content
+        return key
+
+    def get(self, key: str) -> str | None:
+        """Retrieve original content by key."""
+        return self._store.get(key)
+
+    def __len__(self) -> int:
+        return len(self._store)
+
+
+# â”€â”€â”€ Master Router â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+# Global CCR instance
+_ccr = CCRStore()
+
+
+def compress(
+    content: str,
+    *,
+    target_ratio: float = 0.3,
+    store_original: bool = True,
+    min_tokens: int = 50,
+) -> CompressionResult:
+    """
+    Master compression entry point.
+    
+    Usage:
+        result = compress(tool_output)
+        send_to_llm(result.compressed)
+        print(f"Saved {result.savings_pct:.0f}% tokens")
+    
+    Args:
+        content:        Text to compress
+        target_ratio:   Target compression ratio (0.3 = 70% reduction goal)
+        store_original: Store in CCR for potential retrieval
+        min_tokens:     Skip compression if content is smaller than this
+    
+    Returns:
+        CompressionResult with .compressed, .tokens_saved, .compression_ratio
+    """
+    tokens_before = estimate_tokens(content)
+    
+    if tokens_before < min_tokens:
+        return CompressionResult(
+            original=content,
+            compressed=content,
+            content_type=ContentType.UNKNOWN,
+            tokens_before=tokens_before,
+            tokens_after=tokens_before,
+            handler_used="passthrough",
+        )
+
+    ctype = detect_content_type(content)
+
+    if ctype == ContentType.JSON:
+        compressed = compress_json(content, target_ratio)
+        handler = "SmartCrusher/JSON"
+    elif ctype == ContentType.CODE:
+        compressed = compress_code(content)
+        handler = "CodeCompressor/AST"
+    elif ctype == ContentType.LOG:
+        compressed = compress_logs(content)
+        handler = "LogCompressor"
+    elif ctype == ContentType.DIFF:
+        # Keep diffs mostly intact â€” they're already structured
+        compressed = content
+        handler = "passthrough/diff"
+    else:
+        # TEXT, MARKDOWN, UNKNOWN â†’ TF-IDF summarizer
+        compressed = compress_text(content, target_ratio)
+        handler = "TextSummarizer/TFIDF"
+
+    ccr_key = None
+    if store_original:
+        ccr_key = _ccr.put(content)
+
+    tokens_after = estimate_tokens(compressed)
+
+    return CompressionResult(
+        original=content,
+        compressed=compressed,
+        content_type=ctype,
+        tokens_before=tokens_before,
+        tokens_after=tokens_after,
+        handler_used=handler,
+        ccr_key=ccr_key,
+    )
+
+
+def compress_messages(
+    messages: list[dict],
+    *,
+    protect_recent: int = 4,
+    compress_user: bool = False,
+    target_ratio: float = 0.3,
+) -> tuple[list[dict], int, int]:
+    """
+    Compress a list of OpenAI/Anthropic-format messages.
+    
+    Args:
+        messages:       List of {"role": ..., "content": ...} dicts
+        protect_recent: Don't compress last N messages
+        compress_user:  Also compress user messages (default: skip)
+        target_ratio:   Target compression ratio
+    
+    Returns:
+        (compressed_messages, total_tokens_before, total_tokens_after)
+    """
+    result = []
+    total_before = 0
+    total_after = 0
+
+    cutoff = len(messages) - protect_recent
+
+    for i, msg in enumerate(messages):
+        content = msg.get("content", "")
+        role = msg.get("role", "")
+
+        if not isinstance(content, str):
+            result.append(msg)
+            continue
+
+        # Skip if in protected zone
+        if i >= cutoff:
+            total_before += estimate_tokens(content)
+            total_after += estimate_tokens(content)
+            result.append(msg)
+            continue
+
+        # Skip user messages unless opted in
+        if role == "user" and not compress_user:
+            total_before += estimate_tokens(content)
+            total_after += estimate_tokens(content)
+            result.append(msg)
+            continue
+
+        cr = compress(content, target_ratio=target_ratio)
+        total_before += cr.tokens_before
+        total_after += cr.tokens_after
+        result.append({**msg, "content": cr.compressed})
+
+    return result, total_before, total_after
+
+
+def retrieve(key: str) -> str | None:
+    """Retrieve original content from CCR by key."""
+    return _ccr.get(key)
+

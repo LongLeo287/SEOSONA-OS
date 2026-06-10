@@ -1,0 +1,111 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: patterns.md
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+# Patterns
+## App Shell
+import { motion } from 'framer-motion';
+import { type ReactNode } from 'react';
+import { Sidebar } from './Sidebar';
+interface AppShellProps {
+export function AppShell({ children }: AppShellProps) {
+## Responsive App Shell
+import { motion, AnimatePresence } from 'framer-motion';
+import { type ReactNode, useState } from 'react';
+import { Sidebar } from './Sidebar';
+import { MobileHeader } from './MobileHeader';
+import { MobileDrawer } from './MobileDrawer';
+interface ResponsiveAppShellProps {
+export function ResponsiveAppShell({ children }: ResponsiveAppShellProps) {
+## Mobile Header
+import { Bars3Icon } from '@heroicons/react/24/outline';
+interface MobileHeaderProps {
+export function MobileHeader({ onMenuClick }: MobileHeaderProps) {
+## Mobile Drawer
+import { motion, AnimatePresence } from 'framer-motion';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+import { NavLink, useLocation } from 'react-router-dom';
+import { clsx } from 'clsx';
+import {
+interface MobileDrawerProps {
+export function MobileDrawer({ open, onClose }: MobileDrawerProps) {
+## Sidebar Navigation
+import { motion } from 'framer-motion';
+import { NavLink, useLocation } from 'react-router-dom';
+import { clsx } from 'clsx';
+import {
+export function Sidebar() {
+## Page Header
+import { motion } from 'framer-motion';
+import { type ReactNode } from 'react';
+interface PageHeaderProps {
+export function PageHeader({ title, description, actions }: PageHeaderProps) {
+## Page Transition Wrapper
+import { motion } from 'framer-motion';
+import { type ReactNode } from 'react';
+interface PageTransitionProps {
+export function PageTransition({ children }: PageTransitionProps) {
+### Usage with React Router
+import { Routes, Route, useLocation } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+## Basic Page Template
+import { PageTransition } from '../components/layout/PageTransition';
+import { PageHeader } from '../components/layout/PageHeader';
+import { Button } from '../components/ui';
+export function BasicPage() {
+## List Page Template
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { PageTransition } from '../components/layout/PageTransition';
+import { PageHeader } from '../components/layout/PageHeader';
+import { Button, SearchInput, Card, Badge } from '../components/ui';
+import { PlusIcon } from '@heroicons/react/20/solid';
+interface Item {
+export function ListPage() {
+## Tabs Page Template
+import { PageTransition } from '../components/layout/PageTransition';
+import { PageHeader } from '../components/layout/PageHeader';
+import { Tabs, TabsList, TabsTrigger, TabsContent, Card } from '../components/ui';
+export function TabsPage() {
+## Dashboard Template
+import { motion } from 'framer-motion';
+import { PageTransition } from '../components/layout/PageTransition';
+import { PageHeader } from '../components/layout/PageHeader';
+import { Card, CardTitle, CardContent } from '../components/ui';
+import {
+export function Dashboard() {
+## Stagger Animation Patterns
+export const staggerContainer = {
+export const staggerItem = {
+export const fadeInScale = {
+export const slideInFromRight = {
+export const slideInFromLeft = {
+### Using Stagger Animations
+import { motion } from 'framer-motion';
+import { staggerContainer, staggerItem } from './variants';
+## Glass Panel Layouts
+### Two-Column Layout with Glass Panels
+export function TwoColumnLayout() {
+### Grid of Glass Cards
+export function CardGrid({ items }) {
+## Form Patterns
+### Settings Form
+import { Button, Input, Select, Checkbox, Card } from '../components/ui';
+export function SettingsForm() {
+## Empty States
+import { motion } from 'framer-motion';
+import { FolderIcon } from '@heroicons/react/24/outline';
+import { Button } from '../components/ui';
+interface EmptyStateProps {
+export function EmptyState({ icon: Icon = FolderIcon, title, description, action }: EmptyStateProps) {
+### Usage
+## Loading States
+### Skeleton Loader
+import { clsx } from 'clsx';
+interface SkeletonProps {
+export function Skeleton({ className }: SkeletonProps) {
+### Card Skeleton
+export function CardSkeleton() {
+### Table Skeleton
+export function TableSkeleton({ rows = 5 }: { rows?: number }) {
+
+// COMPRESSION COMPLETE.

@@ -1,0 +1,39 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: mcp_server.py
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+import sys
+import json
+import logging
+import hashlib
+from datetime import datetime
+from .config import MempalaceConfig
+from .version import __version__
+from .searcher import search_memories
+from .palace_graph import traverse, find_tunnels, graph_stats
+import chromadb
+from .knowledge_graph import KnowledgeGraph
+def _get_collection(create=False):
+def _no_palace():
+def tool_status():
+def tool_list_wings():
+def tool_list_rooms(wing: str = None):
+def tool_get_taxonomy():
+def tool_search(query: str, limit: int = 5, wing: str = None, room: str = None):
+def tool_check_duplicate(content: str, threshold: float = 0.9):
+def tool_get_aaak_spec():
+def tool_traverse_graph(start_room: str, max_hops: int = 2):
+def tool_find_tunnels(wing_a: str = None, wing_b: str = None):
+def tool_graph_stats():
+def tool_add_drawer(
+def tool_delete_drawer(drawer_id: str):
+def tool_kg_query(entity: str, as_of: str = None, direction: str = "both"):
+def tool_kg_add(
+def tool_kg_invalidate(subject: str, predicate: str, object: str, ended: str = None):
+def tool_kg_timeline(entity: str = None):
+def tool_kg_stats():
+def tool_diary_write(agent_name: str, entry: str, topic: str = "general"):
+def tool_diary_read(agent_name: str, last_n: int = 10):
+def handle_request(request):
+def main():
+
+// COMPRESSION COMPLETE.

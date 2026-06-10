@@ -1,0 +1,9 @@
+https://github.com/firecrawl/firecrawl
+https://github.com/unclecode/crawl4ai
+https://github.com/scrapy/scrapy
+https://github.com/apify/crawlee
+https://github.com/microsoft/playwright
+https://github.com/ScrapeGraphAI/Scrapegraph-ai
+https://github.com/browser-use/browser-use
+https://github.com/projectdiscovery/katana
+https://github.com/getmaxun/maxun

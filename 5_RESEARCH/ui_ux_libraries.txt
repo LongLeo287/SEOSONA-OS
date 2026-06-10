@@ -1,0 +1,6 @@
+https://github.com/magicuidesign/magicui
+https://github.com/prebuiltui/prebuiltui
+https://github.com/bergside/typeui
+https://github.com/shadcn-ui/ui
+https://github.com/megh-bari/pattern-craft
+https://github.com/chenglou/pretext - Fast JS/TS text measurement library without DOM reflow; for canvas/WebGL/SSR text height calculation; ingested to ingested_data/pretext.md

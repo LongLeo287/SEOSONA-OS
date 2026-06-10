@@ -1,0 +1,109 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: components.md
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+# Components
+## Button
+import { motion, type HTMLMotionProps } from 'framer-motion';
+import { clsx } from 'clsx';
+import { forwardRef, type ReactNode } from 'react';
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+type ButtonSize = 'sm' | 'md' | 'lg';
+interface ButtonProps extends Omit<HTMLMotionProps<'button'>, 'children'> {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+### Button Usage
+## Input
+import { forwardRef, type InputHTMLAttributes, type ReactNode } from 'react';
+import { clsx } from 'clsx';
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+### Search Input Variant
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/20/solid';
+interface SearchInputProps {
+export function SearchInput({ value, onChange, placeholder = 'Search...' }: SearchInputProps) {
+## Card
+import { motion, type HTMLMotionProps } from 'framer-motion';
+import { clsx } from 'clsx';
+import { forwardRef, type ReactNode } from 'react';
+type CardVariant = 'default' | 'glass' | 'elevated';
+interface CardProps extends HTMLMotionProps<'div'> {
+export const Card = forwardRef<HTMLDivElement, CardProps>(
+export function CardHeader({ children, className }: { children: ReactNode; className?: string }) {
+export function CardTitle({ children, className }: { children: ReactNode; className?: string }) {
+export function CardDescription({ children, className }: { children: ReactNode; className?: string }) {
+export function CardContent({ children, className }: { children: ReactNode; className?: string }) {
+export function CardFooter({ children, className }: { children: ReactNode; className?: string }) {
+### Card Usage
+## Badge
+import { clsx } from 'clsx';
+import { type ReactNode } from 'react';
+type BadgeVariant = 'default' | 'brand' | 'success' | 'warning' | 'error' | 'info';
+type BadgeSize = 'sm' | 'md';
+interface BadgeProps {
+export function Badge({ variant = 'default', size = 'md', children, className }: BadgeProps) {
+### Badge Usage
+## Dialog
+import { motion, AnimatePresence } from 'framer-motion';
+import { clsx } from 'clsx';
+import { type ReactNode, useEffect, useRef } from 'react';
+import { XMarkIcon } from '@heroicons/react/24/outline';
+interface DialogProps {
+export function Dialog({ open, onClose, children, title, description, size = 'md' }: DialogProps) {
+export function DialogFooter({ children, className }: { children: ReactNode; className?: string }) {
+### Dialog Usage
+## Tabs
+import { motion } from 'framer-motion';
+import { clsx } from 'clsx';
+import { createContext, useContext, useState, type ReactNode } from 'react';
+interface TabsContextValue {
+interface TabsProps {
+export function Tabs({ defaultValue, children, className }: TabsProps) {
+export function TabsList({ children, className }: { children: ReactNode; className?: string }) {
+interface TabsTriggerProps {
+export function TabsTrigger({ value, children, className }: TabsTriggerProps) {
+interface TabsContentProps {
+export function TabsContent({ value, children, className }: TabsContentProps) {
+### Tabs Usage
+## Avatar
+import { clsx } from 'clsx';
+import { useState, type ImgHTMLAttributes } from 'react';
+type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+interface AvatarProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'size'> {
+export function Avatar({ size = 'md', fallback, src, alt, className, ...props }: AvatarProps) {
+## Checkbox
+import { motion } from 'framer-motion';
+import { clsx } from 'clsx';
+import { forwardRef, type InputHTMLAttributes } from 'react';
+import { CheckIcon } from '@heroicons/react/20/solid';
+interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+## Select
+import { clsx } from 'clsx';
+import { forwardRef, type SelectHTMLAttributes } from 'react';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
+interface SelectOption {
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
+export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+## Toast
+import { motion, AnimatePresence } from 'framer-motion';
+import { clsx } from 'clsx';
+import { createContext, useContext, useState, useCallback, type ReactNode } from 'react';
+import { CheckCircleIcon, ExclamationCircleIcon, InformationCircleIcon, XCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+type ToastVariant = 'success' | 'error' | 'warning' | 'info';
+interface Toast {
+interface ToastContextValue {
+export function ToastProvider({ children }: { children: ReactNode }) {
+export function useToast() {
+### Toast Usage
+## Component Index
+export { Button } from './Button';
+export { Input, SearchInput } from './Input';
+export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './Card';
+export { Badge } from './Badge';
+export { Dialog, DialogFooter } from './Dialog';
+export { Tabs, TabsList, TabsTrigger, TabsContent } from './Tabs';
+export { Avatar } from './Avatar';
+export { Checkbox } from './Checkbox';
+export { Select } from './Select';
+export { ToastProvider, useToast } from './Toast';
+
+// COMPRESSION COMPLETE.

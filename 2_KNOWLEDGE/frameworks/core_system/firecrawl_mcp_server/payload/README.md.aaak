@@ -1,0 +1,69 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: README.md
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+# Firecrawl MCP Server
+## Features
+## Installation
+### Running with npx
+### Manual Installation
+### Running on Cursor
+### Running on Windsurf
+### Running with Streamable HTTP Local Mode
+### Installing via Smithery (Legacy)
+### Running on VS Code
+## Configuration
+### Environment Variables
+#### Required for Cloud API
+#### Optional Configuration
+##### Retry Configuration
+##### Credit Usage Monitoring
+### Configuration Examples
+# Required for cloud API
+export FIRECRAWL_API_KEY=your-api-key
+# Optional retry configuration
+export FIRECRAWL_RETRY_MAX_ATTEMPTS=5        # Increase max retry attempts
+export FIRECRAWL_RETRY_INITIAL_DELAY=2000    # Start with 2s delay
+export FIRECRAWL_RETRY_MAX_DELAY=30000       # Maximum 30s delay
+export FIRECRAWL_RETRY_BACKOFF_FACTOR=3      # More aggressive backoff
+# Optional credit monitoring
+export FIRECRAWL_CREDIT_WARNING_THRESHOLD=2000    # Warning at 2000 credits
+export FIRECRAWL_CREDIT_CRITICAL_THRESHOLD=500    # Critical at 500 credits
+# Required for self-hosted
+export FIRECRAWL_API_URL=https://firecrawl.your-domain.com
+# Optional authentication for self-hosted
+export FIRECRAWL_API_KEY=your-api-key  # If your instance requires auth
+# Custom retry configuration
+export FIRECRAWL_RETRY_MAX_ATTEMPTS=10
+export FIRECRAWL_RETRY_INITIAL_DELAY=500     # Start with faster retries
+### Usage with Claude Desktop
+### System Configuration
+### Rate Limiting and Batch Processing
+## How to Choose a Tool
+### Quick Reference Table
+### Format Selection Guide
+## Available Tools
+### 1. Scrape Tool (`firecrawl_scrape`)
+### 2. Batch Scrape Tool (`firecrawl_batch_scrape`)
+### 3. Check Batch Status (`firecrawl_check_batch_status`)
+### 4. Map Tool (`firecrawl_map`)
+### 5. Search Tool (`firecrawl_search`)
+### 6. Crawl Tool (`firecrawl_crawl`)
+### 7. Check Crawl Status (`firecrawl_check_crawl_status`)
+### 8. Extract Tool (`firecrawl_extract`)
+### 9. Agent Tool (`firecrawl_agent`)
+### 10. Check Agent Status (`firecrawl_agent_status`)
+### 11. Browser Create (`firecrawl_browser_create`) — Deprecated
+### 12. Browser Execute (`firecrawl_browser_execute`) — Deprecated
+### 13. Browser List (`firecrawl_browser_list`) — Deprecated
+### 14. Browser Delete (`firecrawl_browser_delete`) — Deprecated
+## Logging System
+## Error Handling
+## Development
+# Install dependencies
+# Build
+# Run tests
+### Contributing
+### Thanks to contributors
+## License
+
+// COMPRESSION COMPLETE.

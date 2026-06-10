@@ -1,0 +1,79 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: SKILL.md
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+# Vincent Trading Engine - Strategy-Driven Automated Trading
+## How It Works
+## Security Model
+## Part 1: LLM-Powered Strategies
+### Core Concepts
+### Signal Pipeline
+### Strategy Lifecycle
+### Create a Strategy
+### List Strategies
+### Get Strategy Details
+### Update a Strategy
+### Activate a Strategy
+### Pause a Strategy
+### Resume a Strategy
+### Archive a Strategy
+### Duplicate a Strategy (New Version)
+### View Version History
+### View LLM Invocation History
+### View Cost Summary
+### View Performance Metrics
+### Driver Configuration
+#### Web Search Drivers
+#### Twitter Drivers
+#### Newswire Drivers (Finnhub)
+#### Price Triggers
+### Thesis Best Practices
+### LLM Available Tools
+### Cost Tracking
+## Part 2: Standalone Trade Rules
+### Check Worker Status
+# Returns: worker status, active rules count, last sync time, circuit breaker state
+### Create a Stop-Loss Rule
+# Polymarket — triggerPrice is 0–1 (outcome token price)
+# HyperLiquid — triggerPrice is absolute USD price, marketId and tokenId are the coin name
+### Create a Take-Profit Rule
+# Polymarket
+# HyperLiquid
+### Create a Trailing Stop Rule
+# Polymarket
+# HyperLiquid
+### List Rules
+# All rules
+# Filter by status
+### Update a Rule
+### Cancel a Rule
+### View Monitored Positions
+### View Event Log
+# All events
+# Events for specific rule
+# Paginated
+### Rule Statuses
+## Complete Workflow: Strategy + Trade Rules
+### Polymarket Workflow
+### Step 1: Place a bet with the Polymarket skill
+### Step 2: Create a strategy to monitor the thesis
+### Step 3: Set a standalone stop-loss as immediate protection
+### Step 4: Activate the strategy
+### Step 5: Monitor activity
+# Check strategy invocations
+# Check trade rule events
+# Check costs
+# Check performance
+### HyperLiquid Workflow
+### Step 1: Open a perp position with the HyperLiquid skill
+### Step 2: Set a stop-loss rule for the position
+### Step 3: Set a take-profit rule
+### Step 4: Create a strategy to monitor your thesis
+### Step 5: Activate and monitor
+## Background Workers
+## Best Practices
+## Example User Prompts
+## Output Format
+## Error Handling
+## Important Notes
+
+// COMPRESSION COMPLETE.

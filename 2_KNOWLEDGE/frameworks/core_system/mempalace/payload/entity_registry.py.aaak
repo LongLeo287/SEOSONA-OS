@@ -1,0 +1,32 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: entity_registry.py
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+    from mempalace.entity_registry import EntityRegistry
+import json
+import re
+import urllib.request
+import urllib.parse
+from pathlib import Path
+from typing import Optional
+def _wikipedia_lookup(word: str) -> dict:
+class EntityRegistry:
+    def __init__(self, data: dict, path: Path):
+    def load(cls, config_dir: Optional[Path] = None) -> "EntityRegistry":
+    def save(self):
+    def _empty() -> dict:
+    def mode(self) -> str:
+    def people(self) -> dict:
+    def projects(self) -> list:
+    def ambiguous_flags(self) -> list:
+    def seed(self, mode: str, people: list, projects: list, aliases: dict = None):
+    def lookup(self, word: str, context: str = "") -> dict:
+    def _disambiguate(self, word: str, context: str, person_info: dict) -> Optional[dict]:
+    def research(self, word: str, auto_confirm: bool = False) -> dict:
+    def confirm_research(
+    def learn_from_text(self, text: str, min_confidence: float = 0.75) -> list:
+        from mempalace.entity_detector import extract_candidates, score_entity, classify_entity
+    def extract_people_from_query(self, query: str) -> list:
+    def extract_unknown_candidates(self, query: str) -> list:
+    def summary(self) -> str:
+
+// COMPRESSION COMPLETE.

@@ -1,0 +1,4 @@
+https://github.com/Lum1104/Understand-Anything
+https://github.com/responsively-org/responsively-app
+https://github.com/buzinas/react-trace
+https://github.com/aquasecurity/trivy - Comprehensive CLI security scanner (CVE, secrets, IaC misconfig, SBOM); Skill created at core_system/security_scanning/SKILL.md

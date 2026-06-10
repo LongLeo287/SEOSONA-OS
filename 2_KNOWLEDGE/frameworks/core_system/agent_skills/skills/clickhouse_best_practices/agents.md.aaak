@@ -1,0 +1,45 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: agents.md
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+# ClickHouse Best Practices
+## Abstract
+## Table of Contents
+## 1. Schema Design
+### 1.1 Avoid Nullable Unless Semantically Required
+### 1.2 Consider Starting Without Partitioning
+### 1.3 Filter on ORDER BY Columns in Queries
+### 1.4 Keep Partition Cardinality Low (100-1,000 Values)
+### 1.5 Minimize Bit-Width for Numeric Types
+### 1.6 Order Columns by Cardinality (Low to High)
+### 1.7 Plan PRIMARY KEY Before Table Creation
+### 1.8 Prioritize Filter Columns in ORDER BY
+### 1.9 Understand Partition Query Performance Trade-offs
+### 1.10 Use Enum for Finite Value Sets
+### 1.11 Use JSON Type for Dynamic Schemas
+### 1.12 Use LowCardinality for Repeated Strings
+### 1.13 Use Native Types Instead of String
+### 1.14 Use Partitioning for Data Lifecycle Management
+## 2. Query Optimization
+### 2.1 Choose the Right JOIN Algorithm
+### 2.2 Consider Alternatives to JOINs
+### 2.3 Filter Tables Before Joining
+### 2.4 Optimize NULL Handling in Outer JOINs
+### 2.5 Use ANY JOIN When Only One Match Needed
+### 2.6 Use Data Skipping Indices for Non-ORDER BY Filters
+### 2.7 Use Incremental MVs for Real-Time Aggregations
+### 2.8 Use Refreshable MVs for Complex Joins and Batch Workflows
+## 3. Insert Strategy
+### 3.1 Avoid ALTER TABLE DELETE
+### 3.2 Avoid ALTER TABLE UPDATE
+### 3.3 Avoid OPTIMIZE TABLE FINAL
+### 3.4 Batch Inserts Appropriately (10K-100K rows)
+# Single-row inserts - creates 10,000 parts!
+# Tiny batches - still too many parts
+# Ideal batch size: 10,000-100,000 rows
+### 3.5 Use Async Inserts for High-Frequency Small Batches
+# Small batches without async_insert - creates too many parts
+### 3.6 Use Native Format for Best Insert Performance
+# Use Native format for best performance
+## References
+
+// COMPRESSION COMPLETE.

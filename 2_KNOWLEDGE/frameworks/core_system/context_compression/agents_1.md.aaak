@@ -1,0 +1,251 @@
+﻿# SKILL: context_compression
+# SOURCE: Reverse-engineered from github.com/chopratejas/headroom (Apache 2.0)
+# PURPOSE: Compress tool outputs, file reads, RAG chunks, and conversation history
+#          before sending to LLM â€” 60-95% token reduction, same answers.
+# ACTIVATION: Load this skill when building any context management, token optimization,
+#             or LLM pipeline compression feature.
+
+---
+
+## ARCHITECTURE OVERVIEW
+
+Headroom is a **context compression layer** for AI agents. Its pipeline:
+
+```
+Agent / Tool Output / File Read / RAG Chunk
+         â”‚
+         â–¼
+   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚  ContentRouter                          â”‚
+   â”‚  â”œâ”€ detect content type (ML/heuristic) â”‚
+   â”‚  â””â”€ route to appropriate handler       â”‚
+   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚  Handler (per content type)             â”‚
+   â”‚  â”œâ”€ JSONStructureHandler                â”‚
+   â”‚  â”œâ”€ CodeStructureHandler (AST-based)    â”‚
+   â”‚  â””â”€ TextHandler (Kompress model)        â”‚
+   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+   â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
+   â”‚  CCR (Compressed Context Repository)   â”‚
+   â”‚  Store originals, serve on demand      â”‚
+   â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+         â”‚
+         â–¼
+   Compressed prompt â†’ LLM
+```
+
+---
+
+## CORE ALGORITHMS (6 strategies)
+
+### 1. SmartCrusher â€” JSON/Structured Data
+- Parse JSON â†’ extract schema skeleton (keys, types)
+- Truncate long arrays, deduplicate repeated objects
+- Preserve top-level keys, remove verbose nested values
+- **Target ratio: 0.1â€“0.3** (70â€“90% reduction)
+
+```python
+# Pattern: schema extraction
+def compress_json(data: dict, target_ratio: float = 0.2) -> str:
+    schema = extract_schema(data)      # keys + types only
+    samples = sample_array_items(data) # first+last item of arrays
+    return json.dumps({"schema": schema, "sample": samples})
+```
+
+### 2. CodeCompressor â€” AST-based Code Compression
+- Parse code to AST (using `tree-sitter` or regex fallback)
+- Extract: function signatures, class definitions, import statements
+- Remove: function bodies (replace with `...`), inline comments
+- Preserve: docstrings (they carry semantic meaning)
+- **Target ratio: 0.2â€“0.4**
+
+```python
+# Pattern: signature extraction
+def compress_code(code: str, lang: str) -> str:
+    sigs = extract_signatures(code)    # def foo(a, b) -> str: ...
+    imports = extract_imports(code)
+    classes = extract_class_defs(code)
+    return "\n".join(imports + classes + sigs)
+```
+
+### 3. LogCompressor â€” Repetition Elimination
+- Detect repeated log line patterns (regex grouping)
+- Replace N repeated lines with: `[Ã—N] <pattern>`
+- Keep: ERROR, FATAL, EXCEPTION lines always
+- Truncate middle: keep first 20 + last 20 lines
+- **Target ratio: 0.05â€“0.2** (most aggressive)
+
+```python
+# Pattern: deduplication
+def compress_logs(logs: str) -> str:
+    lines = logs.split("\n")
+    keep_always = [l for l in lines if is_critical(l)]
+    deduped = deduplicate_pattern(lines)
+    return "\n".join(keep_always[:20] + ["..."] + keep_always[-20:])
+```
+
+### 4. Kompress-base â€” Neural Text Compression
+- HuggingFace model: `chopratejas/kompress-base`
+- Extractive summarization: scores sentences by relevance
+- Preserves factual content, removes filler/repetition
+- Fallback: sentence scoring by TF-IDF when model unavailable
+- **Target ratio: 0.3â€“0.5**
+
+### 5. CacheAligner â€” Deduplication Across Messages
+- Hash each message chunk (SHA-256 of content)
+- If same content appears in prior messages â†’ reference it
+- Replace repeated content with: `[ref:msg_3_chunk_2]`
+- Especially powerful for multi-turn conversations
+- **Target ratio: depends on repetition frequency**
+
+### 6. CCR (Compressed Context Repository) â€” Reversible Storage
+- Store original content keyed by content hash
+- Compressed version contains retrieval markers
+- LLM can call `headroom_retrieve(key)` to get original
+- Never deletes originals â€” fully reversible
+- **Use case: when exact content needed later**
+
+---
+
+## CONTENT TYPE DETECTION
+
+Headroom uses **Google's Magika** (ML model, ~5ms, 99%+ accuracy).
+For SEOSONASystem, implement a lightweight heuristic fallback:
+
+```python
+def detect_content_type(text: str) -> ContentType:
+    # Fast heuristics (no ML dependency)
+    text_stripped = text.strip()
+    
+    # JSON
+    if (text_stripped.startswith("{") and text_stripped.endswith("}")) or \
+       (text_stripped.startswith("[") and text_stripped.endswith("]")):
+        try:
+            json.loads(text_stripped)
+            return ContentType.JSON
+        except: pass
+    
+    # Code (check for common patterns)
+    code_signals = ["def ", "function ", "class ", "import ", "const ", "var ", "=>"]
+    if any(sig in text for sig in code_signals):
+        return ContentType.CODE
+    
+    # Logs (timestamp patterns)
+    if re.search(r'\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}', text):
+        return ContentType.LOG
+    
+    # Diff
+    if text.startswith("---") or text.startswith("+++") or \
+       re.search(r'^@@.*@@', text, re.MULTILINE):
+        return ContentType.DIFF
+    
+    # Markdown
+    if re.search(r'^#{1,6} ', text, re.MULTILINE) or \
+       "```" in text or "**" in text:
+        return ContentType.MARKDOWN
+    
+    return ContentType.TEXT
+```
+
+---
+
+## COMPRESSION CONFIG (CompressConfig)
+
+Key parameters to control compression behavior:
+
+| Parameter | Default | Purpose |
+|-----------|---------|---------|
+| `compress_user_messages` | `False` | Skip user messages (preserve intent) |
+| `compress_system_messages` | `True` | Compress system prompts |
+| `protect_recent` | `4` | Don't touch last N messages (active context) |
+| `protect_analysis_context` | `True` | Detect analyze/review intent â†’ no compress |
+| `target_ratio` | `0.3` | Target compressed size (0.3 = 70% saved) |
+| `min_tokens` | `100` | Skip compression if content too small |
+
+---
+
+## INTEGRATION PATTERNS
+
+### Pattern 1: Wrap tool outputs before feeding to agent
+```python
+from context_compression import compress_tool_output
+
+def tool_handler(tool_name: str, output: str) -> str:
+    if len(output) > 500:  # Only compress large outputs
+        compressed = compress_tool_output(output)
+        return compressed.text
+    return output
+```
+
+### Pattern 2: Compress full message history
+```python
+def get_compressed_messages(messages: list[dict]) -> list[dict]:
+    compressor = ContextCompressor(protect_recent=4)
+    return compressor.compress_messages(messages)
+```
+
+### Pattern 3: File read compression
+```python
+def read_file_compressed(path: str) -> str:
+    content = open(path).read()
+    detected = detect_content_type(content)
+    return route_to_handler(content, detected)
+```
+
+---
+
+## OMNICLAW INTEGRATION POINTS
+
+When implementing compression in SEOSONASystem:
+
+1. **Tool Output Hook**: Intercept `view_file`, `run_command`, `read_url_content` results
+2. **Transcript Compression**: Compress old conversation turns before checkpoint
+3. **Skill File Compression**: When loading `.aaak` files, compress code blocks
+4. **RAG Chunk Compression**: Before adding chunks to context, compress them
+
+---
+
+## IMPLEMENTATION CHECKLIST
+
+When building `context_compression` module:
+- [ ] `detect_content_type(text)` â€” heuristic detector (no ML deps)
+- [ ] `compress_json(data, target_ratio)` â€” SmartCrusher  
+- [ ] `compress_code(code, lang)` â€” signature extractor
+- [ ] `compress_logs(logs, keep_critical=True)` â€” log deduplicator
+- [ ] `compress_text(text, target_ratio)` â€” TF-IDF summarizer (no model)
+- [ ] `compress_messages(messages, config)` â€” full pipeline
+- [ ] `CompressionResult` dataclass â€” with `tokens_before`, `tokens_after`, `ratio`
+- [ ] `CCRStore` â€” simple dict-based reversible store (no DB needed)
+
+---
+
+## TOKEN ESTIMATION (no tiktoken needed)
+
+```python
+def estimate_tokens(text: str) -> int:
+    # Rule of thumb: ~4 chars per token for English
+    # ~2.5 chars per token for code (more tokens per char)
+    if is_code(text):
+        return len(text) // 2
+    return len(text) // 4
+```
+
+---
+
+## REFERENCE
+
+- Source repo: https://github.com/chopratejas/headroom
+- License: Apache 2.0
+- Key files:
+  - `headroom/compress.py` â€” public API
+  - `headroom/compression/universal.py` â€” UniversalCompressor
+  - `headroom/compression/detector.py` â€” ContentType detection
+  - `headroom/compression/handlers/json_handler.py` â€” JSONStructureHandler
+  - `headroom/compression/handlers/code_handler.py` â€” CodeStructureHandler
+  - `headroom/pipeline.py` â€” PipelineStage orchestration
+

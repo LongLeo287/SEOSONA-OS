@@ -1,0 +1,30 @@
+﻿https://github.com/langgenius/dify
+https://github.com/mem0ai/mem0
+https://github.com/awesome-skills/code-review-skill
+https://x.com/trq212/status/2061907337154367865?s=46 - Claude Dynamic Workflows architecture patterns
+https://github.com/ntd4996/agentpet - macOS Ambient UX and Unix-socket telemetry for AI agents
+https://github.com/leonxlnx/taste-skill
+https://github.com/openai/skills
+https://github.com/multica-ai/andrej-karpathy-skills
+https://github.com/NousResearch/hermes-agent
+https://github.com/MemPalace/mempalace
+https://github.com/obra/superpowers
+https://github.com/sickn33/seosona-awesome-skills
+https://github.com/kepano/obsidian-skills
+https://github.com/coreyhaines31/marketingskills
+https://github.com/K-Dense-AI/scientific-agent-skills
+https://github.com/agentskills/agentskills
+https://github.com/mukul975/Anthropic-Cybersecurity-Skills
+https://github.com/larksuite/cli
+https://github.com/anthropics/skills
+https://github.com/nhadaututtheky/neural-memory
+https://github.com/marketingjuliancongdanh79-pixel/skill-generator
+https://github.com/vudovn/ag-kit
+https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep - ARIS: autonomous ML research loop with cross-model review, native SEOSONA adaptation; Skill created at core_system/aris_research_loop/SKILL.md
+https://github.com/charlie947/social-media-skills - Markdown-based skill templates for AI agent social media posting
+https://github.com/Arjun544/flutter_init - A Next.js-based scaffolding engine for Flutter apps with handlebars templates.
+https://github.com/microsoft/markitdown - A lightweight Python utility for converting complex documents to Markdown for LLMs.
+https://github.com/PaddlePaddle/PaddleOCR - A multilingual OCR toolkit with state-of-the-art models and AI agent integrations.
+https://openai.com/index/chatgpt-memory-dreaming/ - OpenAI ChatGPT Memory Dreaming: Continuous background synthesis of context.
+https://github.com/microsoft/VibeVoice - Microsoft VibeVoice: Open-Source Frontier Voice AI (ASR & TTS) for long-form speech processing.
+

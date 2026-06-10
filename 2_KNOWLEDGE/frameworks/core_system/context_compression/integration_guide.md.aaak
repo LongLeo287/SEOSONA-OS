@@ -1,0 +1,142 @@
+﻿# SKILL: context_compression â€” Benchmark & Integration Guide
+# USE WHEN: Tuning compression parameters or integrating into a specific pipeline
+
+---
+
+## BENCHMARK RESULTS (from Headroom repo)
+
+| Content Type    | Before (tokens) | After (tokens) | Reduction |
+|----------------|-----------------|----------------|-----------|
+| Large JSON API  | 10,144          | 1,260          | **88%**   |
+| Python codebase | 8,500           | 2,100          | **75%**   |
+| Server logs     | 15,000          | 800            | **95%**   |
+| Markdown docs   | 3,200           | 1,400          | **56%**   |
+| Mixed text      | 5,000           | 2,000          | **60%**   |
+
+---
+
+## INTEGRATION WITH ANTIGRAVITY SYSTEM
+
+### Hook 1: Compress tool outputs automatically
+```python
+# In any tool result handler:
+from core_system.context_compression.scripts.compress_engine import compress
+
+def on_tool_result(tool_name: str, output: str) -> str:
+    if tool_name in ("view_file", "run_command", "read_url_content"):
+        result = compress(output, target_ratio=0.3)
+        if result.savings_pct > 20:  # Only use if meaningfully smaller
+            return f"{result.compressed}\n[Compressed: {result.savings_pct:.0f}% saved]"
+    return output
+```
+
+### Hook 2: Compress before sending to agent
+```python
+from core_system.context_compression.scripts.compress_engine import compress_messages
+
+def prepare_messages_for_llm(messages: list[dict]) -> list[dict]:
+    compressed, before, after = compress_messages(
+        messages,
+        protect_recent=4,   # Keep last 4 messages untouched
+        compress_user=False,
+        target_ratio=0.3,
+    )
+    savings = before - after
+    print(f"[Context Compression] {before} â†’ {after} tokens ({savings} saved)")
+    return compressed
+```
+
+### Hook 3: Compress .aaak skill files before loading
+```python
+def load_skill(path: str) -> str:
+    content = open(path).read()
+    result = compress(content, target_ratio=0.5, store_original=True)
+    return result.compressed  # Still contains key information
+```
+
+---
+
+## WHEN TO COMPRESS vs WHEN TO SKIP
+
+### âœ… Always compress:
+- Tool outputs > 500 tokens (view_file, run_command, grep results)
+- RAG chunks (before adding to context)
+- Old conversation history (turn 1 to turn N-4)
+- Server logs, stack traces, JSON API responses
+
+### âš ï¸ Compress with caution:
+- System prompts (can lose nuance â€” use target_ratio=0.7)
+- Code the agent is actively editing (use protect_recent)
+- Recent tool outputs (last 2 turns)
+
+### âŒ Never compress:
+- User messages (may lose original intent)
+- Code that must be executed exactly
+- Cryptographic content (hashes, keys, tokens)
+- Last N messages (active working context)
+
+---
+
+## QUALITY ASSURANCE RULES
+
+1. **Factual preservation**: NEVER compress dates, numbers, proper nouns without `...` marker
+2. **Always show what was removed**: Add `[X tokens removed]` or `[N lines deduped]` notes
+3. **Reversible**: Store originals in CCR when `store_original=True`
+4. **Compression ratio guard**: If result is bigger than original, return original
+5. **High-entropy preservation**: UUIDs, IPs, error codes â†’ always keep verbatim
+
+```python
+# Guard pattern
+if len(compressed) >= len(original):
+    return original  # Compression made it worse, revert
+```
+
+---
+
+## KNOWN LIMITATIONS (from Headroom issues)
+
+1. **Kompress-base model**: Requires HuggingFace download â€” use TF-IDF fallback for local-first
+2. **Magika ML detector**: ~50MB model â€” use heuristic detector for lightweight deployment
+3. **Code compression**: AST parsing requires `tree-sitter` â€” regex fallback loses precision for closures
+4. **Non-English text**: Token estimation less accurate for Vietnamese/Chinese (use char count / 1.5)
+5. **Streaming**: Compression works on complete chunks only â€” not compatible with token streaming
+
+---
+
+## VIETNAMESE TEXT ADJUSTMENT
+
+For Vietnamese content (SEOSONA website, etc.):
+```python
+def estimate_tokens_vn(text: str) -> int:
+    # Vietnamese: ~1.5-2 chars per token (more compact than English)
+    # But more tokens per word due to tonal marks
+    return max(1, len(text) // 2)
+```
+
+---
+
+## ANTI-PATTERNS (DO NOT DO)
+
+```python
+# âŒ WRONG: Compress everything indiscriminately
+for msg in all_messages:
+    msg["content"] = compress(msg["content"]).compressed
+
+# âœ… RIGHT: Use compress_messages() with protect_recent
+compressed, _, _ = compress_messages(messages, protect_recent=4)
+
+# âŒ WRONG: Throw away CCR key
+result = compress(big_file)
+send(result.compressed)  # Lost the ability to retrieve original
+
+# âœ… RIGHT: Store CCR key in message metadata
+result = compress(big_file)
+send(result.compressed, metadata={"ccr_key": result.ccr_key})
+
+# âŒ WRONG: Compress user messages
+compress_messages(msgs, compress_user=True)  # Dangerous
+
+# âœ… RIGHT: Only compress assistant + tool messages
+compress_messages(msgs, compress_user=False)
+```
+

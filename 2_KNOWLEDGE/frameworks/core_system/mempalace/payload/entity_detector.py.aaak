@@ -1,0 +1,19 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: entity_detector.py
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+    from entity_detector import detect_entities, confirm_entities
+import re
+import os
+from pathlib import Path
+from collections import defaultdict
+def extract_candidates(text: str) -> dict:
+def _build_patterns(name: str) -> dict:
+def score_entity(name: str, text: str, lines: list) -> dict:
+def classify_entity(name: str, frequency: int, scores: dict) -> dict:
+def detect_entities(file_paths: list, max_files: int = 10) -> dict:
+def _print_entity_list(entities: list, label: str):
+def confirm_entities(detected: dict, yes: bool = False) -> dict:
+def scan_for_detection(project_dir: str, max_files: int = 10) -> list:
+    import sys
+
+// COMPRESSION COMPLETE.

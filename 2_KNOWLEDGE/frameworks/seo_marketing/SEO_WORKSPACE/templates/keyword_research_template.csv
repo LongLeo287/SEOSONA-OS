@@ -1,0 +1,2 @@
+keyword,keyword_group,search_intent,est_volume,est_difficulty,current_rank_{domain},competitor_ranking_{comp1},competitor_ranking_{comp2},competitor_ranking_{comp3},content_exists_{domain},content_gap_notes,priority
+[seed keyword 1],[Group],[Transactional|Commercial|Informational|Navigational],[Very High|High|Medium|Low|Micro],[Very High|High|Medium|Low|Very Low],[Top 1-3|Top 4-10|Top 11-20|None],[Top 1-3|Top 4-10|Top 11-20|None],[Top 1-3|Top 4-10|Top 11-20|None],[Top 1-3|Top 4-10|Top 11-20|None],[Yes|Partial|No],[Gap description],[P0|P1|P2|P3]

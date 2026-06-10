@@ -1,0 +1,38 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: dialect.py
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+from AAAK output. It is a structured summary layer (closets) that points to the
+import json
+import os
+import re
+from typing import List, Dict, Optional
+from pathlib import Path
+class Dialect:
+    def __init__(self, entities: Dict[str, str] = None, skip_names: List[str] = None):
+    def from_config(cls, config_path: str) -> "Dialect":
+    def save_config(self, config_path: str):
+    def encode_entity(self, name: str) -> Optional[str]:
+    def encode_emotions(self, emotions: List[str]) -> str:
+    def get_flags(self, zettel: dict) -> str:
+    def _detect_emotions(self, text: str) -> List[str]:
+    def _detect_flags(self, text: str) -> List[str]:
+    def _extract_topics(self, text: str, max_topics: int = 3) -> List[str]:
+    def _extract_key_sentence(self, text: str) -> str:
+    def _detect_entities_in_text(self, text: str) -> List[str]:
+    def compress(self, text: str, metadata: dict = None) -> str:
+        from the input text. This is lossy — the original text cannot be
+    def extract_key_quote(self, zettel: dict) -> str:
+    def encode_zettel(self, zettel: dict) -> str:
+    def encode_tunnel(self, tunnel: dict) -> str:
+    def encode_file(self, zettel_json: dict) -> str:
+    def compress_file(self, zettel_json_path: str, output_path: str = None) -> str:
+    def compress_all(self, zettel_dir: str, output_path: str = None) -> str:
+    def generate_layer1(
+        from datetime import date as date_cls
+    def decode(self, dialect_text: str) -> dict:
+    def count_tokens(text: str) -> int:
+    def compression_stats(self, original_text: str, compressed: str) -> dict:
+    import sys
+    def usage():
+
+// COMPRESSION COMPLETE.

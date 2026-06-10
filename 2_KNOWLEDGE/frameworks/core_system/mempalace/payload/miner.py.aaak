@@ -1,0 +1,37 @@
+// MEMPALACE COMPRESSED CONTEXT FOR: miner.py
+// AAAK (Actionable Abstract AI Knowledge) Format
+
+import os
+import sys
+import hashlib
+import fnmatch
+from pathlib import Path
+from datetime import datetime
+from collections import defaultdict
+import chromadb
+class GitignoreMatcher:
+    def __init__(self, base_dir: Path, rules: list):
+    def from_dir(cls, dir_path: Path):
+    def matches(self, path: Path, is_dir: bool = None):
+    def _rule_matches(self, rule: dict, relative: str, is_dir: bool) -> bool:
+    def _match_from_root(self, target_parts: list, pattern_parts: list) -> bool:
+        def matches(path_index: int, pattern_index: int) -> bool:
+def load_gitignore_matcher(dir_path: Path, cache: dict):
+def is_gitignored(path: Path, matchers: list, is_dir: bool = False) -> bool:
+def should_skip_dir(dirname: str) -> bool:
+def normalize_include_paths(include_ignored: list) -> set:
+def is_exact_force_include(path: Path, project_path: Path, include_paths: set) -> bool:
+def is_force_included(path: Path, project_path: Path, include_paths: set) -> bool:
+def load_config(project_dir: str) -> dict:
+    import yaml
+def detect_room(filepath: Path, content: str, rooms: list, project_path: Path) -> str:
+def chunk_text(content: str, source_file: str) -> list:
+def get_collection(palace_path: str):
+def file_already_mined(collection, source_file: str) -> bool:
+def add_drawer(
+def process_file(
+def scan_project(
+def mine(
+def status(palace_path: str):
+
+// COMPRESSION COMPLETE.

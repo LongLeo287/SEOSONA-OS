@@ -1,0 +1,73 @@
+{
+  "name": "testimonial",
+  "description": "Customer testimonial and social proof video template",
+  "type": "social-proof",
+  "defaultAspectRatio": "16:9",
+  "defaultDuration": 8,
+  "platforms": ["youtube", "linkedin", "facebook", "instagram"],
+  "structure": {
+    "scenes": [
+      {
+        "name": "intro",
+        "duration": 1.5,
+        "description": "Customer introduction and context"
+      },
+      {
+        "name": "challenge",
+        "duration": 2,
+        "description": "Before state or problem they faced"
+      },
+      {
+        "name": "transformation",
+        "duration": 3,
+        "description": "Solution experience and results"
+      },
+      {
+        "name": "recommendation",
+        "duration": 1.5,
+        "description": "Endorsement and call to action"
+      }
+    ]
+  },
+  "promptTemplate": "Authentic customer testimonial video:\n\nVisual: {user_prompt}\nSetting: Authentic environment - office, home, or business\nStyle: Warm, relatable, genuine, documentary feel\nCamera: Medium shot, eye-level, subtle movement\nLighting: Natural, flattering, authentic\n\nAudio:\n- \"Customer\" says: Genuine testimonial about experience\n- Ambient: Natural room tone, authentic\n- Music: Warm, subtle, fades under speech\n\nTechnical: 8 seconds, {aspect_ratio}, 1080p, professional quality",
+  "audioConfig": {
+    "dialogue": {
+      "speaker": "Customer",
+      "tone": "genuine, enthusiastic, natural"
+    },
+    "music": "warm, inspiring, subtle",
+    "ambient": ["natural room tone"]
+  },
+  "styleGuide": {
+    "lighting": "natural, flattering",
+    "colorGrade": "warm, inviting",
+    "cameraMovement": "minimal, stable",
+    "pacing": "conversational, authentic"
+  },
+  "authenticity": {
+    "setting": "real environment preferred",
+    "expression": "genuine emotion",
+    "speech": "natural, unscripted feel"
+  },
+  "variations": [
+    {
+      "name": "testimonial-quick",
+      "duration": 15,
+      "scenes": ["quote", "result", "recommend"]
+    },
+    {
+      "name": "testimonial-story",
+      "duration": 60,
+      "scenes": [
+        "intro",
+        "background",
+        "challenge",
+        "discovery",
+        "experience",
+        "results",
+        "recommendation",
+        "cta"
+      ]
+    }
+  ]
+}

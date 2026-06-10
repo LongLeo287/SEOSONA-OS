@@ -1,0 +1,224 @@
+{
+  "id": "saas-launch",
+  "name": "SaaS Go-to-Market Launch",
+  "version": "1.0.0",
+  "author": { "name": "ClaudeKit", "url": "https://claudekit.cc" },
+  "tags": ["saas", "gtm", "launch", "growth", "demand-gen"],
+  "estimatedDuration": "60 days",
+  "difficulty": "advanced",
+  "ai_models_used": ["claude-sonnet", "claude-opus"],
+  "inputs": {
+    "required": [
+      { "key": "product_name", "type": "string", "prompt": "Your SaaS product name" },
+      { "key": "product_url", "type": "url", "prompt": "Product website URL" },
+      { "key": "value_prop", "type": "string", "prompt": "Core value proposition in one sentence" },
+      { "key": "pricing_range", "type": "string", "prompt": "Pricing range (e.g., '$29-$99/mo')" },
+      { "key": "target_market", "type": "string", "prompt": "Target market description (industry + company size + role)" }
+    ],
+    "optional": [
+      { "key": "competitors", "type": "array", "default": [], "prompt": "Top 3-5 competitor names or URLs" },
+      { "key": "existing_audience", "type": "number", "default": 0, "prompt": "Existing email list or audience size" },
+      { "key": "monthly_content_budget", "type": "number", "default": 0, "prompt": "Monthly content/marketing budget in USD" },
+      { "key": "launch_timeline", "type": "string", "default": "60 days", "prompt": "Target timeline to first paid customers" }
+    ]
+  },
+  "goal_targets": {
+    "mrr": { "default": 10000, "metric": "stripe" },
+    "trial_signups": { "default": 200, "metric": "stripe" },
+    "organic_traffic": { "default": 10000, "metric": "ga4" },
+    "email_subscribers": { "default": 2000, "metric": "manual" }
+  },
+  "stages": [
+    {
+      "id": "brand-intelligence",
+      "name": "Brand Intelligence",
+      "steps": [
+        {
+          "id": "market-research",
+          "name": "Market Research & Opportunity Mapping",
+          "strategy": "Map the entire competitive landscape before writing a single word of copy. Identify three layers: direct competitors (same solution), indirect competitors (different solution, same problem), and status quo (spreadsheets, manual processes, doing nothing). The biggest competitor is usually 'do nothing' — your messaging must overcome inertia, not just feature-compare.",
+          "ai_execution": "Crawl competitor websites, pricing pages, G2/Capterra reviews, and social profiles. Extract positioning statements, feature matrices, pricing structures, and customer complaints. Map the competitive landscape into direct/indirect/status-quo layers. Identify messaging white space and underserved segments.",
+          "human_decision": "Validate market sizing with real data, not just TAM projections. Identify which competitor weaknesses are genuine opportunities vs deliberate trade-offs. Decide whether to position as a category leader, challenger, or category creator — each requires fundamentally different go-to-market.",
+          "command": "/ckm:competitor",
+          "agent": "researcher",
+          "skills": ["competitor", "marketing-research"],
+          "outputs": ["market-landscape.md", "competitor-matrix.md", "opportunity-map.md"],
+          "dependsOn": [],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "icp-profiling",
+          "name": "ICP Deep Profiling",
+          "strategy": "Your ICP is not a demographic — it is a psychographic. The best ICP definition includes: what triggers their search for a solution, what words they use to describe their problem, what they have tried before, who influences their buying decision, and what would make them switch from their current solution. Interview 5-10 real prospects if possible — one conversation beats 100 survey responses.",
+          "ai_execution": "Build multi-dimensional ICP profiles from review mining, community analysis, and competitor customer research. Extract buying triggers, objection patterns, and decision-making criteria. Map the buyer journey from problem-aware to solution-aware to product-aware. Generate interview scripts for prospect validation.",
+          "human_decision": "Validate ICP against your actual best customers, not aspirational targets. Narrow down to one primary ICP for launch — trying to serve multiple ICPs at launch dilutes everything. Conduct real prospect interviews and update profiles with qualitative insights AI cannot access.",
+          "command": "/ckm:persona",
+          "agent": "researcher",
+          "skills": ["persona", "marketing-research", "marketing-psychology"],
+          "outputs": ["icp-profiles.md", "buyer-journey-map.md", "interview-scripts.md"],
+          "dependsOn": ["market-research"],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "competitive-positioning",
+          "name": "Competitive Positioning & Messaging",
+          "strategy": "Positioning is not what you say about yourself — it is the mental real estate you own in the buyer's mind. Use the positioning formula: For [ICP] who [trigger/need], [product] is the [category] that [key differentiator], unlike [alternative] which [limitation]. Test three positioning options: best-in-class (we do X better), unique approach (we solve X differently), or new category (X is the wrong way to think about this problem).",
+          "ai_execution": "Generate positioning statements using multiple frameworks (April Dunford, Crossing the Chasm, Obviously Awesome). Create messaging hierarchies for website, ads, email, and sales conversations. Produce a competitive battle card showing your advantages and how to handle competitor comparisons. Draft the 'why us' narrative.",
+          "human_decision": "Choose the positioning that is both true and defensible long-term. Ensure the key differentiator is something customers actually care about, not just something you are proud of building. Test positioning with 3-5 real prospects before committing — their reaction tells you everything.",
+          "command": "/ckm:write/fast",
+          "agent": "copywriter",
+          "skills": ["copywriting", "marketing-psychology", "competitor"],
+          "outputs": ["positioning-doc.md", "messaging-hierarchy.md", "battle-cards.md"],
+          "dependsOn": ["icp-profiling"],
+          "parallel": false,
+          "gate": "brand-review"
+        }
+      ]
+    },
+    {
+      "id": "content-pipeline",
+      "name": "Content Pipeline",
+      "steps": [
+        {
+          "id": "content-strategy",
+          "name": "Content Strategy & Calendar",
+          "strategy": "Build a content strategy that serves three goals simultaneously: SEO (bottom-of-funnel keywords people search when ready to buy), thought leadership (original insights that build authority), and sales enablement (content that helps close deals). Prioritize bottom-of-funnel content first — 'best X for Y' and 'X vs Y' pages drive revenue faster than top-of-funnel blog posts.",
+          "ai_execution": "Build a keyword-driven content calendar mapping each piece to funnel stage, ICP segment, and distribution channel. Identify bottom-of-funnel keywords with buying intent. Generate content briefs for the first 30 days of publishing. Create a content production workflow with templates for each content type.",
+          "human_decision": "Prioritize content by revenue impact, not traffic potential. Decide your unique editorial angle — what perspective can only you bring? Allocate resources between SEO content (compounds over time) and thought leadership (builds brand authority faster).",
+          "command": "/ckm:seo/keywords",
+          "agent": "content-creator",
+          "skills": ["seo", "content-marketing", "marketing-research"],
+          "outputs": ["content-strategy.md", "content-calendar.md", "content-briefs/"],
+          "dependsOn": ["competitive-positioning"],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "anchor-content",
+          "name": "Anchor Content Creation",
+          "strategy": "Create 3-5 anchor content pieces that will drive your organic growth for months: a definitive guide for your primary keyword, a comparison page against top competitors, a use-case guide for your primary ICP, an ROI calculator or interactive tool, and a 'state of X' original research piece. These assets become the foundation everything else links to.",
+          "ai_execution": "Draft anchor content pieces following approved briefs. Apply brand voice and positioning consistently. Include data visualizations, expert quotes, and actionable frameworks. Optimize each piece for featured snippets and rich results. Generate all supporting meta content and social share assets.",
+          "human_decision": "Add proprietary data, customer quotes, and original insights to every anchor piece. These must be genuinely valuable — not just long. Review competitor comparison content for fairness and accuracy. Ensure the ROI calculator uses realistic assumptions.",
+          "command": "/ckm:write/blog",
+          "agent": "copywriter",
+          "skills": ["copywriting", "content-marketing", "seo"],
+          "outputs": ["anchor-content/", "comparison-pages/"],
+          "dependsOn": ["content-strategy"],
+          "parallel": true,
+          "gate": "brand-review"
+        },
+        {
+          "id": "content-distribution",
+          "name": "Content Distribution Engine",
+          "strategy": "Publishing without distribution is a tree falling in an empty forest. For every hour creating content, spend one hour distributing it. Build distribution into the content creation process — before writing, identify 5 places each piece will be shared and tailor the angle for each. Leverage founder personal brands — people follow people, not company accounts.",
+          "ai_execution": "Generate platform-native versions of each anchor piece for Twitter, LinkedIn, Reddit, Indie Hackers, and email. Create a distribution playbook with templates for each channel. Schedule posts at optimal times. Draft community engagement scripts that add value without being promotional.",
+          "human_decision": "Choose distribution channels based on where your ICP actually spends time, not where everyone else posts. Personally engage in community discussions — AI can draft but you must deliver authenticity. Build relationships with newsletter curators and content aggregators in your niche.",
+          "command": "/ckm:social",
+          "agent": "social-media-manager",
+          "skills": ["social", "content-marketing", "email"],
+          "outputs": ["distribution-playbook.md", "social-content/", "community-plan.md"],
+          "dependsOn": ["anchor-content"],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    },
+    {
+      "id": "demand-gen",
+      "name": "Demand Generation",
+      "steps": [
+        {
+          "id": "email-sequences",
+          "name": "Email Nurture Sequences",
+          "strategy": "Build three email sequences: welcome series (5 emails over 10 days — educate and activate), trial nurture (7 emails matching trial milestones — drive to aha moment), and re-engagement (3 emails for churned trials — address top objections). Each email should deliver standalone value — if they never click, they should still learn something useful. The CTA should feel like a natural next step, not a sales push.",
+          "ai_execution": "Generate complete email sequences with subject line variants, preview text, body copy, and CTAs. Map each email to buyer journey stage and behavioral triggers. Create dynamic content blocks for ICP segment personalization. Draft A/B test plans for subject lines and send times.",
+          "human_decision": "Review email sequences for genuine helpfulness vs thinly veiled selling. Test deliverability before launching — check spam scores and preview across email clients. Set up proper tracking and attribution before sending a single email. Decide email frequency based on your audience's tolerance.",
+          "command": "/ckm:email/sequence",
+          "agent": "copywriter",
+          "skills": ["email", "copywriting", "marketing-psychology"],
+          "outputs": ["welcome-sequence/", "trial-nurture/", "reengagement-sequence/"],
+          "dependsOn": ["competitive-positioning"],
+          "parallel": true,
+          "gate": "brand-review"
+        },
+        {
+          "id": "lead-magnets",
+          "name": "Lead Magnet Creation",
+          "strategy": "The best lead magnets solve a specific, immediate problem for your ICP — not a vague educational piece. Create lead magnets that naturally lead to your product: a template that is better with your tool, a calculator that shows the cost of the problem you solve, a checklist for a process your product automates. The lead magnet should make them want your product, not replace it.",
+          "ai_execution": "Generate 3 lead magnets aligned to different funnel stages: top (educational guide), middle (template/tool), bottom (ROI calculator/comparison). Create landing page copy for each with conversion-optimized forms. Draft follow-up email sequences specific to each lead magnet download.",
+          "human_decision": "Ensure lead magnets provide genuine standalone value — if it feels like a bait-and-switch, it damages trust permanently. Choose formats your audience actually consumes (developers hate PDFs, executives hate videos). Gate only high-value content — give away the rest to build organic reach.",
+          "command": "/ckm:write/fast",
+          "agent": "content-creator",
+          "skills": ["content-marketing", "copywriting", "form-cro"],
+          "outputs": ["lead-magnets/", "lead-magnet-landing-pages/", "follow-up-sequences/"],
+          "dependsOn": ["competitive-positioning"],
+          "parallel": true,
+          "gate": "brand-review"
+        },
+        {
+          "id": "paid-ads-setup",
+          "name": "Paid Ads Foundation",
+          "strategy": "Start with bottom-of-funnel paid search (competitor keywords and high-intent terms) before scaling to cold audiences. Set up proper conversion tracking and attribution before spending a dollar. Budget rule: spend enough to reach statistical significance on each ad variant within 7 days. If your budget does not allow that, focus on fewer channels. Retargeting website visitors is almost always the highest-ROI paid channel.",
+          "ai_execution": "Generate ad copy variants for Google Ads (search and display), LinkedIn Ads, and Twitter Ads. Create audience targeting specifications for each platform. Build a retargeting funnel with sequential messaging. Draft landing page variants with message-match for each ad group. Set up UTM tracking scheme.",
+          "human_decision": "Set budget caps and cost-per-acquisition targets before launching. Choose platforms based on where your ICP is reachable, not platform popularity. Start small and scale what works — resist the temptation to launch everywhere at once. Monitor daily for the first week to catch wasted spend early.",
+          "command": "/ckm:campaign/create",
+          "agent": "campaign-manager",
+          "skills": ["campaign", "copywriting", "analytics"],
+          "outputs": ["ad-copy-variants/", "audience-targeting.md", "retargeting-funnel.md", "tracking-setup.md"],
+          "dependsOn": ["content-distribution"],
+          "parallel": false,
+          "gate": "human-approval"
+        }
+      ]
+    },
+    {
+      "id": "performance",
+      "name": "Performance & Optimization",
+      "steps": [
+        {
+          "id": "attribution-analysis",
+          "name": "Attribution & Funnel Analysis",
+          "strategy": "Build a full-funnel attribution model: first touch (what brought them in), multi-touch (what influenced them), and last touch (what converted them). Most SaaS buying journeys involve 7-12 touchpoints over 2-4 weeks. Single-touch attribution is misleading — it over-credits the last click and under-credits everything that built trust. Track cohorts by acquisition channel to measure true LTV:CAC by source.",
+          "ai_execution": "Build attribution reports from GA4, email, and CRM data. Map the typical buyer journey with touchpoint sequence analysis. Calculate channel-level metrics: CAC, LTV:CAC ratio, payback period, and conversion rate by funnel stage. Generate cohort analysis showing how different acquisition channels perform over time.",
+          "human_decision": "Interpret attribution data with business judgment — some channels have long payback periods but higher LTV. Decide which attribution model aligns with your business reality (most B2B SaaS should use multi-touch). Set realistic LTV:CAC targets by channel and adjust budget allocation accordingly.",
+          "command": "/ckm:analyze/report",
+          "agent": "analytics-analyst",
+          "skills": ["analytics", "campaign"],
+          "outputs": ["attribution-report.md", "funnel-analysis.md", "cohort-analysis.md"],
+          "dependsOn": ["paid-ads-setup"],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "optimization-loop",
+          "name": "Continuous Optimization Loop",
+          "strategy": "Build a weekly optimization rhythm: Monday — review metrics and identify the biggest lever. Tuesday-Thursday — implement one change to that lever. Friday — measure impact and document learning. The goal is not to optimize everything at once but to improve the biggest bottleneck by 10-20% each week. Over 60 days, compound improvements of 15% weekly on your worst metric will double your overall performance.",
+          "ai_execution": "Generate weekly optimization reports identifying the biggest conversion bottleneck. Create A/B test recommendations with statistical significance calculators. Draft updated creative variants based on performance data. Build a learning repository that connects changes to outcomes. Generate next-week optimization priorities.",
+          "human_decision": "Choose which single lever to focus on each week — resist the urge to change multiple variables. Make resource allocation decisions based on expected impact vs effort. Recognize when diminishing returns on one channel signal the need to open new channels. Set the long-term optimization roadmap beyond the initial 60 days.",
+          "command": "/ckm:funnel",
+          "agent": "analytics-analyst",
+          "skills": ["analytics", "campaign", "marketing-research"],
+          "outputs": ["weekly-optimization-reports/", "ab-test-results/", "learning-repository.md", "optimization-roadmap.md"],
+          "dependsOn": ["attribution-analysis"],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    }
+  ],
+  "gates": {
+    "brand-review": {
+      "type": "auto",
+      "checker": "content-reviewer",
+      "criteria": ["brand-voice-consistency", "positioning-alignment", "messaging-accuracy", "competitive-fairness"],
+      "pass_threshold": 0.8
+    },
+    "human-approval": {
+      "type": "manual",
+      "prompt": "Review budget allocation and targeting before committing ad spend. Verify conversion tracking is working.",
+      "blocksAll": true
+    }
+  }
+}

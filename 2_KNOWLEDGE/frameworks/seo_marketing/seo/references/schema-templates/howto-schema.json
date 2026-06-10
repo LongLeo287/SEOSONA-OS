@@ -1,0 +1,66 @@
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "{howto_title}",
+  "description": "{howto_description}",
+  "image": {
+    "@type": "ImageObject",
+    "url": "{featured_image_url}",
+    "height": "{image_height}",
+    "width": "{image_width}"
+  },
+  "totalTime": "{total_time_iso8601}",
+  "_comment_totalTime": "Use ISO 8601 duration format, e.g., PT30M for 30 minutes, PT2H for 2 hours",
+  "estimatedCost": {
+    "@type": "MonetaryAmount",
+    "currency": "{currency_code}",
+    "value": "{estimated_cost}"
+  },
+  "supply": [
+    {
+      "@type": "HowToSupply",
+      "name": "{supply_item_1}"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "{supply_item_2}"
+    },
+    {
+      "@type": "HowToSupply",
+      "name": "{supply_item_3}"
+    }
+  ],
+  "tool": [
+    {
+      "@type": "HowToTool",
+      "name": "{tool_item_1}"
+    },
+    {
+      "@type": "HowToTool",
+      "name": "{tool_item_2}"
+    }
+  ],
+  "step": [
+    {
+      "@type": "HowToStep",
+      "name": "{step_1_title}",
+      "text": "{step_1_description}",
+      "image": "{step_1_image_url}",
+      "url": "{step_1_url}"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "{step_2_title}",
+      "text": "{step_2_description}",
+      "image": "{step_2_image_url}",
+      "url": "{step_2_url}"
+    },
+    {
+      "@type": "HowToStep",
+      "name": "{step_3_title}",
+      "text": "{step_3_description}",
+      "image": "{step_3_image_url}",
+      "url": "{step_3_url}"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "name": "seosona-os",
+  "version": "3.0.0",
+  "description": "SEOSONA OS — SEO Website Analysis Workspace Tools. Audit, report, export CSV + HTML dashboard.",
+  "main": "1_CORE/scripts/audit_check.js",
+  "bin": {
+    "seosona-audit": "1_CORE/scripts/audit_check.js"
+  },
+  "scripts": {
+    "lint": "node 1_CORE/scripts/language_linter.js",
+    "postinstall": "node 1_CORE/scripts/setup-hooks.js && node 1_CORE/scripts/global_injector.js",
+    "install:global": "node 1_CORE/scripts/global_injector.js",
+    "audit:check": "node 1_CORE/scripts/audit_check.js",
+    "status": "npm run audit:check",
+    "prepublishOnly": "npm run lint && npm run audit:check"
+  },
+  "files": [
+    "1_CORE/scripts/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "seo",
+    "audit",
+    "seo-analysis",
+    "seo-dashboard",
+    "website-audit",
+    "seosona",
+    "vietnam-seo"
+  ],
+  "author": "longleo <contact@seosona.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LongLeo287/SEOSONA-OS.git"
+  },
+  "homepage": "https://seosona.com"
+}

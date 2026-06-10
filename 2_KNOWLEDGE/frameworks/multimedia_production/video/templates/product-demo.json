@@ -1,0 +1,69 @@
+{
+  "name": "product-demo",
+  "description": "Product showcase and demonstration video template",
+  "type": "demo",
+  "defaultAspectRatio": "16:9",
+  "defaultDuration": 8,
+  "platforms": ["youtube", "linkedin", "facebook"],
+  "structure": {
+    "scenes": [
+      {
+        "name": "hook",
+        "duration": 2,
+        "description": "Attention-grabbing product reveal or benefit statement"
+      },
+      {
+        "name": "problem",
+        "duration": 1.5,
+        "description": "Quick pain point or challenge setup"
+      },
+      {
+        "name": "solution",
+        "duration": 3,
+        "description": "Product demonstration showing key features"
+      },
+      {
+        "name": "cta",
+        "duration": 1.5,
+        "description": "Call to action with clear next step"
+      }
+    ]
+  },
+  "promptTemplate": "Professional product demonstration video:\n\nVisual: {user_prompt}\nSetting: Clean, modern environment highlighting product\nStyle: Premium, polished, aspirational, professional grade\nCamera: Smooth movements, product-focused shots\nLighting: Studio quality, highlights product features\n\nAudio:\n- \"Narrator\" says: Product benefit statement\n- SFX: Satisfying interaction sounds\n- Music: Modern corporate, subtle and professional\n\nTechnical: 8 seconds, {aspect_ratio}, 1080p, high quality, broadcast ready",
+  "audioConfig": {
+    "dialogue": {
+      "speaker": "Narrator",
+      "tone": "professional, confident"
+    },
+    "music": "corporate upbeat, subtle",
+    "sfx": ["click", "whoosh", "notification"]
+  },
+  "styleGuide": {
+    "lighting": "studio, product-focused",
+    "colorGrade": "clean, modern, brand-aligned",
+    "cameraMovement": "smooth, controlled",
+    "pacing": "measured, professional"
+  },
+  "variations": [
+    {
+      "name": "product-demo-30s",
+      "duration": 30,
+      "scenes": ["hook", "problem", "solution-extended", "features", "social-proof", "cta"]
+    },
+    {
+      "name": "product-demo-60s",
+      "duration": 60,
+      "scenes": [
+        "hook",
+        "problem",
+        "intro",
+        "demo-1",
+        "demo-2",
+        "demo-3",
+        "benefits",
+        "social-proof",
+        "cta"
+      ]
+    }
+  ]
+}

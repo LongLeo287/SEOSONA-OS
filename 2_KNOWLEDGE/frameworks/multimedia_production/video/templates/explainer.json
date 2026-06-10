@@ -1,0 +1,73 @@
+{
+  "name": "explainer",
+  "description": "Educational explainer video template",
+  "type": "educational",
+  "defaultAspectRatio": "16:9",
+  "defaultDuration": 8,
+  "platforms": ["youtube", "linkedin", "facebook"],
+  "structure": {
+    "scenes": [
+      {
+        "name": "hook",
+        "duration": 2,
+        "description": "Curiosity-driving question or statement"
+      },
+      {
+        "name": "problem",
+        "duration": 2,
+        "description": "Problem visualization or challenge"
+      },
+      {
+        "name": "solution",
+        "duration": 3,
+        "description": "Step-by-step explanation or concept reveal"
+      },
+      {
+        "name": "takeaway",
+        "duration": 1,
+        "description": "Key learning point and next step"
+      }
+    ]
+  },
+  "promptTemplate": "Educational explainer video:\n\nVisual: {user_prompt}\nSetting: Clean, informative environment\nStyle: Clear, educational, engaging, professional\nCamera: Steady, focused shots with subtle movement\nLighting: Bright, clear, easy to see details\n\nAudio:\n- \"Narrator\" says: Clear explanation\n- SFX: Transition sounds, indicator pings\n- Music: Light, upbeat background, not distracting\n\nTechnical: 8 seconds, {aspect_ratio}, 1080p, high quality",
+  "audioConfig": {
+    "dialogue": {
+      "speaker": "Narrator",
+      "tone": "clear, educational, friendly"
+    },
+    "music": "light educational, subtle",
+    "sfx": ["transition", "highlight", "pop"]
+  },
+  "styleGuide": {
+    "lighting": "bright, clear",
+    "colorGrade": "clean, vibrant, educational",
+    "cameraMovement": "steady, focused",
+    "pacing": "measured, digestible"
+  },
+  "textOverlays": {
+    "enabled": true,
+    "style": "clean, sans-serif",
+    "placement": "lower-third or full-screen"
+  },
+  "variations": [
+    {
+      "name": "explainer-quick",
+      "duration": 15,
+      "scenes": ["hook", "explain", "takeaway"]
+    },
+    {
+      "name": "explainer-detailed",
+      "duration": 60,
+      "scenes": [
+        "hook",
+        "problem",
+        "intro",
+        "step-1",
+        "step-2",
+        "step-3",
+        "summary",
+        "cta"
+      ]
+    }
+  ]
+}

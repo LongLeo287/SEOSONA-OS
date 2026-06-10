@@ -1,0 +1,33 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "${SEOSONA_ROOT}/3_MEMORY",
+        "${SEOSONA_ROOT}/2_KNOWLEDGE/raw_data"
+      ]
+    },
+    "firecrawl": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mendable/firecrawl-mcp-server"
+      ],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
+    "github": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-github"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
+      }
+    }
+  }
+}

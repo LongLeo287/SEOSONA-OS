@@ -1,0 +1,210 @@
+{
+  "id": "product-hunt-launch",
+  "name": "Product Hunt Launch Playbook",
+  "version": "1.0.0",
+  "author": { "name": "ClaudeKit", "url": "https://claudekit.cc" },
+  "tags": ["launch", "product-hunt", "growth", "pr"],
+  "estimatedDuration": "3 weeks",
+  "difficulty": "advanced",
+  "ai_models_used": ["claude-sonnet", "claude-opus"],
+  "inputs": {
+    "required": [
+      { "key": "product_name", "type": "string", "prompt": "Your product name" },
+      { "key": "product_url", "type": "url", "prompt": "Your product URL or landing page" },
+      { "key": "one_liner", "type": "string", "prompt": "One-line description of what your product does" },
+      { "key": "target_audience", "type": "string", "prompt": "Primary target audience (e.g., 'indie hackers building SaaS')" },
+      { "key": "launch_date", "type": "date", "prompt": "Planned Product Hunt launch date (YYYY-MM-DD)" }
+    ],
+    "optional": [
+      { "key": "competitors", "type": "array", "default": [], "prompt": "Competitor URLs or names to analyze" },
+      { "key": "hunter", "type": "string", "default": "", "prompt": "Product Hunt hunter username (if you have one lined up)" },
+      { "key": "pricing_model", "type": "string", "default": "freemium", "prompt": "Pricing model: freemium, free-trial, paid, open-source" },
+      { "key": "launch_offer", "type": "string", "default": "", "prompt": "Special launch day offer (e.g., '50% off first year')" }
+    ]
+  },
+  "goal_targets": {
+    "ph_upvotes": { "default": 500, "metric": "manual" },
+    "launch_day_visits": { "default": 1000, "metric": "ga4" },
+    "trial_signups": { "default": 50, "metric": "stripe" },
+    "email_signups": { "default": 200, "metric": "manual" }
+  },
+  "stages": [
+    {
+      "id": "pre-launch",
+      "name": "Pre-Launch Intelligence",
+      "steps": [
+        {
+          "id": "competitor-launch-analysis",
+          "name": "Competitor Launch Analysis",
+          "strategy": "Study every competitor that launched on PH in the last 12 months. Map their taglines, first comments, launch timing, and vote trajectory. The best launches borrow structural patterns from winners while differentiating on positioning. Look for gaps in their messaging — what pain points did they miss that you solve?",
+          "ai_execution": "Crawl competitor PH pages, extract taglines, vote counts, comment sentiment, and gallery assets. Cross-reference with their current messaging to spot pivots. Generate a competitive positioning matrix showing white space.",
+          "human_decision": "Choose which competitive angle to own. Decide whether to position as alternative, complement, or new category. Validate the gap is real and not just a messaging oversight.",
+          "command": "/ckm:competitor",
+          "agent": "researcher",
+          "skills": ["competitor", "marketing-research"],
+          "outputs": ["competitor-ph-analysis.md", "positioning-matrix.md"],
+          "dependsOn": [],
+          "parallel": true,
+          "gate": null
+        },
+        {
+          "id": "audience-pain-mining",
+          "name": "Audience Pain Mining",
+          "strategy": "Real positioning comes from real language. Mine where your audience talks — Reddit, Twitter, Indie Hackers, HN, Slack communities — to find their exact words for pain, not your assumptions. The best PH taglines use the audience's own vocabulary, not marketing jargon.",
+          "ai_execution": "Crawl community sources at scale — extract pain points, language patterns, objections, and buying triggers. Cluster by frequency and emotional intensity. Map language patterns to your feature set.",
+          "human_decision": "Validate which pain points match your product reality. Discard hallucinations. Pick the 2-3 pain points where you have genuine differentiation, not just parity.",
+          "command": "/ckm:persona",
+          "agent": "researcher",
+          "skills": ["persona", "marketing-research"],
+          "outputs": ["audience-pain-map.md", "voice-of-customer.md"],
+          "dependsOn": [],
+          "parallel": true,
+          "gate": null
+        },
+        {
+          "id": "tagline-variants",
+          "name": "Tagline & Positioning Variants",
+          "strategy": "Generate 20+ tagline variants using different positioning angles: pain-led, outcome-led, comparison-led, category-creation. Test them against the pain mining data. The winning tagline should make the reader think 'finally, someone gets it' — not 'oh, another tool.'",
+          "ai_execution": "Generate tagline variants using proven copywriting frameworks (PAS, AIDA, before/after). Score each against audience language match, uniqueness vs competitors, and clarity. A/B test top candidates with quick polls.",
+          "human_decision": "Select the final tagline and positioning angle. Trust your gut on brand voice — AI can generate options but you know your brand's personality. Test with 5 real people before committing.",
+          "command": "/ckm:write/fast",
+          "agent": "copywriter",
+          "skills": ["copywriting", "marketing-psychology"],
+          "outputs": ["tagline-variants.md", "positioning-brief.md"],
+          "dependsOn": ["audience-pain-mining"],
+          "parallel": false,
+          "gate": "brand-review"
+        },
+        {
+          "id": "teaser-content",
+          "name": "Teaser Content Campaign",
+          "strategy": "Build anticipation 2 weeks before launch. Create a drip sequence: behind-the-scenes builds, problem-awareness posts, social proof teasers. Each piece should make one pain point visceral without revealing the full solution. Goal: build a waitlist and prime your network to show up on launch day.",
+          "ai_execution": "Generate a 2-week content calendar with platform-native posts for Twitter, LinkedIn, and Indie Hackers. Create email drip sequence for waitlist. Produce teaser graphics copy and video scripts.",
+          "human_decision": "Approve tone and timing. Decide how much to reveal vs tease. Choose which platforms to prioritize based on where your audience actually hangs out. Personally engage in comments — AI drafts, you humanize.",
+          "command": "/ckm:social",
+          "agent": "content-creator",
+          "skills": ["social", "email", "content-marketing"],
+          "outputs": ["teaser-calendar.md", "teaser-posts/", "email-drip-sequence.md"],
+          "dependsOn": ["tagline-variants"],
+          "parallel": false,
+          "gate": "brand-review"
+        }
+      ]
+    },
+    {
+      "id": "launch-prep",
+      "name": "Launch Preparation",
+      "steps": [
+        {
+          "id": "launch-kit",
+          "name": "Launch Kit Assembly",
+          "strategy": "Your PH page is a landing page with different rules. The first comment is your most important asset — it should tell your story authentically (why you built this, what problem you lived with). Gallery images should show the product solving the pain, not feature screenshots. Maker video under 90 seconds, showing the 'aha moment' in first 10 seconds.",
+          "ai_execution": "Draft the first comment with storytelling framework. Generate gallery image copy and layout suggestions. Create the product description optimized for PH's format constraints. Draft maker video script with hook-problem-solution-CTA structure.",
+          "human_decision": "Record the maker video yourself — authenticity matters more than production quality. Personally write or heavily edit the first comment. Choose gallery images that show real UI, not mockups. Decide on the launch day offer.",
+          "command": "/ckm:campaign/create",
+          "agent": "campaign-manager",
+          "skills": ["campaign", "copywriting", "content-marketing"],
+          "outputs": ["ph-first-comment.md", "ph-description.md", "gallery-specs.md", "maker-video-script.md"],
+          "dependsOn": ["teaser-content"],
+          "parallel": false,
+          "gate": "human-approval"
+        },
+        {
+          "id": "landing-page",
+          "name": "Landing Page Optimization",
+          "strategy": "PH traffic is high-intent but impatient. Your landing page needs to convert in under 8 seconds. Hero should mirror the PH tagline exactly (consistency builds trust). Social proof above the fold. CTA should match the launch offer. Remove all navigation distractions — this is a campaign page, not your homepage.",
+          "ai_execution": "Audit current landing page for conversion bottlenecks. Generate optimized hero copy, CTA variants, and social proof sections. Create A/B test variants for headline and CTA. Build urgency elements tied to launch offer.",
+          "human_decision": "Approve final landing page copy and layout. Ensure the offer is technically implemented correctly (coupon codes, trial extensions). Test the full signup flow yourself — broken forms kill launches.",
+          "command": "/ckm:write/cro",
+          "agent": "copywriter",
+          "skills": ["copywriting", "form-cro", "marketing-psychology"],
+          "outputs": ["landing-page-copy.md", "cro-recommendations.md"],
+          "dependsOn": ["tagline-variants"],
+          "parallel": true,
+          "gate": "human-approval"
+        }
+      ]
+    },
+    {
+      "id": "launch-day",
+      "name": "Launch Day Execution",
+      "steps": [
+        {
+          "id": "launch-execute",
+          "name": "Launch Day Orchestration",
+          "strategy": "Launch at 12:01 AM PST (PH resets at midnight). Post your first comment within 60 seconds. Activate your network in waves — close friends first (first hour), broader network (hours 2-4), communities (hours 4-8). Respond to every single comment within 15 minutes. Cross-post to Twitter, LinkedIn, and communities with PH-specific CTAs ('Support us on PH'). Monitor vote velocity and adjust outreach intensity.",
+          "ai_execution": "Pre-schedule social posts across all platforms with PH link. Draft response templates for common comment types (questions, feature requests, comparisons, praise). Monitor social mentions and alert for engagement opportunities. Generate real-time progress updates for your team/network.",
+          "human_decision": "Personally respond to every PH comment — use AI drafts as starting points but add personal touches. Make judgment calls on when to push harder vs let organic momentum build. Handle any negative comments or competitor attacks personally. Decide when to activate each outreach wave.",
+          "command": "/ckm:social",
+          "agent": "social-media-manager",
+          "skills": ["social", "campaign", "content-marketing"],
+          "outputs": ["launch-day-plan.md", "response-templates.md", "social-schedule.md"],
+          "dependsOn": ["launch-kit", "landing-page"],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    },
+    {
+      "id": "post-launch",
+      "name": "Post-Launch Momentum",
+      "steps": [
+        {
+          "id": "analytics-report",
+          "name": "Launch Analytics Deep Dive",
+          "strategy": "Within 48 hours post-launch, analyze everything: traffic sources, conversion funnel, signup-to-activation rate, PH comment sentiment, social amplification. The numbers tell you what worked — the comments tell you why. Map which outreach channels drove real signups vs vanity traffic.",
+          "ai_execution": "Pull GA4 data for launch day traffic, source attribution, and conversion events. Analyze PH vote timeline and comment sentiment. Cross-reference social post engagement with traffic spikes. Generate a comprehensive launch report with actionable insights.",
+          "human_decision": "Interpret the 'why' behind the numbers. Decide which channels deserve continued investment vs one-time launch effects. Identify the top 3 learnings to apply to your next launch or ongoing marketing.",
+          "command": "/ckm:analyze/report",
+          "agent": "analytics-analyst",
+          "skills": ["analytics", "marketing-research"],
+          "outputs": ["launch-report.md", "channel-attribution.md"],
+          "dependsOn": ["launch-execute"],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "momentum-content",
+          "name": "Post-Launch Content Wave",
+          "strategy": "Capitalize on launch buzz with a content wave in the first week: 'How we launched on PH' blog post (indie hackers love these), customer story threads, feature deep-dives addressing PH comment themes, and a 'What we learned' post. This content has a short shelf life — publish within 5 days while the launch is still fresh.",
+          "ai_execution": "Draft blog posts using launch data and PH comments as source material. Generate social content repurposing launch day wins. Create email announcement for existing subscribers about launch results. Build content from PH comment themes (FAQ-style posts).",
+          "human_decision": "Choose which stories to tell and which metrics to share publicly. Add personal anecdotes and behind-the-scenes details that AI cannot generate. Decide transparency level — being honest about struggles builds more trust than only sharing wins.",
+          "command": "/ckm:write/blog",
+          "agent": "content-creator",
+          "skills": ["content-marketing", "copywriting", "social", "seo"],
+          "outputs": ["launch-blog-post.md", "post-launch-social/", "email-announcement.md"],
+          "dependsOn": ["analytics-report"],
+          "parallel": true,
+          "gate": "brand-review"
+        },
+        {
+          "id": "learn",
+          "name": "Retrospective & Learnings",
+          "strategy": "Run a structured retro: what worked, what flopped, what surprised you. Document everything — future launches (feature launches, major updates) will reuse 80% of this playbook. Score each channel by effort-to-impact ratio. Build your personal launch checklist from what you learned.",
+          "ai_execution": "Aggregate all outputs, metrics, and notes into a structured retrospective. Compare results to initial goal targets. Generate a reusable launch checklist based on what actually moved the needle. Identify patterns across all data points.",
+          "human_decision": "Add qualitative insights that data cannot capture — team energy levels, relationship impacts, personal stress points. Decide which processes to systematize vs keep manual. Set realistic targets for next launch based on this baseline.",
+          "command": "/ckm:analyze/report",
+          "agent": "analytics-analyst",
+          "skills": ["analytics", "marketing-research"],
+          "outputs": ["retrospective.md", "reusable-checklist.md"],
+          "dependsOn": ["analytics-report"],
+          "parallel": true,
+          "gate": null
+        }
+      ]
+    }
+  ],
+  "gates": {
+    "brand-review": {
+      "type": "auto",
+      "checker": "content-reviewer",
+      "criteria": ["brand-voice-consistency", "messaging-accuracy", "tone-alignment", "no-competitor-disparagement"],
+      "pass_threshold": 0.8
+    },
+    "human-approval": {
+      "type": "manual",
+      "prompt": "Review the outputs above. Approve to proceed or request revisions.",
+      "blocksAll": true
+    }
+  }
+}

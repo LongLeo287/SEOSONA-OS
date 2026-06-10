@@ -1,0 +1,28 @@
+# SEOSONA OS - GLOBAL SYSTEM SETTINGS
+# ===================================
+
+os_version: "6.0"
+mode: "auto-pilot"          # Options: "auto-pilot" (Zero-Touch), "interactive"
+
+# --- Directory Mapping ---
+paths:
+  core: "1_CORE"
+  knowledge_base: "2_KNOWLEDGE"
+  memory_vault: "3_MEMORY"
+  agents_roster: "4_AGENTS"
+  research_zone: "5_RESEARCH"
+
+# --- Telemetry & Logging ---
+logging:
+  level: "info"             # Options: debug, info, warn, error
+  auto_cleanup_days: 7      # How long to keep raw logs in 3_MEMORY/system_logs
+  
+# --- Task Management ---
+orchestration:
+  max_parallel_agents: 3
+  enforce_strict_workflow: true   # If true, prohibits skipping checklist steps
+  
+# --- Modules ---
+features:
+  enable_dmp: true          # DMP = Dreaming Memory Protocol (Background synthesis)
+  enable_osint_graph: false # Requires Neo4j local server running
