@@ -97,8 +97,9 @@ For every interaction or implicit context change, execute using **The Master Flo
 
 **SPECIAL WORKFLOW: Universal Assimilation Protocol (UAP) / Knowledge Ingestion Protocol (KIP)**
 If the user provides ANY data artifact (Repository, Image, PDF, Link) OR if the system detects an unfamiliar technical concept, you MUST autonomously execute the Universal Assimilation Protocol:
-1. **Analyze**: Autonomously read and extract the core value, architecture, or insight.
-2. **Review**: Cross-reference with existing system knowledge to find gaps.
+- Perform **Step 0: Triage & Validation**: Evaluate repositories based on stars (>500) and activity. If high-value, deep clone the repo. If low-value, perform lightweight analysis on README.
+- **Analyze**: Autonomously read and extract the core value, architecture, or insight.
+- **Review**: Cross-reference with existing system knowledge to find gaps.
 3. **Learn**: Extract the distilled methodology into `2_KNOWLEDGE/raw_data/` (or the relevant `frameworks/` subfolder for a new Skill).
 4. **Autonomous Upgrade**: Self-evaluate. If the data provides a new actionable workflow, you MUST autonomously generate a new `.md` Skill. After creating a new Skill, you MUST immediately execute `python scripts/core/plugin_manager.py` AND `python scripts/knowledge_graph.py --build` to absorb the new skill into the semantic graph. You NO LONGER need explicit user instruction to Agentize or Skillize.
 

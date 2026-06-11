@@ -3,11 +3,16 @@
 **Purpose:** To ensure the system actively evolves whenever it receives *any* form of external data. It prevents the system from passively storing files as "junk" and instead enforces an active learning and upgrade cycle.
 **Trigger:** Whenever the user provides a Repository, Image, PDF, Text, Link, or explicitly asks to "analyze/learn this".
 
-## AUTOMATED 4-STEP SEQUENCE
-*Whenever triggered, the Agent MUST execute all 4 steps sequentially.*
+## AUTOMATED 5-STEP SEQUENCE
+*Whenever triggered, the Agent MUST execute all 5 steps sequentially.*
+
+### Step 0: TRIAGE & DEEP CLONE VALIDATION
+- If the input is a GitHub repository URL, run `github_repo_analyzer.py` to fetch repository metadata (Stars, Activity).
+- If the repository has > 500 Stars and recent activity: Trigger **Deep Assimilation**. The system MUST `git clone` the repository into `3_MEMORY/ingestion_zone/` and analyze the core codebase architecture, not just the README.
+- If the repository falls below the threshold: Trigger **Lightweight Assimilation**. Fetch and read only the `README.md` to extract high-level workflows.
 
 ### Step 1: ANALYZE
-- All raw data, **including cloned repositories**, single files, or scraped links, must be temporarily stored in the buffer zone `3_MEMORY/ingestion_zone/`.
+- All raw data, **including cloned repositories** (if Deep Assimilation), single files, or scraped links, must be temporarily stored in the buffer zone `3_MEMORY/ingestion_zone/`.
 - Read and extract the content of the file/repo/link.
 - Identify the nature: Is this code logic, a design pattern, a workflow, or theoretical knowledge?
 - Filter out noise and boilerplate. Identify the **Unique Value**.
