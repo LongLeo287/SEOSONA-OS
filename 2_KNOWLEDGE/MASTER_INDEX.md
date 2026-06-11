@@ -211,6 +211,8 @@ ${SEOSONA_ROOT}
 | Use MCP | `frameworks/agentic_workflows/use-mcp/` |
 | Template Skill | `frameworks/agentic_workflows/template-skill/` |
 | Legacy Engine | `frameworks/agentic_workflows/legacy_engine/` |
+| OmniClaw Daemons | `frameworks/agentic_workflows/omniclaw_8_daemons_architecture/` |
+| Tactical Memory Flow | `frameworks/agentic_workflows/tactical_memory_flow/` |
 
 ---
 
