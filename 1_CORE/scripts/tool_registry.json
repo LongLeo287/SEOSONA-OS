@@ -241,10 +241,29 @@
       "retry_policy": {"max_retries": 3, "failure_types": ["network", "timeout", "rate_limit"]},
       "priority": 100,
       "category": "automation"
+    },
+    "technical_seo_autofixer": {
+      "label": "Technical SEO Auto-Fixer",
+      "module": "technical_seo_autofixer",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "url": {"type": "string", "required": true},
+        "issue_type": {"type": "string", "required": true},
+        "params": {"type": "string", "required": true}
+      },
+      "outputs": {
+        "pattern": null,
+        "columns": []
+      },
+      "dependencies": ["technical_seo_scanner"],
+      "retry_policy": {"max_retries": 1, "failure_types": ["data_quality"]},
+      "priority": 101,
+      "category": "automation"
     }
   },
   "execution_groups": {
-    "parallel_safe": ["psi_connector", "keyword_connector", "backlink_connector", "gsc_connector", "ga4_connector", "wp_rest_connector"],
+    "parallel_safe": ["psi_connector", "keyword_connector", "backlink_connector", "gsc_connector", "ga4_connector", "wp_rest_connector", "technical_seo_autofixer"],
     "sequential_required": ["rank_tracker", "serp_competitor"],
     "final": ["dashboard_generator_v4"]
   }
