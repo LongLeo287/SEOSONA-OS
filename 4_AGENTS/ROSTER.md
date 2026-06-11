@@ -23,6 +23,7 @@ This document is the **authoritative registry** of all AI agents and personas av
 | Agent | Primary Expertise |
 |---|---|
 | `attraction-specialist` | Lead generation, traffic attraction |
+| `seosona-consultant` | SEOSONA corporate services & sales advisory |
 | `campaign-manager` | Multi-channel campaign management |
 | `campaign-debugger` | Campaign diagnostics & optimization |
 | `community-manager` | Community growth & engagement |

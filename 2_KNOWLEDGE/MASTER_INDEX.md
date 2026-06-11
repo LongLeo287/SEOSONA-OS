@@ -41,6 +41,7 @@ ${SEOSONA_ROOT}
 │   ├── frameworks/        (structured skill libraries)
 │   ├── workflows/         (SOP & workflow scripts)
 │   ├── raw_data/          (117 raw reference files + INDEX.md)
+│   │   └── corporate/         (SEOSONA company knowledge, methodologies, and services)
 │   ├── commands/          (slash commands e.g. /ckm)
 │   ├── output_styles/     (AI output level templates)
 │   └── sops/              (system-level SOPs)
