@@ -222,10 +222,29 @@
       "retry_policy": {"max_retries": 1, "failure_types": ["data_quality"]},
       "priority": 99,
       "category": "reporting"
+    },
+    "wp_rest_connector": {
+      "label": "WordPress REST API Connector",
+      "module": "wp_rest_connector",
+      "function": "run",
+      "inputs": {
+        "wp_url": {"type": "string", "required": true},
+        "title": {"type": "string", "required": true},
+        "content_html": {"type": "string", "required": true},
+        "status": {"type": "string", "required": false, "default": "draft"}
+      },
+      "outputs": {
+        "pattern": null,
+        "columns": []
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 3, "failure_types": ["network", "timeout", "rate_limit"]},
+      "priority": 100,
+      "category": "automation"
     }
   },
   "execution_groups": {
-    "parallel_safe": ["psi_connector", "keyword_connector", "backlink_connector", "gsc_connector", "ga4_connector"],
+    "parallel_safe": ["psi_connector", "keyword_connector", "backlink_connector", "gsc_connector", "ga4_connector", "wp_rest_connector"],
     "sequential_required": ["rank_tracker", "serp_competitor"],
     "final": ["dashboard_generator_v4"]
   }

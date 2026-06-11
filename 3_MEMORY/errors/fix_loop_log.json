@@ -1,0 +1,40 @@
+[
+  {
+    "connector": "wp_rest_connector",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 0,
+        "timestamp": "2026-06-11T11:33:08.822530"
+      }
+    ],
+    "started_at": "2026-06-11T11:33:08.822530",
+    "completed_at": "2026-06-11T11:33:08.822530"
+  },
+  {
+    "connector": "wp_rest_connector",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 0,
+        "timestamp": "2026-06-11T11:33:35.401486"
+      }
+    ],
+    "started_at": "2026-06-11T11:33:35.401486",
+    "completed_at": "2026-06-11T11:33:35.401486"
+  }
+]
