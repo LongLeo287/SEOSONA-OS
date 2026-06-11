@@ -196,15 +196,21 @@ def main():
 
     # ── Step 17: Validation Report ────────────────────────────────────────────
     print("\n" + "=" * 65)
-    print("🔍 STEP 17/18: Output Validation")
+    print("🔍 STEP 17/18: Output Validation & Quality Scoring")
     print("=" * 65)
     validation_data = None
     try:
         from audit_validator import print_validation_report
         validation = print_validation_report(domain)
         validation_data = validation
+
+        print("\n   [Scoring Audit Quality...]")
+        from quality_scorer import AuditQualityScorer
+        scorer = AuditQualityScorer(domain)
+        quality_report = scorer.score()
+        scorer.print_report(quality_report)
     except Exception as e:
-        print(f"   ⚠️ Validation skipped: {e}")
+        print(f"   ⚠️ Validation and Scoring skipped: {e}")
 
     # ── Step 18: Session Memory ───────────────────────────────────────────────
     print("\n" + "=" * 65)

@@ -1,0 +1,38 @@
+{
+  "domain": "popmart.com",
+  "created_at": "2026-06-11T09:55:31.220073",
+  "total_tasks": 13,
+  "waves": 2,
+  "estimated_sequential_s": 240,
+  "estimated_parallel_s": 65,
+  "parallel_speedup": "3.7x",
+  "execution_plan": [
+    {
+      "wave": 1,
+      "description": "Parallel (rankings, performance, ai_search, crawl_analysis, authority, structured_data, technical, analytics, content, content_quality): PageSpeed Insights / CWV, Keyword Research, Backlink Intelligence, Google Search Console (+6 more)",
+      "tasks": [
+        "PageSpeed Insights / CWV",
+        "Keyword Research",
+        "Backlink Intelligence",
+        "Google Search Console",
+        "Google Analytics 4",
+        "Technical SEO Scanner",
+        "Schema.org Validator",
+        "E-E-A-T Analyzer",
+        "Log Analyzer",
+        "AEO / AI Search Readiness"
+      ],
+      "parallel": true
+    },
+    {
+      "wave": 2,
+      "description": "Parallel (rankings, competitive, reporting): SERP Competitor Analyzer, Rank Tracker, Premium Dashboard v4",
+      "tasks": [
+        "SERP Competitor Analyzer",
+        "Rank Tracker",
+        "Premium Dashboard v4"
+      ],
+      "parallel": true
+    }
+  ]
+}
