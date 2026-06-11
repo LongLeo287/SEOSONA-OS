@@ -48,10 +48,15 @@ Load: `references/content-audit-checklist.md`
 ### Content Strategy Workflow
 1. Audit existing content
 2. Define audience personas
-3. Identify content pillars (3-5)
-4. Map topic clusters per pillar
-5. Create editorial calendar
-6. Define production workflow
+3. Identify content### 1. Topic Authority & Helpful Content (SEOSONA Standard)
+- Focus on comprehensive topical clusters rather than isolated keywords.
+- **Helpful Content Checklist (Google Guidelines):**
+  - **Originality:** Does the content provide original research, reporting, or firsthand experience? (Never just spin competitor content).
+  - **Comprehensiveness:** Does it cover all angles so the user doesn't need to search elsewhere?
+  - **Depth:** Does it provide insightful analysis beyond the obvious?
+  - **Titles:** Are titles descriptive and helpful without being clickbait or exaggerated?
+  - **Expertise (E-E-A-T):** Is it written by an expert? Does it have an author box, clear sourcing, and zero factual errors?
+  - **Human-First:** Is it written to solve a real human problem, or just to manipulate search engines?ion workflow
 7. Set measurement framework
 
 ### Blog Planning Workflow
