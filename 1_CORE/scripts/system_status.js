@@ -93,6 +93,27 @@ function checkRouter() {
   else pass(`SKILLS_ROUTER routes: ${routeCount}`);
 }
 
+function checkCapabilityBridge() {
+  exists('1_CORE/PORTABLE_CAPABILITY_CONTRACT.md');
+  exists('1_CORE/scripts/seosona_capability_bridge.js');
+
+  try {
+    const output = execFileSync('node', ['1_CORE/scripts/seosona_capability_bridge.js', 'validate'], {
+      cwd: ROOT,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    const result = JSON.parse(output);
+    if (!result.ok) {
+      fail(`Capability bridge validation failed: ${result.errors.join('; ')}`);
+      return;
+    }
+    pass(`Capability bridge valid: ${result.resourceCount} resources, ${result.capabilityCount} skills`);
+  } catch (error) {
+    fail(`Capability bridge validation failed: ${error.message}`);
+  }
+}
+
 function checkConfig() {
   if (fs.existsSync(path.join(ROOT, '1_CONFIG', '.env'))) {
     pass('Local config present: 1_CONFIG/.env');
@@ -153,6 +174,7 @@ console.log('');
 checkCoreFiles();
 checkPackageScripts();
 checkRouter();
+checkCapabilityBridge();
 checkConfig();
 checkGit();
 checkIngestionCleanup();

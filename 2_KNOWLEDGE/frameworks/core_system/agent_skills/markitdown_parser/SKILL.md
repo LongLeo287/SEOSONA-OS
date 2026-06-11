@@ -30,7 +30,7 @@ pip install markitdown
 ### Step 2: Parsing Execution
 Run the conversion tool targeting the specific file. Always output to a temporary `.md` file in the current working directory or `scratch` folder.
 ```powershell
-markitdown "C:\Absolute\Path\To\Input\file.pdf" -o "parsed_output.md"
+markitdown ".\input\file.pdf" -o "parsed_output.md"
 ```
 
 ### Step 3: Context Ingestion

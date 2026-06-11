@@ -38,6 +38,7 @@ Your global OS is anchored at: ${PORTABLE_PATH}
 2. Consult before every task: ${PORTABLE_PATH}/2_KNOWLEDGE/MASTER_INDEX.md
 3. Route via: ${PORTABLE_PATH}/2_KNOWLEDGE/SKILLS_ROUTER.md
 4. Agent registry: ${PORTABLE_PATH}/4_AGENTS/ROSTER.md
+5. Portable capability bridge: ${PORTABLE_PATH}/1_CORE/scripts/seosona_capability_bridge.js
 
 ## Orchestrator — ALWAYS activate first on complex requests
 File: ${PORTABLE_PATH}/1_CORE/agents/orchestrator_agent.md
@@ -64,6 +65,12 @@ Role: Parse intent → route to correct Persona + Skills → structure task chec
 - After every major task: log to ${PORTABLE_PATH}/3_MEMORY/logs/
 - SEO exports: ${PORTABLE_PATH}/3_MEMORY/seo_exports/{domain}/
 - Knowledge items: ${PORTABLE_PATH}/3_MEMORY/knowledge_items/
+
+## Portable Capability Protocol
+- Machine-readable manifest: node ${PORTABLE_PATH}/1_CORE/scripts/seosona_capability_bridge.js manifest
+- Route a task: node ${PORTABLE_PATH}/1_CORE/scripts/seosona_capability_bridge.js route "<query>"
+- Validate connection: node ${PORTABLE_PATH}/1_CORE/scripts/seosona_capability_bridge.js validate
+- Use first-class capabilities for agent loops and reasoning: seosona:cost-bounded-agent-looping, seosona:thinking-model-router
 
 ## Core Rules (Summary)
 - NEVER hardcode paths. Always use ~/.seosona/ anchor.
@@ -253,8 +260,9 @@ You are connected to SEOSONA OS — a global AI OS with 500+ skills, agents, and
 - **Agents**: \`${PORTABLE_PATH}/4_AGENTS/personas\`
 - **Skills**: \`${PORTABLE_PATH}/2_KNOWLEDGE/frameworks\`
 - **Core Rules**: \`${PORTABLE_PATH}/1_CORE/SOUL.md\`
+- **Capability Bridge**: \`${PORTABLE_PATH}/1_CORE/scripts/seosona_capability_bridge.js\`
 
-Always load and follow the rules in SOUL.md. Consult MASTER_INDEX.md before every task.
+Always load and follow the rules in SOUL.md. Consult MASTER_INDEX.md before every task. Use the Capability Bridge for machine-readable routing when available.
 ${BLOCK_END}`;
 
     // Remove old block to prevent duplicates, then prepend fresh block

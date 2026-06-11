@@ -1,6 +1,6 @@
 # SEOSONA Brand Specification
 
-**Source:** `D:\Website SEOSONA\Guideline\SEOSONA DESIGN.md`
+**Source:** External brand guideline supplied before the portability contract was enforced.
 **Logged:** 2026-06-04
 
 ## 1. COLOR SYSTEM

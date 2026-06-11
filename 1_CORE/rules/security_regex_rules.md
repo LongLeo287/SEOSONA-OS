@@ -19,8 +19,8 @@ If any matches are found:
 
 ## 3. Hardcoded Path Detection (Rule #7 Enforcement)
 Scan ALL modified system files for absolute/machine-specific paths:
-* **Windows Absolute Path:** `[A-Za-z]:\\\\` or `[A-Za-z]:/` (e.g., `d:/SEOSONA OS`, `C:\Users`)
-* **Unix Absolute Path (personal):** `/home/[a-z]+/` or `/Users/[a-zA-Z]+/`
+* **Windows Absolute Path:** `[A-Za-z]:\\\\` or `[A-Za-z]:/` (for example, a physical drive root or user profile path)
+* **Unix Absolute Path (personal):** personal home-directory paths on Linux or macOS
 * **Violation Keyword:** Any occurrence of a volume letter followed by `:` (e.g., `d:`, `C:`) outside of `.env` files.
 
 If any matches are found:

@@ -1,7 +1,7 @@
 # SEOSONA OS — Master Knowledge Index v7.0
 # Complete map of all Skills, Frameworks, Agents, Workflows, and Data
 
-_Updated: 2026-06-10 | Version: 7.0 (ClaudeKit Marketing Assimilation)_
+_Updated: 2026-06-11 | Version: 7.1 (Agent Looping and Thinking Model Assimilation)_
 
 ---
 
@@ -14,21 +14,21 @@ _Updated: 2026-06-10 | Version: 7.0 (ClaudeKit Marketing Assimilation)_
 | **Frontend Engineering Skills** | 13 | `2_KNOWLEDGE/frameworks/frontend_engineering/` |
 | **Backend Engineering Skills** | 13 | `2_KNOWLEDGE/frameworks/backend_engineering/` |
 | **Multimedia Production Skills** | 15 | `2_KNOWLEDGE/frameworks/multimedia_production/` |
-| **Agentic Workflow Skills** | 16 | `2_KNOWLEDGE/frameworks/agentic_workflows/` |
-| **Productivity Skills** | 18 | `2_KNOWLEDGE/frameworks/productivity/` |
+| **Agentic Workflow Skills** | 19 | `2_KNOWLEDGE/frameworks/agentic_workflows/` |
+| **Productivity Skills** | 19 | `2_KNOWLEDGE/frameworks/productivity/` |
 | **Workflows / SOPs** | 90 | `2_KNOWLEDGE/workflows/` |
-| **System SOPs** | 6 | `2_KNOWLEDGE/sops/` |
+| **System SOPs** | 7 | `2_KNOWLEDGE/sops/` |
 | **Automation Hooks** | 8 | `1_CORE/hooks/` |
 | **Data Connectors (Python)** | 11 | `scripts/connectors/` |
-| **Raw Reference Library** | 119+ files | `2_KNOWLEDGE/raw_data/` (see INDEX.md) |
-| **TOTAL CAPABILITIES** | **490** | |
+| **Raw Reference Library** | 120+ files | `2_KNOWLEDGE/raw_data/` (see INDEX.md) |
+| **TOTAL CAPABILITIES** | **494** | |
 
 ---
 
 ## 🏗️ Directory Structure
 
-```
-D:\SEOSONA OS
+```text
+${SEOSONA_ROOT}
 ├── 1_CONFIG/          → System configuration & legacy settings
 │   ├── ide_profiles/      (Universal IDE settings: .ck.json, settings.json)
 │   └── schemas/           (JSON schemas for validation)
@@ -189,7 +189,7 @@ D:\SEOSONA OS
 
 ---
 
-## 🧠 SKILLS — Agentic Workflows (15 skills)
+## 🧠 SKILLS — Agentic Workflows (19 skills)
 
 | Skill | Path |
 |---|---|
@@ -198,6 +198,8 @@ D:\SEOSONA OS
 | MCP Builder | `frameworks/agentic_workflows/mcp-builder/` |
 | MCP Management | `frameworks/agentic_workflows/mcp-management/` |
 | Skill Creator | `frameworks/agentic_workflows/skill-creator/` |
+| Cost-Bounded Agent Looping | `frameworks/agentic_workflows/cost_bounded_agent_looping/` |
+| Portable Capability Bridge | `frameworks/agentic_workflows/seosona_portable_capability_bridge/` |
 | Kit Builder | `frameworks/agentic_workflows/kit-builder/` |
 | Repomix | `frameworks/agentic_workflows/repomix/` |
 | Hub | `frameworks/agentic_workflows/hub/` |
@@ -211,12 +213,13 @@ D:\SEOSONA OS
 
 ---
 
-## 📈 SKILLS — Productivity (18 skills)
+## 📈 SKILLS — Productivity (19 skills)
 
 | Skill | Path |
 |---|---|
 | Sequential Thinking | `frameworks/productivity/sequential-thinking/` |
 | Problem Solving | `frameworks/productivity/problem-solving/` |
+| Thinking Model Router | `frameworks/productivity/thinking_model_router/` |
 | Brainstorm | `frameworks/productivity/brainstorm/` |
 | Plan | `frameworks/productivity/plan/` |
 | Kanban | `frameworks/productivity/kanban/` |
@@ -256,6 +259,7 @@ D:\SEOSONA OS
 - `lightrag_graph_mapping.md`
 - `mempalace_sop.md`
 - `seosona_blackboard_protocol.md`
+- `universal_tool_integration_sop.md`
 
 ---
 
@@ -315,5 +319,5 @@ D:\SEOSONA OS
 | **Folo (AI RSS Reader)** | [RSSNext/Folo](https://github.com/RSSNext/Folo) | AI Content Aggregation (Cross-Platform) | `frameworks/ingested_data/folo_rss_reader/` |
 | **Context7 MCP Platform** | [upstash/context7](https://github.com/upstash/context7) | MCP Server / AI Code Docs | `frameworks/ingested_data/context7_mcp/` |
 | **Marketing Content Pipeline** | [pennydinh/marketing-pineline-share](https://github.com/pennydinh/marketing-pineline-share) | AI Content Automation (Next.js + Remotion) | `frameworks/ingested_data/marketing_content_pipeline/` |
-| **ClaudeKit Marketing** | `D:\Marketing-Kit` / [claudekit/claudekit-marketing](https://github.com/claudekit/claudekit-marketing) | AI Marketing Toolkit (31 agents, 101 skills, 14 hooks) | `frameworks/ingested_data/claudekit_marketing/` |
+| **ClaudeKit Marketing** | Local external source snapshot + [claudekit/claudekit-marketing](https://github.com/claudekit/claudekit-marketing) | AI Marketing Toolkit (31 agents, 101 skills, 14 hooks) | `frameworks/ingested_data/claudekit_marketing/` |
 

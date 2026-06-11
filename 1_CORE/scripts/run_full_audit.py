@@ -1,8 +1,13 @@
 # seosona-ignore-lang
 #!/usr/bin/env python3
 """
-SEOSONA OS — Full Audit Orchestrator v4.0
-Runs all connectors in sequence, cleaning old data first:
+SEOSONA OS — Full Audit Orchestrator v5.0
+Runs all connectors in sequence with V5 enhancements:
+  - Validation Loops: Every output is validated before acceptance
+  - Fix Loops: Automatic retry with backoff on failures
+  - Tool Registry: Standardized connector interface
+
+Modules:
   1.  Data Cleanup     — Removes old CSV/MD files to ensure fresh data
   2.  PSI/CWV          — PageSpeed Insights + Core Web Vitals
   3.  Keywords         — Google Autocomplete expansion
@@ -35,6 +40,7 @@ if hasattr(sys.stdout, "reconfigure"):
 
 ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(ROOT / "1_CORE" / "scripts" / "connectors"))
+sys.path.insert(0, str(ROOT / "1_CORE" / "scripts" / "validators"))
 
 CONNECTORS = [
     "psi", "keywords", "serp_competitor", "backlinks", "gsc", 
@@ -69,7 +75,12 @@ def run_psi(domain, url, skip=False):
     print("\n" + "="*65)
     print("⚡ STEP 2/13: PageSpeed Insights + Core Web Vitals")
     print("="*65)
-    try: import psi_connector; psi_connector.run(domain=domain, url=url)
+    try:
+        from fix_loop import run_with_fix_loop
+        import psi_connector
+        result = run_with_fix_loop("PSI/CWV", psi_connector.run, domain=domain, url=url)
+        if not result.success:
+            print(f"   ❌ PSI error after {result.total_attempts} attempts: {result.final_error}")
     except (Exception, SystemExit) as e: print(f"   ❌ PSI error: {e}")
 
 def run_keywords(domain, seeds=None, skip=False):
@@ -77,7 +88,12 @@ def run_keywords(domain, seeds=None, skip=False):
     print("\n" + "="*65)
     print("🔑 STEP 3/13: Keyword Research")
     print("="*65)
-    try: import keyword_connector; keyword_connector.run(seeds=seeds, domain=domain)
+    try:
+        from fix_loop import run_with_fix_loop
+        import keyword_connector
+        result = run_with_fix_loop("Keywords", keyword_connector.run, seeds=seeds, domain=domain)
+        if not result.success:
+            print(f"   ❌ Keywords error after {result.total_attempts} attempts: {result.final_error}")
     except (Exception, SystemExit) as e: print(f"   ❌ Keywords error: {e}")
 
 def run_serp_competitor(domain, skip=False):
@@ -190,7 +206,7 @@ def main():
     url = args.url or config["defaults"]["target_url"]
 
     print("==================================================================")
-    print("  SEOSONA OS -- Full Website SEO Audit v3.0")
+    print("  SEOSONA OS -- Full Website SEO Audit v5.0 (with Validation & Fix Loops)")
     print(f"  Target: {domain} | Start: {datetime.now().strftime('%H:%M:%S')}")
     print("==================================================================\n")
 
@@ -272,6 +288,16 @@ def main():
 
     # ── Step 16: Dashboard ────────────────────────────────────────────────────
     run_dashboard(domain)
+
+    # ── Step 17: Validation Report ────────────────────────────────────────────
+    print("\n" + "="*65)
+    print("🔍 STEP 17/17: Output Validation")
+    print("="*65)
+    try:
+        from audit_validator import print_validation_report
+        validation = print_validation_report(domain)
+    except Exception as e:
+        print(f"   ⚠️ Validation skipped: {e}")
 
     elapsed = (datetime.now() - start_time).seconds
     print(f"\n✅ FULL AUDIT COMPLETE IN {elapsed//60}m {elapsed%60}s")

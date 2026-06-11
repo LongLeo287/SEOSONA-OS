@@ -1,55 +1,60 @@
-# ⚙️ SEOSONA OS Operational Ecosystem (Zero-Config Global)
+# SEOSONA OS Operational Ecosystem
 
-This document describes the Standard Operating Procedure (SOP) for SEOSONA OS following its restructuring into the **Global Symlink** architecture.
-
----
+This document describes the standard operating model for SEOSONA OS as a portable AI operating system.
 
 ## 1. Core Mechanism
 
-The new architecture transforms SEOSONA OS from a "Project Directory" into a **"Background AI Operating System"**.
-You no longer need to copy cumbersome files into individual projects. The operational mechanism works in 3 steps:
+SEOSONA OS is not tied to one project folder, IDE, CLI, or physical installation path. It operates as a portable system graph.
 
-1. **Global Anchor (Symlink):** SEOSONA OS creates an invisible pipeline (`~/.seosona`) pointing directly to its brain. No matter where you move the root folder, running the installation command will automatically realign the pipeline.
-2. **Global Injection:** Every AI tool (Claude Code, Cursor, Codex, Windsurf, etc.) is "injected" with a default awareness: *"You are SEOSONA OS. Your brain is located at ~/.seosona"*.
-3. **Real-time Access:** When the AI needs a skill, it navigates through the `~/.seosona` pipeline to fetch the exact skill file and applies it to your current project.
+The mechanism has four layers:
 
----
+1. **Portable Anchor:** `~/.seosona` points to the active SEOSONA OS root.
+2. **Environment Variable:** `${SEOSONA_ROOT}` can be used by scripts and runtime configs.
+3. **Global Injection:** IDEs and CLIs receive a startup instruction that points them to `~/.seosona/1_CORE/SOUL.md`.
+4. **Capability Bridge:** `~/.seosona/1_CORE/scripts/seosona_capability_bridge.js` exposes the system graph as portable JSON.
 
-## 2. Practical Operational Flow
+## 2. System Graph
 
-### 🟢 Phase 1: Initialization (One-time only)
-1. Download the SEOSONA OS directory to any location (e.g., `D:\SEOSONA OS`).
-2. Open a Terminal in that directory and run:
-   ```bash
-   npm install
-   ```
-3. *Done! Your machine is now permanently infused with SEOSONA OS.*
+The portable graph includes:
 
-### 🔵 Phase 2: Daily Workflow (Zero-Touch)
-1. Open **ANY** project folder you want to work on (e.g., `E:\ClientProject_A`).
-2. Open your preferred AI tool (Cursor, Claude Code, Windsurf, Codex).
-3. Chat normally with the AI:
-   > *"Analyze the SEO technicals of this `index.html` file according to SEOSONA standards."*
-4. The AI will automatically:
-   - Navigate through the pipeline and read `MASTER_INDEX.md` to find the skill.
-   - Transform into the **[Claude SEO Analyst]**.
-   - Pull the `seo_marketing` skill set to audit the `index.html` file.
+- Skills from `2_KNOWLEDGE/frameworks/`.
+- Agents from `4_AGENTS/personas/`.
+- Workflows from `1_CORE/workflows/` and `2_KNOWLEDGE/workflows/`.
+- Knowledge Items from `3_MEMORY/knowledge_items/`.
+- Raw references from `2_KNOWLEDGE/raw_data/`.
+- SOPs from `2_KNOWLEDGE/sops/`.
+- Rules and contracts from `1_CORE/`.
 
-### 🔴 Phase 3: Background Automation (Invisible Hooks)
-While the AI works, **Global Hooks** trigger silently in the background to protect you:
-- **Privacy Block:** Prevents the AI from leaking sensitive client data to the internet.
-- **Rules Reminder:** Automatically enforces coding standards (SOUL.md) if the AI shows signs of writing sloppy code.
-- **Memory Logger:** After task completion, the AI automatically drops the analysis report into the `~/.seosona/3_MEMORY/logs/` repository, preserving knowledge for the entire system.
+Connected tools should route through the bridge first when they need machine-readable discovery.
 
----
+## 3. Daily Flow
 
-## 3. System Administration & Updates
+1. Open any project folder.
+2. Open any connected IDE, CLI, MCP client, or agent runtime.
+3. The tool resolves SEOSONA through `~/.seosona`.
+4. The tool reads `1_CORE/SOUL.md`.
+5. The tool queries the bridge:
 
-Because the entire system acts as a Single Source of Truth, administration becomes incredibly effortless:
+```bash
+node ~/.seosona/1_CORE/scripts/seosona_capability_bridge.js route "task description"
+```
 
-- **When adding a new Skill:** Simply drop the Markdown file into `D:\SEOSONA OS\2_KNOWLEDGE\frameworks\`. Instantly, **EVERY PROJECT** on your machine has access to that skill.
-- **When modifying SOUL.md rules:** Change one line, and 100% of running IDEs/CLIs will immediately and obediently follow the new rule.
+6. The tool loads the smallest useful set of resources.
+7. The tool executes, verifies, and logs major work under `3_MEMORY/logs/`.
 
----
+## 4. Administration
 
-> **Summary:** SEOSONA OS now operates exactly like a RAM module plugged directly into the brain of every AI tool on your machine. Just launch the AI and use it — no installation per project, no copying files, and no complex commands to remember!
+When adding or updating system knowledge:
+
+- Add skills under `2_KNOWLEDGE/frameworks/`.
+- Add agents under `4_AGENTS/personas/`.
+- Add workflows under `1_CORE/workflows/` or `2_KNOWLEDGE/workflows/`.
+- Add KIs under `3_MEMORY/knowledge_items/`.
+- Add raw references under `2_KNOWLEDGE/raw_data/`.
+- Add SOPs under `2_KNOWLEDGE/sops/`.
+- Rebuild routing with `1_CORE/scripts/core/plugin_manager.py`.
+- Validate with `npm run capabilities:validate` and `npm run status`.
+
+Persistent instructions, docs, configs, skills, and memory must use `~/.seosona`, `${SEOSONA_ROOT}`, or relative paths. Physical installation paths are not allowed.
+
+TASK COMPLETED
