@@ -13,15 +13,15 @@ _Updated: 2026-06-10 | Version: 7.0 (ClaudeKit Marketing Assimilation)_
 | **SEO/Marketing Skills** | 56 | `2_KNOWLEDGE/frameworks/seo_marketing/` |
 | **Frontend Engineering Skills** | 13 | `2_KNOWLEDGE/frameworks/frontend_engineering/` |
 | **Backend Engineering Skills** | 13 | `2_KNOWLEDGE/frameworks/backend_engineering/` |
-| **Multimedia Production Skills** | 14 | `2_KNOWLEDGE/frameworks/multimedia_production/` |
-| **Agentic Workflow Skills** | 15 | `2_KNOWLEDGE/frameworks/agentic_workflows/` |
+| **Multimedia Production Skills** | 15 | `2_KNOWLEDGE/frameworks/multimedia_production/` |
+| **Agentic Workflow Skills** | 16 | `2_KNOWLEDGE/frameworks/agentic_workflows/` |
 | **Productivity Skills** | 18 | `2_KNOWLEDGE/frameworks/productivity/` |
 | **Workflows / SOPs** | 90 | `2_KNOWLEDGE/workflows/` |
 | **System SOPs** | 6 | `2_KNOWLEDGE/sops/` |
 | **Automation Hooks** | 8 | `1_CORE/hooks/` |
 | **Data Connectors (Python)** | 11 | `scripts/connectors/` |
-| **Raw Reference Library** | 117 files | `2_KNOWLEDGE/raw_data/` (see INDEX.md) |
-| **TOTAL CAPABILITIES** | **488** | |
+| **Raw Reference Library** | 119+ files | `2_KNOWLEDGE/raw_data/` (see INDEX.md) |
+| **TOTAL CAPABILITIES** | **490** | |
 
 ---
 
@@ -167,7 +167,7 @@ D:\SEOSONA OS
 
 ---
 
-## 🎬 SKILLS — Multimedia Production (14 skills)
+## 🎬 SKILLS — Multimedia Production (15 skills)
 
 | Skill | Path |
 |---|---|
@@ -185,6 +185,7 @@ D:\SEOSONA OS
 | Assets Organizing | `frameworks/multimedia_production/assets-organizing/` |
 | Creativity | `frameworks/multimedia_production/creativity/` |
 | Video ⭐ | `frameworks/multimedia_production/video/` |
+| Video Audio Ingestion | `frameworks/multimedia_production/video_audio_ingestion/` |
 
 ---
 

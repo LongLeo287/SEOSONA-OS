@@ -11,8 +11,13 @@
     "postinstall": "node 1_CORE/scripts/setup-hooks.js && node 1_CORE/scripts/global_injector.js",
     "install:global": "node 1_CORE/scripts/global_injector.js",
     "audit:check": "node 1_CORE/scripts/audit_check.js",
-    "status": "npm run audit:check",
-    "prepublishOnly": "npm run lint && npm run audit:check"
+    "status": "npm run status:system",
+    "status:system": "node 1_CORE/scripts/system_status.js",
+    "status:seo": "npm run audit:check",
+    "status:all": "npm run status:system && npm run status:seo",
+    "git:check": "node 1_CORE/scripts/git_push_check.js",
+    "git:push-check": "node 1_CORE/scripts/git_push_check.js --strict --dry-run",
+    "prepublishOnly": "npm run lint && npm run status:system && npm run audit:check"
   },
   "files": [
     "1_CORE/scripts/",

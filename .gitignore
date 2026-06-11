@@ -27,6 +27,7 @@ cli/README.md
 # ── Raw cloned repos (processed by UAP, then deleted) ─────────────────────────
 repos/*/
 repos/*.txt
+5_RESEARCH/repositories/
 
 # ── Python cache ──────────────────────────────────────────────────────────────
 **/__pycache__/
