@@ -1,13 +1,13 @@
 {
   "version": "5.0",
-  "built_at": "2026-06-11T10:07:10.750066",
+  "built_at": "2026-06-11T11:12:09.065825",
   "stats": {
-    "nodes": 259,
-    "edges": 384,
+    "nodes": 260,
+    "edges": 385,
     "categories": 12,
-    "skills": 247,
-    "keywords": 414,
-    "built_at": "2026-06-11T10:07:10.750066"
+    "skills": 248,
+    "keywords": 416,
+    "built_at": "2026-06-11T11:12:09.065825"
   },
   "nodes": {
     "cat:agentic-workflows": {
@@ -2981,6 +2981,18 @@
       "description": "name: seosona:video-content description: >- Video marketing strategy, script writing, storyboards, YouTube SEO, platform optimization, and AI video generation workflows. Activate when user wants to cr",
       "metadata": {}
     },
+    "skill:wp-auto-seo-pipeline": {
+      "id": "skill:wp-auto-seo-pipeline",
+      "label": "wp auto seo pipeline",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/wp_auto_seo_pipeline",
+      "keywords": [
+        "wp auto seo pipeline",
+        "wp-auto-seo-pipeline"
+      ],
+      "description": "name: \"wp-auto-seo-pipeline\" description: \"Architecture for building automated WordPress SEO pipelines. Features a robust separation of concerns (Generation vs Post-Processing) while strictly enforcin",
+      "metadata": {}
+    },
     "cat:testing-automation": {
       "id": "cat:testing-automation",
       "label": "Testing Automation",
@@ -4511,6 +4523,12 @@
       "weight": 1.0
     },
     {
+      "source": "cat:seo-marketing",
+      "target": "skill:wp-auto-seo-pipeline",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
       "source": "cat:testing-automation",
       "target": "skill:playwright",
       "relation": "category_of",
@@ -4578,25 +4596,13 @@
     },
     {
       "source": "skill:cost-bounded-agent-looping",
-      "target": "skill:page-agent",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:cost-bounded-agent-looping",
       "target": "skill:lark-vc-agent",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:lark-skill-maker",
-      "target": "skill:template-skill",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:lark-skill-maker",
-      "target": "skill:workflow-skill-creator",
+      "source": "skill:cost-bounded-agent-looping",
+      "target": "skill:page-agent",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4607,8 +4613,20 @@
       "weight": 0.5
     },
     {
+      "source": "skill:lark-skill-maker",
+      "target": "skill:workflow-skill-creator",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:lark-skill-maker",
+      "target": "skill:template-skill",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
       "source": "skill:external-skill-assimilation",
-      "target": "skill:lark-skill-maker",
+      "target": "skill:workflow-skill-creator",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4620,7 +4638,7 @@
     },
     {
       "source": "skill:external-skill-assimilation",
-      "target": "skill:workflow-skill-creator",
+      "target": "skill:lark-skill-maker",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4649,6 +4667,12 @@
       "weight": 0.5
     },
     {
+      "source": "skill:backend-development",
+      "target": "skill:frontend-development",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
       "source": "skill:apify-actor-development",
       "target": "skill:frontend-development",
       "relation": "related_to",
@@ -4657,12 +4681,6 @@
     {
       "source": "skill:apify-actor-development",
       "target": "skill:backend-development",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:backend-development",
-      "target": "skill:frontend-development",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4679,42 +4697,6 @@
       "weight": 0.5
     },
     {
-      "source": "skill:literature-search-arxiv",
-      "target": "skill:literature-search-europepmc",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:literature-search-arxiv",
-      "target": "skill:literature-search-openalex",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:literature-search-arxiv",
-      "target": "skill:literature-search-biorxiv",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:literature-search-arxiv",
-      "target": "skill:protein-sequence-similarity-search",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:literature-search-europepmc",
-      "target": "skill:literature-search-openalex",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:literature-search-europepmc",
-      "target": "skill:protein-sequence-similarity-search",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
       "source": "skill:literature-search-openalex",
       "target": "skill:protein-sequence-similarity-search",
       "relation": "related_to",
@@ -4722,7 +4704,7 @@
     },
     {
       "source": "skill:literature-search-biorxiv",
-      "target": "skill:literature-search-europepmc",
+      "target": "skill:protein-sequence-similarity-search",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4734,19 +4716,43 @@
     },
     {
       "source": "skill:literature-search-biorxiv",
+      "target": "skill:literature-search-europepmc",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
       "target": "skill:protein-sequence-similarity-search",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:brave-search",
+      "source": "skill:foldseek-structural-search",
+      "target": "skill:literature-search-openalex",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
+      "target": "skill:literature-search-biorxiv",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
+      "target": "skill:literature-search-europepmc",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
       "target": "skill:literature-search-arxiv",
       "relation": "related_to",
       "weight": 0.5
     },
     {
       "source": "skill:brave-search",
-      "target": "skill:literature-search-europepmc",
+      "target": "skill:protein-sequence-similarity-search",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4770,72 +4776,78 @@
     },
     {
       "source": "skill:brave-search",
-      "target": "skill:protein-sequence-similarity-search",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:foldseek-structural-search",
-      "target": "skill:literature-search-arxiv",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:foldseek-structural-search",
       "target": "skill:literature-search-europepmc",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:foldseek-structural-search",
-      "target": "skill:literature-search-openalex",
+      "source": "skill:brave-search",
+      "target": "skill:literature-search-arxiv",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:foldseek-structural-search",
-      "target": "skill:literature-search-biorxiv",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:foldseek-structural-search",
+      "source": "skill:literature-search-europepmc",
       "target": "skill:protein-sequence-similarity-search",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:polymarket",
+      "source": "skill:literature-search-europepmc",
+      "target": "skill:literature-search-openalex",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-arxiv",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-arxiv",
+      "target": "skill:literature-search-openalex",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-arxiv",
+      "target": "skill:literature-search-biorxiv",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-arxiv",
+      "target": "skill:literature-search-europepmc",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:hyperliquid",
       "target": "skill:wallet",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:polymarket",
-      "target": "skill:twitter",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:credentials",
+      "source": "skill:hyperliquid",
       "target": "skill:polymarket",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:credentials",
-      "target": "skill:wallet",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:credentials",
+      "source": "skill:hyperliquid",
       "target": "skill:twitter",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:credentials",
+      "source": "skill:brave-search",
+      "target": "skill:wallet",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
       "target": "skill:hyperliquid",
       "relation": "related_to",
       "weight": 0.5
@@ -4854,19 +4866,43 @@
     },
     {
       "source": "skill:brave-search",
-      "target": "skill:wallet",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:brave-search",
       "target": "skill:twitter",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:brave-search",
+      "source": "skill:polymarket",
+      "target": "skill:wallet",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:polymarket",
+      "target": "skill:twitter",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:credentials",
+      "target": "skill:wallet",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:credentials",
       "target": "skill:hyperliquid",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:credentials",
+      "target": "skill:polymarket",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:credentials",
+      "target": "skill:twitter",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4877,31 +4913,13 @@
       "weight": 0.5
     },
     {
-      "source": "skill:hyperliquid",
-      "target": "skill:polymarket",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:hyperliquid",
-      "target": "skill:wallet",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:hyperliquid",
-      "target": "skill:twitter",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
       "source": "skill:lark-sheets",
       "target": "skill:seo-sheets-export",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:lark-workflow-meeting-summary",
+      "source": "skill:lark-workflow-standup-report",
       "target": "skill:workflow-skill-creator",
       "relation": "related_to",
       "weight": 0.5
@@ -4913,26 +4931,8 @@
       "weight": 0.5
     },
     {
-      "source": "skill:lark-workflow-standup-report",
+      "source": "skill:lark-workflow-meeting-summary",
       "target": "skill:workflow-skill-creator",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:apify-actor-development",
-      "target": "skill:apify-generate-output-schema",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:apify-actor-development",
-      "target": "skill:apify-ultimate-scraper",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:apify-actor-development",
-      "target": "skill:apify-actorization",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4944,25 +4944,37 @@
     },
     {
       "source": "skill:apify-actorization",
-      "target": "skill:apify-generate-output-schema",
+      "target": "skill:apify-ultimate-scraper",
       "relation": "related_to",
       "weight": 0.5
     },
     {
       "source": "skill:apify-actorization",
+      "target": "skill:apify-generate-output-schema",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actor-development",
       "target": "skill:apify-ultimate-scraper",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actor-development",
+      "target": "skill:apify-generate-output-schema",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actor-development",
+      "target": "skill:apify-actorization",
       "relation": "related_to",
       "weight": 0.5
     },
     {
       "source": "skill:clickhouse-best-practices",
       "target": "skill:logging-best-practices",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:marketing-skills",
-      "target": "skill:science-skills-common",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -4974,6 +4986,12 @@
     },
     {
       "source": "skill:antigravity-awesome-skills",
+      "target": "skill:science-skills-common",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-skills",
       "target": "skill:science-skills-common",
       "relation": "related_to",
       "weight": 0.5
@@ -4991,6 +5009,30 @@
       "weight": 0.5
     },
     {
+      "source": "skill:frontend-design",
+      "target": "skill:logo-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:frontend-design",
+      "target": "skill:ui-design-references",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:frontend-design",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:frontend-design",
+      "target": "skill:web-design-guidelines",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
       "source": "skill:cip-design",
       "target": "skill:frontend-design",
       "relation": "related_to",
@@ -4998,13 +5040,13 @@
     },
     {
       "source": "skill:cip-design",
-      "target": "skill:web-design-guidelines",
+      "target": "skill:logo-design",
       "relation": "related_to",
       "weight": 0.5
     },
     {
       "source": "skill:cip-design",
-      "target": "skill:logo-design",
+      "target": "skill:ui-design-references",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5016,31 +5058,37 @@
     },
     {
       "source": "skill:cip-design",
-      "target": "skill:ui-design-references",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:frontend-design",
       "target": "skill:web-design-guidelines",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:frontend-design",
-      "target": "skill:logo-design",
+      "source": "skill:logo-design",
+      "target": "skill:ui-design-references",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:frontend-design",
+      "source": "skill:logo-design",
       "target": "skill:youtube-thumbnail-design",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:frontend-design",
-      "target": "skill:ui-design-references",
+      "source": "skill:logo-design",
+      "target": "skill:web-design-guidelines",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:ui-design-references",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:ui-design-references",
+      "target": "skill:web-design-guidelines",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5051,20 +5099,8 @@
       "weight": 0.5
     },
     {
-      "source": "skill:logo-design",
-      "target": "skill:web-design-guidelines",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:logo-design",
-      "target": "skill:youtube-thumbnail-design",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:logo-design",
-      "target": "skill:ui-design-references",
+      "source": "skill:banner-design",
+      "target": "skill:frontend-design",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5076,25 +5112,7 @@
     },
     {
       "source": "skill:banner-design",
-      "target": "skill:frontend-design",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:banner-design",
-      "target": "skill:web-design-guidelines",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:banner-design",
       "target": "skill:logo-design",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:banner-design",
-      "target": "skill:youtube-thumbnail-design",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5105,14 +5123,14 @@
       "weight": 0.5
     },
     {
-      "source": "skill:ui-design-references",
-      "target": "skill:web-design-guidelines",
+      "source": "skill:banner-design",
+      "target": "skill:youtube-thumbnail-design",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:ui-design-references",
-      "target": "skill:youtube-thumbnail-design",
+      "source": "skill:banner-design",
+      "target": "skill:web-design-guidelines",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5165,26 +5183,20 @@
       "weight": 0.5
     },
     {
-      "source": "skill:human-protein-atlas-database",
-      "target": "skill:protein-sequence-similarity-search",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:human-protein-atlas-database",
-      "target": "skill:protein-sequence-msa",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
       "source": "skill:protein-sequence-msa",
       "target": "skill:protein-sequence-similarity-search",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:ncbi-sequence-fetch",
+      "source": "skill:human-protein-atlas-database",
       "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:human-protein-atlas-database",
+      "target": "skill:protein-sequence-msa",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5195,14 +5207,8 @@
       "weight": 0.5
     },
     {
-      "source": "skill:affiliate-marketing",
-      "target": "skill:content-marketing",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:affiliate-marketing",
-      "target": "skill:marketing-skills",
+      "source": "skill:ncbi-sequence-fetch",
+      "target": "skill:protein-sequence-similarity-search",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5213,14 +5219,20 @@
       "weight": 0.5
     },
     {
-      "source": "skill:content-hub",
+      "source": "skill:affiliate-marketing",
       "target": "skill:content-marketing",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:launch-strategy",
-      "target": "skill:pricing-strategy",
+      "source": "skill:affiliate-marketing",
+      "target": "skill:marketing-skills",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:content-hub",
+      "target": "skill:content-marketing",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5237,20 +5249,26 @@
       "weight": 0.5
     },
     {
-      "source": "skill:marketing-ideas",
+      "source": "skill:launch-strategy",
+      "target": "skill:pricing-strategy",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-dashboard",
+      "target": "skill:marketing-planning",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-dashboard",
       "target": "skill:marketing-research",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:marketing-ideas",
+      "source": "skill:marketing-dashboard",
       "target": "skill:marketing-psychology",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:marketing-ideas",
-      "target": "skill:marketing-planning",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5261,20 +5279,14 @@
       "weight": 0.5
     },
     {
-      "source": "skill:marketing-dashboard",
+      "source": "skill:marketing-planning",
       "target": "skill:marketing-research",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:marketing-dashboard",
+      "source": "skill:marketing-planning",
       "target": "skill:marketing-psychology",
-      "relation": "related_to",
-      "weight": 0.5
-    },
-    {
-      "source": "skill:marketing-dashboard",
-      "target": "skill:marketing-planning",
       "relation": "related_to",
       "weight": 0.5
     },
@@ -5285,26 +5297,32 @@
       "weight": 0.5
     },
     {
-      "source": "skill:marketing-planning",
+      "source": "skill:marketing-ideas",
+      "target": "skill:marketing-planning",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-ideas",
       "target": "skill:marketing-research",
       "relation": "related_to",
       "weight": 0.5
     },
     {
-      "source": "skill:marketing-planning",
+      "source": "skill:marketing-ideas",
       "target": "skill:marketing-psychology",
       "relation": "related_to",
       "weight": 0.5
     },
     {
       "source": "skill:marketing-research",
-      "target": "skill:seo-content-research",
+      "target": "skill:seo-keyword-research",
       "relation": "related_to",
       "weight": 0.5
     },
     {
       "source": "skill:marketing-research",
-      "target": "skill:seo-keyword-research",
+      "target": "skill:seo-content-research",
       "relation": "related_to",
       "weight": 0.5
     },
