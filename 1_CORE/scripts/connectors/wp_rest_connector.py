@@ -5,9 +5,11 @@ import base64
 import requests
 from typing import Dict, Any, List
 
-sys.path.append(os.path.join(os.path.dirname(__file__), "..", "core"))
 try:
-    from secrets_manager import get_secret
+    from dotenv import load_dotenv
+    env_path = os.path.join(os.path.dirname(__file__), "..", "..", "..", "1_CONFIG", ".env")
+    load_dotenv(env_path)
+    def get_secret(key): return os.environ.get(key)
 except ImportError:
     def get_secret(key): return os.environ.get(key)
 
