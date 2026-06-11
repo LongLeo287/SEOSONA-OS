@@ -1,0 +1,20 @@
+[
+  {
+    "query": "how do i use antigravity IDE artifacts and carousels",
+    "intent": "research",
+    "matched_count": 5,
+    "top_match": "seosona:video content",
+    "confidence": "medium",
+    "fallback_used": false,
+    "timestamp": "2026-06-11T10:07:16.407533"
+  },
+  {
+    "query": "antigravity",
+    "intent": "research",
+    "matched_count": 3,
+    "top_match": "antigravity awesome skills",
+    "confidence": "medium",
+    "fallback_used": false,
+    "timestamp": "2026-06-11T10:07:21.212854"
+  }
+]
