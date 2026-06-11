@@ -31,6 +31,7 @@ Transform static knowledge into active system execution capabilities:
 - **Skillization**: If the input is a marketing/SEO capability -> Generate a complete `SKILL.md` inside `2_KNOWLEDGE/frameworks/seo_marketing/`. Include frontmatter metadata with `keywords` in multiple languages (e.g., English + Vietnamese) to support natural language routing.
 - **Agentization**: If the input represents an entire business domain -> Create an Agent Persona in `4_AGENTS/personas/` and register it in `4_AGENTS/ROSTER.md`.
 - **Integration**: MUST update `2_KNOWLEDGE/SKILLS_ROUTER.md` and `2_KNOWLEDGE/MASTER_INDEX.md` to wire this new Skill/Agent into the system's collective awareness.
+- **Bookmarking (For Repositories)**: If the input was a GitHub repository and it successfully passed validation and assimilation, the agent MUST append the repository link and a brief description to `5_RESEARCH/repo_bookmarks.md`. Repositories that fail validation, are rejected, or are deemed malicious MUST NOT be logged here.
 - **Cleanup**: Delete the cloned repository and any temporary files in `3_MEMORY/ingestion_zone/`. **Strictly enforce this deletion** to ensure the system remains lean and clean.
 
 ---
