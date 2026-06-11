@@ -2,6 +2,33 @@
 
 All notable changes to SEOSONA OS will be documented in this file.
 
+## [v5.0.0] — Context Engine & Execution Graphs
+
+A massive architectural rewrite transitioning from static, linear scripts to a robust, parallelized execution system with dynamic LLM context assembly.
+
+**Phase 1: Foundation (Resilience & Validation)**
+- ✅ **Fix Loops**: Implemented `fix_loop.py` to wrap all 14 connectors with exponential backoff and failure diagnosis (network, auth, rate-limit, data-quality).
+- ✅ **Validation Loops**: Added `audit_validator.py` with strict per-connector rules and marker contamination detection.
+- ✅ **Tool Registry**: Standardized all connector I/O through `tool_registry.json`.
+
+**Phase 2: Intelligence (Semantic Routing & Memory)**
+- ✅ **Knowledge Graph**: Replaced flat `SKILLS_ROUTER.md` matching with a semantic Knowledge Graph (`knowledge_graph.py`) scaling to 259 nodes and 384 edges.
+- ✅ **Intent Router**: Automatically classifies intent (audit, research, fix) and extracts domain terms before querying the Knowledge Graph (`intent_router.py`).
+- ✅ **Session Memory**: Implemented cross-session tracking (`session_memory.py`) to inject historical metrics into LLM prompts using time-decay learning.
+
+**Phase 3: Orchestration (Assembly & DAGs)**
+- ✅ **Task Planner**: Introduced Kahn's topological sort (`task_planner.py`) to parallelize the 14-module audit into execution waves, estimating up to a 3.7x speedup.
+- ✅ **Quality Scorer**: Developed `quality_scorer.py` to assign a composite A-F grade based on completeness, freshness, and placeholder detection.
+- ✅ **Context Engine**: Deprecated the monolithic `SOUL.md` injection in favor of dynamic, token-budgeted prompt assembly (`context_engine.py`).
+
+**Phase 4: Skills Expansion (Plugin Ingestion)**
+- ✅ Ingested 5 massive new skill frameworks:
+  - `page-agent` (Alibaba browser DOM automation)
+  - `marketing-skills` (Corey Haines CRO & PAS formulas)
+  - `antigravity-awesome-skills` (IDE Artifact & Carousel mastery)
+  - `ui-design-references` (Refero & MotionSites UI/UX guidelines)
+  - `flowsint` (Reconurge OSINT DAG workflows)
+
 ## [v3.0.0] — Full SEO Intelligence Engine
 
 - ✅ V3 SEO Audit Engine: 12-module fully automated website intelligence pipeline.

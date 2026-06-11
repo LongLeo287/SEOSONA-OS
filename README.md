@@ -52,25 +52,28 @@ No more copy-pasting system prompts. No more configuring each tool separately. N
 | Feature | Description |
 |---|---|
 | 🔍 **Omni-Scanner** | Auto-detects and anchors every IDE and CLI tool (Cursor, Codex, Windsurf, Aider, etc.) |
-| 🧬 **DNA Injection** | Creates a universal `~/.seosona` symlink and anchors all IDEs/CLIs to a single Omni-Brain |
+| 🧬 **Context Engine (V5)** | Assembles modular, token-budgeted intelligence specifically for the current task |
 | 🌍 **Cross-Platform** | Works on Windows (PowerShell), macOS and Linux (Node.js CLI) |
-| 🔒 **Zero Hardcodes** | All paths are computed at runtime — portable across any machine |
-| ⚡ **1-Click Setup** | Run `npm install -g seosona-cli` |
-| 🧩 **Dynamic Plugin System** | 115+ auto-discovered AI skills via YAML-frontmatter `SKILL.md` |
-| 📊 **V4 SEO Audit Engine** | Fully automated 14-module website intelligence system with OSINT |
-| 🧠 **MemPalace Architecture** | Structured spatial memory system for persistent AI context |
+| 🧠 **Knowledge Graph** | Semantic routing across 259 dynamic skills via `intent_router.py` |
+| ⚡ **Task Planner** | DAG-based parallel execution waves for massive speedups |
+| 🛡️ **Fix Loops** | Automatic failure diagnosis and retry-with-backoff for all operations |
+| 📊 **Quality Scorer** | Composite A-F grading and validation of all extracted data |
 | 🚨 **SEOSONA Omni-Brain Protocol** | Zero-tolerance ruleset preventing AI from bypassing workflows |
 
 ---
 
-## 📈 V4 SEO Intelligence System (NEW)
+## 📈 V5 Intelligence Architecture (NEW)
 
-SEOSONA OS includes a fully automated, standalone Python orchestrator for deeply analyzing websites. It replaces expensive SEO software by chaining free APIs, web scrapers, Playwright E2E testing, and Deep Web OSINT into a premium 14-tab HTML dashboard.
+SEOSONA OS includes a fully automated, standalone Python orchestrator for deeply analyzing websites, workflows, and domains. It replaces expensive SEO software by chaining free APIs, web scrapers, Playwright E2E testing, and Deep Web OSINT into a premium dashboard.
 
-**Features:**
-- **Auto-Cleanup:** Automatically purges old CSV/MD data to keep runs clean.
-- **Secrets Manager:** AES-128 encryption for API keys (`.vault`).
-- **14 Integrated Modules:**
+**V5 Core Upgrades:**
+- **Task Planner:** Kahn's topological sort groups 14+ modules into parallel execution waves (3.7x speedup).
+- **Validation & Fix Loops:** Validates output completeness and marker contamination. Automatically retries network/auth failures using exponential backoff.
+- **Session Memory:** Cross-session audit metrics with time-decay learning and regression tracking.
+- **Quality Scorer:** Outputs a composite A-F grade with actionable recommendations.
+- **Intent Router:** Normalizes user queries, extracts domain terms, and dynamically routes to the 259-node Knowledge Graph.
+
+**14 Integrated Modules (Wrapped in Fix Loops):**
   1. `PageSpeed Insights (CWV)`: Lab & Real user web vitals.
   2. `Keywords`: Google autocomplete intent mapping.
   3. `SERP Competitor`: Content gap & H1/Title scraping.
@@ -82,13 +85,13 @@ SEOSONA OS includes a fully automated, standalone Python orchestrator for deeply
   9. `Schema Validator`: Checks JSON-LD/Microdata for rich snippets.
   10. `E-E-A-T Analyzer`: Identifies thin content and orphan pages.
   11. `Log Analyzer`: Parses Nginx/Apache logs for Googlebot patterns.
-  12. `OSINT Entity Scan (NEW)`: Deep web investigation for Author/Brand validation.
-  13. `Playwright E2E QA (NEW)`: Automated UX/CRO friction and JS rendering tests.
+  12. `OSINT Entity Scan`: Deep web investigation for Author/Brand validation.
+  13. `Playwright E2E QA`: Automated UX/CRO friction and JS rendering tests.
   14. `Premium Dashboard v4`: Renders an interactive HTML report with Falsifiability checks.
 
 **Run an audit:**
 ```powershell
-python scripts/run_full_audit.py --domain your_domain.com --clean
+python 1_CORE/scripts/run_full_audit.py --domain your_domain.com
 ```
 
 ---
