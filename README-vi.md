@@ -234,7 +234,7 @@ SEOSONA OS/
 ├── 📂 4_AGENTS/                      # Nhân sự — Danh sách và mô tả các nhân cách AI
 │   └── 📋 ROSTER.md                  # Khai báo các chức danh đang hoạt động trong OS
 │
-├── 📂 5_RESEARCH/                    # Thám báo — Dữ liệu thô, các link tracking, repo
+├── 📂 5_RESEARCH/                    # Lưu trữ Link Repo — Nơi chuyên biệt để lưu trữ danh sách các link Repository bên ngoài
 │
 ├── 📂 cli/                           # Gói NPM CLI chạy bằng Node.js
 │   ├── bin/seosona.js               # Điểm khởi chạy CLI

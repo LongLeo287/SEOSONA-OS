@@ -241,7 +241,7 @@ SEOSONA OS/
 ├── 📂 4_AGENTS/                      # The Personas — Agent Roster and role definitions
 │   └── 📋 ROSTER.md                  # Defines current agent capacity and roles
 │
-├── 📂 5_RESEARCH/                    # The Scout — Raw input, tracking links, repo lists
+├── 📂 5_RESEARCH/                    # Repository Index — Dedicated storage for external repository links
 │
 ├── 📂 cli/                           # Node.js CLI package
 │   ├── bin/seosona.js               # CLI entry point

@@ -48,7 +48,7 @@ ${SEOSONA_ROOT}
 ├── 4_AGENTS/          → Agent roster & personas
 │   ├── ROSTER.md          (authoritative agent registry)
 │   └── personas/          (93 specialist persona files)
-├── 5_RESEARCH/        → External repos & reference materials
+├── 5_RESEARCH/        → Dedicated storage for Github/external repository links
 └── scripts/           → Python connectors & orchestrator scripts
 ```
 
