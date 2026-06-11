@@ -1,0 +1,5168 @@
+{
+  "version": "5.0",
+  "built_at": "2026-06-11T09:45:37.810929",
+  "stats": {
+    "nodes": 255,
+    "edges": 366,
+    "categories": 12,
+    "skills": 243,
+    "keywords": 406,
+    "built_at": "2026-06-11T09:45:37.810929"
+  },
+  "nodes": {
+    "cat:agentic-workflows": {
+      "id": "cat:agentic-workflows",
+      "label": "Agentic Workflows",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "agentic workflows"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:claude-code": {
+      "id": "skill:claude-code",
+      "label": "ckm:claude code",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/claude-code",
+      "keywords": [
+        "ckm:claude code",
+        "ckm:claude-code"
+      ],
+      "description": "name: ckm:claude-code description: Activate when users ask about Claude Code installation, slash commands (/plan, /fix, /content, /docs, /design, /git), creating/managing Agent Skills, configuring MCP",
+      "metadata": {}
+    },
+    "skill:claudekit-cli": {
+      "id": "skill:claudekit-cli",
+      "label": "claudekit_cli",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/claudekit_cli",
+      "keywords": [
+        "claudekit_cli"
+      ],
+      "description": "--- skill: claudekit-cli category: agentic_workflows source: ingestion_zone/claudekit-cli.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:context-engineering": {
+      "id": "skill:context-engineering",
+      "label": "ck:context engineering",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/context-engineering",
+      "keywords": [
+        "ck:context engineering",
+        "ck:context-engineering"
+      ],
+      "description": "name: ck:context-engineering description: >- argument-hint: \"[topic or question]\" Check context usage limits, monitor time remaining, optimize token consumption, debug context failures. Use when askin",
+      "metadata": {}
+    },
+    "skill:cost-bounded-agent-looping": {
+      "id": "skill:cost-bounded-agent-looping",
+      "label": "seosona:cost bounded agent looping",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/cost_bounded_agent_looping",
+      "keywords": [
+        "seosona:cost bounded agent looping",
+        "seosona:cost-bounded-agent-looping"
+      ],
+      "description": "name: seosona:cost-bounded-agent-looping description: Run autonomous work as a controlled loop: discovery, planning, execution, verification, and iteration. Use for single-agent or fleet-agent workflo",
+      "metadata": {}
+    },
+    "skill:external-skill-assimilation": {
+      "id": "skill:external-skill-assimilation",
+      "label": "seosona:external skill assimilation",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/external_skill_assimilation",
+      "keywords": [
+        "seosona:external skill assimilation",
+        "seosona:external-skill-assimilation"
+      ],
+      "description": "name: seosona:external-skill-assimilation description: Assimilate external skill repositories safely by cloning only into a temporary ingestion buffer, inventorying capabilities, scanning risk, distil",
+      "metadata": {}
+    },
+    "skill:hub": {
+      "id": "skill:hub",
+      "label": "ckm:hub",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/hub",
+      "keywords": [
+        "ckm:hub"
+      ],
+      "description": "name: ckm:hub description: Open Content Hub + Marketing Dashboard argument-hint: \"[--stop|--scan]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:init": {
+      "id": "skill:init",
+      "label": "ckm:init",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/init",
+      "keywords": [
+        "ckm:init"
+      ],
+      "description": "name: ckm:init description: 💡💡💡💡 Initialize marketing project argument-hint: \"[prompt]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:kit-builder": {
+      "id": "skill:kit-builder",
+      "label": "ckm:kit builder",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/kit-builder",
+      "keywords": [
+        "ckm:kit builder",
+        "ckm:kit-builder"
+      ],
+      "description": "name: ckm:kit-builder description: Build ClaudeKit Marketing components - skills, agents, commands, workflows. Use when creating new automation, extending marketing capabilities, or understanding kit ",
+      "metadata": {}
+    },
+    "skill:mcp-builder": {
+      "id": "skill:mcp-builder",
+      "label": "ck:mcp builder",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/mcp-builder",
+      "keywords": [
+        "ck:mcp builder",
+        "ck:mcp-builder"
+      ],
+      "description": "name: ck:mcp-builder description: Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when buildin",
+      "metadata": {}
+    },
+    "skill:mcp-management": {
+      "id": "skill:mcp-management",
+      "label": "ck:mcp management",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/mcp-management",
+      "keywords": [
+        "ck:mcp management",
+        "ck:mcp-management"
+      ],
+      "description": "name: ck:mcp-management description: Manage Model Context Protocol (MCP) servers - discover, analyze, and execute tools/prompts/resources from configured MCP servers. Use when working with MCP integra",
+      "metadata": {}
+    },
+    "skill:play": {
+      "id": "skill:play",
+      "label": "ckm:play",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/play",
+      "keywords": [
+        "ckm:play"
+      ],
+      "description": "name: ckm:play description: > Marketing playbook orchestrator with dependency-graph routing, quality gates, goal tracking, and smart suggestions. Expert strategy × AI execution speed. Triggers: /ckm:p",
+      "metadata": {}
+    },
+    "skill:preview": {
+      "id": "skill:preview",
+      "label": "ck:preview",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/preview",
+      "keywords": [
+        "ck:preview"
+      ],
+      "description": "name: ck:preview description: Path to markdown file, plan directory, or plans collection metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:repomix": {
+      "id": "skill:repomix",
+      "label": "ck:repomix",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/repomix",
+      "keywords": [
+        "ck:repomix"
+      ],
+      "description": "name: ck:repomix description: Package entire code repositories into single AI-friendly files using Repomix. Capabilities include pack codebases with customizable include/exclude patterns, generate mul",
+      "metadata": {}
+    },
+    "skill:scout": {
+      "id": "skill:scout",
+      "label": "ck:scout",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/scout",
+      "keywords": [
+        "ck:scout"
+      ],
+      "description": "name: ck:scout description: Fast codebase scouting using parallel agents. Use for file discovery, task context gathering, quick searches across directories. Supports internal (Explore) and external (G",
+      "metadata": {}
+    },
+    "skill:seosona-portable-capability-bridge": {
+      "id": "skill:seosona-portable-capability-bridge",
+      "label": "seosona:portable capability bridge",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/seosona_portable_capability_bridge",
+      "keywords": [
+        "seosona:portable capability bridge",
+        "seosona:portable-capability-bridge"
+      ],
+      "description": "name: seosona:portable-capability-bridge description: Expose the full SEOSONA OS system graph to any IDE, CLI, MCP client, or agent runtime through portable anchors and a machine-readable bridge that ",
+      "metadata": {}
+    },
+    "skill:skill-creator": {
+      "id": "skill:skill-creator",
+      "label": "ck:skill creator",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/skill-creator",
+      "keywords": [
+        "ck:skill creator",
+        "ck:skill-creator"
+      ],
+      "description": "name: ck:skill-creator description: Create or update Claude skills optimized for Skillmark benchmarks. Use for new skills, skill scripts, references, benchmark optimization, extending Claude's capabil",
+      "metadata": {}
+    },
+    "skill:template-skill": {
+      "id": "skill:template-skill",
+      "label": "ck:template skill",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/template-skill",
+      "keywords": [
+        "ck:template skill",
+        "ck:template-skill"
+      ],
+      "description": "name: ck:template-skill description: Replace with description of the skill and when Claude should use it. metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:use-mcp": {
+      "id": "skill:use-mcp",
+      "label": "ck:use mcp",
+      "node_type": "skill",
+      "path": "frameworks/agentic_workflows/use-mcp",
+      "keywords": [
+        "ck:use mcp",
+        "ck:use-mcp"
+      ],
+      "description": "name: ck:use-mcp description: Utilize tools of Model Context Protocol (MCP) servers argument-hint: \"[task]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "cat:backend-engineering": {
+      "id": "cat:backend-engineering",
+      "label": "Backend Engineering",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "backend engineering"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:backend-development": {
+      "id": "skill:backend-development",
+      "label": "ck:backend development",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/backend-development",
+      "keywords": [
+        "ck:backend development",
+        "ck:backend-development"
+      ],
+      "description": "name: ck:backend-development description: Build robust backend systems with modern technologies (Node.js, Python, Go, Rust), frameworks (NestJS, FastAPI, Django), databases (PostgreSQL, MongoDB, Redis",
+      "metadata": {}
+    },
+    "skill:better-auth": {
+      "id": "skill:better-auth",
+      "label": "ck:better auth",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/better-auth",
+      "keywords": [
+        "ck:better auth",
+        "ck:better-auth"
+      ],
+      "description": "name: ck:better-auth description: Implement authentication and authorization with Better Auth - a framework-agnostic TypeScript authentication framework. Features include email/password authentication",
+      "metadata": {}
+    },
+    "skill:ckm-storage": {
+      "id": "skill:ckm-storage",
+      "label": "ckm:storage",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/ckm-storage",
+      "keywords": [
+        "ckm:storage"
+      ],
+      "description": "name: ckm:storage description: S3 storage operations - upload, sync, list, get URLs argument-hint: \"[list|sync|upload|url] [args]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:databases": {
+      "id": "skill:databases",
+      "label": "ck:databases",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/databases",
+      "keywords": [
+        "ck:databases"
+      ],
+      "description": "name: ck:databases description: Work with MongoDB (document database, BSON documents, aggregation pipelines, Atlas cloud) and PostgreSQL (relational database, SQL queries, psql CLI, pgAdmin). Use when",
+      "metadata": {}
+    },
+    "skill:debugging": {
+      "id": "skill:debugging",
+      "label": "ckm:debugging",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/debugging",
+      "keywords": [
+        "ckm:debugging"
+      ],
+      "description": "name: ckm:debugging description: Systematic debugging framework ensuring root cause investigation before fixes. Includes four-phase debugging process, backward call stack tracing, multi-layer validati",
+      "metadata": {}
+    },
+    "skill:devops": {
+      "id": "skill:devops",
+      "label": "ck:devops",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/devops",
+      "keywords": [
+        "ck:devops"
+      ],
+      "description": "name: ck:devops description: Deploy and manage cloud infrastructure on Cloudflare (Workers, R2, D1, KV, Pages, Durable Objects, Browser Rendering), Docker containers, and Google Cloud Platform (Comput",
+      "metadata": {}
+    },
+    "skill:fix": {
+      "id": "skill:fix",
+      "label": "ck:fix",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/fix",
+      "keywords": [
+        "ck:fix"
+      ],
+      "description": "name: ck:fix description: Fix bugs, errors, test failures, CI/CD issues with intelligent routing. Use when reporting bugs, type errors, log errors, UI issues, code problems. Auto-classifies complexity",
+      "metadata": {}
+    },
+    "skill:git": {
+      "id": "skill:git",
+      "label": "ck:git",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/git",
+      "keywords": [
+        "ck:git"
+      ],
+      "description": "name: ck:git description: Git operations with conventional commits. Use for staging, committing, pushing, PRs, merges. Auto-splits commits by type/scope. Security scans for secrets. argument-hint: \"cm",
+      "metadata": {}
+    },
+    "skill:google-adk-python": {
+      "id": "skill:google-adk-python",
+      "label": "ck:google adk python",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/google-adk-python",
+      "keywords": [
+        "ck:google adk python",
+        "ck:google-adk-python"
+      ],
+      "description": "name: ck:google-adk-python description: Build AI agents with Google ADK Python. Multi-agent systems, tool integration, workflow orchestration. argument-hint: \"[agent or feature]\" metadata: author: cla",
+      "metadata": {}
+    },
+    "skill:payment-integration": {
+      "id": "skill:payment-integration",
+      "label": "ck:payment integration",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/payment-integration",
+      "keywords": [
+        "ck:payment integration",
+        "ck:payment-integration"
+      ],
+      "description": "name: ck:payment-integration description: Integrate payments with SePay (VietQR), Polar (SaaS subscriptions), Stripe (global payments). Use for checkout, webhooks, QR codes, subscriptions, currency co",
+      "metadata": {}
+    },
+    "skill:shopify": {
+      "id": "skill:shopify",
+      "label": "ck:shopify",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/shopify",
+      "keywords": [
+        "ck:shopify"
+      ],
+      "description": "name: ck:shopify description: Build Shopify applications, extensions, and themes using GraphQL/REST APIs, Shopify CLI, Polaris UI components, and Liquid templating. Capabilities include app developmen",
+      "metadata": {}
+    },
+    "skill:storage": {
+      "id": "skill:storage",
+      "label": "ckm:storage",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/storage",
+      "keywords": [
+        "ckm:storage"
+      ],
+      "description": "name: ckm:storage description: S3-compatible object storage integration for marketing assets. Works with Cloudflare R2, AWS S3, MinIO, Backblaze B2, DigitalOcean Spaces. metadata: author: claudekit ve",
+      "metadata": {}
+    },
+    "skill:test": {
+      "id": "skill:test",
+      "label": "ck:test",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/test",
+      "keywords": [
+        "ck:test"
+      ],
+      "description": "name: ck:test description: Test ClaudeKit workflows, run UI tests on websites, validate marketing commands/agents/skills with step-by-step verification. argument-hint: \"[ui|workflow] [target]\" metadat",
+      "metadata": {}
+    },
+    "skill:worktree": {
+      "id": "skill:worktree",
+      "label": "ck:worktree",
+      "node_type": "skill",
+      "path": "frameworks/backend_engineering/worktree",
+      "keywords": [
+        "ck:worktree"
+      ],
+      "description": "name: ck:worktree description: Create isolated git worktree for parallel development argument-hint: \"[feature-description] OR [project] [feature] (monorepo)\" metadata: author: claudekit version: \"1.0.",
+      "metadata": {}
+    },
+    "cat:core-system": {
+      "id": "cat:core-system",
+      "label": "Core System",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "core system"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:agent-governance": {
+      "id": "skill:agent-governance",
+      "label": "agent_governance",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_governance",
+      "keywords": [
+        "agent_governance"
+      ],
+      "description": "--- skill: agent-governance category: core_system source: ingestion_zone/agent-governance-toolkit.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:agent-skills": {
+      "id": "skill:agent-skills",
+      "label": "agent_skills",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills",
+      "keywords": [
+        "agent_skills"
+      ],
+      "description": "---",
+      "metadata": {}
+    },
+    "skill:brave-search": {
+      "id": "skill:brave-search",
+      "label": "Vincent   Brave Search for agents",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/brave_search",
+      "keywords": [
+        "Vincent   Brave Search for agents",
+        "Vincent - Brave Search for agents"
+      ],
+      "description": "name: Vincent - Brave Search for agents description: | Web and news search powered by Brave Search. Use this skill when users want to search the web, find news articles, or look up current information",
+      "metadata": {}
+    },
+    "skill:credentials": {
+      "id": "skill:credentials",
+      "label": "Vincent   Credentials for agents",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/credentials",
+      "keywords": [
+        "Vincent   Credentials for agents",
+        "Vincent - Credentials for agents"
+      ],
+      "description": "name: Vincent - Credentials for agents description: | Secure credential management for agents. Use this skill when users need to store API keys, passwords, OAuth tokens, or SSH keys and write them to ",
+      "metadata": {}
+    },
+    "skill:hyperliquid": {
+      "id": "skill:hyperliquid",
+      "label": "Vincent   HyperLiquid for agents",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/hyperliquid",
+      "keywords": [
+        "Vincent   HyperLiquid for agents",
+        "Vincent - HyperLiquid for agents"
+      ],
+      "description": "name: Vincent - HyperLiquid for agents description: Use this skill to create a HyperLiquid perpetuals and spot wallet for your agent. Trade perps, manage spot balances, transfer USDC between sub-accou",
+      "metadata": {}
+    },
+    "skill:lark-approval": {
+      "id": "skill:lark-approval",
+      "label": "lark approval",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-approval",
+      "keywords": [
+        "lark approval",
+        "lark-approval"
+      ],
+      "description": "name: lark-approval version: 1.0.0 description: \"飞书审批 API：审批实例、审批任务管理。\" metadata: requires: bins: [\"lark-cli\"] cliHelp: \"lark-cli approval --help\" ---",
+      "metadata": {}
+    },
+    "skill:lark-apps": {
+      "id": "skill:lark-apps",
+      "label": "lark apps",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-apps",
+      "keywords": [
+        "lark apps",
+        "lark-apps"
+      ],
+      "description": "name: lark-apps description: \"把本地 HTML 文件或目录部署到飞书妙搭（Miaoda），生成一个公网可访问的应用及其链接（URL）。当用户要创建 HTML 或要把 HTML、静态网站或 Web demo 发布成公网可访问的链接 / 可分享链接、设置应用共享范围，或提到妙搭 / Miaoda 时使用。凡产出可独立访问的 HTML 产物都属本 skill 的潜在归宿，是",
+      "metadata": {}
+    },
+    "skill:lark-attendance": {
+      "id": "skill:lark-attendance",
+      "label": "lark attendance",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-attendance",
+      "keywords": [
+        "lark attendance",
+        "lark-attendance"
+      ],
+      "description": "name: lark-attendance version: 1.0.0 description: \"飞书考勤打卡：查询自己的考勤打卡记录\" metadata: requires: bins: [\"lark-cli\"] cliHelp: \"lark-cli attendance --help\" ---",
+      "metadata": {}
+    },
+    "skill:lark-base": {
+      "id": "skill:lark-base",
+      "label": "lark base",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-base",
+      "keywords": [
+        "lark base",
+        "lark-base"
+      ],
+      "description": "name: lark-base version: 1.2.2 description: \"飞书多维表格（Base）操作：建表、字段、记录、视图、统计、公式/lookup、表单、仪表盘、workflow、角色权限；遇到 Base/多维表格/bitable 或 /base/ 链接时使用。文件导入转 lark-drive，认证/授权转 lark-shared。\" metadata: requires: ",
+      "metadata": {}
+    },
+    "skill:lark-calendar": {
+      "id": "skill:lark-calendar",
+      "label": "lark calendar",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-calendar",
+      "keywords": [
+        "lark calendar",
+        "lark-calendar"
+      ],
+      "description": "name: lark-calendar version: 1.0.0 description: \"飞书日历（calendar）：提供日历与日程（会议）的全面管理能力。核心场景包括：查看/搜索日程、创建/更新日程、管理参会人、查询忙闲状态及推荐空闲时段、查询/搜索与预定会议室。注意：涉及【预约日程/会议】或【查询/预定会议室】时，必须先读取 references/lark-calendar-sche",
+      "metadata": {}
+    },
+    "skill:lark-contact": {
+      "id": "skill:lark-contact",
+      "label": "lark contact",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-contact",
+      "keywords": [
+        "lark contact",
+        "lark-contact"
+      ],
+      "description": "name: lark-contact version: 1.0.0 description: \"飞书 / Lark 通讯录:按姓名 / 邮箱解析成 open_id,或按 open_id 反查姓名 / 部门 / 邮箱 / 联系方式 / 个人状态 / 签名。当用户提到某人姓名要下一步发消息 / 排日程,或拿到 open_id 想查具体信息时使用。不负责部门树遍历、按部门列员工、组织架构图,这类需求走原",
+      "metadata": {}
+    },
+    "skill:lark-doc": {
+      "id": "skill:lark-doc",
+      "label": "lark doc",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-doc",
+      "keywords": [
+        "lark doc",
+        "lark-doc"
+      ],
+      "description": "name: lark-doc description: \"飞书云文档 / Docx / 知识库 Wiki 文档（v2）：创建、打开、读取、获取、查看、总结、整理、改写、翻译、审阅和编辑飞书文档内容。当用户给出飞书文档 URL/token，或说查看/读取/打开某个文档、提取文档内容、总结文档、生成/创建文档、追加/替换/删除/移动内容、调整排版、插入或下载文档图片/附件/素材/画板缩略图时使用。文档",
+      "metadata": {}
+    },
+    "skill:lark-drive": {
+      "id": "skill:lark-drive",
+      "label": "lark drive",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-drive",
+      "keywords": [
+        "lark drive",
+        "lark-drive"
+      ],
+      "description": "name: lark-drive version: 1.0.0 description: \"飞书云空间（云盘/云存储）：管理云空间（云盘/云存储）中的文件和文件夹。上传和下载文件、创建文件夹、复制/移动/删除文件、查看文件元数据、管理文档评论、管理文档权限、订阅用户评论变更事件、修改文件标题（docx、sheet、bitable、file、folder、wiki）；也负责把本地 Word/Mark",
+      "metadata": {}
+    },
+    "skill:lark-event": {
+      "id": "skill:lark-event",
+      "label": "lark event",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-event",
+      "keywords": [
+        "lark event",
+        "lark-event"
+      ],
+      "description": "name: lark-event version: 1.0.0 description: \"Lark/Feishu real-time event listening / subscribing / consuming: stream events as NDJSON via `lark-cli event consume <EventKey>` (covers IM messages/react",
+      "metadata": {}
+    },
+    "skill:lark-im": {
+      "id": "skill:lark-im",
+      "label": "lark im",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-im",
+      "keywords": [
+        "lark im",
+        "lark-im"
+      ],
+      "description": "name: lark-im version: 1.0.0 description: \"飞书即时通讯：收发消息和管理群聊。发送和回复消息、搜索聊天记录、管理群聊成员、上传下载图片和文件（支持大文件分片下载）、管理表情回复、发送应用内/短信/电话加急。当用户需要发消息、查看或搜索聊天记录、下载聊天中的文件、查看群成员、搜索群、创建群聊或话题群、管理标记数据时使用。\" metadata: require",
+      "metadata": {}
+    },
+    "skill:lark-mail": {
+      "id": "skill:lark-mail",
+      "label": "lark mail",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-mail",
+      "keywords": [
+        "lark mail",
+        "lark-mail"
+      ],
+      "description": "name: lark-mail version: 1.0.0 description: \"飞书邮箱 — draft, compose, send, reply, forward, read, and search emails; manage drafts, folders, labels, contacts, attachments, and mail rules. Use when user ",
+      "metadata": {}
+    },
+    "skill:lark-markdown": {
+      "id": "skill:lark-markdown",
+      "label": "lark markdown",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-markdown",
+      "keywords": [
+        "lark markdown",
+        "lark-markdown"
+      ],
+      "description": "name: lark-markdown version: 1.2.1 description: \"飞书 Markdown：查看、创建、上传、编辑和比较 Markdown 文件。当用户需要创建或编辑 Markdown 文件、读取、修改、局部 patch 或比较差异时使用。不负责将 Markdown 导入为飞书在线文档，也不负责文件搜索、权限、评论、移动、删除等云空间管理操作。\" metadata: ",
+      "metadata": {}
+    },
+    "skill:lark-minutes": {
+      "id": "skill:lark-minutes",
+      "label": "lark minutes",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-minutes",
+      "keywords": [
+        "lark minutes",
+        "lark-minutes"
+      ],
+      "description": "name: lark-minutes version: 1.0.0 description: \"飞书妙记：妙记相关基本功能。1.查询妙记列表（按关键词/所有者/参与者/时间范围）；2.获取妙记基础信息（标题、封面、时长 等）；3.下载妙记音视频文件；4.获取妙记相关 AI 产物（总结、待办、章节）；5.上传音视频生成妙记，也支持将本地音视频文件转成纪要、逐字稿、文字稿、撰写文字等产物；6.更新妙记",
+      "metadata": {}
+    },
+    "skill:lark-okr": {
+      "id": "skill:lark-okr",
+      "label": "lark okr",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-okr",
+      "keywords": [
+        "lark okr",
+        "lark-okr"
+      ],
+      "description": "name: lark-okr version: 1.0.0 description: \"飞书 OKR：管理目标与关键结果。查看和编辑 OKR 周期、目标（Objective）、关键结果（Key Result）、对齐关系、量化指标和进展记录。当用户需要查看或创建 OKR、管理目标和关键结果、查看对齐关系时使用。\" metadata: requires: bins: [ \"lark-cli\" ] cl",
+      "metadata": {}
+    },
+    "skill:lark-openapi-explorer": {
+      "id": "skill:lark-openapi-explorer",
+      "label": "lark openapi explorer",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-openapi-explorer",
+      "keywords": [
+        "lark openapi explorer",
+        "lark-openapi-explorer"
+      ],
+      "description": "name: lark-openapi-explorer version: 1.0.0 description: \"飞书/Lark 原生 OpenAPI 探索：从官方文档库中挖掘未经 CLI 封装的原生 OpenAPI 接口。当用户的需求无法被现有 lark-* skill 或 lark-cli 已注册命令满足，需要查找并调用原生飞书 OpenAPI 时使用。\" metadata: requires",
+      "metadata": {}
+    },
+    "skill:lark-shared": {
+      "id": "skill:lark-shared",
+      "label": "lark shared",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-shared",
+      "keywords": [
+        "lark shared",
+        "lark-shared"
+      ],
+      "description": "name: lark-shared version: 1.0.0 description: \"Use when first setting up lark-cli, running auth login, switching user/bot identity (--as), handling permission denied or scope errors, needing to update",
+      "metadata": {}
+    },
+    "skill:lark-sheets": {
+      "id": "skill:lark-sheets",
+      "label": "lark sheets",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-sheets",
+      "keywords": [
+        "lark sheets",
+        "lark-sheets"
+      ],
+      "description": "name: lark-sheets version: 2.0.0 description: \"飞书电子表格：创建和操作电子表格。支持创建表格、管理工作表与行列结构（增删/合并/调整尺寸/隐藏/冻结）、读写单元格（值/公式/样式/批注/单元格图片）、查找替换、多操作原子批量更新，以及图表、透视表、条件格式、筛选器、迷你图、浮动图片等对象的创建与维护。当用户需要创建电子表格、管理工作表、批量读写或编辑",
+      "metadata": {}
+    },
+    "skill:lark-skill-maker": {
+      "id": "skill:lark-skill-maker",
+      "label": "lark skill maker",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-skill-maker",
+      "keywords": [
+        "lark skill maker",
+        "lark-skill-maker"
+      ],
+      "description": "name: lark-skill-maker version: 1.0.0 description: \"创建 lark-cli 的自定义 Skill。当用户需要把飞书 API 操作封装成可复用的 Skill（包装原子 API 或编排多步流程）时使用。\" metadata: requires: bins: [\"lark-cli\"] ---",
+      "metadata": {}
+    },
+    "skill:lark-slides": {
+      "id": "skill:lark-slides",
+      "label": "lark slides",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-slides",
+      "keywords": [
+        "lark slides",
+        "lark-slides"
+      ],
+      "description": "name: lark-slides version: 1.0.0 description: \"飞书幻灯片：创建和编辑幻灯片，接口通过 XML 协议通信。创建演示文稿、读取幻灯片内容、管理幻灯片页面（创建、删除、读取、局部替换）。当用户需要创建或编辑幻灯片、读取或修改单个页面时使用。当用户给出 doubao.com 的 /slides/ URL/token 时，也应直接使用本 skill，不要因为域",
+      "metadata": {}
+    },
+    "skill:lark-task": {
+      "id": "skill:lark-task",
+      "label": "lark task",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-task",
+      "keywords": [
+        "lark task",
+        "lark-task"
+      ],
+      "description": "name: lark-task version: 1.0.0 description: \"飞书任务：管理任务、清单和任务智能体。创建待办任务、查看和更新任务状态、拆分子任务、组织任务清单、分配协作成员、上传任务附件、注册或注销任务智能体、更新任务智能体的主页数据、写入智能体任务记录。当用户需要创建待办事项、查看任务列表、跟踪任务进度、管理项目清单或给他人分配任务、为任务上传附件文件、注册注销任务智",
+      "metadata": {}
+    },
+    "skill:lark-vc": {
+      "id": "skill:lark-vc",
+      "label": "lark vc",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-vc",
+      "keywords": [
+        "lark vc",
+        "lark-vc"
+      ],
+      "description": "name: lark-vc version: 1.0.0 description: \"飞书视频会议：搜索历史会议、查询会议纪要产物（总结、待办、章节、逐字稿）、查询会议参会人快照。1. 查询已经结束的会议数量或详情时使用本技能（如历史日期｜昨天｜上周｜今天已经开过的会议等场景），查询未开始的会议日程使用 lark-calendar 技能。2. 支持通过关键词、时间范围、组织者、参与者、会议室等筛选",
+      "metadata": {}
+    },
+    "skill:lark-vc-agent": {
+      "id": "skill:lark-vc-agent",
+      "label": "lark vc agent",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-vc-agent",
+      "keywords": [
+        "lark vc agent",
+        "lark-vc-agent"
+      ],
+      "description": "name: lark-vc-agent version: 1.0.0 description: \"飞书视频会议：让机器人代当前用户加入/离开正在进行的会议，并读取会议期间的实时事件（参会人加入与离开、发言、聊天、屏幕共享等）。1. 用户提供 9 位会议号、要求代为入会或离会时使用 +meeting-join / +meeting-leave——会真实产生入会/离会记录。2. 会议进行中用户想知道“",
+      "metadata": {}
+    },
+    "skill:lark-whiteboard": {
+      "id": "skill:lark-whiteboard",
+      "label": "lark whiteboard",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-whiteboard",
+      "keywords": [
+        "lark whiteboard",
+        "lark-whiteboard"
+      ],
+      "description": "name: lark-whiteboard version: 1.0.0 description: > 飞书画板：查询和编辑飞书云文档中的画板。支持导出画板为预览图片、导出原始节点结构、使用 DSL（转成 OpenAPI 格式）、PlantUML/Mermaid 格式更新画板内容。 当用户需要查看画板内容、导出画板图片、编辑画板，或是需要可视化表达架构、流程、组织关系、时间线、因果、对比等结构化信",
+      "metadata": {}
+    },
+    "skill:lark-wiki": {
+      "id": "skill:lark-wiki",
+      "label": "lark wiki",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-wiki",
+      "keywords": [
+        "lark wiki",
+        "lark-wiki"
+      ],
+      "description": "name: lark-wiki version: 1.0.0 description: \"飞书知识库：管理知识空间、空间成员和文档节点。创建和查询知识空间、查看和管理空间成员、管理节点层级结构、在知识库中组织文档和快捷方式。当用户需要在知识库中查找或创建文档、浏览知识空间结构、查看或管理空间成员、移动或复制节点时使用。当用户给出 doubao.com 的 /wiki/ URL/token 时，也应",
+      "metadata": {}
+    },
+    "skill:lark-workflow-meeting-summary": {
+      "id": "skill:lark-workflow-meeting-summary",
+      "label": "lark workflow meeting summary",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-workflow-meeting-summary",
+      "keywords": [
+        "lark workflow meeting summary",
+        "lark-workflow-meeting-summary"
+      ],
+      "description": "name: lark-workflow-meeting-summary version: 1.0.0 description: \"会议纪要整理工作流：汇总指定时间范围内的会议纪要并生成结构化报告。当用户需要整理会议纪要、生成会议周报、回顾一段时间内的会议内容时使用。\" metadata: requires: bins: [\"lark-cli\"] ---",
+      "metadata": {}
+    },
+    "skill:lark-workflow-standup-report": {
+      "id": "skill:lark-workflow-standup-report",
+      "label": "lark workflow standup report",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/larksuite_cli/lark-workflow-standup-report",
+      "keywords": [
+        "lark workflow standup report",
+        "lark-workflow-standup-report"
+      ],
+      "description": "name: lark-workflow-standup-report version: 1.0.0 description: \"日程待办摘要：编排 calendar +agenda 和 task +get-my-tasks，生成指定日期的日程与未完成任务摘要。适用于了解今天/明天/本周的安排。\" metadata: requires: bins: [\"lark-cli\"] ---",
+      "metadata": {}
+    },
+    "skill:markitdown-parser": {
+      "id": "skill:markitdown-parser",
+      "label": "markitdown_parser",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/markitdown_parser",
+      "keywords": [
+        "markitdown_parser"
+      ],
+      "description": "**Version**: 1.0.0 **Domain**: Document Parsing & Context Ingestion **Security Level**: Safe (Requires local I/O read permissions)",
+      "metadata": {}
+    },
+    "skill:polymarket": {
+      "id": "skill:polymarket",
+      "label": "Vincent   Polymarket for agents",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/polymarket",
+      "keywords": [
+        "Vincent   Polymarket for agents",
+        "Vincent - Polymarket for agents"
+      ],
+      "description": "name: Vincent - Polymarket for agents description: | Polymarket prediction market trading for agents. Use this skill when users want to create a Polymarket wallet, browse markets, place bets, manage p",
+      "metadata": {}
+    },
+    "skill:apify-actorization": {
+      "id": "skill:apify-actorization",
+      "label": "apify actorization",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/skills/apify_actorization",
+      "keywords": [
+        "apify actorization",
+        "apify-actorization"
+      ],
+      "description": "name: apify-actorization description: Convert existing projects into Apify Actors - serverless cloud programs. Actorize JavaScript/TypeScript (SDK with Actor.init/exit), Python (async context manager)",
+      "metadata": {}
+    },
+    "skill:apify-actor-development": {
+      "id": "skill:apify-actor-development",
+      "label": "apify actor development",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/skills/apify_actor_development",
+      "keywords": [
+        "apify actor development",
+        "apify-actor-development"
+      ],
+      "description": "name: apify-actor-development description: Develop, debug, and deploy Apify Actors - serverless cloud programs for web scraping, automation, and data processing. Use when creating new Actors, modifyin",
+      "metadata": {}
+    },
+    "skill:apify-generate-output-schema": {
+      "id": "skill:apify-generate-output-schema",
+      "label": "apify generate output schema",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/skills/apify_generate_output_schema",
+      "keywords": [
+        "apify generate output schema",
+        "apify-generate-output-schema"
+      ],
+      "description": "name: apify-generate-output-schema description: Generate output schemas (dataset_schema.json, output_schema.json, key_value_store_schema.json) for an Apify Actor by analyzing its source code. Use when",
+      "metadata": {}
+    },
+    "skill:apify-ultimate-scraper": {
+      "id": "skill:apify-ultimate-scraper",
+      "label": "apify ultimate scraper",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/skills/apify_ultimate_scraper",
+      "keywords": [
+        "apify ultimate scraper",
+        "apify-ultimate-scraper"
+      ],
+      "description": "name: apify-ultimate-scraper description: Universal AI-powered web scraper for any platform. Scrape data from Instagram, Facebook, TikTok, YouTube, Google Maps, Google Search, Google Trends, Booking.c",
+      "metadata": {}
+    },
+    "skill:clickhouse-best-practices": {
+      "id": "skill:clickhouse-best-practices",
+      "label": "clickhouse best practices",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/skills/clickhouse_best_practices",
+      "keywords": [
+        "clickhouse best practices",
+        "clickhouse-best-practices"
+      ],
+      "description": "name: clickhouse-best-practices description: MUST USE when reviewing ClickHouse schemas, queries, or configurations. Contains 28 rules that MUST be checked before providing recommendations. Always rea",
+      "metadata": {}
+    },
+    "skill:logging-best-practices": {
+      "id": "skill:logging-best-practices",
+      "label": "logging best practices",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/skills/logging_best_practices",
+      "keywords": [
+        "logging best practices",
+        "logging-best-practices"
+      ],
+      "description": "name: logging-best-practices description: Logging best practices focused on wide events (canonical log lines) for powerful debugging and analytics license: MIT metadata: author: boristane version: \"1.",
+      "metadata": {}
+    },
+    "skill:twitter": {
+      "id": "skill:twitter",
+      "label": "Vincent   Twitter / X.com for agents",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/twitter",
+      "keywords": [
+        "Vincent   Twitter / X.com for agents",
+        "Vincent - Twitter / X.com for agents"
+      ],
+      "description": "name: Vincent - Twitter / X.com for agents description: | Twitter/X.com data access for agents. Use this skill when users want to search tweets, look up user profiles, or retrieve recent tweets. Pay-p",
+      "metadata": {}
+    },
+    "skill:wallet": {
+      "id": "skill:wallet",
+      "label": "Vincent   A wallet for agents",
+      "node_type": "skill",
+      "path": "frameworks/core_system/agent_skills/wallet",
+      "keywords": [
+        "Vincent   A wallet for agents",
+        "Vincent - A wallet for agents"
+      ],
+      "description": "name: Vincent - A wallet for agents description: | The agent's wallet for EVM chain transactions and raw signing. Use this skill when users want to create a wallet, transfer tokens, swap on DEXs, inte",
+      "metadata": {}
+    },
+    "skill:aris-research-loop": {
+      "id": "skill:aris-research-loop",
+      "label": "aris_research_loop",
+      "node_type": "skill",
+      "path": "frameworks/core_system/aris_research_loop",
+      "keywords": [
+        "aris_research_loop"
+      ],
+      "description": "**Skill ID:** `aris_research_loop_v1` **Version:** 1.0.0 **Author:** SEOSONA System â€” UAP Ingestion 2026-06-04 **Source Reference:** https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep ",
+      "metadata": {}
+    },
+    "skill:composio-sdk": {
+      "id": "skill:composio-sdk",
+      "label": "composio_sdk",
+      "node_type": "skill",
+      "path": "frameworks/core_system/composio_sdk",
+      "keywords": [
+        "composio_sdk"
+      ],
+      "description": "--- skill: composio-sdk category: core_system source: ingestion_zone/composio.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:crawlee": {
+      "id": "skill:crawlee",
+      "label": "crawlee",
+      "node_type": "skill",
+      "path": "frameworks/core_system/crawlee",
+      "keywords": [
+        "crawlee"
+      ],
+      "description": "---",
+      "metadata": {}
+    },
+    "skill:custom-dev-suite": {
+      "id": "skill:custom-dev-suite",
+      "label": "custom dev suite",
+      "node_type": "skill",
+      "path": "frameworks/core_system/custom-dev-suite",
+      "keywords": [
+        "custom dev suite",
+        "custom-dev-suite"
+      ],
+      "description": "name: custom-dev-suite description: Global developer guidelines combining premium front-end anti-slop rules, strict programming safety, context organization, and structured goal definition. version: 1",
+      "metadata": {}
+    },
+    "skill:firecrawl": {
+      "id": "skill:firecrawl",
+      "label": "firecrawl",
+      "node_type": "skill",
+      "path": "frameworks/core_system/firecrawl",
+      "keywords": [
+        "firecrawl"
+      ],
+      "description": "--- skill: firecrawl category: core_system source: ingestion_zone/firecrawl.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:firecrawl-mcp-server": {
+      "id": "skill:firecrawl-mcp-server",
+      "label": "Firecrawl Mcp Server",
+      "node_type": "skill",
+      "path": "frameworks/core_system/firecrawl_mcp_server",
+      "keywords": [
+        "Firecrawl Mcp Server"
+      ],
+      "description": "id: firecrawl_mcp_server name: Firecrawl Mcp Server version: 1.0.0 tier: 3 status: active author: OA Forge Pipeline updated: 2026-04-09 domain: llm-tooling cost_tier: standard load_on_boot: false acce",
+      "metadata": {}
+    },
+    "skill:harness-books": {
+      "id": "skill:harness-books",
+      "label": "harness_books",
+      "node_type": "skill",
+      "path": "frameworks/core_system/harness_books",
+      "keywords": [
+        "harness_books"
+      ],
+      "description": "--- skill: harness-books category: core_system source: ingestion_zone/harness-books.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:mcp-server": {
+      "id": "skill:mcp-server",
+      "label": "mcp_server",
+      "node_type": "skill",
+      "path": "frameworks/core_system/mcp_server",
+      "keywords": [
+        "mcp_server"
+      ],
+      "description": "---",
+      "metadata": {}
+    },
+    "skill:mempalace": {
+      "id": "skill:mempalace",
+      "label": "Mempalace",
+      "node_type": "skill",
+      "path": "frameworks/core_system/mempalace",
+      "keywords": [
+        "Mempalace"
+      ],
+      "description": "id: mempalace name: Mempalace version: 1.0.0 tier: 3 status: active author: OA Forge Pipeline updated: 2026-04-09 domain: forms cost_tier: standard load_on_boot: false accessible_by: - Orchestrator - ",
+      "metadata": {}
+    },
+    "skill:post-session-learning": {
+      "id": "skill:post-session-learning",
+      "label": "post_session_learning",
+      "node_type": "skill",
+      "path": "frameworks/core_system/post_session_learning",
+      "keywords": [
+        "post_session_learning"
+      ],
+      "description": "**Skill ID:** `post_session_learning_v1` **Version:** 1.0.0 **Author:** SEOSONA System â€” UAP Ingestion 2026-06-04 **Source Reference:** Anthropic internal prompt (Suzanne); ingested via `anthropic-p",
+      "metadata": {}
+    },
+    "skill:repo2rl-env": {
+      "id": "skill:repo2rl-env",
+      "label": "repo2rl_env",
+      "node_type": "skill",
+      "path": "frameworks/core_system/repo2rl_env",
+      "keywords": [
+        "repo2rl_env"
+      ],
+      "description": "--- skill: repo2rl-env category: core_system source: ingestion_zone/Repo2RLEnv.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:security-scanning": {
+      "id": "skill:security-scanning",
+      "label": "security_scanning",
+      "node_type": "skill",
+      "path": "frameworks/core_system/security_scanning",
+      "keywords": [
+        "security_scanning"
+      ],
+      "description": "**Skill ID:** `security_scanning_trivy_v1` **Version:** 1.0.0 **Author:** SEOSONA System â€” UAP Ingestion 2026-06-04 **Source Reference:** https://github.com/aquasecurity/trivy **Category:** core_sys",
+      "metadata": {}
+    },
+    "skill:skawld-sdk": {
+      "id": "skill:skawld-sdk",
+      "label": "skawld_sdk",
+      "node_type": "skill",
+      "path": "frameworks/core_system/skawld_sdk",
+      "keywords": [
+        "skawld_sdk"
+      ],
+      "description": "--- skill: skawld-sdk category: core_system source: ingestion_zone/skawld-sdk.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:supervisor-skills": {
+      "id": "skill:supervisor-skills",
+      "label": "supervisor_skills",
+      "node_type": "skill",
+      "path": "frameworks/core_system/supervisor_skills",
+      "keywords": [
+        "supervisor_skills"
+      ],
+      "description": "--- skill: supervisor-skills category: core_system source: ingestion_zone/Supervisor-Skills.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:synapse-ai": {
+      "id": "skill:synapse-ai",
+      "label": "synapse_ai",
+      "node_type": "skill",
+      "path": "frameworks/core_system/synapse_ai",
+      "keywords": [
+        "synapse_ai"
+      ],
+      "description": "--- skill: synapse-ai category: core_system source: ingestion_zone/synapse-ai.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:tolaria": {
+      "id": "skill:tolaria",
+      "label": "tolaria",
+      "node_type": "skill",
+      "path": "frameworks/core_system/tolaria",
+      "keywords": [
+        "tolaria"
+      ],
+      "description": "--- skill: tolaria category: core_system source: ingestion_zone/tolaria.md status: ingested ---",
+      "metadata": {}
+    },
+    "cat:frontend-engineering": {
+      "id": "cat:frontend-engineering",
+      "label": "Frontend Engineering",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "frontend engineering"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:chrome-devtools": {
+      "id": "skill:chrome-devtools",
+      "label": "ck:chrome devtools",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/chrome-devtools",
+      "keywords": [
+        "ck:chrome devtools",
+        "ck:chrome-devtools"
+      ],
+      "description": "name: ck:chrome-devtools description: Browser automation, debugging, and performance analysis using Puppeteer CLI scripts. Use for automating browsers, taking screenshots, analyzing performance, monit",
+      "metadata": {}
+    },
+    "skill:design": {
+      "id": "skill:design",
+      "label": "ckm:design",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/design",
+      "keywords": [
+        "ckm:design"
+      ],
+      "description": "name: ckm:design description: \"Comprehensive design skill: brand identity, design tokens, UI styling, logo generation (55 styles, Gemini AI), corporate identity program (50 deliverables, CIP mockups),",
+      "metadata": {}
+    },
+    "skill:design-system": {
+      "id": "skill:design-system",
+      "label": "ckm:design system",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/design-system",
+      "keywords": [
+        "ckm:design system",
+        "ckm:design-system"
+      ],
+      "description": "name: ckm:design-system description: Token architecture, component specifications, and slide generation. Three-layer tokens (primitive→semantic→component), CSS variables, spacing/typography scales, co",
+      "metadata": {}
+    },
+    "skill:frontend-design": {
+      "id": "skill:frontend-design",
+      "label": "ck:frontend design",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/frontend-design",
+      "keywords": [
+        "ck:frontend design",
+        "ck:frontend-design"
+      ],
+      "description": "name: ck:frontend-design description: Create polished frontend interfaces from designs/screenshots/videos. Use for web components, 3D experiences, replicating UI designs, quick prototypes, immersive i",
+      "metadata": {}
+    },
+    "skill:frontend-development": {
+      "id": "skill:frontend-development",
+      "label": "ck:frontend development",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/frontend-development",
+      "keywords": [
+        "ck:frontend development",
+        "ck:frontend-development"
+      ],
+      "description": "name: ck:frontend-development description: Frontend development guidelines for React/TypeScript applications. Modern patterns including Suspense, lazy loading, useSuspenseQuery, file organization with",
+      "metadata": {}
+    },
+    "skill:frontend-ui-dark-ts": {
+      "id": "skill:frontend-ui-dark-ts",
+      "label": "frontend_ui_dark_ts",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/frontend_ui_dark_ts",
+      "keywords": [
+        "frontend_ui_dark_ts"
+      ],
+      "description": "name: frontend_ui_dark_ts",
+      "metadata": {}
+    },
+    "skill:markdown-novel-viewer": {
+      "id": "skill:markdown-novel-viewer",
+      "label": "ck:markdown novel viewer",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/markdown-novel-viewer",
+      "keywords": [
+        "ck:markdown novel viewer",
+        "ck:markdown-novel-viewer"
+      ],
+      "description": "name: ck:markdown-novel-viewer description: View markdown files with calm, book-like reading experience. Background HTTP server for rendering markdown. argument-hint: \"[file-or-directory]\" metadata: a",
+      "metadata": {}
+    },
+    "skill:mermaidjs-v11": {
+      "id": "skill:mermaidjs-v11",
+      "label": "ck:mermaidjs v11",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/mermaidjs-v11",
+      "keywords": [
+        "ck:mermaidjs v11",
+        "ck:mermaidjs-v11"
+      ],
+      "description": "name: ck:mermaidjs-v11 description: Create diagrams and visualizations using Mermaid.js v11 syntax. Use when generating flowcharts, sequence diagrams, class diagrams, state diagrams, ER diagrams, Gant",
+      "metadata": {}
+    },
+    "skill:nextjs-app-router-patterns": {
+      "id": "skill:nextjs-app-router-patterns",
+      "label": "nextjs_app_router_patterns",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/nextjs_app_router_patterns",
+      "keywords": [
+        "nextjs_app_router_patterns"
+      ],
+      "description": "name: nextjs_app_router_patterns",
+      "metadata": {}
+    },
+    "skill:react-best-practices": {
+      "id": "skill:react-best-practices",
+      "label": "react_best_practices",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/react_best_practices",
+      "keywords": [
+        "react_best_practices"
+      ],
+      "description": "name: react_best_practices",
+      "metadata": {}
+    },
+    "skill:react-components": {
+      "id": "skill:react-components",
+      "label": "React Components",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/react_components",
+      "keywords": [
+        "React Components"
+      ],
+      "description": "id: react_components name: React Components version: 1.0.0 tier: 3 status: active author: OA Forge Pipeline updated: 2026-04-09 domain: utility cost_tier: standard load_on_boot: false accessible_by: -",
+      "metadata": {}
+    },
+    "skill:payload": {
+      "id": "skill:payload",
+      "label": "react:components",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/react_components/payload",
+      "keywords": [
+        "react:components"
+      ],
+      "description": "id: react-components name: react:components version: 1.0.0 tier: 1 status: active author: SEOSONA OS Core Team updated: 2026-04-02 description: Converts Stitch designs into modular Vite and React comp",
+      "metadata": {}
+    },
+    "skill:shader": {
+      "id": "skill:shader",
+      "label": "ck:shader",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/shader",
+      "keywords": [
+        "ck:shader"
+      ],
+      "description": "name: ck:shader description: \"Write GLSL fragment shaders for procedural graphics. Topics: shapes (SDF), patterns, noise (Perlin/simplex/cellular), fBm, colors (HSB/RGB), matrices, gradients, animatio",
+      "metadata": {}
+    },
+    "skill:tailwind-design-system": {
+      "id": "skill:tailwind-design-system",
+      "label": "tailwind_design_system",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/tailwind_design_system",
+      "keywords": [
+        "tailwind_design_system"
+      ],
+      "description": "name: tailwind_design_system",
+      "metadata": {}
+    },
+    "skill:threejs": {
+      "id": "skill:threejs",
+      "label": "ck:threejs",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/threejs",
+      "keywords": [
+        "ck:threejs"
+      ],
+      "description": "name: ck:threejs description: \"Build 3D web apps with Three.js (WebGL/WebGPU). 556 searchable examples, 60 API classes, 20 use cases. Actions: create 3D scene, load model, add animation, implement phy",
+      "metadata": {}
+    },
+    "skill:typescript-advanced-types": {
+      "id": "skill:typescript-advanced-types",
+      "label": "typescript_advanced_types",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/typescript_advanced_types",
+      "keywords": [
+        "typescript_advanced_types"
+      ],
+      "description": "name: typescript_advanced_types",
+      "metadata": {}
+    },
+    "skill:ui-styling": {
+      "id": "skill:ui-styling",
+      "label": "ck:ui styling",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/ui-styling",
+      "keywords": [
+        "ck:ui styling",
+        "ck:ui-styling"
+      ],
+      "description": "name: ck:ui-styling description: Create beautiful, accessible user interfaces with shadcn/ui components (built on Radix UI + Tailwind), Tailwind CSS utility-first styling, and canvas-based visual desi",
+      "metadata": {}
+    },
+    "skill:ui-ux-pro-max": {
+      "id": "skill:ui-ux-pro-max",
+      "label": "ck:ui ux pro max",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/ui_ux_pro_max",
+      "keywords": [
+        "ck:ui ux pro max",
+        "ck:ui-ux-pro-max"
+      ],
+      "description": "name: ui_ux_pro_max",
+      "metadata": {}
+    },
+    "skill:web-design-guidelines": {
+      "id": "skill:web-design-guidelines",
+      "label": "ck:web design guidelines",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/web-design-guidelines",
+      "keywords": [
+        "ck:web design guidelines",
+        "ck:web-design-guidelines"
+      ],
+      "description": "name: ck:web-design-guidelines description: Review UI code for Web Interface Guidelines compliance. Use when asked to \"review my UI\", \"check accessibility\", \"audit design\", \"review UX\", or \"check my s",
+      "metadata": {}
+    },
+    "skill:web-frameworks": {
+      "id": "skill:web-frameworks",
+      "label": "ck:web frameworks",
+      "node_type": "skill",
+      "path": "frameworks/frontend_engineering/web-frameworks",
+      "keywords": [
+        "ck:web frameworks",
+        "ck:web-frameworks"
+      ],
+      "description": "name: ck:web-frameworks description: Build modern full-stack web applications with Next.js (App Router, Server Components, RSC, PPR, SSR, SSG, ISR), Turborepo (monorepo management, task pipelines, rem",
+      "metadata": {}
+    },
+    "cat:mobile-engineering": {
+      "id": "cat:mobile-engineering",
+      "label": "Mobile Engineering",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "mobile engineering"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:mobile-engineering": {
+      "id": "skill:mobile-engineering",
+      "label": "android cli",
+      "node_type": "skill",
+      "path": "frameworks/mobile_engineering",
+      "keywords": [
+        "android cli",
+        "android-cli"
+      ],
+      "description": "name: android-cli description: Orchestrates Android development tasks including project creation, deployment, SDK management, and environment diagnostics using the `android` command-line tool. ---",
+      "metadata": {}
+    },
+    "cat:multimedia-production": {
+      "id": "cat:multimedia-production",
+      "label": "Multimedia Production",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "multimedia production"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:ai-artist": {
+      "id": "skill:ai-artist",
+      "label": "ck:ai artist",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/ai-artist",
+      "keywords": [
+        "ck:ai artist",
+        "ck:ai-artist"
+      ],
+      "description": "name: ck:ai-artist description: \"Generate images via Nano Banana with 129 curated prompts. Mandatory validation interview refines style/mood/colors (use --skip to bypass). 3 modes: search, creative, w",
+      "metadata": {}
+    },
+    "skill:ai-multimodal": {
+      "id": "skill:ai-multimodal",
+      "label": "ck:ai multimodal",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/ai-multimodal",
+      "keywords": [
+        "ck:ai multimodal",
+        "ck:ai-multimodal"
+      ],
+      "description": "name: ck:ai-multimodal description: Analyze images/audio/video with Gemini API (better vision than Claude). Generate images (Imagen 4, Nano Banana 2, MiniMax), videos (Veo 3, Hailuo), speech (MiniMax ",
+      "metadata": {}
+    },
+    "skill:assets-organizing": {
+      "id": "skill:assets-organizing",
+      "label": "ckm:assets organizing",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/assets-organizing",
+      "keywords": [
+        "ckm:assets organizing",
+        "ckm:assets-organizing"
+      ],
+      "description": "name: ckm:assets-organizing description: Organize all outputs from slash commands and subagents in assets/ directory by topics, date format, and slugs. argument-hint: \"[directory or asset-type]\" metad",
+      "metadata": {}
+    },
+    "skill:banner-design": {
+      "id": "skill:banner-design",
+      "label": "ckm:banner design",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/banner-design",
+      "keywords": [
+        "ckm:banner design",
+        "ckm:banner-design"
+      ],
+      "description": "name: ckm:banner-design description: \"Design banners for social media, ads, website heroes, creative assets, and print. Multiple art direction options with AI-generated visuals. Actions: design, creat",
+      "metadata": {}
+    },
+    "skill:cip-design": {
+      "id": "skill:cip-design",
+      "label": "ckm:cip design",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/cip-design",
+      "keywords": [
+        "ckm:cip design",
+        "ckm:cip-design"
+      ],
+      "description": "name: ckm:cip-design description: \"Corporate Identity Program design with 50 deliverables, 20 styles, 20 industries. Generate CIP mockups with Gemini Nano Banana (Flash/Pro). Actions: design, create, ",
+      "metadata": {}
+    },
+    "skill:creativity": {
+      "id": "skill:creativity",
+      "label": "ckm:creativity",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/creativity",
+      "keywords": [
+        "ckm:creativity"
+      ],
+      "description": "name: ckm:creativity description: \"Creative direction intelligence. 55 styles, 18 platforms, 12 voiceover types, 17 music genres, 30 campaign categories. Actions: create, design, plan, direct, brief c",
+      "metadata": {}
+    },
+    "skill:elevenlabs": {
+      "id": "skill:elevenlabs",
+      "label": "ckm:elevenlabs",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/elevenlabs",
+      "keywords": [
+        "ckm:elevenlabs"
+      ],
+      "description": "name: ckm:elevenlabs description: Generate speech, clone voices, create sound effects & music with ElevenLabs API. TTS, voice design, audio generation, conversational AI agents. argument-hint: \"[actio",
+      "metadata": {}
+    },
+    "skill:logo-design": {
+      "id": "skill:logo-design",
+      "label": "ckm:logo design",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/logo-design",
+      "keywords": [
+        "ckm:logo design",
+        "ckm:logo-design"
+      ],
+      "description": "name: ckm:logo-design description: \"Logo design intelligence with 55 styles, 30 color palettes, 25 industries. Generate logos with Gemini Nano Banana model, search styles/colors/industries. Actions: d",
+      "metadata": {}
+    },
+    "skill:media-processing": {
+      "id": "skill:media-processing",
+      "label": "ck:media processing",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/media-processing",
+      "keywords": [
+        "ck:media processing",
+        "ck:media-processing"
+      ],
+      "description": "name: ck:media-processing description: Process multimedia files with FFmpeg (video/audio encoding, conversion, streaming, filtering, hardware acceleration), ImageMagick (image manipulation, format con",
+      "metadata": {}
+    },
+    "skill:remotion": {
+      "id": "skill:remotion",
+      "label": "ck:remotion",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/remotion",
+      "keywords": [
+        "ck:remotion"
+      ],
+      "description": "name: ck:remotion description: Best practices for Remotion - Video creation in React argument-hint: \"[video or component]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:slides": {
+      "id": "skill:slides",
+      "label": "ckm:slides",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/slides",
+      "keywords": [
+        "ckm:slides"
+      ],
+      "description": "name: ckm:slides description: Create strategic HTML presentations with Chart.js, design tokens, responsive layouts, copywriting formulas, and contextual slide strategies. argument-hint: \"[topic] [slid",
+      "metadata": {}
+    },
+    "skill:video": {
+      "id": "skill:video",
+      "label": "ckm:video",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/video",
+      "keywords": [
+        "ckm:video"
+      ],
+      "description": "name: ckm:video description: Video marketing strategy, script writing, storyboards, production workflows, video specs for YouTube/TikTok/Instagram/LinkedIn, thumbnail creation, Veo 3.1 generation, opt",
+      "metadata": {}
+    },
+    "skill:video-audio-ingestion": {
+      "id": "skill:video-audio-ingestion",
+      "label": "seosona:video audio ingestion",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/video_audio_ingestion",
+      "keywords": [
+        "seosona:video audio ingestion",
+        "seosona:video-audio-ingestion"
+      ],
+      "description": "name: seosona:video-audio-ingestion description: Build compliant video/audio ingestion pipelines with yt-dlp, ffmpeg, and OpenAI Whisper for transcripts, subtitles, SEO briefs, chaptering, and knowled",
+      "metadata": {}
+    },
+    "skill:youtube": {
+      "id": "skill:youtube",
+      "label": "ckm:youtube",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/youtube",
+      "keywords": [
+        "ckm:youtube"
+      ],
+      "description": "name: ckm:youtube description: Convert YouTube videos to blog posts, infographics, social content. Download video/audio, get captions/transcripts, generate AI summaries, analyze comments via VidCap.xy",
+      "metadata": {}
+    },
+    "skill:youtube-thumbnail-design": {
+      "id": "skill:youtube-thumbnail-design",
+      "label": "ckm:youtube thumbnail design",
+      "node_type": "skill",
+      "path": "frameworks/multimedia_production/youtube-thumbnail-design",
+      "keywords": [
+        "ckm:youtube thumbnail design",
+        "ckm:youtube-thumbnail-design"
+      ],
+      "description": "name: ckm:youtube-thumbnail-design description: \"Design YouTube thumbnails with 17 styles, niche-specific guides, and CTR optimization. Generate complete thumbnails with text using Gemini Nano Banana ",
+      "metadata": {}
+    },
+    "cat:osint": {
+      "id": "cat:osint",
+      "label": "Osint",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "osint"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:osint-graph-investigation": {
+      "id": "skill:osint-graph-investigation",
+      "label": "osint graph investigation",
+      "node_type": "skill",
+      "path": "frameworks/osint/osint-graph-investigation",
+      "keywords": [
+        "osint graph investigation",
+        "osint-graph-investigation"
+      ],
+      "description": "name: osint-graph-investigation description: >- Skill for OSINT graph-based investigations using Flowsint as the visualization backend. Maps entity relationships (domains, IPs, emails, backlinks) into",
+      "metadata": {}
+    },
+    "cat:productivity": {
+      "id": "cat:productivity",
+      "label": "Productivity",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "productivity"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:analyze": {
+      "id": "skill:analyze",
+      "label": "ckm:analyze",
+      "node_type": "skill",
+      "path": "frameworks/productivity/analyze",
+      "keywords": [
+        "ckm:analyze"
+      ],
+      "description": "name: ckm:analyze description: 💡💡 Analytics and performance reports argument-hint: \"[type]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:ask": {
+      "id": "skill:ask",
+      "label": "ck:ask",
+      "node_type": "skill",
+      "path": "frameworks/productivity/ask",
+      "keywords": [
+        "ck:ask"
+      ],
+      "description": "name: ck:ask description: 💡 Answer technical and architectural questions. argument-hint: \"[technical-question]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:brainstorm": {
+      "id": "skill:brainstorm",
+      "label": "ck:brainstorm",
+      "node_type": "skill",
+      "path": "frameworks/productivity/brainstorm",
+      "keywords": [
+        "ck:brainstorm"
+      ],
+      "description": "name: ck:brainstorm description: Brainstorm solutions with trade-off analysis and brutal honesty. Use for ideation, architecture decisions, technical debates, feature exploration, feasibility assessme",
+      "metadata": {}
+    },
+    "skill:code-review": {
+      "id": "skill:code-review",
+      "label": "ck:code review",
+      "node_type": "skill",
+      "path": "frameworks/productivity/code-review",
+      "keywords": [
+        "ck:code review",
+        "ck:code-review"
+      ],
+      "description": "name: ck:code-review description: Use when receiving code review feedback (especially if unclear or technically questionable), when completing tasks or major features requiring review before proceedin",
+      "metadata": {}
+    },
+    "skill:cook": {
+      "id": "skill:cook",
+      "label": "ck:cook",
+      "node_type": "skill",
+      "path": "frameworks/productivity/cook",
+      "keywords": [
+        "ck:cook"
+      ],
+      "description": "name: ck:cook description: ALWAYS activate this skill before implementing EVERY feature, plan, or fix. argument-hint: \"[task|plan-path] [--interactive|--fast|--parallel|--auto|--no-test]\" metadata: au",
+      "metadata": {}
+    },
+    "skill:costflow-vn": {
+      "id": "skill:costflow-vn",
+      "label": "costflow_vn",
+      "node_type": "skill",
+      "path": "frameworks/productivity/costflow_vn",
+      "keywords": [
+        "costflow_vn"
+      ],
+      "description": "--- skill: costflow-vn category: productivity source: ingestion_zone/costflow_vn.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:dashboard": {
+      "id": "skill:dashboard",
+      "label": "ckm:dashboard",
+      "node_type": "skill",
+      "path": "frameworks/productivity/dashboard",
+      "keywords": [
+        "ckm:dashboard"
+      ],
+      "description": "name: ckm:dashboard description: Launch and manage the Marketing Dashboard argument-hint: \"[subcommand] [args]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:docs": {
+      "id": "skill:docs",
+      "label": "ck:docs",
+      "node_type": "skill",
+      "path": "frameworks/productivity/docs",
+      "keywords": [
+        "ck:docs"
+      ],
+      "description": "name: ck:docs description: Initialize, update, and summarize project documentation argument-hint: \"[init|llms|summarize|update] [args]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:docs-seeker": {
+      "id": "skill:docs-seeker",
+      "label": "ck:docs seeker",
+      "node_type": "skill",
+      "path": "frameworks/productivity/docs-seeker",
+      "keywords": [
+        "ck:docs seeker",
+        "ck:docs-seeker"
+      ],
+      "description": "name: ck:docs-seeker description: \"Search technical documentation using executable scripts to detect query type, fetch from llms.txt sources (context7.com), and analyze results. Use when user needs: (",
+      "metadata": {}
+    },
+    "skill:docx": {
+      "id": "skill:docx",
+      "label": "ckm:docx",
+      "node_type": "skill",
+      "path": "frameworks/uncategorized_skills/document-skills/docx",
+      "keywords": [
+        "ckm:docx"
+      ],
+      "description": "name: ckm:docx description: \"Comprehensive document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction. When Claude needs to work ",
+      "metadata": {}
+    },
+    "skill:pdf": {
+      "id": "skill:pdf",
+      "label": "ckm:pdf",
+      "node_type": "skill",
+      "path": "frameworks/uncategorized_skills/document-skills/pdf",
+      "keywords": [
+        "ckm:pdf"
+      ],
+      "description": "name: ckm:pdf description: Comprehensive PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms. When Claude needs to fill in a PDF",
+      "metadata": {}
+    },
+    "skill:pptx": {
+      "id": "skill:pptx",
+      "label": "ckm:pptx",
+      "node_type": "skill",
+      "path": "frameworks/uncategorized_skills/document-skills/pptx",
+      "keywords": [
+        "ckm:pptx"
+      ],
+      "description": "name: ckm:pptx description: \"Presentation creation, editing, and analysis. When Claude needs to work with presentations (.pptx files) for: (1) Creating new presentations, (2) Modifying or editing cont",
+      "metadata": {}
+    },
+    "skill:xlsx": {
+      "id": "skill:xlsx",
+      "label": "ckm:xlsx",
+      "node_type": "skill",
+      "path": "frameworks/uncategorized_skills/document-skills/xlsx",
+      "keywords": [
+        "ckm:xlsx"
+      ],
+      "description": "name: ckm:xlsx description: \"Comprehensive spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization. When Claude needs to work with spreadshe",
+      "metadata": {}
+    },
+    "skill:journal": {
+      "id": "skill:journal",
+      "label": "ck:journal",
+      "node_type": "skill",
+      "path": "frameworks/productivity/journal",
+      "keywords": [
+        "ck:journal"
+      ],
+      "description": "name: ck:journal description: 💡 Write some journal entries. metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:kanban": {
+      "id": "skill:kanban",
+      "label": "ck:kanban",
+      "node_type": "skill",
+      "path": "frameworks/productivity/kanban",
+      "keywords": [
+        "ck:kanban"
+      ],
+      "description": "name: ck:kanban description: AI agent orchestration board (Coming Soon) metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:notebooklm-prompts": {
+      "id": "skill:notebooklm-prompts",
+      "label": "notebooklm_prompts",
+      "node_type": "skill",
+      "path": "frameworks/productivity/notebooklm_prompts",
+      "keywords": [
+        "notebooklm_prompts"
+      ],
+      "description": "--- skill: notebooklm-prompts category: productivity source: ingestion_zone/notebooklm-prompt-library-hack.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:plan": {
+      "id": "skill:plan",
+      "label": "ck:plan",
+      "node_type": "skill",
+      "path": "frameworks/productivity/plan",
+      "keywords": [
+        "ck:plan"
+      ],
+      "description": "name: ck:plan description: 💡💡💡 Intelligent plan creation with prompt enhancement argument-hint: \"[archive|ci|cro|fast|hard|parallel|two|validate] [task]\" metadata: author: claudekit version: \"1.0.0\" -",
+      "metadata": {}
+    },
+    "skill:plans-kanban": {
+      "id": "skill:plans-kanban",
+      "label": "ck:plans kanban",
+      "node_type": "skill",
+      "path": "frameworks/productivity/plans-kanban",
+      "keywords": [
+        "ck:plans kanban",
+        "ck:plans-kanban"
+      ],
+      "description": "name: ck:plans-kanban description: Plans dashboard server with progress tracking and timeline visualization. argument-hint: \"[plans-dir]\" metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:problem-solving": {
+      "id": "skill:problem-solving",
+      "label": "ck:problem solving",
+      "node_type": "skill",
+      "path": "frameworks/productivity/problem-solving",
+      "keywords": [
+        "ck:problem solving",
+        "ck:problem-solving"
+      ],
+      "description": "name: ck:problem-solving description: Apply systematic problem-solving techniques for complexity spirals (simplification cascades), innovation blocks (collision-zone thinking), recurring patterns (met",
+      "metadata": {}
+    },
+    "skill:sequential-thinking": {
+      "id": "skill:sequential-thinking",
+      "label": "ck:sequential thinking",
+      "node_type": "skill",
+      "path": "frameworks/productivity/sequential-thinking",
+      "keywords": [
+        "ck:sequential thinking",
+        "ck:sequential-thinking"
+      ],
+      "description": "name: ck:sequential-thinking description: Apply structured, reflective problem-solving for complex tasks requiring multi-step analysis, revision capability, and hypothesis verification. Use for comple",
+      "metadata": {}
+    },
+    "skill:sure-framework": {
+      "id": "skill:sure-framework",
+      "label": "sure_framework",
+      "node_type": "skill",
+      "path": "frameworks/productivity/sure_framework",
+      "keywords": [
+        "sure_framework"
+      ],
+      "description": "--- skill: sure-framework category: productivity source: ingestion_zone/sure.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:thinking-model-router": {
+      "id": "skill:thinking-model-router",
+      "label": "seosona:thinking model router",
+      "node_type": "skill",
+      "path": "frameworks/productivity/thinking_model_router",
+      "keywords": [
+        "seosona:thinking model router",
+        "seosona:thinking-model-router"
+      ],
+      "description": "name: seosona:thinking-model-router description: Select the right mental model before analysis, planning, debugging, strategy, risk review, product design, or decision-making. Use when a task is ambig",
+      "metadata": {}
+    },
+    "skill:understand-anything": {
+      "id": "skill:understand-anything",
+      "label": "understand_anything",
+      "node_type": "skill",
+      "path": "frameworks/productivity/understand_anything",
+      "keywords": [
+        "understand_anything"
+      ],
+      "description": "--- skill: understand-anything category: productivity source: ingestion_zone/Understand-Anything.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:watzup": {
+      "id": "skill:watzup",
+      "label": "ck:watzup",
+      "node_type": "skill",
+      "path": "frameworks/productivity/watzup",
+      "keywords": [
+        "ck:watzup"
+      ],
+      "description": "name: ck:watzup description: 💡 Review recent changes and wrap up the work metadata: author: claudekit version: \"1.0.0\" ---",
+      "metadata": {}
+    },
+    "skill:write": {
+      "id": "skill:write",
+      "label": "ckm:write",
+      "node_type": "skill",
+      "path": "frameworks/productivity/write",
+      "keywords": [
+        "ckm:write"
+      ],
+      "description": "name: ckm:write description: Write creative copy, blog posts, CRO content, and more argument-hint: \"[audit|blog|blog-youtube|cro|enhance|fast|good|publish] [args]\" metadata: author: claudekit version:",
+      "metadata": {}
+    },
+    "cat:science-medical": {
+      "id": "cat:science-medical",
+      "label": "Science Medical",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "science medical"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:alphafold-database-fetch-and-analyze": {
+      "id": "skill:alphafold-database-fetch-and-analyze",
+      "label": "alphafold database fetch and analyze",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/alphafold_database_fetch_and_analyze",
+      "keywords": [
+        "alphafold database fetch and analyze",
+        "alphafold-database-fetch-and-analyze"
+      ],
+      "description": "name: alphafold-database-fetch-and-analyze description: > Retrieve and analyze AlphaFold predicted structures for a protein. Use when the user provides a specific UniProt Accession ID and wants struct",
+      "metadata": {}
+    },
+    "skill:alphagenome-single-variant-analysis": {
+      "id": "skill:alphagenome-single-variant-analysis",
+      "label": "alphagenome single variant analysis",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/alphagenome_single_variant_analysis",
+      "keywords": [
+        "alphagenome single variant analysis",
+        "alphagenome-single-variant-analysis"
+      ],
+      "description": "name: alphagenome-single-variant-analysis description: > Analyzes genetic variant effects on gene expression (RNA-seq), chromatin accessibility (DNASE), histone marks (ChIP), and transcription factors",
+      "metadata": {}
+    },
+    "skill:chembl-database": {
+      "id": "skill:chembl-database",
+      "label": "chembl database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/chembl_database",
+      "keywords": [
+        "chembl database",
+        "chembl-database"
+      ],
+      "description": "name: chembl-database description: > Query the ChEMBL database for bioactive molecules, drug targets, bioactivity data, approved drugs, and chemical structures. Use when the user asks about compounds,",
+      "metadata": {}
+    },
+    "skill:clinical-trials-database": {
+      "id": "skill:clinical-trials-database",
+      "label": "clinical trials database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/clinical_trials_database",
+      "keywords": [
+        "clinical trials database",
+        "clinical-trials-database"
+      ],
+      "description": "name: clinical-trials-database description: > Query ClinicalTrials.gov via APIv2. Use when you want to search for trials by condition, drug, location, status, or phase; retrieve trial details by NCT I",
+      "metadata": {}
+    },
+    "skill:clinvar-database": {
+      "id": "skill:clinvar-database",
+      "label": "clinvar database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/clinvar_database",
+      "keywords": [
+        "clinvar database",
+        "clinvar-database"
+      ],
+      "description": "name: clinvar-database description: > Use when needing clinical significance, pathogenicity classifications (e.g., Pathogenic, Benign, VUS), clinical evidence rationales, or finding \"hard positive\" be",
+      "metadata": {}
+    },
+    "skill:dbsnp-database": {
+      "id": "skill:dbsnp-database",
+      "label": "dbsnp database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/dbsnp_database",
+      "keywords": [
+        "dbsnp database",
+        "dbsnp-database"
+      ],
+      "description": "name: dbsnp-database description: > Use when you want to look up, map, and search for short genetic variants (SNPs, indels) in NCBI's dbSNP database. Resolves between rsIDs, genomic coordinates in VCF",
+      "metadata": {}
+    },
+    "skill:embl-ebi-ols": {
+      "id": "skill:embl-ebi-ols",
+      "label": "embl ebi ols",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/embl_ebi_ols",
+      "keywords": [
+        "embl ebi ols",
+        "embl-ebi-ols"
+      ],
+      "description": "name: embl-ebi-ols description: > Query and search the EMBL-EBI Ontology Lookup Service (OLS) for biomedical ontology terms, definitions, and hierarchies across 250+ ontologies (e.g., GO, DOID, HP). U",
+      "metadata": {}
+    },
+    "skill:encode-ccres-database": {
+      "id": "skill:encode-ccres-database",
+      "label": "encode ccres database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/encode_ccres_database",
+      "keywords": [
+        "encode ccres database",
+        "encode-ccres-database"
+      ],
+      "description": "name: encode-ccres-database description: > Query the ENCODE Registry of cis-Regulatory Elements (cCREs) via the SCREEN GraphQL API, or make custom queries to the ENCODE Portal REST API for experiments",
+      "metadata": {}
+    },
+    "skill:ensembl-database": {
+      "id": "skill:ensembl-database",
+      "label": "ensembl database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/ensembl_database",
+      "keywords": [
+        "ensembl database",
+        "ensembl-database"
+      ],
+      "description": "name: ensembl-database description: > Query the Ensembl database to resolve gene, transcript, and protein IDs, fetch genomic or protein sequences, retrieve gene structures (exons), and get variant con",
+      "metadata": {}
+    },
+    "skill:foldseek-structural-search": {
+      "id": "skill:foldseek-structural-search",
+      "label": "foldseek structural search",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/foldseek_structural_search",
+      "keywords": [
+        "foldseek structural search",
+        "foldseek-structural-search"
+      ],
+      "description": "name: foldseek-structural-search description: > Performs 3D structural searches of proteins against various databases (PDB, AlphaFold, CATH, MGnify, etc.) using the Foldseek API. Use ONLY when the use",
+      "metadata": {}
+    },
+    "skill:gnomad-database": {
+      "id": "skill:gnomad-database",
+      "label": "gnomad database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/gnomad_database",
+      "keywords": [
+        "gnomad database",
+        "gnomad-database"
+      ],
+      "description": "name: gnomad-database description: > Query the Genome Aggregation Database (gnomAD). Use when determining the rarity or allele frequency of specific genetic variants, retrieving gene constraint metric",
+      "metadata": {}
+    },
+    "skill:gtex-database": {
+      "id": "skill:gtex-database",
+      "label": "gtex database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/gtex_database",
+      "keywords": [
+        "gtex database",
+        "gtex-database"
+      ],
+      "description": "name: gtex-database description: > Use when you want to retrieve quantitative RNA expression data and variant eQTL information from the GTEx (Genotype-Tissue Expression) Project across 54 non-diseased",
+      "metadata": {}
+    },
+    "skill:human-protein-atlas-database": {
+      "id": "skill:human-protein-atlas-database",
+      "label": "human protein atlas database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/human_protein_atlas_database",
+      "keywords": [
+        "human protein atlas database",
+        "human-protein-atlas-database"
+      ],
+      "description": "name: human-protein-atlas-database description: > Use when you want to retrieve semi-quantitative protein expression and spatial localisation data from the Human Protein Atlas (HPA). ---",
+      "metadata": {}
+    },
+    "skill:interpro-database": {
+      "id": "skill:interpro-database",
+      "label": "interpro database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/interpro_database",
+      "keywords": [
+        "interpro database",
+        "interpro-database"
+      ],
+      "description": "name: interpro-database description: > Identify domains, families, and sites in proteins; find all proteins in a family or sharing a domain; explore species distribution for a domain; annotate genomes",
+      "metadata": {}
+    },
+    "skill:jaspar-database": {
+      "id": "skill:jaspar-database",
+      "label": "jaspar database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/jaspar_database",
+      "keywords": [
+        "jaspar database",
+        "jaspar-database"
+      ],
+      "description": "name: jaspar-database description: > Query the JASPAR database for Transcription Factor (TF) binding profiles. Use when retrieving Position Frequency Matrices (PFMs) or Position Weight Matrices (PWMs)",
+      "metadata": {}
+    },
+    "skill:literature-search-arxiv": {
+      "id": "skill:literature-search-arxiv",
+      "label": "literature search arxiv",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/literature_search_arxiv",
+      "keywords": [
+        "literature search arxiv",
+        "literature-search-arxiv"
+      ],
+      "description": "name: literature-search-arxiv description: > Search for scientific papers, preprints, and publications on arXiv. Extract metadata, abstracts, and download full-text PDFs or HTML versions of papers. Us",
+      "metadata": {}
+    },
+    "skill:literature-search-biorxiv": {
+      "id": "skill:literature-search-biorxiv",
+      "label": "literature search biorxiv",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/literature_search_biorxiv",
+      "keywords": [
+        "literature search biorxiv",
+        "literature-search-biorxiv"
+      ],
+      "description": "name: literature-search-biorxiv description: > Browse, filter, and download life sciences, biology, and medical preprints from bioRxiv and medRxiv. Supports fetching paper metadata by DOI, and browsin",
+      "metadata": {}
+    },
+    "skill:literature-search-europepmc": {
+      "id": "skill:literature-search-europepmc",
+      "label": "literature search europepmc",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/literature_search_europepmc",
+      "keywords": [
+        "literature search europepmc",
+        "literature-search-europepmc"
+      ],
+      "description": "name: literature-search-europepmc description: > Search Europe PMC for scientific literature and download open-access full texts and PDFs. Retrieve full-text XML/plain text by PMCID, get citation list",
+      "metadata": {}
+    },
+    "skill:literature-search-openalex": {
+      "id": "skill:literature-search-openalex",
+      "label": "literature search openalex",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/literature_search_openalex",
+      "keywords": [
+        "literature search openalex",
+        "literature-search-openalex"
+      ],
+      "description": "name: literature-search-openalex description: > Query the OpenAlex scholarly database for research papers, authors, institutions, topics, sources, publishers, funders, geo-locations, and keywords. Use",
+      "metadata": {}
+    },
+    "skill:ncbi-sequence-fetch": {
+      "id": "skill:ncbi-sequence-fetch",
+      "label": "ncbi sequence fetch",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/ncbi_sequence_fetch",
+      "keywords": [
+        "ncbi sequence fetch",
+        "ncbi-sequence-fetch"
+      ],
+      "description": "name: ncbi-sequence-fetch description: > Retrieve protein and nucleotide sequences from NCBI databases using E-utilities. Supports direct accession lookup, CDS translation, gene+organism search, locus",
+      "metadata": {}
+    },
+    "skill:openfda-database": {
+      "id": "skill:openfda-database",
+      "label": "openfda database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/openfda_database",
+      "keywords": [
+        "openfda database",
+        "openfda-database"
+      ],
+      "description": "name: openfda-database description: > Query, search, and download data from the openFDA API for drugs, devices, foods, tobacco, cosmetics, animal and veterinary products, substances, and transparency ",
+      "metadata": {}
+    },
+    "skill:opentargets-database": {
+      "id": "skill:opentargets-database",
+      "label": "opentargets database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/opentargets_database",
+      "keywords": [
+        "opentargets database",
+        "opentargets-database"
+      ],
+      "description": "name: opentargets-database description: > Query Open Targets Platform for target-disease associations, drug target discovery, tractability/safety data, genetics/omics evidence, known drugs, for therap",
+      "metadata": {}
+    },
+    "skill:pdb-database": {
+      "id": "skill:pdb-database",
+      "label": "pdb database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/pdb_database",
+      "keywords": [
+        "pdb database",
+        "pdb-database"
+      ],
+      "description": "name: pdb-database description: > Use when you want to search for or download experimentally-determined 3D structures for biomolecules (proteins, nucleic acids, bound ligands). Supports searching by s",
+      "metadata": {}
+    },
+    "skill:protein-sequence-msa": {
+      "id": "skill:protein-sequence-msa",
+      "label": "protein sequence msa",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/protein_sequence_msa",
+      "keywords": [
+        "protein sequence msa",
+        "protein-sequence-msa"
+      ],
+      "description": "name: protein-sequence-msa description: > Performs multiple sequence alignment of proteins with EBI Clustal Omega. Use when you need to align multiple sequences to assess similarity, domain conservati",
+      "metadata": {}
+    },
+    "skill:protein-sequence-similarity-search": {
+      "id": "skill:protein-sequence-similarity-search",
+      "label": "protein sequence similarity search",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/protein_sequence_similarity_search",
+      "keywords": [
+        "protein sequence similarity search",
+        "protein-sequence-similarity-search"
+      ],
+      "description": "name: protein-sequence-similarity-search description: > Searches for homologous protein sequences using MMseqs2 (fast, default) or BLAST (comprehensive, fallback). Trigger this whenever the user provi",
+      "metadata": {}
+    },
+    "skill:pubchem-database": {
+      "id": "skill:pubchem-database",
+      "label": "pubchem database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/pubchem_database",
+      "keywords": [
+        "pubchem database",
+        "pubchem-database"
+      ],
+      "description": "name: pubchem-database description: > Query PubChem, search by name/CID/SMILES, retrieve properties, similarity/substructure searches, bioactivity, for cheminformatics. Use when a user asks about a sp",
+      "metadata": {}
+    },
+    "skill:pubmed-database": {
+      "id": "skill:pubmed-database",
+      "label": "pubmed database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/pubmed_database",
+      "keywords": [
+        "pubmed database",
+        "pubmed-database"
+      ],
+      "description": "name: pubmed-database description: >- Search PubMed for scientific literature, including published clinical trials. Fetch abstracts and full text. Link published research to biological databases (gene",
+      "metadata": {}
+    },
+    "skill:pymol": {
+      "id": "skill:pymol",
+      "label": "pymol",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/pymol",
+      "keywords": [
+        "pymol"
+      ],
+      "description": "name: pymol description: > Visualize, analyze, and render protein and molecular structures using PyMOL. Use when the user wants to create images of protein structures, perform structural alignments or",
+      "metadata": {}
+    },
+    "skill:quickgo-database": {
+      "id": "skill:quickgo-database",
+      "label": "quickgo database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/quickgo_database",
+      "keywords": [
+        "quickgo database",
+        "quickgo-database"
+      ],
+      "description": "name: quickgo-database description: > Query the QuickGO and Evidence & Conclusion Ontology (ECO) REST API. Use this when you need to map genes to biological processes, molecular functions, or cellular",
+      "metadata": {}
+    },
+    "skill:reactome-database": {
+      "id": "skill:reactome-database",
+      "label": "reactome database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/reactome_database",
+      "keywords": [
+        "reactome database",
+        "reactome-database"
+      ],
+      "description": "name: reactome-database description: > Query the Reactome database (Analysis and Content Services). Use when the user asks about pathway analysis, gene list enrichment, retrieving results by token, fi",
+      "metadata": {}
+    },
+    "skill:science-skills-common": {
+      "id": "skill:science-skills-common",
+      "label": "science skills common",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/science_skills_common",
+      "keywords": [
+        "science skills common",
+        "science-skills-common"
+      ],
+      "description": "name: science-skills-common description: >- Shared Python package for Science Skills, currently containing http_client -- a unified HTTP client with rate limiting, retries, and exponential backoff. No",
+      "metadata": {}
+    },
+    "skill:string-database": {
+      "id": "skill:string-database",
+      "label": "string database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/string_database",
+      "keywords": [
+        "string database",
+        "string-database"
+      ],
+      "description": "name: string-database description: > Query the STRING database for protein-protein interactions (PPIs), functional enrichment, and homology. Use when the user asks about interactions between specific ",
+      "metadata": {}
+    },
+    "skill:ucsc-conservation-and-tfbs": {
+      "id": "skill:ucsc-conservation-and-tfbs",
+      "label": "ucsc conservation and tfbs",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/ucsc_conservation_and_tfbs",
+      "keywords": [
+        "ucsc conservation and tfbs",
+        "ucsc-conservation-and-tfbs"
+      ],
+      "description": "name: ucsc-conservation-and-tfbs description: > Fetch Evolutionary Conservation scores (phyloP, phastCons) and Transcription Factor Binding Sites (TFBS) from the UCSC Genome Browser. Use when analyzin",
+      "metadata": {}
+    },
+    "skill:unibind-database": {
+      "id": "skill:unibind-database",
+      "label": "unibind database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/unibind_database",
+      "keywords": [
+        "unibind database",
+        "unibind-database"
+      ],
+      "description": "name: unibind-database description: >- Queries the UniBind database for experimentally validated transcription factor (TF) binding sites. Use when retrieving direct TF-DNA interaction datasets, downlo",
+      "metadata": {}
+    },
+    "skill:uniprot-database": {
+      "id": "skill:uniprot-database",
+      "label": "uniprot database",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/uniprot_database",
+      "keywords": [
+        "uniprot database",
+        "uniprot-database"
+      ],
+      "description": "name: uniprot-database description: >- Access protein metadata, function, taxonomy, and sequences across UniProtKB, UniParc, and UniRef. Use when searching for proteins, mapping identifiers, or retrie",
+      "metadata": {}
+    },
+    "skill:uv": {
+      "id": "skill:uv",
+      "label": "uv",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/uv",
+      "keywords": [
+        "uv"
+      ],
+      "description": "name: uv description: >- Checks whether the uv Python package manager is installed and installs it if missing. Ensures uv is on PATH. Use when another skill requires uv as a prerequisite. ---",
+      "metadata": {}
+    },
+    "skill:workflow-skill-creator": {
+      "id": "skill:workflow-skill-creator",
+      "label": "workflow skill creator",
+      "node_type": "skill",
+      "path": "frameworks/science_medical/workflow_skill_creator",
+      "keywords": [
+        "workflow skill creator",
+        "workflow-skill-creator"
+      ],
+      "description": "name: workflow-skill-creator description: > Distills a completed user workflow or interaction into a reusable agent skill. Use when the user asks to turn their workflow, interaction, or multi-step pro",
+      "metadata": {}
+    },
+    "cat:seo-marketing": {
+      "id": "cat:seo-marketing",
+      "label": "Seo Marketing",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "seo marketing"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:ab-test-setup": {
+      "id": "skill:ab-test-setup",
+      "label": "ckm:ab test setup",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/ab-test-setup",
+      "keywords": [
+        "ckm:ab test setup",
+        "ckm:ab-test-setup"
+      ],
+      "description": "name: ckm:ab-test-setup description: When the user wants to plan, design, or implement an A/B test or experiment. Also use when the user mentions \"A/B test,\" \"split test,\" \"experiment,\" \"test this cha",
+      "metadata": {}
+    },
+    "skill:ab-testing": {
+      "id": "skill:ab-testing",
+      "label": "seosona:ab testing",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/ab_testing",
+      "keywords": [
+        "seosona:ab testing",
+        "seosona:ab-testing"
+      ],
+      "description": "name: seosona:ab-testing description: >- A/B test design, hypothesis framework, sample size calculation, statistical analysis, and experiment documentation. Activate when user wants to test a change, ",
+      "metadata": {}
+    },
+    "skill:ads-management": {
+      "id": "skill:ads-management",
+      "label": "ckm:ads management",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/ads_management",
+      "keywords": [
+        "ckm:ads management",
+        "ckm:ads-management"
+      ],
+      "description": "name: ckm:ads-management description: Activate for paid advertising campaigns on Google Ads, Meta Ads, LinkedIn Ads, TikTok Ads. Includes ad copywriting, audience targeting, budget optimization, A/B t",
+      "metadata": {}
+    },
+    "skill:affiliate-marketing": {
+      "id": "skill:affiliate-marketing",
+      "label": "ckm:affiliate marketing",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/affiliate_marketing",
+      "keywords": [
+        "ckm:affiliate marketing",
+        "ckm:affiliate-marketing"
+      ],
+      "description": "name: ckm:affiliate-marketing description: Build high-converting SaaS affiliate programs with 20-40% commissions, KOL/KOC partnerships, and fraud prevention. Covers platform selection (PartnerStack, F",
+      "metadata": {}
+    },
+    "skill:ai-writing-formulas": {
+      "id": "skill:ai-writing-formulas",
+      "label": "ai writing formulas",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/ai_writing_formulas",
+      "keywords": [
+        "ai writing formulas",
+        "ai-writing-formulas"
+      ],
+      "description": "name: ai-writing-formulas description: >- Standard Operating Procedure for using AI writing formulas like PAS, QUEST, SCAR, AIDA to create high-converting marketing content. ---",
+      "metadata": {}
+    },
+    "skill:analytics": {
+      "id": "skill:analytics",
+      "label": "ckm:analytics",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/analytics",
+      "keywords": [
+        "ckm:analytics"
+      ],
+      "description": "name: ckm:analytics description: Activate for marketing analytics, KPI tracking, reporting dashboards, attribution analysis, and performance optimization. Use when analyzing campaign data, creating re",
+      "metadata": {}
+    },
+    "skill:brand": {
+      "id": "skill:brand",
+      "label": "ckm:brand",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/brand",
+      "keywords": [
+        "ckm:brand"
+      ],
+      "description": "name: ckm:brand description: Brand voice, visual identity, messaging frameworks, asset management, brand consistency. Activate for branded content, tone of voice, marketing assets, brand compliance, s",
+      "metadata": {}
+    },
+    "skill:brand-identity": {
+      "id": "skill:brand-identity",
+      "label": "seosona:brand identity",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/brand_identity",
+      "keywords": [
+        "seosona:brand identity",
+        "seosona:brand-identity"
+      ],
+      "description": "name: seosona:brand-identity description: >- Brand voice, visual identity, messaging framework, and brand consistency. Activate when user asks about brand guidelines, tone of voice, brand audit, messa",
+      "metadata": {}
+    },
+    "skill:campaign": {
+      "id": "skill:campaign",
+      "label": "ckm:campaign",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/campaign",
+      "keywords": [
+        "ckm:campaign"
+      ],
+      "description": "name: ckm:campaign description: Marketing campaign planning, execution, optimization. Create campaigns, track status, analyze performance, manage budgets, coordinate multi-channel efforts. argument-hi",
+      "metadata": {}
+    },
+    "skill:claude-seo-framework": {
+      "id": "skill:claude-seo-framework",
+      "label": "claude seo framework",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/claude_seo_framework",
+      "keywords": [
+        "claude seo framework",
+        "claude-seo-framework"
+      ],
+      "description": "name: claude-seo-framework description: >- Comprehensive, multi-agent SEO analysis framework for AI-first search (GEO), E-E-A-T, Schema, and Technical SEO. --- ---",
+      "metadata": {}
+    },
+    "skill:competitor-intelligence": {
+      "id": "skill:competitor-intelligence",
+      "label": "ckm:competitor",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/competitor_intelligence",
+      "keywords": [
+        "ckm:competitor"
+      ],
+      "description": "name: ckm:competitor description: Competitive analysis, alternative pages, vs comparisons, SEO competitor content, market positioning, and battlecard generation. argument-hint: \"[analyze|content|seo|a",
+      "metadata": {}
+    },
+    "skill:content-creator": {
+      "id": "skill:content-creator",
+      "label": "content_creator",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/content_creator",
+      "keywords": [
+        "content_creator"
+      ],
+      "description": "name: content_creator",
+      "metadata": {}
+    },
+    "skill:content-hub": {
+      "id": "skill:content-hub",
+      "label": "ckm:content hub",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/content_hub",
+      "keywords": [
+        "ckm:content hub",
+        "ckm:content-hub"
+      ],
+      "description": "name: ckm:content-hub description: Browser-based asset gallery for managing marketing assets. Visual grid with filter/search, brand context sidebar, and actions (preview, edit, generate). R2-ready man",
+      "metadata": {}
+    },
+    "skill:content-marketing": {
+      "id": "skill:content-marketing",
+      "label": "ckm:content marketing",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/content_marketing",
+      "keywords": [
+        "ckm:content marketing",
+        "ckm:content-marketing"
+      ],
+      "description": "name: ckm:content-marketing description: Activate for content strategy, editorial calendars, content pillar mapping, blog planning, and content audit. Use when planning content programs, creating edit",
+      "metadata": {}
+    },
+    "skill:copywriting": {
+      "id": "skill:copywriting",
+      "label": "seosona:copywriting",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/copywriting/copywriting",
+      "keywords": [
+        "seosona:copywriting"
+      ],
+      "description": "name: ck:copywriting description: Conversion copywriting formulas, headline templates, email copy patterns, landing page structures, CTA optimization, and writing style extraction. Activate for writin",
+      "metadata": {}
+    },
+    "skill:cro": {
+      "id": "skill:cro",
+      "label": "seosona:cro",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/cro",
+      "keywords": [
+        "seosona:cro"
+      ],
+      "description": "name: seosona:cro description: >- Conversion Rate Optimization for forms, landing pages, onboarding flows, and checkout. Evidence-based optimization with A/B test hypotheses. Activate when user asks t",
+      "metadata": {}
+    },
+    "skill:email-marketing": {
+      "id": "skill:email-marketing",
+      "label": "ckm:email",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/email_marketing",
+      "keywords": [
+        "ckm:email"
+      ],
+      "description": "name: ckm:email description: Email campaigns, newsletters, drip sequences, automation flows, email copywriting, deliverability, subject line formulas, A/B testing. Generate email content for any marke",
+      "metadata": {}
+    },
+    "skill:flowsint": {
+      "id": "skill:flowsint",
+      "label": "flowsint",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/flowsint",
+      "keywords": [
+        "flowsint"
+      ],
+      "description": "--- skill: flowsint category: seo_marketing source: ingestion_zone/flowsint.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:form-cro": {
+      "id": "skill:form-cro",
+      "label": "ckm:form cro",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/form-cro",
+      "keywords": [
+        "ckm:form cro",
+        "ckm:form-cro"
+      ],
+      "description": "name: ckm:form-cro description: When the user wants to optimize any form that is NOT signup/registration — including lead capture forms, contact forms, demo request forms, application forms, survey fo",
+      "metadata": {}
+    },
+    "skill:free-tool-strategy": {
+      "id": "skill:free-tool-strategy",
+      "label": "ckm:free tool strategy",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/free_tool_strategy",
+      "keywords": [
+        "ckm:free tool strategy",
+        "ckm:free-tool-strategy"
+      ],
+      "description": "name: ckm:free-tool-strategy description: When the user wants to plan, evaluate, or build a free tool for marketing purposes — lead generation, SEO value, or brand awareness. Also use when the user me",
+      "metadata": {}
+    },
+    "skill:funnel": {
+      "id": "skill:funnel",
+      "label": "seosona:funnel",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/funnel",
+      "keywords": [
+        "seosona:funnel"
+      ],
+      "description": "name: seosona:funnel description: >- Marketing funnel design, analysis, and optimization. Maps website traffic data from GSC/GA4 to funnel stages. Designs complete conversion funnels from traffic sour",
+      "metadata": {}
+    },
+    "skill:landing-page-generator": {
+      "id": "skill:landing-page-generator",
+      "label": "landing_page_generator",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/landing_page_generator",
+      "keywords": [
+        "landing_page_generator"
+      ],
+      "description": "name: \"landing_page_generator\"",
+      "metadata": {}
+    },
+    "skill:last30days-skill": {
+      "id": "skill:last30days-skill",
+      "label": "last30days_skill",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/last30days_skill",
+      "keywords": [
+        "last30days_skill"
+      ],
+      "description": "--- skill: last30days-skill category: seo_marketing source: ingestion_zone/last30days-skill.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:launch-strategy": {
+      "id": "skill:launch-strategy",
+      "label": "ckm:launch strategy",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/launch_strategy",
+      "keywords": [
+        "ckm:launch strategy",
+        "ckm:launch-strategy"
+      ],
+      "description": "name: ckm:launch-strategy description: \"When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature rele",
+      "metadata": {}
+    },
+    "skill:linkedin-authority-builder": {
+      "id": "skill:linkedin-authority-builder",
+      "label": "linkedin_authority_builder",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/linkedin_authority_builder",
+      "keywords": [
+        "linkedin_authority_builder"
+      ],
+      "description": "name: linkedin_authority_builder",
+      "metadata": {}
+    },
+    "skill:marketing-dashboard": {
+      "id": "skill:marketing-dashboard",
+      "label": "ckm:marketing dashboard",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/marketing-dashboard",
+      "keywords": [
+        "ckm:marketing dashboard",
+        "ckm:marketing-dashboard"
+      ],
+      "description": "name: ckm:marketing-dashboard description: Local-first marketing command center for solopreneurs. Manage campaigns, content, and assets with Claude Code AI automation. metadata: author: claudekit vers",
+      "metadata": {}
+    },
+    "skill:marketing-research": {
+      "id": "skill:marketing-research",
+      "label": "ckm:marketing research",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/marketing-research",
+      "keywords": [
+        "ckm:marketing research",
+        "ckm:marketing-research"
+      ],
+      "description": "name: ckm:marketing-research description: Research market trends, competitors, audience insights, and marketing best practices. Use before marketing-planning for data-driven strategy. argument-hint: \"",
+      "metadata": {}
+    },
+    "skill:marketing-analytics": {
+      "id": "skill:marketing-analytics",
+      "label": "seosona:marketing analytics",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/marketing_analytics",
+      "keywords": [
+        "seosona:marketing analytics",
+        "seosona:marketing-analytics"
+      ],
+      "description": "name: seosona:marketing-analytics description: >- Marketing analytics, KPI frameworks, attribution modeling, ROI calculation, campaign performance analysis, and reporting. Integrates with SEOSONA's GA",
+      "metadata": {}
+    },
+    "skill:marketing-ideas": {
+      "id": "skill:marketing-ideas",
+      "label": "ckm:marketing ideas",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/marketing_ideas",
+      "keywords": [
+        "ckm:marketing ideas",
+        "ckm:marketing-ideas"
+      ],
+      "description": "name: ckm:marketing-ideas description: \"When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,' 'growth i",
+      "metadata": {}
+    },
+    "skill:marketing-planning": {
+      "id": "skill:marketing-planning",
+      "label": "ckm:marketing planning",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/marketing_planning",
+      "keywords": [
+        "ckm:marketing planning",
+        "ckm:marketing-planning"
+      ],
+      "description": "name: ckm:marketing-planning description: Plan marketing strategies, campaigns, content calendars, and initiatives using proven frameworks (RACE, SOSTAC, STP). Activates marketing-research for data-dr",
+      "metadata": {}
+    },
+    "skill:marketing-psychology": {
+      "id": "skill:marketing-psychology",
+      "label": "ckm:marketing psychology",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/marketing_psychology",
+      "keywords": [
+        "ckm:marketing psychology",
+        "ckm:marketing-psychology"
+      ],
+      "description": "name: ckm:marketing-psychology description: \"When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'me",
+      "metadata": {}
+    },
+    "skill:marketing-skills-ingested": {
+      "id": "skill:marketing-skills-ingested",
+      "label": "marketing_skills_ingested",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/marketing_skills_ingested",
+      "keywords": [
+        "marketing_skills_ingested"
+      ],
+      "description": "--- skill: marketing-skills-ingested category: seo_marketing source: ingestion_zone/marketingskills.md status: ingested ---",
+      "metadata": {}
+    },
+    "skill:onboarding-cro": {
+      "id": "skill:onboarding-cro",
+      "label": "ckm:onboarding cro",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/onboarding_cro",
+      "keywords": [
+        "ckm:onboarding cro",
+        "ckm:onboarding-cro"
+      ],
+      "description": "name: ckm:onboarding-cro description: When the user wants to optimize post-signup onboarding, user activation, first-run experience, or time-to-value. Also use when the user mentions \"onboarding flow,",
+      "metadata": {}
+    },
+    "skill:paid-ads": {
+      "id": "skill:paid-ads",
+      "label": "ckm:paid ads",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/paid_ads",
+      "keywords": [
+        "ckm:paid ads",
+        "ckm:paid-ads"
+      ],
+      "description": "name: ckm:paid-ads description: \"When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user m",
+      "metadata": {}
+    },
+    "skill:persona": {
+      "id": "skill:persona",
+      "label": "seosona:persona",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/persona",
+      "keywords": [
+        "seosona:persona"
+      ],
+      "description": "name: seosona:persona description: >- Customer persona creation, ICP (Ideal Customer Profile) development, audience segmentation, and persona-driven content strategy. Activate when user asks to define",
+      "metadata": {}
+    },
+    "skill:pricing-strategy": {
+      "id": "skill:pricing-strategy",
+      "label": "ckm:pricing strategy",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/pricing_strategy",
+      "keywords": [
+        "ckm:pricing strategy",
+        "ckm:pricing-strategy"
+      ],
+      "description": "name: ckm:pricing-strategy description: \"When the user wants help with pricing decisions, packaging, or monetization strategy. Also use when the user mentions 'pricing,' 'pricing tiers,' 'freemium,' '",
+      "metadata": {}
+    },
+    "skill:referral-gamification": {
+      "id": "skill:referral-gamification",
+      "label": "ckm:referral program building",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/referral_gamification",
+      "keywords": [
+        "ckm:referral program building",
+        "ckm:referral-program-building"
+      ],
+      "description": "name: ckm:referral-program-building description: Build referral programs for SaaS/digital products. Covers reward structures (two-sided, tiered, multi-step), platform selection (Rewardful, ReferralCan",
+      "metadata": {}
+    },
+    "skill:seo": {
+      "id": "skill:seo",
+      "label": "ckm:seo",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo",
+      "keywords": [
+        "ckm:seo"
+      ],
+      "description": "name: ckm:seo description: SEO audits, keyword research (ReviewWeb.site API), on-page optimization, technical SEO, programmatic SEO (pSEO), JSON+LD schema, Google Search Console API, Core Web Vitals. ",
+      "metadata": {}
+    },
+    "skill:seo-aeo-best-practices": {
+      "id": "skill:seo-aeo-best-practices",
+      "label": "seo_aeo_best_practices",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_aeo_best_practices",
+      "keywords": [
+        "seo_aeo_best_practices"
+      ],
+      "description": "name: seo_aeo_best_practices",
+      "metadata": {}
+    },
+    "skill:seo-algorithm-decoder": {
+      "id": "skill:seo-algorithm-decoder",
+      "label": "seo algorithm decoder",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_algorithm_decoder",
+      "keywords": [
+        "seo algorithm decoder",
+        "seo-algorithm-decoder"
+      ],
+      "description": "name: seo-algorithm-decoder version: 1.0.0 evaluation_score: 94 grade: A security_scan: PASSED description: > Google Algorithm Decoder for SEOSONA OS. Activate when the user asks why rankings dropped,",
+      "metadata": {}
+    },
+    "skill:seo-backlink-intel": {
+      "id": "skill:seo-backlink-intel",
+      "label": "seo backlink intel",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_backlink_intel",
+      "keywords": [
+        "seo backlink intel",
+        "seo-backlink-intel"
+      ],
+      "description": "name: seo-backlink-intel version: 1.0.0 evaluation_score: 90 grade: A security_scan: PASSED description: > Backlink Intelligence skill. Activate when user asks about backlinks, domain authority, refer",
+      "metadata": {}
+    },
+    "skill:seo-content-research": {
+      "id": "skill:seo-content-research",
+      "label": "seo content research",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_content_research",
+      "keywords": [
+        "seo content research",
+        "seo-content-research"
+      ],
+      "description": "name: seo-content-research version: 1.0.0 evaluation_score: 93 grade: A security_scan: PASSED description: > Content Research Engine for SEOSONA OS. Activate when the user needs a content brief, wants",
+      "metadata": {}
+    },
+    "skill:seo-featured-snippet": {
+      "id": "skill:seo-featured-snippet",
+      "label": "seo featured snippet",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_featured_snippet",
+      "keywords": [
+        "seo featured snippet",
+        "seo-featured-snippet"
+      ],
+      "description": "name: seo-featured-snippet version: 1.0.0 evaluation_score: 92 grade: A security_scan: PASSED description: > Featured Snippet and SERP Feature Optimizer for SEOSONA OS. Activate when the user wants to",
+      "metadata": {}
+    },
+    "skill:seo-gsc-integration": {
+      "id": "skill:seo-gsc-integration",
+      "label": "seo gsc integration",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_gsc_integration",
+      "keywords": [
+        "seo gsc integration",
+        "seo-gsc-integration"
+      ],
+      "description": "name: seo-gsc-integration version: 1.0.0 evaluation_score: 93 grade: A security_scan: PASSED description: > Google Search Console Integration skill. Activate when user wants to connect to GSC, check s",
+      "metadata": {}
+    },
+    "skill:seo-keyword-research": {
+      "id": "skill:seo-keyword-research",
+      "label": "seo keyword research",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_keyword_research",
+      "keywords": [
+        "seo keyword research",
+        "seo-keyword-research"
+      ],
+      "description": "name: seo-keyword-research version: 1.0.0 evaluation_score: 92 grade: A security_scan: PASSED description: > Keyword Research Engine for SEOSONA OS. Activate when user asks about finding keywords, key",
+      "metadata": {}
+    },
+    "skill:seo-local": {
+      "id": "skill:seo-local",
+      "label": "seo local",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_local",
+      "keywords": [
+        "seo local",
+        "seo-local"
+      ],
+      "description": "name: seo-local version: 1.0.0 evaluation_score: 91 grade: A security_scan: PASSED description: > Local SEO Module for SEOSONA OS. Activate when the user wants to optimize for local search results, ma",
+      "metadata": {}
+    },
+    "skill:seo-migration-assistant": {
+      "id": "skill:seo-migration-assistant",
+      "label": "seo migration assistant",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_migration_assistant",
+      "keywords": [
+        "seo migration assistant",
+        "seo-migration-assistant"
+      ],
+      "description": "name: seo-migration-assistant description: Guidelines for URL migration, 301 redirect validation, and on-page technical SEO audits for Next.js web applications. version: 1.0.0 platforms: [linux, macos",
+      "metadata": {}
+    },
+    "skill:seo-rank-tracker": {
+      "id": "skill:seo-rank-tracker",
+      "label": "seo rank tracker",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_rank_tracker",
+      "keywords": [
+        "seo rank tracker",
+        "seo-rank-tracker"
+      ],
+      "description": "name: seo-rank-tracker version: 1.0.0 evaluation_score: 91 grade: A security_scan: PASSED description: > Rank Tracking skill. Activate when user wants to track keyword rankings over time, monitor posi",
+      "metadata": {}
+    },
+    "skill:seo-serp-competitor": {
+      "id": "skill:seo-serp-competitor",
+      "label": "seo serp competitor",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_serp_competitor",
+      "keywords": [
+        "seo serp competitor",
+        "seo-serp-competitor"
+      ],
+      "description": "name: seo-serp-competitor version: 1.0.0 evaluation_score: 91 grade: A security_scan: PASSED description: > SERP Competitor Analysis skill. Activate when user wants to analyze competitors in Google se",
+      "metadata": {}
+    },
+    "skill:seo-sheets-export": {
+      "id": "skill:seo-sheets-export",
+      "label": "seo sheets export",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/seo_sheets_export",
+      "keywords": [
+        "seo sheets export",
+        "seo-sheets-export"
+      ],
+      "description": "name: seo-sheets-export version: 1.0.0 evaluation_score: 92 grade: A security_scan: PASSED description: > Google Sheets Export skill. Activate when user wants to export SEO analysis results to Google ",
+      "metadata": {}
+    },
+    "skill:seo-workspace": {
+      "id": "skill:seo-workspace",
+      "label": "seo workspace",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/SEO_WORKSPACE",
+      "keywords": [
+        "seo workspace",
+        "seo-workspace"
+      ],
+      "description": "name: seo-workspace description: >- SEOSONA OS core SEO Analysis Framework (5 Pillars) for auditing websites, tracking metrics, and scoring. Use this to conduct an end-to-end SEO Audit. ---",
+      "metadata": {}
+    },
+    "skill:social-content-distribution": {
+      "id": "skill:social-content-distribution",
+      "label": "social_content_distribution",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/social_content_distribution",
+      "keywords": [
+        "social_content_distribution"
+      ],
+      "description": "**Skill ID:** `social_content_distribution_v1` **Version:** 1.0.0 **Author:** SEOSONA System â€” UAP Ingestion 2026-06-04 **Source Reference:** https://github.com/dreammis/social-auto-upload **Categor",
+      "metadata": {}
+    },
+    "skill:social-media": {
+      "id": "skill:social-media",
+      "label": "ckm:social",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/social_media",
+      "keywords": [
+        "ckm:social"
+      ],
+      "description": "name: ckm:social description: Social media content creation, scheduling, API integrations for X/Twitter, Facebook, Threads, LinkedIn, YouTube, TikTok, Instagram. Platform-specific workflows, engagemen",
+      "metadata": {}
+    },
+    "skill:video-content": {
+      "id": "skill:video-content",
+      "label": "seosona:video content",
+      "node_type": "skill",
+      "path": "frameworks/seo_marketing/video_content",
+      "keywords": [
+        "seosona:video content",
+        "seosona:video-content"
+      ],
+      "description": "name: seosona:video-content description: >- Video marketing strategy, script writing, storyboards, YouTube SEO, platform optimization, and AI video generation workflows. Activate when user wants to cr",
+      "metadata": {}
+    },
+    "cat:testing-automation": {
+      "id": "cat:testing-automation",
+      "label": "Testing Automation",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "testing automation"
+      ],
+      "description": "",
+      "metadata": {}
+    },
+    "skill:playwright": {
+      "id": "skill:playwright",
+      "label": "playwright",
+      "node_type": "skill",
+      "path": "frameworks/testing_automation/playwright",
+      "keywords": [
+        "playwright"
+      ],
+      "description": "name: \"playwright\" description: \"Use when the task requires automating a real browser from the terminal (navigation, form filling, snapshots, screenshots, data extraction, UI-flow debugging) via `play",
+      "metadata": {}
+    },
+    "cat:uncategorized-skills": {
+      "id": "cat:uncategorized-skills",
+      "label": "Uncategorized Skills",
+      "node_type": "category",
+      "path": null,
+      "keywords": [
+        "uncategorized skills"
+      ],
+      "description": "",
+      "metadata": {}
+    }
+  },
+  "edges": [
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:claude-code",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:claudekit-cli",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:context-engineering",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:cost-bounded-agent-looping",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:external-skill-assimilation",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:hub",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:init",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:kit-builder",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:mcp-builder",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:mcp-management",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:play",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:preview",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:repomix",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:scout",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:seosona-portable-capability-bridge",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:skill-creator",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:template-skill",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:agentic-workflows",
+      "target": "skill:use-mcp",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:backend-development",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:better-auth",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:ckm-storage",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:databases",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:debugging",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:devops",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:fix",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:git",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:google-adk-python",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:payment-integration",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:shopify",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:storage",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:test",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:backend-engineering",
+      "target": "skill:worktree",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:agent-governance",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:agent-skills",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:brave-search",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:credentials",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:hyperliquid",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-approval",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-apps",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-attendance",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-base",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-calendar",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-contact",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-doc",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-drive",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-event",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-im",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-mail",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-markdown",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-minutes",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-okr",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-openapi-explorer",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-shared",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-sheets",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-skill-maker",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-slides",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-task",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-vc",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-vc-agent",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-whiteboard",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-wiki",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-workflow-meeting-summary",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:lark-workflow-standup-report",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:markitdown-parser",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:polymarket",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:apify-actorization",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:apify-actor-development",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:apify-generate-output-schema",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:apify-ultimate-scraper",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:clickhouse-best-practices",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:logging-best-practices",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:twitter",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:wallet",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:aris-research-loop",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:composio-sdk",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:crawlee",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:custom-dev-suite",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:firecrawl",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:firecrawl-mcp-server",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:harness-books",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:mcp-server",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:mempalace",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:post-session-learning",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:repo2rl-env",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:security-scanning",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:skawld-sdk",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:supervisor-skills",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:synapse-ai",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:core-system",
+      "target": "skill:tolaria",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:chrome-devtools",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:design",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:design-system",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:frontend-design",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:frontend-development",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:frontend-ui-dark-ts",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:markdown-novel-viewer",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:mermaidjs-v11",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:nextjs-app-router-patterns",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:react-best-practices",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:react-components",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:payload",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:shader",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:tailwind-design-system",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:threejs",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:typescript-advanced-types",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:ui-styling",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:ui-ux-pro-max",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:ui-ux-pro-max",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:web-design-guidelines",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:frontend-engineering",
+      "target": "skill:web-frameworks",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:mobile-engineering",
+      "target": "skill:mobile-engineering",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:ai-artist",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:ai-multimodal",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:assets-organizing",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:banner-design",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:cip-design",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:creativity",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:elevenlabs",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:logo-design",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:media-processing",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:remotion",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:slides",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:video",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:video-audio-ingestion",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:youtube",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:multimedia-production",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:osint",
+      "target": "skill:osint-graph-investigation",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:analyze",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:ask",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:brainstorm",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:code-review",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:cook",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:costflow-vn",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:dashboard",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:docs",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:docs-seeker",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:docx",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:pdf",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:pptx",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:xlsx",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:journal",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:kanban",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:notebooklm-prompts",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:plan",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:plans-kanban",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:problem-solving",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:sequential-thinking",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:sure-framework",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:thinking-model-router",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:understand-anything",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:watzup",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:productivity",
+      "target": "skill:write",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:alphafold-database-fetch-and-analyze",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:alphagenome-single-variant-analysis",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:chembl-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:clinical-trials-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:clinvar-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:dbsnp-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:embl-ebi-ols",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:encode-ccres-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:ensembl-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:foldseek-structural-search",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:gnomad-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:gtex-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:human-protein-atlas-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:interpro-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:jaspar-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:literature-search-arxiv",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:literature-search-biorxiv",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:literature-search-europepmc",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:literature-search-openalex",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:ncbi-sequence-fetch",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:openfda-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:opentargets-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:pdb-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:protein-sequence-msa",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:pubchem-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:pubmed-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:pymol",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:quickgo-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:reactome-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:science-skills-common",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:string-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:ucsc-conservation-and-tfbs",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:unibind-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:uniprot-database",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:uv",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:science-medical",
+      "target": "skill:workflow-skill-creator",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:ab-test-setup",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:ab-testing",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:ads-management",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:affiliate-marketing",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:ai-writing-formulas",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:analytics",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:brand",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:brand-identity",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:campaign",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:claude-seo-framework",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:competitor-intelligence",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:content-creator",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:content-hub",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:content-marketing",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:copywriting",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:copywriting",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:cro",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:email-marketing",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:flowsint",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:form-cro",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:free-tool-strategy",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:funnel",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:landing-page-generator",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:last30days-skill",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:launch-strategy",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:linkedin-authority-builder",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:marketing-dashboard",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:marketing-research",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:marketing-analytics",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:marketing-ideas",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:marketing-planning",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:marketing-psychology",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:marketing-skills-ingested",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:onboarding-cro",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:paid-ads",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:persona",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:pricing-strategy",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:referral-gamification",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-aeo-best-practices",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-algorithm-decoder",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-backlink-intel",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-content-research",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-featured-snippet",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-gsc-integration",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-keyword-research",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-local",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-migration-assistant",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-rank-tracker",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-serp-competitor",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-sheets-export",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:seo-workspace",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:social-content-distribution",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:social-media",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:seo-marketing",
+      "target": "skill:video-content",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:testing-automation",
+      "target": "skill:playwright",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:uncategorized-skills",
+      "target": "skill:docx",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:uncategorized-skills",
+      "target": "skill:pdf",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:uncategorized-skills",
+      "target": "skill:pptx",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "cat:uncategorized-skills",
+      "target": "skill:xlsx",
+      "relation": "category_of",
+      "weight": 1.0
+    },
+    {
+      "source": "skill:use-mcp",
+      "target": "skill:mcp-builder",
+      "relation": "depends_on",
+      "weight": 0.8
+    },
+    {
+      "source": "skill:markdown-novel-viewer",
+      "target": "skill:preview",
+      "relation": "depends_on",
+      "weight": 0.8
+    },
+    {
+      "source": "skill:cip-design",
+      "target": "skill:ai-multimodal",
+      "relation": "depends_on",
+      "weight": 0.8
+    },
+    {
+      "source": "skill:plans-kanban",
+      "target": "skill:kanban",
+      "relation": "depends_on",
+      "weight": 0.8
+    },
+    {
+      "source": "skill:social-media",
+      "target": "skill:content-creator",
+      "relation": "depends_on",
+      "weight": 0.8
+    },
+    {
+      "source": "skill:cost-bounded-agent-looping",
+      "target": "skill:lark-vc-agent",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:lark-skill-maker",
+      "target": "skill:template-skill",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:lark-skill-maker",
+      "target": "skill:workflow-skill-creator",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:template-skill",
+      "target": "skill:workflow-skill-creator",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:external-skill-assimilation",
+      "target": "skill:lark-skill-maker",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:external-skill-assimilation",
+      "target": "skill:template-skill",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:external-skill-assimilation",
+      "target": "skill:workflow-skill-creator",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:kit-builder",
+      "target": "skill:mcp-builder",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:mcp-builder",
+      "target": "skill:mcp-management",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:ads-management",
+      "target": "skill:mcp-management",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:skill-creator",
+      "target": "skill:workflow-skill-creator",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actor-development",
+      "target": "skill:backend-development",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actor-development",
+      "target": "skill:frontend-development",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:backend-development",
+      "target": "skill:frontend-development",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:ckm-storage",
+      "target": "skill:storage",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:payment-integration",
+      "target": "skill:seo-gsc-integration",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:wallet",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:hyperliquid",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:polymarket",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:twitter",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:credentials",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:hyperliquid",
+      "target": "skill:wallet",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:hyperliquid",
+      "target": "skill:polymarket",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:hyperliquid",
+      "target": "skill:twitter",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:polymarket",
+      "target": "skill:wallet",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:polymarket",
+      "target": "skill:twitter",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:twitter",
+      "target": "skill:wallet",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:credentials",
+      "target": "skill:wallet",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:credentials",
+      "target": "skill:hyperliquid",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:credentials",
+      "target": "skill:polymarket",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:credentials",
+      "target": "skill:twitter",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-europepmc",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-europepmc",
+      "target": "skill:literature-search-openalex",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:literature-search-europepmc",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:foldseek-structural-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:literature-search-openalex",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:literature-search-biorxiv",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:brave-search",
+      "target": "skill:literature-search-arxiv",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
+      "target": "skill:literature-search-europepmc",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
+      "target": "skill:literature-search-openalex",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
+      "target": "skill:literature-search-biorxiv",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:foldseek-structural-search",
+      "target": "skill:literature-search-arxiv",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-openalex",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-biorxiv",
+      "target": "skill:literature-search-europepmc",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-biorxiv",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-biorxiv",
+      "target": "skill:literature-search-openalex",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-arxiv",
+      "target": "skill:literature-search-europepmc",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-arxiv",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-arxiv",
+      "target": "skill:literature-search-openalex",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:literature-search-arxiv",
+      "target": "skill:literature-search-biorxiv",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:lark-sheets",
+      "target": "skill:seo-sheets-export",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:lark-workflow-standup-report",
+      "target": "skill:workflow-skill-creator",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:lark-workflow-meeting-summary",
+      "target": "skill:lark-workflow-standup-report",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:lark-workflow-meeting-summary",
+      "target": "skill:workflow-skill-creator",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actor-development",
+      "target": "skill:apify-ultimate-scraper",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actor-development",
+      "target": "skill:apify-generate-output-schema",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actor-development",
+      "target": "skill:apify-actorization",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-generate-output-schema",
+      "target": "skill:apify-ultimate-scraper",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actorization",
+      "target": "skill:apify-ultimate-scraper",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:apify-actorization",
+      "target": "skill:apify-generate-output-schema",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:clickhouse-best-practices",
+      "target": "skill:logging-best-practices",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:firecrawl",
+      "target": "skill:firecrawl-mcp-server",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:design",
+      "target": "skill:design-system",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:frontend-design",
+      "target": "skill:frontend-development",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:logo-design",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:logo-design",
+      "target": "skill:web-design-guidelines",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:banner-design",
+      "target": "skill:logo-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:banner-design",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:banner-design",
+      "target": "skill:cip-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:banner-design",
+      "target": "skill:web-design-guidelines",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:banner-design",
+      "target": "skill:frontend-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:cip-design",
+      "target": "skill:logo-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:cip-design",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:cip-design",
+      "target": "skill:web-design-guidelines",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:cip-design",
+      "target": "skill:frontend-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:web-design-guidelines",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:frontend-design",
+      "target": "skill:logo-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:frontend-design",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:frontend-design",
+      "target": "skill:web-design-guidelines",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:ui-styling",
+      "target": "skill:ui-ux-pro-max",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:web-design-guidelines",
+      "target": "skill:web-frameworks",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:ai-artist",
+      "target": "skill:ai-multimodal",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:video-audio-ingestion",
+      "target": "skill:video-content",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:youtube",
+      "target": "skill:youtube-thumbnail-design",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:docs",
+      "target": "skill:docs-seeker",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:alphafold-database-fetch-and-analyze",
+      "target": "skill:ncbi-sequence-fetch",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:human-protein-atlas-database",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:human-protein-atlas-database",
+      "target": "skill:protein-sequence-msa",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:protein-sequence-msa",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:ncbi-sequence-fetch",
+      "target": "skill:protein-sequence-similarity-search",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:ncbi-sequence-fetch",
+      "target": "skill:protein-sequence-msa",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:affiliate-marketing",
+      "target": "skill:content-marketing",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:content-hub",
+      "target": "skill:content-marketing",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:free-tool-strategy",
+      "target": "skill:launch-strategy",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:free-tool-strategy",
+      "target": "skill:pricing-strategy",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:launch-strategy",
+      "target": "skill:pricing-strategy",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-psychology",
+      "target": "skill:marketing-research",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-planning",
+      "target": "skill:marketing-psychology",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-planning",
+      "target": "skill:marketing-research",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-ideas",
+      "target": "skill:marketing-psychology",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-ideas",
+      "target": "skill:marketing-planning",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-ideas",
+      "target": "skill:marketing-research",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-dashboard",
+      "target": "skill:marketing-psychology",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-dashboard",
+      "target": "skill:marketing-planning",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-dashboard",
+      "target": "skill:marketing-ideas",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-dashboard",
+      "target": "skill:marketing-research",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-research",
+      "target": "skill:seo-keyword-research",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:marketing-research",
+      "target": "skill:seo-content-research",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:seo-content-research",
+      "target": "skill:seo-keyword-research",
+      "relation": "related_to",
+      "weight": 0.5
+    },
+    {
+      "source": "skill:seo-content-research",
+      "target": "skill:video-content",
+      "relation": "related_to",
+      "weight": 0.5
+    }
+  ]
+}
