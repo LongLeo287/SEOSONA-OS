@@ -202,6 +202,9 @@ seosona init
 
 # Check what was injected
 seosona setup    # Re-run anytime to verify state
+
+# Diagnose a project connector from the OS workspace
+npm run project:doctor -- /path/to/your/project
 ```
 
 
@@ -311,6 +314,17 @@ seosona-init (run per project)
     └── Drops ONLY relevant rule files into the project root
             No phantom files for tools you don't have
 ```
+
+### Project Connector Health
+
+The project connector adds a portable manifest and doctor flow for each bound repo:
+
+- `seosona.project.json` declares stack, commands, memory namespace, rule files, and autonomy level.
+- `npm run project:doctor -- <project-root>` reports `connected`, `partial`, or `broken`.
+- `npm run project:init -- <project-root>` creates the manifest, portable rules, and memory namespace.
+- `npm run project:sync-rules -- <project-root>` refreshes generated rule files from the manifest.
+
+The doctor also checks for stale legacy paths, embedded Git credentials in remotes, missing memory namespaces, and missing local health scripts.
 
 ### The SOUL.md — Master Intelligence
 The `SOUL.md` file contains the full cognitive blueprint of SEOSONA OS:

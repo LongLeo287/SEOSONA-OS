@@ -47,8 +47,10 @@ const PORTABILITY_SCAN_ROOTS = [
   '1_CORE/rules',
   '1_CORE/workflows',
   '1_CORE/scripts/global_injector.js',
+  '1_CORE/scripts/project_connector.js',
   '1_CORE/scripts/seosona_capability_bridge.js',
   '1_CORE/scripts/system_status.js',
+  '1_CONFIG/schemas/seosona.project.schema.json',
   '2_KNOWLEDGE/MASTER_INDEX.md',
   '2_KNOWLEDGE/SKILLS_ROUTER.md',
   '2_KNOWLEDGE/raw_data/INDEX.md',
@@ -248,14 +250,61 @@ function route(query) {
         resource.relativePath,
         ...resource.keywords,
       ].join(' ').toLowerCase();
-      const score = terms.reduce((total, term) => total + (haystack.includes(term) ? 1 : 0), 0);
-      return { ...resource, score };
+      const matchedTerms = terms.filter((term) => haystack.includes(term));
+      const score = matchedTerms.length;
+      return enrichRouteMatch(resource, score, matchedTerms, terms.length);
     })
     .filter((resource) => resource.score > 0)
     .sort((a, b) => b.score - a.score || a.type.localeCompare(b.type) || a.name.localeCompare(b.name))
     .slice(0, 20);
 
   return { query, matches };
+}
+
+function enrichRouteMatch(resource, score, matchedTerms, termCount) {
+  const confidence = Math.max(0.05, Math.min(1, score / Math.max(termCount, 1)));
+  return {
+    ...resource,
+    score,
+    confidence: Number(confidence.toFixed(2)),
+    why_matched: matchedTerms.map((term) => `Matched query term: ${term}`),
+    required_files: requiredFilesForResource(resource),
+    risk_level: inferRiskLevel(resource, matchedTerms),
+    safe_to_auto_execute: isSafeToAutoExecute(resource, matchedTerms),
+    recommended_personas: recommendPersonas(resource, matchedTerms),
+  };
+}
+
+function requiredFilesForResource(resource) {
+  const files = [resource.portablePath];
+  const skillManifest = path.posix.join(resource.relativePath.replace(/\/$/, ''), 'SKILL.md');
+  if (resource.type === 'skill' && exists(skillManifest)) {
+    files.push(portable(skillManifest));
+  }
+  return Array.from(new Set(files));
+}
+
+function inferRiskLevel(resource, matchedTerms) {
+  const haystack = [resource.name, resource.domain, resource.relativePath, ...matchedTerms].join(' ').toLowerCase();
+  if (/(deploy|push|publish|credential|secret|security|auth|token|production|database|migration)/.test(haystack)) return 'high';
+  if (/(git|commit|workflow|agent|automation|script|api|integration|connector)/.test(haystack)) return 'medium';
+  return 'low';
+}
+
+function isSafeToAutoExecute(resource, matchedTerms) {
+  if (resource.type === 'contract' || resource.type === 'rule' || resource.type === 'sop' || resource.type === 'knowledge_item') return true;
+  return inferRiskLevel(resource, matchedTerms) !== 'high';
+}
+
+function recommendPersonas(resource, matchedTerms) {
+  const haystack = [resource.name, resource.domain, resource.relativePath, ...matchedTerms].join(' ').toLowerCase();
+  const personas = [];
+  if (/(seo|search|schema|content|gsc|rank|backlink|serp|geo)/.test(haystack)) personas.push('SEO Migration Auditor');
+  if (/(frontend|ui|ux|react|next|tailwind|design|component)/.test(haystack)) personas.push('Visual & Motion Designer');
+  if (/(build|ci|deploy|script|cli|package|infrastructure|doctor|connector)/.test(haystack)) personas.push('DevOps & Infrastructure Engineer');
+  if (/(security|secret|token|auth|validation|contract|api)/.test(haystack)) personas.push('Security & API Auditor');
+  if (personas.length === 0) personas.push('Orchestrator Agent');
+  return Array.from(new Set(personas));
 }
 
 function scanPortability() {

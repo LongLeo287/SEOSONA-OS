@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const { execFileSync } = require('child_process');
 const { getSoulContent, getAppDataPath, colors } = require('./utils');
 
 function runInit() {
@@ -28,6 +29,12 @@ function runInit() {
     console.log("");
     console.log(colors.cyan("[SEOSONA] Binding project to SEOSONA OS..."));
     console.log(colors.cyan(`  Target : ${cwd}`));
+
+    const connector = path.join(os.homedir(), ".seosona", "1_CORE", "scripts", "project_connector.js");
+    if (fs.existsSync(connector)) {
+        execFileSync(process.execPath, [connector, "init", cwd], { stdio: "inherit" });
+        return;
+    }
 
     const soulContent = getSoulContent();
     const globalPrompt = `You are the SEOSONA Master System. Your core directives are below:\n\n${soulContent}`;

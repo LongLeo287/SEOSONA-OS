@@ -14,6 +14,10 @@
     "capabilities:route": "node 1_CORE/scripts/seosona_capability_bridge.js route",
     "capabilities:validate": "node 1_CORE/scripts/seosona_capability_bridge.js validate",
     "capabilities:audit": "node 1_CORE/scripts/seosona_capability_bridge.js audit-portability",
+    "project:doctor": "node 1_CORE/scripts/project_connector.js doctor",
+    "project:init": "node 1_CORE/scripts/project_connector.js init",
+    "project:sync-rules": "node 1_CORE/scripts/project_connector.js sync-rules",
+    "project:test": "node 1_CORE/scripts/project_connector.test.js",
     "audit:check": "node 1_CORE/scripts/audit_check.js",
     "status": "npm run status:system",
     "status:system": "node 1_CORE/scripts/system_status.js",
@@ -23,7 +27,7 @@
     "apis:free:install": "python 1_CORE/scripts/free_api_status.py --install-deps",
     "git:check": "node 1_CORE/scripts/git_push_check.js",
     "git:push-check": "node 1_CORE/scripts/git_push_check.js --strict --dry-run",
-    "prepublishOnly": "npm run lint && npm run status:system && npm run audit:check"
+    "prepublishOnly": "npm run lint && npm run project:test && npm run status:system && npm run audit:check"
   },
   "files": [
     "1_CORE/scripts/",

@@ -37,6 +37,7 @@ node 1_CORE/scripts/seosona_capability_bridge.js manifest
 node 1_CORE/scripts/seosona_capability_bridge.js route <query>
 node 1_CORE/scripts/seosona_capability_bridge.js validate
 node 1_CORE/scripts/seosona_capability_bridge.js audit-portability
+node 1_CORE/scripts/project_connector.js doctor <project-root>
 ```
 
 The bridge emits portable paths only. JSON output must use `~/.seosona` paths, `${SEOSONA_ROOT}` paths, or relative paths.
@@ -52,6 +53,12 @@ The bridge exports a system graph. Each resource includes:
 - `portablePath`: `~/.seosona/...` path.
 - `domain`: system domain or directory family.
 - `source`: router, agent registry, KI directory, workflow directory, raw data, SOP, rule, or contract.
+- `confidence`: normalized route confidence for the query.
+- `why_matched`: matched query terms used for the route decision.
+- `required_files`: portable files the agent should read before acting.
+- `risk_level`: low, medium, or high execution risk.
+- `safe_to_auto_execute`: whether the route is safe for default autonomous execution.
+- `recommended_personas`: suggested specialist personas for the task.
 
 `capabilities` remains a backward-compatible alias for routed skills. Connected tools that want complete SEOSONA context should use `resources`.
 
@@ -91,5 +98,15 @@ Validation confirms:
 - The required agent-looping, thinking-model, and portable-bridge capabilities are routeable.
 - No machine-specific paths are emitted by the bridge.
 - Portability audit finds no machine-specific paths in semantic system surfaces.
+
+## Project Connector Contract
+
+A fully connected project should include:
+
+- `seosona.project.json` using schema `seosona.project.v1`.
+- Portable rule files generated from the manifest, such as `AGENTS.md`, `.clauderules`, and `.cursorrules`.
+- A project memory namespace under `3_MEMORY/projects/<project-slug>/`.
+- A local command such as `npm run seosona:doctor` that calls `1_CORE/scripts/project_connector.js doctor`.
+- No persistent project connector file may store the physical SEOSONA OS installation path.
 
 TASK COMPLETED

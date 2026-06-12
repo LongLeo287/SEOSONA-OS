@@ -74,7 +74,7 @@ function checkPackageScripts() {
   const pkg = readJson('package.json');
   if (!pkg) return;
   const scripts = pkg.scripts || {};
-  const required = ['status', 'status:system', 'status:seo', 'git:check'];
+  const required = ['status', 'status:system', 'status:seo', 'git:check', 'project:doctor', 'project:test'];
   for (const script of required) {
     if (scripts[script]) pass(`npm script available: ${script}`);
     else fail(`Missing npm script: ${script}`);
@@ -96,6 +96,8 @@ function checkRouter() {
 function checkCapabilityBridge() {
   exists('1_CORE/PORTABLE_CAPABILITY_CONTRACT.md');
   exists('1_CORE/scripts/seosona_capability_bridge.js');
+  exists('1_CORE/scripts/project_connector.js');
+  exists('1_CONFIG/schemas/seosona.project.schema.json');
 
   try {
     const output = execFileSync('node', ['1_CORE/scripts/seosona_capability_bridge.js', 'validate'], {
