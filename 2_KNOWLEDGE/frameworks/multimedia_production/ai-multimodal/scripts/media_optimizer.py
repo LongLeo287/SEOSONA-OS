@@ -16,6 +16,7 @@ import json
 import os
 import subprocess
 import sys
+from fractions import Fraction
 from pathlib import Path
 from typing import Optional, Dict, Any, List
 
@@ -63,6 +64,14 @@ def load_env_files():
 load_env_files()
 
 
+def parse_frame_rate(value: str) -> float:
+    """Parse ffprobe frame-rate strings such as "30000/1001" without eval."""
+    try:
+        return float(Fraction(str(value)))
+    except (ValueError, ZeroDivisionError):
+        return 0.0
+
+
 def check_ffmpeg() -> bool:
     """Check if ffmpeg is installed."""
     try:
@@ -104,7 +113,7 @@ def get_media_info(file_path: str) -> Dict[str, Any]:
             if stream['codec_type'] == 'video':
                 info['width'] = stream.get('width', 0)
                 info['height'] = stream.get('height', 0)
-                info['fps'] = eval(stream.get('r_frame_rate', '0/1'))
+                info['fps'] = parse_frame_rate(stream.get('r_frame_rate', '0/1'))
             elif stream['codec_type'] == 'audio':
                 info['sample_rate'] = int(stream.get('sample_rate', 0))
                 info['channels'] = stream.get('channels', 0)

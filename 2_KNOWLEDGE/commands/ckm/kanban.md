@@ -38,12 +38,12 @@ PLANS_DIR="${INPUT_DIR:-./plans}"
 # Start kanban dashboard
 node .claude/skills/plans-kanban/scripts/server.cjs \
   --dir "$PLANS_DIR" \
-  --host 0.0.0.0 \
+  --host 127.0.0.1 \
   --open \
   --background
 ```
 
-Report the URL to the user. For remote access from other devices, use the `networkUrl` field from the JSON output.
+Report the local URL to the user. Use the `networkUrl` field only when remote device access is explicitly authorized.
 
 ## Future Plans
 

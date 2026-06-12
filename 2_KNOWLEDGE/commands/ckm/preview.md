@@ -51,14 +51,14 @@ if [[ -d "$INPUT_PATH" ]]; then
   # Directory mode - browse
   node $SKILL_DIR_PATH/scripts/server.cjs \
     --dir "$INPUT_PATH" \
-    --host 0.0.0.0 \
+    --host 127.0.0.1 \
     --open \
     --foreground
 else
   # File mode - view markdown
   node $SKILL_DIR_PATH/scripts/server.cjs \
     --file "$INPUT_PATH" \
-    --host 0.0.0.0 \
+    --host 127.0.0.1 \
     --open \
     --foreground
 fi
@@ -72,7 +72,7 @@ fi
 Example Bash tool call:
 ```json
 {
-  "command": "node .claude/skills/markdown-novel-viewer/scripts/server.cjs --dir \"path\" --host 0.0.0.0 --open --foreground",
+  "command": "node .claude/skills/markdown-novel-viewer/scripts/server.cjs --dir \"path\" --host 127.0.0.1 --open --foreground",
   "run_in_background": true,
   "timeout": 300000,
   "description": "Start preview server in background"
@@ -81,7 +81,7 @@ Example Bash tool call:
 
 After starting, parse the JSON output (e.g., `{"success":true,"url":"http://localhost:3456/view?file=...","networkUrl":"http://192.168.1.x:3456/view?file=..."}`) and report:
 - Local URL for browser access
-- Network URL for remote device access (if available)
+- Network URL only when explicitly authorized for remote device access
 - Inform user that server is now running as CC background task (visible in `/tasks`)
 
 **CRITICAL:** MUST display the FULL URL including path and query string (e.g., `http://localhost:3456/view?file=/path/to/file.md`). NEVER truncate to just `host:port` (e.g., `http://localhost:3456`). The full URL is required for direct file access.
