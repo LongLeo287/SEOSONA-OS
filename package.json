@@ -19,6 +19,8 @@
     "status:system": "node 1_CORE/scripts/system_status.js",
     "status:seo": "npm run audit:check",
     "status:all": "npm run status:system && npm run status:seo",
+    "apis:free": "python 1_CORE/scripts/free_api_status.py",
+    "apis:free:install": "python 1_CORE/scripts/free_api_status.py --install-deps",
     "git:check": "node 1_CORE/scripts/git_push_check.js",
     "git:push-check": "node 1_CORE/scripts/git_push_check.js --strict --dry-run",
     "prepublishOnly": "npm run lint && npm run status:system && npm run audit:check"
