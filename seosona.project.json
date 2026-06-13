@@ -1,0 +1,35 @@
+{
+  "$schema": "~/.seosona/1_CONFIG/schemas/seosona.project.schema.json",
+  "schema": "seosona.project.v1",
+  "name": "seosona-os",
+  "displayName": "SEOSONA OS",
+  "domain": "software-project",
+  "stack": [
+    "unknown"
+  ],
+  "osRoot": "~/.seosona",
+  "memoryNamespace": "seosona-os",
+  "autonomy": {
+    "defaultLevel": "project_edit",
+    "requiresExplicitApproval": [
+      "os_core_patch",
+      "git_publish",
+      "deploy"
+    ]
+  },
+  "commands": {
+    "typecheck": "npm run lint",
+    "build": "npm run status:system",
+    "lint": "npm run lint"
+  },
+  "workflows": [
+    "project-doctor",
+    "portable-rule-sync",
+    "project-memory-logging"
+  ],
+  "ruleFiles": [
+    "AGENTS.md",
+    ".clauderules",
+    ".cursorrules"
+  ]
+}

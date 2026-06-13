@@ -15,6 +15,8 @@
     "capabilities:validate": "node 1_CORE/scripts/seosona_capability_bridge.js validate",
     "capabilities:audit": "node 1_CORE/scripts/seosona_capability_bridge.js audit-portability",
     "project:doctor": "node 1_CORE/scripts/project_connector.js doctor",
+    "seosona:doctor": "node scripts/seosona-project.mjs doctor",
+    "seosona:log": "node scripts/seosona-project.mjs log",
     "project:init": "node 1_CORE/scripts/project_connector.js init",
     "project:sync-rules": "node 1_CORE/scripts/project_connector.js sync-rules",
     "project:test": "node 1_CORE/scripts/project_connector.test.js",

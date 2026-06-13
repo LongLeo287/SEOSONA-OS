@@ -67,3 +67,11 @@ service_account.json
 
 # SEOSONA encrypted secrets
 *.vault
+
+# Local ingestion snapshots and nested external repositories
+5_RESEARCH/ingest_batch_uiux/
+2_KNOWLEDGE/frameworks/21st_sdk/
+2_KNOWLEDGE/frameworks/refero_skill/
+
+# Project runtime event streams
+3_MEMORY/projects/*/changelog/*.jsonl

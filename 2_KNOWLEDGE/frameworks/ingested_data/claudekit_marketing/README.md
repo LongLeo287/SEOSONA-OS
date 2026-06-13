@@ -1,6 +1,6 @@
 # ClaudeKit Marketing — AI Marketing Automation Toolkit
 
-> **Source**: `D:\Marketing-Kit` (Local) / https://github.com/claudekit/claudekit-marketing
+> **Source**: Local external source snapshot / https://github.com/claudekit/claudekit-marketing
 > **Ingested**: 2026-06-10
 > **Type**: Framework (AI Marketing Automation Toolkit — Claude Code Subagent Orchestration)
 > **License**: Apache 2.0
