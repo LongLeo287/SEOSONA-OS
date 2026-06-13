@@ -1,0 +1,7 @@
+{
+  "name": "Weather",
+  "slug": "weather",
+  "description": "An agent that reports current weather for any city using the free wttr.in API. No API key required.",
+  "icon": "CloudSun",
+  "ordering": 2
+}

@@ -1,0 +1,113 @@
+---
+title: "Project Structure"
+description: "Understand the file layout of a 21st Agents project. Learn what goes where and how the CLI, code, and dashboard work together."
+---
+
+# Project Structure
+
+Agents are defined in code. Your agent config — model, tools, system prompt, hooks — lives in your project. The dashboard is for monitoring, logs, and environment variables.
+
+## Default layout
+
+```text
+21st-agents/
+├── package.json              # @21st-sdk/agent + zod
+├── agents/
+│   └── my-agent/
+│       └── index.ts          # Agent configuration (entry point)
+├── .an/                      # Generated on first deploy
+│   └── project.json          # Links project to deployed agent
+├── .env                      # Local env vars (optional)
+└── .gitignore                # Should include .an/
+```
+
+Keep each deployable agent in its own folder under `agents/` so related files can live next to the entry point.
+
+## Entry point
+
+When you run `an deploy`, the CLI scans the `agents/` directory. Each deployable agent should live at `agents/<slug>/index.ts` or `agents/<slug>/index.js`.
+
+Layout:
+
+| File | Notes |
+|------|-------|
+| `agents/my-agent/index.ts` or `agents/my-agent/index.js` | Use one folder per deployable agent so sibling files like `template/` can live next to it. |
+
+The entry point must have a `default export` that returns an agent config created with `agent()`.
+
+## Agent file
+
+The agent file is where all your configuration lives. Everything the agent does — its model, behavior, tools, and hooks — is defined here:
+
+```ts
+import { agent, tool } from "@21st-sdk/agent"
+import { z } from "zod"
+
+export default agent({
+  model: "claude-sonnet-4-6",
+  runtime: "claude-code",
+  systemPrompt: "You are a helpful coding assistant.",
+  permissionMode: "default",
+  maxTurns: 50,
+  tools: {
+    greet: tool({
+      description: "Greet a user",
+      inputSchema: z.object({ name: z.string() }),
+      execute: async ({ name }) => ({
+        content: [{ type: "text", text: `Hello, ${name}!` }],
+      }),
+    }),
+  },
+  onFinish: async ({ result }) => {
+    console.log("Done:", result)
+  },
+})
+```
+
+> **Tip:** `@21st-sdk/agent` is externalized during bundling — the sandbox provides it at runtime. You don't need to worry about bundle size from this import.
+
+## package.json
+
+Two required dependencies:
+
+```json
+{
+  "name": "my-agent",
+  "type": "module",
+  "dependencies": {
+    "@21st-sdk/agent": "latest",
+    "zod": "^3.24"
+  }
+}
+```
+
+You don't need to install the CLI globally. Use `npx @21st-sdk/cli deploy` to deploy without a global install.
+
+## Generated files
+
+After your first deploy, the CLI creates a `.an/` directory with project metadata:
+
+```json
+{
+  "agentId": "a1b2c3d4-...",
+  "slug": "my-agent"
+}
+```
+
+This file links your local project to the deployed agent. Subsequent deploys reuse the same slug and update the existing agent. Add `.an/` to your `.gitignore`.
+
+## What lives where
+
+Agents are **code-first**. The agent config lives entirely in your code. The dashboard is for monitoring and managing environment variables — not for editing agent behavior.
+
+| What | Where | Managed from |
+|------|-------|-------------|
+| Agent config (model, runtime, permission mode, max turns) | `agents/my-agent/index.ts` | Code only |
+| System prompt | `agents/my-agent/index.ts` | Code only |
+| Custom tools (Zod schemas) | `agents/my-agent/index.ts` | Code only |
+| Lifecycle hooks (onStart, onToolCall, onFinish) | `agents/my-agent/index.ts` | Code only |
+| Environment variables | Dashboard | Dashboard |
+| Deployments (sandbox, bundle hash) | Dashboard | `an deploy` |
+| Logs & costs (conversations, tokens, USD) | Dashboard | View only |
+
+> **Note:** To change agent behavior (model, tools, prompt, hooks), edit your code and run `an deploy` again. The dashboard shows the current deployed config but does not allow editing it.

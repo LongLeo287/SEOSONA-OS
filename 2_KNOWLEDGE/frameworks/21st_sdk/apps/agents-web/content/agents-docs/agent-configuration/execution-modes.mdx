@@ -1,0 +1,28 @@
+---
+title: "Permission modes"
+description: "Control how agents handle tool approvals and execution safety."
+---
+
+# Permission modes
+
+Permission modes control how an agent handles tool approvals during execution. This determines whether the agent can freely use tools or needs explicit approval for certain actions.
+
+## Available modes
+
+| Mode | Value | Description |
+|------|-------|-------------|
+| **Default** | `default` | Agent asks for approval before risky actions (file writes, shell commands) |
+| **Accept Edits** | `acceptEdits` | File edits (Edit, Write) are auto-approved. Other risky actions still require approval |
+| **Bypass All** | `bypassPermissions` | No approval needed for any tool. Recommended for sandboxed environments |
+
+## Choosing a mode
+
+- **For production with untrusted inputs**, use `default`. The agent will pause and request approval before executing potentially destructive operations.
+- **For development and testing**, use `acceptEdits`. The agent can freely edit code but will still ask before running shell commands.
+- **For fully sandboxed environments**, use `bypassPermissions`. Since the agent runs in an isolated sandbox, there's no risk of affecting your production systems. This is the default when creating new agents.
+
+## Max turns
+
+In addition to permission modes, each agent has a **max turns** setting (1–500, default: 50). This limits the number of reasoning steps the agent can take before stopping, preventing infinite loops and runaway costs.
+
+Configure both settings under **Advanced Options** in the agent config dialog.

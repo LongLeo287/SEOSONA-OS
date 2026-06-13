@@ -1,0 +1,696 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "21st Agents API",
+    "version": "1.0.0",
+    "description": "REST API for the 21st Agents runtime. Manage sandboxes, threads, files, and stream chat responses.",
+    "contact": {
+      "name": "21st.dev",
+      "url": "https://21st.dev"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://relay.an.dev",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "tags": [
+    { "name": "Sandboxes", "description": "Create, retrieve, and delete sandbox environments" },
+    { "name": "Sandbox Operations", "description": "Execute commands, read/write files, and clone repos" },
+    { "name": "Threads", "description": "Manage conversation threads within sandboxes" },
+    { "name": "Chat", "description": "SSE streaming chat endpoint" }
+  ],
+  "paths": {
+    "/v1/sandboxes": {
+      "post": {
+        "tags": ["Sandboxes"],
+        "summary": "Create Sandbox",
+        "operationId": "create-sandbox",
+        "description": "Creates a new sandbox environment for the specified agent. Optionally seed it with files, environment variables, and setup commands.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["agent"],
+                "properties": {
+                  "agent": {
+                    "type": "string",
+                    "description": "Agent slug to use for this sandbox"
+                  },
+                  "files": {
+                    "type": "object",
+                    "additionalProperties": { "type": "string" },
+                    "description": "Map of file path to content to seed"
+                  },
+                  "envs": {
+                    "type": "object",
+                    "additionalProperties": { "type": "string" },
+                    "description": "Environment variables to set"
+                  },
+                  "setup": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Shell commands to run after creation"
+                  },
+                  "timeoutMs": {
+                    "type": "integer",
+                    "description": "Sandbox timeout in milliseconds. Defaults to the relay-managed timeout."
+                  },
+                  "networkAllowOut": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Allowed outbound domains, IPs, or CIDRs. Relay-required hosts are appended automatically."
+                  },
+                  "networkDenyOut": {
+                    "type": "array",
+                    "items": { "type": "string" },
+                    "description": "Denied outbound IPs or CIDRs."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sandbox created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Sandbox" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" },
+          "401": { "$ref": "#/components/responses/Unauthorized" }
+        }
+      }
+    },
+    "/v1/sandboxes/{id}": {
+      "get": {
+        "tags": ["Sandboxes"],
+        "summary": "Get Sandbox",
+        "operationId": "get-sandbox",
+        "description": "Retrieves details about an existing sandbox including its agent, threads, and current status.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sandbox details",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/SandboxDetail" }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      },
+      "delete": {
+        "tags": ["Sandboxes"],
+        "summary": "Delete Sandbox",
+        "operationId": "delete-sandbox",
+        "description": "Deletes the sandbox and cascades deletion to all threads within it.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" }
+        ],
+        "responses": {
+          "204": { "description": "Sandbox deleted" },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    },
+    "/v1/sandboxes/{id}/exec": {
+      "post": {
+        "tags": ["Sandbox Operations"],
+        "summary": "Execute Command",
+        "operationId": "exec-command",
+        "description": "Run a shell command inside the sandbox. Returns stdout, stderr, and exit code.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["command"],
+                "properties": {
+                  "command": {
+                    "type": "string",
+                    "description": "Shell command to execute"
+                  },
+                  "cwd": {
+                    "type": "string",
+                    "description": "Working directory for the command"
+                  },
+                  "envs": {
+                    "type": "object",
+                    "additionalProperties": { "type": "string" },
+                    "description": "Additional environment variables"
+                  },
+                  "timeoutMs": {
+                    "type": "integer",
+                    "description": "Timeout in milliseconds",
+                    "default": 30000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Command output",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ExecResult" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sandboxes/{id}/files": {
+      "get": {
+        "tags": ["Sandbox Operations"],
+        "summary": "Read File",
+        "operationId": "read-file",
+        "description": "Read the content of a single file from the sandbox.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" },
+          {
+            "name": "path",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Absolute path to the file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "File content",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/FileContent" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Sandbox Operations"],
+        "summary": "Write Files",
+        "operationId": "write-files",
+        "description": "Write one or more files to the sandbox filesystem. Creates directories as needed.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["files"],
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "items": { "$ref": "#/components/schemas/FileWrite" },
+                    "description": "Array of files to write"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Files written successfully" }
+        }
+      }
+    },
+    "/v1/sandboxes/{id}/git/clone": {
+      "post": {
+        "tags": ["Sandbox Operations"],
+        "summary": "Clone Repository",
+        "operationId": "git-clone",
+        "description": "Clone a git repository into the sandbox.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["url"],
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "description": "Git repository URL"
+                  },
+                  "path": {
+                    "type": "string",
+                    "description": "Target directory path in the sandbox"
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "Auth token for private repos (e.g. GitHub PAT)"
+                  },
+                  "depth": {
+                    "type": "integer",
+                    "description": "Clone depth (use 1 for shallow clone)"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Repository cloned",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/GitCloneResult" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sandboxes/{id}/threads": {
+      "get": {
+        "tags": ["Threads"],
+        "summary": "List Threads",
+        "operationId": "list-threads",
+        "description": "Returns all threads within a sandbox.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of threads",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/Thread" }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["Threads"],
+        "summary": "Create Thread",
+        "operationId": "create-thread",
+        "description": "Creates a new conversation thread in a sandbox.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Display name for the thread"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Thread created",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Thread" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/sandboxes/{id}/threads/{threadId}": {
+      "get": {
+        "tags": ["Threads"],
+        "summary": "Get Thread",
+        "operationId": "get-thread",
+        "description": "Retrieves a thread with its full message history.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" },
+          { "$ref": "#/components/parameters/threadId" }
+        ],
+        "responses": {
+          "200": {
+            "description": "Thread with messages",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ThreadDetail" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Threads"],
+        "summary": "Delete Thread",
+        "operationId": "delete-thread",
+        "description": "Deletes a thread and its message history.",
+        "parameters": [
+          { "$ref": "#/components/parameters/sandboxId" },
+          { "$ref": "#/components/parameters/threadId" }
+        ],
+        "responses": {
+          "204": { "description": "Thread deleted" }
+        }
+      }
+    },
+    "/v1/chat/{slug}": {
+      "post": {
+        "tags": ["Chat"],
+        "summary": "Send Message",
+        "operationId": "send-message",
+        "description": "Sends a message to the agent and returns an SSE stream of the response. Optionally specify sandboxId/threadId to continue existing sessions.",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Agent slug"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/ChatRequest" }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "SSE stream of chat events",
+            "content": {
+              "text/event-stream": {
+                "schema": { "type": "string" }
+              }
+            }
+          },
+          "400": { "$ref": "#/components/responses/BadRequest" }
+        }
+      }
+    },
+    "/v1/chat/{slug}/{sandboxId}/stream": {
+      "get": {
+        "tags": ["Chat"],
+        "summary": "Resume Stream",
+        "operationId": "resume-stream",
+        "description": "Reconnect to an active SSE stream for a sandbox.",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Agent slug"
+          },
+          { "$ref": "#/components/parameters/sandboxIdPath" }
+        ],
+        "responses": {
+          "200": {
+            "description": "SSE stream resumed",
+            "content": {
+              "text/event-stream": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Chat"],
+        "summary": "Cancel Stream",
+        "operationId": "cancel-stream",
+        "description": "Cancel an active stream for deterministic server-side cancellation.",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Agent slug"
+          },
+          { "$ref": "#/components/parameters/sandboxIdPath" }
+        ],
+        "responses": {
+          "204": { "description": "Stream cancelled" }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "API key from the 21st Agents dashboard"
+      }
+    },
+    "parameters": {
+      "sandboxId": {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "Sandbox ID"
+      },
+      "sandboxIdPath": {
+        "name": "sandboxId",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "Sandbox ID"
+      },
+      "threadId": {
+        "name": "threadId",
+        "in": "path",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "Thread ID"
+      }
+    },
+    "schemas": {
+      "Sandbox": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "description": "Internal sandbox ID (prefixed sb_)" },
+          "sandboxId": { "type": "string", "description": "E2B sandbox ID" },
+          "status": { "type": "string", "enum": ["active", "stopped", "error"] },
+          "createdAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "SandboxDetail": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "sandboxId": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "stopped", "error"] },
+          "error": { "type": "string", "nullable": true },
+          "agent": {
+            "type": "object",
+            "properties": {
+              "slug": { "type": "string" },
+              "name": { "type": "string" }
+            }
+          },
+          "threads": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Thread" }
+          },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "Thread": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "description": "Thread ID (prefixed th_)" },
+          "name": { "type": "string" },
+          "status": { "type": "string", "enum": ["active", "completed", "error"] },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "ThreadDetail": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "status": { "type": "string" },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": { "type": "string", "enum": ["user", "assistant"] },
+                "content": { "type": "string" }
+              }
+            }
+          },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "updatedAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "ExecResult": {
+        "type": "object",
+        "properties": {
+          "stdout": { "type": "string" },
+          "stderr": { "type": "string" },
+          "exitCode": { "type": "integer" }
+        }
+      },
+      "FileContent": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "content": { "type": "string" }
+        }
+      },
+      "FileWrite": {
+        "type": "object",
+        "required": ["path", "content"],
+        "properties": {
+          "path": { "type": "string", "description": "Absolute file path" },
+          "content": { "type": "string", "description": "File content" }
+        }
+      },
+      "GitCloneResult": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "branch": { "type": "string" }
+        }
+      },
+      "ChatRequest": {
+        "type": "object",
+        "required": ["messages"],
+        "properties": {
+          "messages": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/ChatMessage" }
+          },
+          "sandboxId": {
+            "type": "string",
+            "description": "Existing sandbox ID. Omit to create a new sandbox."
+          },
+          "threadId": {
+            "type": "string",
+            "description": "Existing thread ID. Requires sandboxId."
+          },
+          "options": { "$ref": "#/components/schemas/ChatOptions" }
+        }
+      },
+      "ChatMessage": {
+        "type": "object",
+        "required": ["id", "role", "parts"],
+        "properties": {
+          "id": { "type": "string" },
+          "role": { "type": "string", "enum": ["user", "assistant"] },
+          "parts": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": { "type": "string", "enum": ["text"] },
+                "text": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "ChatOptions": {
+        "type": "object",
+        "description": "Per-request runtime overrides",
+        "properties": {
+          "systemPrompt": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string", "enum": ["preset", "custom"] },
+              "preset": { "type": "string", "description": "Preset name (e.g. claude_code)" },
+              "append": { "type": "string", "description": "Text appended to the system prompt" }
+            }
+          },
+          "maxTurns": {
+            "type": "integer",
+            "description": "Maximum number of agent turns"
+          },
+          "maxBudgetUsd": {
+            "type": "number",
+            "description": "Maximum cost in USD for this request"
+          },
+          "disallowedTools": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Tools the agent cannot use"
+          }
+        }
+      },
+      "ApiError": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "object",
+            "properties": {
+              "code": { "type": "string" },
+              "message": { "type": "string" },
+              "status": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Bad Request",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ApiError" }
+          }
+        }
+      },
+      "Unauthorized": {
+        "description": "Unauthorized — invalid or missing API key",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ApiError" }
+          }
+        }
+      },
+      "NotFound": {
+        "description": "Resource not found",
+        "content": {
+          "application/json": {
+            "schema": { "$ref": "#/components/schemas/ApiError" }
+          }
+        }
+      }
+    }
+  }
+}

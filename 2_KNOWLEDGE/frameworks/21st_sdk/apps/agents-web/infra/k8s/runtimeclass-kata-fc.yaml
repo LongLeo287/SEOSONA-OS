@@ -1,0 +1,11 @@
+# `kata-deploy` should create this automatically.
+# Keep this manifest as a fallback only, and replace `handler` if the installed runtime uses a different name.
+apiVersion: node.k8s.io/v1
+kind: RuntimeClass
+metadata:
+  name: kata-fc
+handler: kata-fc
+scheduling:
+  nodeSelector:
+    katacontainers.io/kata-runtime: "true"
+    opensandbox-role: active-worker

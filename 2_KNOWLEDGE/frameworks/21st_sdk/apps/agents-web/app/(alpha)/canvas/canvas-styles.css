@@ -1,0 +1,1171 @@
+/* ========================================
+   CANVAS STYLES - All canvas-specific styles in one place
+   ======================================== */
+
+/* ========================================
+   0. CANVAS FONTS
+   ======================================== */
+
+/* ABC Diatype Variable font */
+@font-face {
+  font-family: "ABC Diatype";
+  src: url("/fonts/ABCDiatypeVariable.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ========================================
+   1. THEME OVERRIDES
+   ======================================== */
+
+/* Canvas uses global primary color from globals.css */
+/* Support both data-canvas-page (legacy) and data-alpha-page (new) */
+[data-canvas-page],
+[data-alpha-page] {
+  /* Override muted colors to neutral (Tailwind neutral) */
+  --muted: 0 0% 92%;
+  /* neutral-100 */
+  --muted-foreground: 0 0% 45.1%;
+  /* neutral-600 */
+
+  /* Custom text selection colors using variables */
+  --selection-bg: var(--primary);
+  --selection-fg: 0 0% 98%;
+  /* Light text */
+
+  /* Canvas sidebar width - локально только для Canvas */
+  --sidebar-width: 240px;
+
+  /* Canvas positioning */
+  position: relative;
+
+  /* Canvas custom font */
+  font-family:
+    "ABC Diatype",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 400;
+  /* Base regular = 400 */
+
+  /* Override font CSS variables for canvas pages */
+  --font-sans: "ABC Diatype", system-ui, -apple-system, sans-serif;
+}
+
+/* Font weight mapping for canvas pages */
+[data-canvas-page] .font-medium,
+[data-alpha-page] .font-medium {
+  font-weight: 500 !important;
+  /* Medium → 500 */
+}
+
+[data-canvas-page] .font-semibold,
+[data-alpha-page] .font-semibold {
+  font-weight: 600 !important;
+  /* Semibold → 600 */
+}
+
+[data-canvas-page] .font-bold,
+[data-canvas-page] b,
+[data-canvas-page] strong,
+[data-alpha-page] .font-bold,
+[data-alpha-page] b,
+[data-alpha-page] strong {
+  font-weight: 700 !important;
+  /* Bold → 700 */
+}
+
+[data-canvas-page] .font-extrabold,
+[data-alpha-page] .font-extrabold {
+  font-weight: 800 !important;
+  /* ExtraBold → 800 */
+}
+
+/* Ensure font-normal (Tailwind) uses 400 inside canvas */
+[data-canvas-page] .font-normal,
+[data-alpha-page] .font-normal,
+body:has([data-canvas-page]) .font-normal,
+body:has([data-alpha-page]) .font-normal {
+  font-weight: 400 !important;
+}
+
+[data-canvas-page] .font-black,
+[data-alpha-page] .font-black {
+  font-weight: 900 !important;
+  /* Black (максимальная жирность) */
+}
+
+/* Apply font to all portals, dialogs, popovers on canvas pages */
+/* Using :has() selector for modern browsers */
+body:has([data-canvas-page]) [data-radix-portal],
+body:has([data-canvas-page]) [data-radix-popper-content-wrapper],
+body:has([data-canvas-page]) [role="dialog"],
+body:has([data-canvas-toast-style]) [data-sonner-toaster],
+body:has([data-canvas-toast-style]) [data-sonner-toast],
+body:has([data-alpha-page]) [data-radix-portal],
+body:has([data-alpha-page]) [data-radix-popper-content-wrapper],
+body:has([data-alpha-page]) [role="dialog"] {
+  font-family:
+    "ABC Diatype",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  font-weight: 400;
+  /* base regular in portals */
+  --font-sans: "ABC Diatype", system-ui, -apple-system, sans-serif;
+
+  /* Portals use global primary color from globals.css */
+
+  /* Custom text selection colors using variables */
+  --selection-bg: var(--primary);
+  --selection-fg: 0 0% 98%;
+  /* Light text */
+}
+
+/* Fallback for browsers that don't support :has() - target specific components */
+[data-radix-portal]:has([data-testid]),
+[data-radix-portal] [role="dialog"],
+[data-radix-popper-content-wrapper],
+.canvas-dialog,
+.canvas-popover {
+  font-family:
+    "ABC Diatype",
+    system-ui,
+    -apple-system,
+    sans-serif !important;
+  font-weight: 400;
+  --font-sans: "ABC Diatype", system-ui, -apple-system, sans-serif !important;
+
+  --selection-bg: var(--primary);
+  --selection-fg: 0 0% 98%;
+}
+
+/* Aggressive font override for canvas portals and overlays */
+body:has([data-canvas-page]) [data-radix-portal] *,
+body:has([data-canvas-page]) [data-radix-popper-content-wrapper] *,
+body:has([data-canvas-page]) [role="dialog"] *,
+body:has([data-canvas-page]) .fixed.inset-0 *,
+body:has([data-canvas-toast-style]) [data-sonner-toaster] *,
+body:has([data-canvas-toast-style]) [data-sonner-toast] * {
+  font-family:
+    "ABC Diatype",
+    system-ui,
+    -apple-system,
+    sans-serif !important;
+  --font-sans: "ABC Diatype", system-ui, -apple-system, sans-serif !important;
+}
+
+/* Force override for common UI components on canvas pages only */
+[data-canvas-page] .font-sans,
+[data-canvas-page] [class*="font-sans"],
+[data-alpha-page] .font-sans,
+[data-alpha-page] [class*="font-sans"],
+body:has([data-canvas-page]) .font-sans,
+body:has([data-canvas-page]) [class*="font-sans"],
+body:has([data-canvas-page]) [class*="GeistSans"],
+body:has([data-alpha-page]) .font-sans,
+body:has([data-alpha-page]) [class*="font-sans"],
+body:has([data-alpha-page]) [class*="GeistSans"] {
+  font-family:
+    "ABC Diatype",
+    system-ui,
+    -apple-system,
+    sans-serif !important;
+  --font-sans: "ABC Diatype", system-ui, -apple-system, sans-serif !important;
+}
+
+/* Dark theme - uses global primary color from globals.css */
+.dark [data-canvas-page],
+.dark [data-alpha-page] {
+  /* Override muted colors to neutral (Tailwind neutral) for dark theme */
+  --muted: 0 0% 9.8%;
+  /* neutral-900 */
+  --muted-foreground: 0 0% 52.9%;
+  /* neutral-500 */
+
+  /* Custom text selection colors using variables */
+  --selection-bg: var(--primary);
+  --selection-fg: 0 0% 100%;
+  /* White text */
+}
+
+/* Dark theme for canvas portals */
+.dark body:has([data-canvas-page]) [data-radix-portal],
+.dark body:has([data-canvas-page]) [data-radix-popper-content-wrapper],
+.dark body:has([data-canvas-page]) [role="dialog"],
+.dark body:has([data-canvas-toast-style]) [data-sonner-toaster],
+.dark body:has([data-canvas-toast-style]) [data-sonner-toast],
+.dark body:has([data-alpha-page]) [data-radix-portal],
+.dark body:has([data-alpha-page]) [data-radix-popper-content-wrapper],
+.dark body:has([data-alpha-page]) [role="dialog"],
+.dark [data-radix-portal]:has([data-testid]),
+.dark [data-radix-portal] [role="dialog"],
+.dark [data-radix-popper-content-wrapper],
+.dark .canvas-dialog,
+.dark .canvas-popover {
+  /* Uses global primary color from globals.css */
+
+  /* Custom text selection colors using variables */
+  --selection-bg: var(--primary);
+  --selection-fg: 0 0% 100%;
+  /* White text */
+
+  /* Apply popover color to dialogs and portals */
+  --popover: 0 0% 9%;
+  /* #171717 */
+
+  /* Override muted colors to neutral (Tailwind neutral) for dark theme */
+  --muted: 0 0% 9.8%;
+  /* neutral-900 */
+  --muted-foreground: 0 0% 52.9%;
+  /* neutral-500 */
+}
+
+/* Override background for community command menu dialog and command component */
+/* Target dialog content directly when canvas page exists - Portal renders in body */
+.dark body:has([data-canvas-page]) .community-command-dialog,
+.dark [data-canvas-page] .community-command-dialog,
+.dark body:has([data-canvas-page]) [role="dialog"].community-command-dialog,
+.dark [data-canvas-page] [role="dialog"].community-command-dialog,
+.dark body:has([data-canvas-page]) .community-command-dialog [cmdk-root],
+.dark [data-canvas-page] .community-command-dialog [cmdk-root],
+.dark body:has([data-alpha-page]) .community-command-dialog,
+.dark [data-alpha-page] .community-command-dialog,
+.dark body:has([data-alpha-page]) [role="dialog"].community-command-dialog,
+.dark [data-alpha-page] [role="dialog"].community-command-dialog,
+.dark body:has([data-alpha-page]) .community-command-dialog [cmdk-root],
+.dark [data-alpha-page] .community-command-dialog [cmdk-root] {
+  background-color: #171717 !important;
+}
+
+/* ========================================
+   2. FOCUS RING OVERRIDES
+   ======================================== */
+
+/* Focus ring overrides for specific Canvas components - avoid dialogs */
+[data-canvas-page] .component-card .focus-within\:ring-4:focus-within,
+[data-canvas-page] .component-grid .focus-within\:ring-4:focus-within,
+[data-canvas-page] .focus-within\:ring-4:focus-within,
+[data-alpha-page] .component-card .focus-within\:ring-4:focus-within,
+[data-alpha-page] .component-grid .focus-within\:ring-4:focus-within,
+[data-alpha-page] .focus-within\:ring-4:focus-within {
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.5) !important;
+}
+
+/* Override only specific blue rings that we know should be primary */
+[data-canvas-page] .component-card .ring-blue-500,
+[data-canvas-page] .component-grid .ring-blue-500,
+[data-alpha-page] .component-card .ring-blue-500,
+[data-alpha-page] .component-grid .ring-blue-500 {
+  --tw-ring-color: hsl(var(--primary)) !important;
+}
+
+/* Focus ring for main canvas navigation and toolbar - not dialogs */
+[data-canvas-page] .canvas-toolbar button:focus-visible,
+[data-canvas-page] .app-sidebar button:focus-visible,
+[data-canvas-page] .canvas-nav a:focus-visible,
+[data-alpha-page] .canvas-toolbar button:focus-visible,
+[data-alpha-page] .app-sidebar button:focus-visible,
+[data-alpha-page] .canvas-nav a:focus-visible {
+  outline: none !important;
+  box-shadow:
+    0 0 0 2px hsl(var(--background)),
+    0 0 0 4px hsl(var(--primary)) !important;
+}
+
+/* Circular focus ring for user avatars */
+[data-canvas-page] .rounded-full:focus-visible,
+[data-alpha-page] .rounded-full:focus-visible {
+  outline: none !important;
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.5) !important;
+  border-radius: 9999px !important;
+}
+
+/* ========================================
+   3. GLOBAL CANVAS BEHAVIOR
+   ======================================== */
+
+/* Disable zoom on the entire canvas page */
+[data-canvas-page],
+[data-alpha-page] {
+  /* Prevent touch zoom on mobile devices */
+  touch-action: manipulation;
+
+  /* Prevent zoom via mouse wheel + ctrl/cmd */
+  overscroll-behavior: contain;
+}
+
+/* Prevent zoom via mouse wheel across the entire page */
+[data-canvas-page] *,
+[data-alpha-page] * {
+  touch-action: manipulation;
+}
+
+/* Debug indicator (optional - can be removed) */
+/* [data-canvas-page]:before {
+/*   content: "";
+/*   position: fixed;
+/*   top: 0;
+/*   left: 0;
+/*   width: 3px;
+/*   height: 3px;
+/*   background: rgba(255, 0, 0, 0.1);
+/*   z-index: 9999;
+/*   pointer-events: none;
+/* } */
+
+/* Disable text selection on all canvas pages */
+[data-canvas-page],
+[data-canvas-page] *,
+[data-canvas-page] *:before,
+[data-canvas-page] *:after,
+[data-alpha-page],
+[data-alpha-page] *,
+[data-alpha-page] *:before,
+[data-alpha-page] *:after {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* Allow text selection in input fields, textareas, and editable content */
+[data-canvas-page] input,
+[data-canvas-page] textarea,
+[data-canvas-page] [contenteditable="true"],
+[data-canvas-page] [contenteditable="plaintext-only"],
+[data-canvas-page] .tl-text-shape [data-testid="text-shape-input"],
+[data-alpha-page] input,
+[data-alpha-page] textarea,
+[data-alpha-page] [contenteditable="true"],
+[data-alpha-page] [contenteditable="plaintext-only"],
+[data-alpha-page] .tl-text-shape [data-testid="text-shape-input"] {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+}
+
+/* Allow explicit opt-in text selection when needed */
+[data-canvas-page] .allow-text-selection,
+[data-canvas-page] .allow-text-selection *,
+[data-canvas-page] .allow-text-selection *:before,
+[data-canvas-page] .allow-text-selection *:after,
+[data-alpha-page] .allow-text-selection,
+[data-alpha-page] .allow-text-selection *,
+[data-alpha-page] .allow-text-selection *:before,
+[data-alpha-page] .allow-text-selection *:after {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+}
+
+/* Allow text selection in code blocks on community component pages */
+[data-canvas-page] .code-wrapper-vesper,
+[data-canvas-page] .code-wrapper-vesper *,
+[data-canvas-page] .code-wrapper-vesper .shiki,
+[data-canvas-page] .code-wrapper-vesper .shiki *,
+[data-canvas-page] .sp-editor,
+[data-canvas-page] .sp-editor *,
+[data-canvas-page] .sp-stack,
+[data-canvas-page] .sp-stack *,
+[data-canvas-page] .sp-code-editor,
+[data-canvas-page] .sp-code-editor *,
+[data-canvas-page] .sp-cm,
+[data-canvas-page] .sp-cm *,
+[data-canvas-page] [data-test="sandpack-code-viewer"],
+[data-canvas-page] [data-test="sandpack-code-viewer"] *,
+[data-alpha-page] .code-wrapper-vesper,
+[data-alpha-page] .code-wrapper-vesper *,
+[data-alpha-page] .code-wrapper-vesper .shiki,
+[data-alpha-page] .code-wrapper-vesper .shiki *,
+[data-alpha-page] .sp-editor,
+[data-alpha-page] .sp-editor *,
+[data-alpha-page] .sp-stack,
+[data-alpha-page] .sp-stack *,
+[data-alpha-page] .sp-code-editor,
+[data-alpha-page] .sp-code-editor *,
+[data-alpha-page] .sp-cm,
+[data-alpha-page] .sp-cm *,
+[data-alpha-page] [data-test="sandpack-code-viewer"],
+[data-alpha-page] [data-test="sandpack-code-viewer"] * {
+  user-select: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+}
+
+/* ========================================
+   3. TLDRAW CUSTOMIZATIONS
+   ======================================== */
+
+/* Move "Back to content" button from top-left to bottom-center */
+.tlui-layout__top__left .tlui-helper-buttons {
+  position: fixed !important;
+  bottom: auto !important;
+  left: 50% !important;
+  top: 1.5rem !important;
+  transform: translateX(-50%) !important;
+  z-index: 1000 !important;
+}
+
+/* Style the TLDraw helper button */
+.tlui-layout__top__left .tlui-helper-buttons .tlui-button {
+  background: var(--color-panel) !important;
+  border: 1px solid var(--color-muted-1) !important;
+  border-radius: 9999px !important;
+  padding: 0.5rem 1rem !important;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  transition: all 0.2s ease-in-out !important;
+  font-size: 0.75rem !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+}
+
+/* Hide the arrow icon */
+.tlui-layout__top__left .tlui-helper-buttons .tlui-button .tlui-button__icon {
+  display: none !important;
+}
+
+/* Hover effect for button */
+.tlui-layout__top__left .tlui-helper-buttons .tlui-button:hover {
+  background: var(--color-muted-2) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Button label styling */
+.tlui-layout__top__left .tlui-helper-buttons .tlui-button .tlui-button__label {
+  color: var(--color-text) !important;
+  font-weight: 500 !important;
+  font-size: 0 !important;
+  /* Hide original text */
+}
+
+/* Force English text override */
+.tlui-layout__top__left
+  .tlui-helper-buttons
+  .tlui-button
+  .tlui-button__label:after {
+  content: "Back to Content" !important;
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: var(--color-text) !important;
+}
+
+/* ========================================
+   4. TOAST NOTIFICATIONS
+   ======================================== */
+
+/* Spinner animation for toast icons */
+@keyframes toast-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Canvas Toast Styling - scoped to canvas pages only */
+body:has([data-canvas-toast-style]) [data-sonner-toaster] {
+  position: fixed !important;
+  bottom: 30px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  flex-direction: column-reverse !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+body:has([data-canvas-id-page]) [data-sonner-toaster] {
+  top: calc(1.5rem + 36px) !important;
+  bottom: auto !important;
+}
+
+body:has([data-canvas-diff-page]) [data-sonner-toaster][data-y-position="top"] {
+  top: 1.5rem !important;
+  bottom: auto !important;
+  flex-direction: column !important;
+}
+
+body:has([data-canvas-toast-style]) [data-sonner-toast] {
+  background: white !important;
+  background-color: white !important;
+  border: 1px solid #e5e7eb !important;
+  color: black !important;
+  border-radius: 9999px !important;
+  padding: 0.5rem 1rem !important;
+  font-size: 0.75rem !important;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+  font-weight: 500 !important;
+  height: 32px !important;
+  margin-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  line-height: 1 !important;
+  width: auto !important;
+  min-width: auto !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  transform-origin: bottom center !important;
+}
+
+/* Dark mode for canvas toasts */
+@media (prefers-color-scheme: dark) {
+  body:has([data-canvas-toast-style]) [data-sonner-toast] {
+    background: #1f2937 !important;
+    background-color: #1f2937 !important;
+    border: 1px solid #374151 !important;
+    color: white !important;
+  }
+}
+
+/* All toast types use same style on canvas */
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="success"],
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="error"],
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="info"],
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="loading"] {
+  background: white !important;
+  background-color: white !important;
+  border-color: #e5e7eb !important;
+  color: black !important;
+}
+
+/* Dark mode for all canvas toast types */
+@media (prefers-color-scheme: dark) {
+  body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="success"],
+  body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="error"],
+  body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="info"],
+  body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="loading"] {
+    background: hsl(var(--background)) !important;
+    background-color: hsl(var(--background)) !important;
+    border-color: hsl(var(--border)) !important;
+    color: hsl(var(--foreground)) !important;
+  }
+}
+
+/* Canvas toast icons */
+body:has([data-canvas-toast-style]) [data-sonner-toast] [data-icon] {
+  width: 12px !important;
+  height: 12px !important;
+  margin: 0.5rem 0.5rem 0.5rem -0.5rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* Loading toast specific styling */
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="loading"] {
+  padding-left: 0.5rem !important;
+}
+
+/* Loading spinner specific styling */
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-type="loading"] [data-icon] {
+  width: 16px !important;
+  height: 16px !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Toast with progress percentage */
+body:has([data-canvas-toast-style]) [data-sonner-toast].toast-with-progress {
+  padding-right: 0.75rem !important;
+}
+
+/* Toast hover interactions - show close button, hide spinner */
+body:has([data-canvas-toast-style]) [data-sonner-toast] [data-toast-interactive="true"] .toast-spinner {
+  opacity: 1;
+  transition: opacity 0.15s ease-in-out;
+  pointer-events: auto;
+}
+
+body:has([data-canvas-toast-style]) [data-sonner-toast]:hover [data-toast-interactive="true"] .toast-spinner {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+body:has([data-canvas-toast-style]) [data-sonner-toast] [data-toast-interactive="true"] .toast-close-button {
+  opacity: 0;
+  transition: opacity 0.15s ease-in-out;
+  pointer-events: none;
+}
+
+body:has([data-canvas-toast-style]) [data-sonner-toast]:hover [data-toast-interactive="true"] .toast-close-button {
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+
+/* Hide description and buttons on canvas */
+body:has([data-canvas-toast-style]) [data-sonner-toast] [data-description],
+body:has([data-canvas-toast-style]) [data-sonner-toast] [data-button] {
+  display: none !important;
+}
+
+/* Canvas toast title styling */
+body:has([data-canvas-toast-style]) [data-sonner-toast] [data-title] {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  color: black !important;
+  margin: 0 !important;
+  line-height: 1 !important;
+}
+
+/* Dark mode text */
+@media (prefers-color-scheme: dark) {
+  body:has([data-canvas-toast-style]) [data-sonner-toast] [data-title] {
+    color: hsl(var(--foreground)) !important;
+  }
+}
+
+/* ----------------------------------------
+   Apple-style motion and glass effect (canvas only)
+   ---------------------------------------- */
+
+@keyframes toast-apple-in {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(1);
+    filter: blur(8px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes toast-apple-out {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+    filter: blur(6px);
+  }
+}
+
+/* Apply glass effect and motion to canvas toasts */
+body:has([data-canvas-toast-style]) [data-sonner-toast] {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  -webkit-backdrop-filter: saturate(180%) blur(14px) !important;
+  backdrop-filter: saturate(180%) blur(14px) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  body:has([data-canvas-toast-style]) [data-sonner-toast] {
+    background: rgba(28, 28, 30, 0.64) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
+/* Enter animation */
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-visible="true"] {
+  animation: toast-apple-in 520ms cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+/* Exit animation */
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-mounted="false"],
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-visible="false"],
+body:has([data-canvas-toast-style]) [data-sonner-toast]:not([data-visible="true"]):not([data-swiping="true"]),
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-state="closed"],
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-state="closing"],
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-removed="true"] {
+  animation: toast-apple-out 380ms cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Disable animation during swipe */
+body:has([data-canvas-toast-style]) [data-sonner-toast][data-swiping="true"] {
+  animation: none !important;
+}
+
+/* ========================================
+   5. CUSTOM TEXT SELECTION COLORS
+   ======================================== */
+
+/* Base selectors for text selection - Light theme */
+[data-canvas-page] input::selection,
+[data-canvas-page] textarea::selection,
+[data-canvas-page] [contenteditable="true"]::selection,
+[data-canvas-page] [contenteditable="plaintext-only"]::selection,
+[data-canvas-page] .allow-text-selection::selection,
+[data-canvas-page] .allow-text-selection *::selection,
+[data-canvas-page] .code-wrapper-vesper ::selection,
+[data-canvas-page] .code-wrapper-vesper .shiki ::selection,
+[data-canvas-page] .sp-editor ::selection,
+[data-canvas-page] .sp-stack ::selection,
+[data-canvas-page] .sp-code-editor ::selection,
+[data-canvas-page] .sp-cm ::selection,
+[data-canvas-page] [data-test="sandpack-code-viewer"] ::selection,
+body:has([data-canvas-page]) [data-radix-portal] ::selection,
+body:has([data-canvas-page]) [role="dialog"] ::selection,
+[data-alpha-page] input::selection,
+[data-alpha-page] textarea::selection,
+[data-alpha-page] [contenteditable="true"]::selection,
+[data-alpha-page] [contenteditable="plaintext-only"]::selection,
+[data-alpha-page] .allow-text-selection::selection,
+[data-alpha-page] .allow-text-selection *::selection,
+[data-alpha-page] .code-wrapper-vesper ::selection,
+[data-alpha-page] .code-wrapper-vesper .shiki ::selection,
+[data-alpha-page] .sp-editor ::selection,
+[data-alpha-page] .sp-stack ::selection,
+[data-alpha-page] .sp-code-editor ::selection,
+[data-alpha-page] .sp-cm ::selection,
+[data-alpha-page] [data-test="sandpack-code-viewer"] ::selection,
+body:has([data-alpha-page]) [data-radix-portal] ::selection,
+body:has([data-alpha-page]) [role="dialog"] ::selection {
+  background-color: hsl(var(--selection-bg) / 0.7) !important;
+  color: hsl(var(--selection-fg)) !important;
+}
+
+/* Firefox support - Light theme */
+[data-canvas-page] input::-moz-selection,
+[data-canvas-page] textarea::-moz-selection,
+[data-canvas-page] [contenteditable="true"]::-moz-selection,
+[data-canvas-page] [contenteditable="plaintext-only"]::-moz-selection,
+[data-canvas-page] .allow-text-selection::-moz-selection,
+[data-canvas-page] .allow-text-selection *::-moz-selection,
+[data-canvas-page] .code-wrapper-vesper ::-moz-selection,
+[data-canvas-page] .code-wrapper-vesper .shiki ::-moz-selection,
+[data-canvas-page] .sp-editor ::-moz-selection,
+[data-canvas-page] .sp-stack ::-moz-selection,
+[data-canvas-page] .sp-code-editor ::-moz-selection,
+[data-canvas-page] .sp-cm ::-moz-selection,
+[data-canvas-page] [data-test="sandpack-code-viewer"] ::-moz-selection,
+body:has([data-canvas-page]) [data-radix-portal] ::-moz-selection,
+body:has([data-canvas-page]) [role="dialog"] ::-moz-selection,
+[data-alpha-page] input::-moz-selection,
+[data-alpha-page] textarea::-moz-selection,
+[data-alpha-page] [contenteditable="true"]::-moz-selection,
+[data-alpha-page] [contenteditable="plaintext-only"]::-moz-selection,
+[data-alpha-page] .allow-text-selection::-moz-selection,
+[data-alpha-page] .allow-text-selection *::-moz-selection,
+[data-alpha-page] .code-wrapper-vesper ::-moz-selection,
+[data-alpha-page] .code-wrapper-vesper .shiki ::-moz-selection,
+[data-alpha-page] .sp-editor ::-moz-selection,
+[data-alpha-page] .sp-stack ::-moz-selection,
+[data-alpha-page] .sp-code-editor ::-moz-selection,
+[data-alpha-page] .sp-cm ::-moz-selection,
+[data-alpha-page] [data-test="sandpack-code-viewer"] ::-moz-selection,
+body:has([data-alpha-page]) [data-radix-portal] ::-moz-selection,
+body:has([data-alpha-page]) [role="dialog"] ::-moz-selection {
+  background-color: hsl(var(--selection-bg) / 0.7) !important;
+  color: hsl(var(--selection-fg)) !important;
+}
+
+/* Dark theme - enhanced contrast */
+.dark [data-canvas-page] input::selection,
+.dark [data-canvas-page] textarea::selection,
+.dark [data-canvas-page] [contenteditable="true"]::selection,
+.dark [data-canvas-page] [contenteditable="plaintext-only"]::selection,
+.dark [data-canvas-page] .allow-text-selection::selection,
+.dark [data-canvas-page] .allow-text-selection *::selection,
+.dark [data-canvas-page] .code-wrapper-vesper ::selection,
+.dark [data-canvas-page] .code-wrapper-vesper .shiki ::selection,
+.dark [data-canvas-page] .sp-editor ::selection,
+.dark [data-canvas-page] .sp-stack ::selection,
+.dark [data-canvas-page] .sp-code-editor ::selection,
+.dark [data-canvas-page] .sp-cm ::selection,
+.dark [data-canvas-page] [data-test="sandpack-code-viewer"] ::selection,
+.dark body:has([data-canvas-page]) [data-radix-portal] ::selection,
+.dark body:has([data-canvas-page]) [role="dialog"] ::selection,
+.dark [data-alpha-page] input::selection,
+.dark [data-alpha-page] textarea::selection,
+.dark [data-alpha-page] [contenteditable="true"]::selection,
+.dark [data-alpha-page] [contenteditable="plaintext-only"]::selection,
+.dark [data-alpha-page] .allow-text-selection::selection,
+.dark [data-alpha-page] .allow-text-selection *::selection,
+.dark [data-alpha-page] .code-wrapper-vesper ::selection,
+.dark [data-alpha-page] .code-wrapper-vesper .shiki ::selection,
+.dark [data-alpha-page] .sp-editor ::selection,
+.dark [data-alpha-page] .sp-stack ::selection,
+.dark [data-alpha-page] .sp-code-editor ::selection,
+.dark [data-alpha-page] .sp-cm ::selection,
+.dark [data-alpha-page] [data-test="sandpack-code-viewer"] ::selection,
+.dark body:has([data-alpha-page]) [data-radix-portal] ::selection,
+.dark body:has([data-alpha-page]) [role="dialog"] ::selection {
+  background-color: hsl(var(--selection-bg) / 0.85) !important;
+  color: hsl(var(--selection-fg)) !important;
+}
+
+/* Firefox support - Dark theme */
+.dark [data-canvas-page] input::-moz-selection,
+.dark [data-canvas-page] textarea::-moz-selection,
+.dark [data-canvas-page] [contenteditable="true"]::-moz-selection,
+.dark [data-canvas-page] [contenteditable="plaintext-only"]::-moz-selection,
+.dark [data-canvas-page] .allow-text-selection::-moz-selection,
+.dark [data-canvas-page] .allow-text-selection *::-moz-selection,
+.dark [data-canvas-page] .code-wrapper-vesper ::-moz-selection,
+.dark [data-canvas-page] .code-wrapper-vesper .shiki ::-moz-selection,
+.dark [data-canvas-page] .sp-editor ::-moz-selection,
+.dark [data-canvas-page] .sp-stack ::-moz-selection,
+.dark [data-canvas-page] .sp-code-editor ::-moz-selection,
+.dark [data-canvas-page] .sp-cm ::-moz-selection,
+.dark [data-canvas-page] [data-test="sandpack-code-viewer"] ::-moz-selection,
+.dark body:has([data-canvas-page]) [data-radix-portal] ::-moz-selection,
+.dark body:has([data-canvas-page]) [role="dialog"] ::-moz-selection,
+.dark [data-alpha-page] input::-moz-selection,
+.dark [data-alpha-page] textarea::-moz-selection,
+.dark [data-alpha-page] [contenteditable="true"]::-moz-selection,
+.dark [data-alpha-page] [contenteditable="plaintext-only"]::-moz-selection,
+.dark [data-alpha-page] .allow-text-selection::-moz-selection,
+.dark [data-alpha-page] .allow-text-selection *::-moz-selection,
+.dark [data-alpha-page] .code-wrapper-vesper ::-moz-selection,
+.dark [data-alpha-page] .code-wrapper-vesper .shiki ::-moz-selection,
+.dark [data-alpha-page] .sp-editor ::-moz-selection,
+.dark [data-alpha-page] .sp-stack ::-moz-selection,
+.dark [data-alpha-page] .sp-code-editor ::-moz-selection,
+.dark [data-alpha-page] .sp-cm ::-moz-selection,
+.dark [data-alpha-page] [data-test="sandpack-code-viewer"] ::-moz-selection,
+.dark body:has([data-alpha-page]) [data-radix-portal] ::-moz-selection,
+.dark body:has([data-alpha-page]) [role="dialog"] ::-moz-selection {
+  background-color: hsl(var(--selection-bg) / 0.85) !important;
+  color: hsl(var(--selection-fg)) !important;
+}
+
+/* ========================================
+   6. FLOATING SIDEBAR ISOLATION
+   ======================================== */
+
+/* Isolate floating sidebar scroll - prevent it from affecting parent layout */
+[data-variant="floating"] [data-sidebar="sidebar"] {
+  overscroll-behavior: contain !important;
+  scroll-behavior: auto !important;
+}
+
+/* Prevent floating sidebar scroll from bubbling up */
+[data-variant="floating"] .overflow-y-auto,
+[data-variant="floating"] .overflow-auto {
+  overscroll-behavior-y: contain !important;
+}
+
+/* ========================================
+   7. DIALOG STYLES
+   ======================================== */
+
+/* Enhanced shadows - only for preview dialogs */
+/* Light mode */
+body:has([data-canvas-page]) [data-test="component-preview-dialog"],
+body:has([data-canvas-page]) [data-test="screen-preview-dialog"],
+[data-canvas-page] [data-test="component-preview-dialog"],
+[data-canvas-page] [data-test="screen-preview-dialog"],
+body:has([data-alpha-page]) [data-test="component-preview-dialog"],
+body:has([data-alpha-page]) [data-test="screen-preview-dialog"],
+[data-alpha-page] [data-test="component-preview-dialog"],
+[data-alpha-page] [data-test="screen-preview-dialog"] {
+  box-shadow:
+    0px 6px 12px -3px #0000000a,
+    0px 32px 56px -12px #00000029 !important;
+}
+
+/* Dark mode enhanced shadows for preview dialogs */
+.dark body:has([data-canvas-page]) [data-test="component-preview-dialog"],
+.dark body:has([data-canvas-page]) [data-test="screen-preview-dialog"],
+.dark [data-canvas-page] [data-test="component-preview-dialog"],
+.dark [data-canvas-page] [data-test="screen-preview-dialog"],
+.dark body:has([data-alpha-page]) [data-test="component-preview-dialog"],
+.dark body:has([data-alpha-page]) [data-test="screen-preview-dialog"],
+.dark [data-alpha-page] [data-test="component-preview-dialog"],
+.dark [data-alpha-page] [data-test="screen-preview-dialog"] {
+  box-shadow:
+    0px 6px 12px -3px #0000000a,
+    0px 32px 56px -12px #00000029,
+    0px 0.25px 0.25px 0px #ffffff1f inset,
+    0px 0.5px 0.5px 0px #ffffff0f inset,
+    0px 16px 32px 0px #ffffff0a inset !important;
+}
+
+/* ========================================
+   8. TOOLTIP & POPOVER SHADOWS
+   ======================================== */
+
+/* Light mode tooltip and popover shadows */
+body:has([data-canvas-page]) [data-radix-popper-content-wrapper] > *,
+[data-canvas-page] [data-radix-popper-content-wrapper] > *,
+body:has([data-alpha-page]) [data-radix-popper-content-wrapper] > *,
+[data-alpha-page] [data-radix-popper-content-wrapper] > * {
+  box-shadow:
+    0px 6px 12px -3px #0000000a,
+    0px 32px 56px -12px #00000029 !important;
+}
+
+/* Dark mode popover/dropdown shadows - outer shadows + thin border inset */
+.dark
+  body:has([data-canvas-page])
+  [data-radix-popper-content-wrapper]
+  > *:not([data-tooltip]),
+.dark
+  [data-canvas-page]
+  [data-radix-popper-content-wrapper]
+  > *:not([data-tooltip]),
+.dark body:has([data-canvas-page]) [data-context-menu],
+.dark [data-canvas-page] [data-context-menu],
+.dark
+  body:has([data-alpha-page])
+  [data-radix-popper-content-wrapper]
+  > *:not([data-tooltip]),
+.dark
+  [data-alpha-page]
+  [data-radix-popper-content-wrapper]
+  > *:not([data-tooltip]),
+.dark body:has([data-alpha-page]) [data-context-menu],
+.dark [data-alpha-page] [data-context-menu] {
+  box-shadow:
+    0px 6px 12px -3px #0000000a,
+    0px 32px 56px -12px #00000029,
+    0px 0.25px 0.25px 0px #ffffff1f inset !important;
+}
+
+/* Dark mode tooltip shadows - full effect with all inset highlights */
+.dark body:has([data-canvas-page]) [data-tooltip],
+.dark [data-canvas-page] [data-tooltip],
+.dark body:has([data-alpha-page]) [data-tooltip],
+.dark [data-alpha-page] [data-tooltip] {
+  box-shadow:
+    0px 6px 12px -3px #0000000a,
+    0px 32px 56px -12px #00000029,
+    0px 0.25px 0.25px 0px #ffffff1f inset,
+    0px 0.5px 0.5px 0px #ffffff0f inset,
+    0px 16px 32px 0px #ffffff0a inset !important;
+}
+
+/* ========================================
+   14. DRIVER.JS ONBOARDING TOUR STYLES
+   ======================================== */
+
+/* Note: Driver.js popover styles are injected via driver-tour-utils.ts */
+
+/* Driver.js overlay */
+.driver-overlay {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Driver.js highlight stage */
+.driver-active-element {
+  outline: 2px solid hsl(var(--primary)) !important;
+  outline-offset: 4px !important;
+  border-radius: 8px !important;
+}
+
+/* ========================================
+   15. MARQUEE SELECTION STYLES
+   ======================================== */
+
+/* Marquee selection rectangle - использует primary цвет как в canvas */
+[data-canvas-page] .marquee-selection,
+[data-alpha-page] .marquee-selection {
+  border: 1.5px solid hsl(var(--primary)) !important;
+  background-color: hsl(var(--primary) / 0.15) !important;
+  border-radius: 4px !important;
+  box-shadow:
+    0 0 0 1px hsl(var(--primary) / 0.2),
+    0 2px 8px hsl(var(--primary) / 0.1) !important;
+  pointer-events: none !important;
+  z-index: 50 !important;
+}
+
+/* Dark mode marquee selection */
+.dark [data-canvas-page] .marquee-selection,
+.dark [data-alpha-page] .marquee-selection {
+  border: 1.5px solid hsl(var(--primary)) !important;
+  background-color: hsl(var(--primary) / 0.2) !important;
+  box-shadow:
+    0 0 0 1px hsl(var(--primary) / 0.3),
+    0 2px 8px hsl(var(--primary) / 0.15) !important;
+}
+
+/* TLDraw marquee selection box (прямоугольник выделения при перетаскивании мыши для выбора нескольких shapes) */
+/* Только прямоугольник выделения, не выделенные shapes */
+[data-canvas-page] .tl-brush,
+[data-canvas-page] .tl-brush__fill,
+[data-canvas-page] .tl-brush__stroke,
+[data-canvas-page] [class*="tl-brush"]:not(.tl-selection-bg),
+[data-canvas-page] .tl-selection-brush,
+[data-canvas-page] .tl-selection-brush__fill,
+[data-canvas-page] .tl-selection-brush__stroke,
+[data-alpha-page] .tl-brush,
+[data-alpha-page] .tl-brush__fill,
+[data-alpha-page] .tl-brush__stroke,
+[data-alpha-page] [class*="tl-brush"]:not(.tl-selection-bg),
+[data-alpha-page] .tl-selection-brush,
+[data-alpha-page] .tl-selection-brush__fill,
+[data-alpha-page] .tl-selection-brush__stroke {
+  fill: hsl(var(--primary) / 0.15) !important;
+  stroke: hsl(var(--primary)) !important;
+  stroke-width: 1.5px !important;
+}
+
+/* Dark theme marquee selection для canvas */
+.dark [data-canvas-page] .tl-brush,
+.dark [data-canvas-page] .tl-brush__fill,
+.dark [data-canvas-page] .tl-brush__stroke,
+.dark [data-canvas-page] [class*="tl-brush"]:not(.tl-selection-bg),
+.dark [data-canvas-page] .tl-selection-brush,
+.dark [data-canvas-page] .tl-selection-brush__fill,
+.dark [data-canvas-page] .tl-selection-brush__stroke,
+.dark [data-alpha-page] .tl-brush,
+.dark [data-alpha-page] .tl-brush__fill,
+.dark [data-alpha-page] .tl-brush__stroke,
+.dark [data-alpha-page] [class*="tl-brush"]:not(.tl-selection-bg),
+.dark [data-alpha-page] .tl-selection-brush,
+.dark [data-alpha-page] .tl-selection-brush__fill,
+.dark [data-alpha-page] .tl-selection-brush__stroke {
+  fill: hsl(var(--primary) / 0.2) !important;
+  stroke: hsl(var(--primary)) !important;
+}
+
+/* ========================================
+   16. DIFF PAGE ANIMATIONS
+   ======================================== */
+
+/* Toolbar entrance animation for diff page */
+@keyframes diff-toolbar-enter {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateX(-50%) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Text entrance animation for diff page */
+@keyframes diff-text-enter {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateX(-50%) translateY(calc(2rem + 4px));
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(-50%) translateY(2rem);
+  }
+}
+
+/* Preview panel entrance animation */
+@keyframes diff-preview-enter {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Preview content entrance animation */
+@keyframes diff-preview-content-enter {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ========================================
+   17. MOBILE-SPECIFIC STYLES
+   ======================================== */
+
+@media (max-width: 768px) {
+  /* Hide canvas toolbar, quick actions, and empty canvas screen on mobile */
+  [data-canvas-toolbar],
+  [data-canvas-quick-actions],
+  [data-empty-canvas-screen] {
+    display: none !important;
+  }
+
+  /* Fullscreen modes on mobile */
+  [data-mobile-projects-list],
+  [data-mobile-chat-mode] {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile browsers */
+    width: 100vw;
+    max-height: 100vh;
+    max-height: 100dvh;
+  }
+
+  [data-mobile-preview-mode] {
+    height: 100vh;
+    height: 100dvh;
+    width: 100vw;
+  }
+
+  /* Prevent body scroll on mobile canvas pages */
+  body:has([data-canvas-id-page]) {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Hide desktop preview header on mobile */
+  [data-preview-desktop-header] {
+    display: none !important;
+  }
+
+  /* Ensure mobile chat header is visible with safe area */
+  [data-mobile-chat-header] {
+    display: flex !important;
+  }
+
+  /* Safe area padding for mobile headers */
+  [data-mobile-chat-header],
+  [data-mobile-projects-list] {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Mobile preview header with safe area */
+  [data-mobile-preview-header] {
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* Ensure mobile layouts respect safe areas */
+  @supports (padding: max(0px)) {
+    [data-mobile-projects-list] {
+      padding-top: env(safe-area-inset-top);
+    }
+    
+    [data-mobile-chat-mode] {
+      padding-top: env(safe-area-inset-top);
+    }
+  }
+
+  /* Mobile preview mode fullscreen */
+  [data-mobile-preview-mode] {
+    padding: 0 !important;
+  }
+
+  /* Mobile preview content should take full height */
+  [data-mobile-preview-mode] > div {
+    height: 100% !important;
+  }
+
+  /* Mobile fullscreen chat - no extra padding on container */
+  [data-mobile-fullscreen] {
+    padding: 0 !important;
+  }
+}

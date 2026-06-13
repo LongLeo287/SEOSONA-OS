@@ -1,0 +1,40 @@
+---
+title: "21st Agents Documentation"
+description: "Production infrastructure to ship AI agents inside your product."
+---
+
+# 21st Agents Documentation
+
+21st Agents is the production infrastructure to ship AI agents inside your product. Configure battle-tested agents — Claude Code or Codex — through a dashboard, connect via a streaming Chat API, and monitor everything with built-in observability.
+
+## Quick links
+
+- [Quickstart](/an/docs/getting-started/quickstart) — Get your first agent running in minutes.
+- [Build & Deploy](/an/docs/agent-projects) — Project structure, CLI, and deploy reference.
+- [Core concepts](/an/docs/getting-started/core-concepts) — Understand the architecture behind the platform.
+- [Chat API Reference](/an/docs/reference/api) — Integrate agents into your product via the Relay API.
+
+## What is 21st Agents?
+
+21st Agents gives you everything you need to add AI coding agents to your product:
+
+- **Battle-tested agents** — Claude Code and Codex with tool calling, file editing, and terminal execution built in.
+- **Code-first agents** — Define agents in code with `@21st-sdk/agent` and deploy via CLI. Agent behavior lives entirely in your repo. The dashboard handles API keys, env vars, and monitoring.
+- **Streaming Chat API** — A single HTTP endpoint with Server-Sent Events for real-time agent responses. Compatible with Vercel AI SDK.
+- **Skills system** — Reusable prompt snippets that can be attached to any agent for domain-specific capabilities.
+- **Observability** — Track projects, dialogs, token usage, and costs in real time from the dashboard.
+
+## How it works
+
+1. **Get an API key** from the dashboard — automatically provisioned per team, or create one manually.
+2. **Create and deploy an agent** — define it in code with `@21st-sdk/agent`, then run `an deploy`.
+3. **Integrate via the Chat API** — send messages to the Relay endpoint and stream responses back to your users.
+
+## Supported runtimes
+
+| Runtime | Provider | Models |
+|---------|----------|--------|
+| Claude Code | Anthropic | Sonnet 4.6, Opus 4.6, Haiku 4.5 |
+| Codex | OpenAI | GPT-5.2 Codex (medium/high/xhigh), GPT-5.1 Codex Mini, GPT-5.2 |
+
+Each agent comes with built-in tools: Read, Edit, Write, Glob, Grep, Bash, WebSearch, and WebFetch.

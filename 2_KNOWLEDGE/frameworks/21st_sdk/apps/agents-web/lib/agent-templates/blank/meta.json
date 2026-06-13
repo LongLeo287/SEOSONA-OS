@@ -1,0 +1,7 @@
+{
+  "name": "Blank",
+  "slug": "blank",
+  "description": "Start from scratch. A minimal agent with a system prompt and no tools.",
+  "icon": "Sparkles",
+  "ordering": 1
+}

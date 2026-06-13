@@ -1,0 +1,962 @@
+[
+  {
+    "app_name": "Shopify",
+    "app_domain": "shopify.dev",
+    "industry_tags": ["e-commerce", "developer-tools", "saas"]
+  },
+  {
+    "app_name": "Patreon",
+    "app_domain": "patreon.com",
+    "industry_tags": ["creator-economy", "subscription", "social"]
+  },
+  {
+    "app_name": "monday.com",
+    "app_domain": "monday.com",
+    "industry_tags": ["project-management", "productivity", "saas", "ai"]
+  },
+  {
+    "app_name": "HubSpot",
+    "app_domain": "hubspot.com",
+    "industry_tags": ["marketing", "crm", "sales", "saas", "ai"]
+  },
+  {
+    "app_name": "Hims",
+    "app_domain": "hims.com",
+    "industry_tags": ["healthcare", "telehealth", "e-commerce"]
+  },
+  {
+    "app_name": "Dollar Shave Club",
+    "app_domain": "dollarshaveclub.com",
+    "industry_tags": ["e-commerce", "subscription", "personal-care"]
+  },
+  {
+    "app_name": "Cake Equity",
+    "app_domain": "cakeequity.com",
+    "industry_tags": ["fintech", "equity-management", "saas"]
+  },
+  {
+    "app_name": "Booking.com",
+    "app_domain": "booking.com",
+    "industry_tags": ["travel", "hospitality", "e-commerce"]
+  },
+  {
+    "app_name": "Yandex Practicum",
+    "app_domain": "practicum.yandex.kz",
+    "industry_tags": ["education", "e-learning", "tech-training"]
+  },
+  {
+    "app_name": "Zoom",
+    "app_domain": "zoom.com",
+    "industry_tags": ["communication", "video-conferencing", "saas", "ai"]
+  },
+  {
+    "app_name": "Canva",
+    "app_domain": "canva.com",
+    "industry_tags": ["design", "creativity", "saas", "ai"]
+  },
+  {
+    "app_name": "Better Stack",
+    "app_domain": "betterstack.com",
+    "industry_tags": ["developer-tools", "monitoring", "saas"]
+  },
+  {
+    "app_name": "Quicken",
+    "app_domain": "quicken.com",
+    "industry_tags": ["fintech", "personal-finance", "software"]
+  },
+  {
+    "app_name": "New York Times",
+    "app_domain": "nytimes.com",
+    "industry_tags": ["media", "news", "publishing"]
+  },
+  {
+    "app_name": "Bolt",
+    "app_domain": "bolt.new",
+    "industry_tags": ["developer-tools", "ai", "code-generation"]
+  },
+  {
+    "app_name": "21st.dev",
+    "app_domain": "21st.dev",
+    "industry_tags": ["developer-tools", "design", "ai", "ui-components"]
+  },
+  {
+    "app_name": "Campsite",
+    "app_domain": "campsite.com",
+    "industry_tags": ["communication", "team-collaboration", "saas"]
+  },
+  {
+    "app_name": "Osmo",
+    "app_domain": "osmo.supply",
+    "industry_tags": ["developer-tools", "design", "creativity"]
+  },
+  {
+    "app_name": "ChatGPT",
+    "app_domain": "chatgpt.com",
+    "industry_tags": ["ai", "chatbot", "productivity"]
+  },
+  {
+    "app_name": "Trip.com",
+    "app_domain": "trip.com",
+    "industry_tags": ["travel", "booking", "e-commerce"]
+  },
+  {
+    "app_name": "Wope",
+    "app_domain": "wope.com",
+    "industry_tags": ["seo", "marketing", "ai", "analytics"]
+  },
+  {
+    "app_name": "Xtract",
+    "app_domain": "xtract.framer.ai",
+    "industry_tags": ["ai", "automation", "agency"]
+  },
+  {
+    "app_name": "Zendesk",
+    "app_domain": "zendesk.com",
+    "industry_tags": ["customer-support", "saas", "communication"]
+  },
+  {
+    "app_name": "Zillow",
+    "app_domain": "zillow.com",
+    "industry_tags": ["real-estate", "marketplace", "fintech"]
+  },
+  {
+    "app_name": "Zeplin",
+    "app_domain": "zeplin.io",
+    "industry_tags": ["design", "developer-tools", "collaboration"]
+  },
+  {
+    "app_name": "Zapier",
+    "app_domain": "zapier.com",
+    "industry_tags": ["automation", "integration", "saas", "ai"]
+  },
+  {
+    "app_name": "WSJ",
+    "app_domain": "wsj.com",
+    "industry_tags": ["media", "news", "finance", "publishing"]
+  },
+  {
+    "app_name": "Workable",
+    "app_domain": "workable.com",
+    "industry_tags": ["hr", "recruiting", "saas"]
+  },
+  {
+    "app_name": "Wise",
+    "app_domain": "wise.com",
+    "industry_tags": ["fintech", "money-transfer", "banking"]
+  },
+  {
+    "app_name": "WeTransfer",
+    "app_domain": "wetransfer.com",
+    "industry_tags": ["file-sharing", "productivity", "creative"]
+  },
+  {
+    "app_name": "Webflow",
+    "app_domain": "webflow.com",
+    "industry_tags": ["web-development", "no-code", "design", "saas"]
+  },
+  {
+    "app_name": "Wayyy",
+    "app_domain": "wayyy.co",
+    "industry_tags": ["navigation", "web-design"]
+  },
+  {
+    "app_name": "Wave",
+    "app_domain": "waveapps.com",
+    "industry_tags": ["fintech", "accounting", "small-business"]
+  },
+  {
+    "app_name": "Vimeo",
+    "app_domain": "vimeo.com",
+    "industry_tags": ["video", "creative", "media"]
+  },
+  {
+    "app_name": "Vercel",
+    "app_domain": "vercel.com",
+    "industry_tags": ["developer-tools", "hosting", "ai", "saas"]
+  },
+  {
+    "app_name": "VEED",
+    "app_domain": "veed.io",
+    "industry_tags": ["video-editing", "ai", "creative"]
+  },
+  {
+    "app_name": "Vanta",
+    "app_domain": "vanta.com",
+    "industry_tags": ["security", "compliance", "saas", "ai"]
+  },
+  {
+    "app_name": "v0",
+    "app_domain": "v0.dev",
+    "industry_tags": ["ai", "ui-generation", "developer-tools"]
+  },
+  {
+    "app_name": "Uxcel",
+    "app_domain": "uxcel.com",
+    "industry_tags": ["education", "design", "ux"]
+  },
+  {
+    "app_name": "User Interviews",
+    "app_domain": "userinterviews.com",
+    "industry_tags": ["user-research", "saas", "product"]
+  },
+  {
+    "app_name": "Upwork",
+    "app_domain": "upwork.com",
+    "industry_tags": ["freelance", "marketplace", "remote-work"]
+  },
+  {
+    "app_name": "Unsplash",
+    "app_domain": "unsplash.com",
+    "industry_tags": ["photography", "creative", "media"]
+  },
+  {
+    "app_name": "Uniswap",
+    "app_domain": "uniswap.org",
+    "industry_tags": ["crypto", "defi", "blockchain"]
+  },
+  {
+    "app_name": "Udemy",
+    "app_domain": "udemy.com",
+    "industry_tags": ["education", "e-learning", "marketplace"]
+  },
+  {
+    "app_name": "Typefully",
+    "app_domain": "typefully.com",
+    "industry_tags": ["social-media", "content-creation", "saas"]
+  },
+  {
+    "app_name": "Typeform",
+    "app_domain": "typeform.com",
+    "industry_tags": ["forms", "surveys", "saas"]
+  },
+  {
+    "app_name": "Twitch",
+    "app_domain": "twitch.tv",
+    "industry_tags": ["gaming", "streaming", "social"]
+  },
+  {
+    "app_name": "Twist",
+    "app_domain": "twist.com",
+    "industry_tags": ["communication", "team-collaboration", "saas"]
+  },
+  {
+    "app_name": "Tripadvisor",
+    "app_domain": "tripadvisor.com",
+    "industry_tags": ["travel", "reviews", "marketplace"]
+  },
+  {
+    "app_name": "Trello",
+    "app_domain": "trello.com",
+    "industry_tags": ["project-management", "productivity", "saas"]
+  },
+  {
+    "app_name": "Todoist",
+    "app_domain": "todoist.com",
+    "industry_tags": ["productivity", "task-management", "saas"]
+  },
+  {
+    "app_name": "Tines",
+    "app_domain": "tines.com",
+    "industry_tags": ["security", "automation", "saas", "ai"]
+  },
+  {
+    "app_name": "TIDAL",
+    "app_domain": "tidal.com",
+    "industry_tags": ["music", "streaming", "media"]
+  },
+  {
+    "app_name": "Threads",
+    "app_domain": "threads.com",
+    "industry_tags": ["social-media", "communication"]
+  },
+  {
+    "app_name": "The Athletic",
+    "app_domain": "theathletic.com",
+    "industry_tags": ["sports", "media", "news"]
+  },
+  {
+    "app_name": "Tasty",
+    "app_domain": "tasty.co",
+    "industry_tags": ["food", "recipe", "media"]
+  },
+  {
+    "app_name": "Superhuman",
+    "app_domain": "superhuman.com",
+    "industry_tags": ["email", "productivity", "ai", "saas"]
+  },
+  {
+    "app_name": "Supabase",
+    "app_domain": "supabase.com",
+    "industry_tags": ["developer-tools", "database", "backend", "saas"]
+  },
+  {
+    "app_name": "Substack",
+    "app_domain": "substack.com",
+    "industry_tags": ["publishing", "newsletter", "creator-economy"]
+  },
+  {
+    "app_name": "Strut",
+    "app_domain": "strut.so",
+    "industry_tags": ["writing", "ai", "productivity"]
+  },
+  {
+    "app_name": "Stripe",
+    "app_domain": "stripe.com",
+    "industry_tags": ["fintech", "payments", "developer-tools", "saas"]
+  },
+  {
+    "app_name": "Squarespace",
+    "app_domain": "squarespace.com",
+    "industry_tags": ["web-development", "website-builder", "saas"]
+  },
+  {
+    "app_name": "Sprout Social",
+    "app_domain": "sproutsocial.com",
+    "industry_tags": ["social-media", "marketing", "saas"]
+  },
+  {
+    "app_name": "Sprig",
+    "app_domain": "sprig.com",
+    "industry_tags": ["user-research", "product-analytics", "ai", "saas"]
+  },
+  {
+    "app_name": "Spotify",
+    "app_domain": "spotify.com",
+    "industry_tags": ["music", "streaming", "media", "ai"]
+  },
+  {
+    "app_name": "Spline",
+    "app_domain": "spline.design",
+    "industry_tags": ["design", "3d", "creativity"]
+  },
+  {
+    "app_name": "Slite",
+    "app_domain": "slite.com",
+    "industry_tags": ["knowledge-management", "team-collaboration", "saas"]
+  },
+  {
+    "app_name": "Slack",
+    "app_domain": "slack.com",
+    "industry_tags": ["communication", "team-collaboration", "saas"]
+  },
+  {
+    "app_name": "Skillshare",
+    "app_domain": "skillshare.com",
+    "industry_tags": ["education", "e-learning", "creative"]
+  },
+  {
+    "app_name": "Skiff",
+    "app_domain": "skiff.com",
+    "industry_tags": ["privacy", "email", "productivity"]
+  },
+  {
+    "app_name": "Sketch",
+    "app_domain": "sketch.com",
+    "industry_tags": ["design", "ui-ux", "developer-tools"]
+  },
+  {
+    "app_name": "Shop",
+    "app_domain": "shop.app",
+    "industry_tags": ["e-commerce", "mobile", "shopping"]
+  },
+  {
+    "app_name": "Runway",
+    "app_domain": "runwayml.com",
+    "industry_tags": ["ai", "video", "creative", "generative-ai"]
+  },
+  {
+    "app_name": "Revolut",
+    "app_domain": "revolut.com",
+    "industry_tags": ["fintech", "banking", "crypto"]
+  },
+  {
+    "app_name": "Retool",
+    "app_domain": "retool.com",
+    "industry_tags": ["developer-tools", "internal-tools", "saas"]
+  },
+  {
+    "app_name": "Remote",
+    "app_domain": "remote.com",
+    "industry_tags": ["hr", "remote-work", "saas"]
+  },
+  {
+    "app_name": "Relume",
+    "app_domain": "relume.io",
+    "industry_tags": ["web-development", "ai", "design"]
+  },
+  {
+    "app_name": "Reflect",
+    "app_domain": "reflect.app",
+    "industry_tags": ["note-taking", "productivity", "saas"]
+  },
+  {
+    "app_name": "ReadMe",
+    "app_domain": "readme.io",
+    "industry_tags": ["developer-tools", "documentation", "saas"]
+  },
+  {
+    "app_name": "Read.cv",
+    "app_domain": "read.cv",
+    "industry_tags": ["portfolio", "professional-networking"]
+  },
+  {
+    "app_name": "Rarible",
+    "app_domain": "rarible.com",
+    "industry_tags": ["nft", "crypto", "marketplace"]
+  },
+  {
+    "app_name": "Quartz",
+    "app_domain": "qz.com",
+    "industry_tags": ["media", "business-news", "finance"]
+  },
+  {
+    "app_name": "Qatalog",
+    "app_domain": "qatalog.com",
+    "industry_tags": ["ai", "data-query", "productivity"]
+  },
+  {
+    "app_name": "Product Hunt",
+    "app_domain": "producthunt.com",
+    "industry_tags": ["product-discovery", "startup", "tech"]
+  },
+  {
+    "app_name": "Polywork",
+    "app_domain": "polywork.com",
+    "industry_tags": ["professional-networking", "portfolio"]
+  },
+  {
+    "app_name": "Plausible Analytics",
+    "app_domain": "plausible.io",
+    "industry_tags": ["analytics", "privacy", "saas"]
+  },
+  {
+    "app_name": "Plain",
+    "app_domain": "plain.com",
+    "industry_tags": ["customer-support", "ai", "saas"]
+  },
+  {
+    "app_name": "Pitch",
+    "app_domain": "pitch.com",
+    "industry_tags": ["presentations", "productivity", "saas"]
+  },
+  {
+    "app_name": "Peerspace",
+    "app_domain": "peerspace.com",
+    "industry_tags": ["marketplace", "venue-rental", "events"]
+  },
+  {
+    "app_name": "PayPal",
+    "app_domain": "paypal.com",
+    "industry_tags": ["fintech", "payments", "e-commerce"]
+  },
+  {
+    "app_name": "Otter.ai",
+    "app_domain": "otter.ai",
+    "industry_tags": ["ai", "transcription", "productivity"]
+  },
+  {
+    "app_name": "OpenTable",
+    "app_domain": "opentable.com",
+    "industry_tags": ["restaurant", "booking", "hospitality"]
+  },
+  {
+    "app_name": "OpenSea",
+    "app_domain": "opensea.io",
+    "industry_tags": ["nft", "crypto", "marketplace"]
+  },
+  {
+    "app_name": "OpenPhone",
+    "app_domain": "openphone.com",
+    "industry_tags": ["communication", "business-phone", "saas"]
+  },
+  {
+    "app_name": "OpenAI",
+    "app_domain": "openai.com",
+    "industry_tags": ["ai", "machine-learning", "developer-tools"]
+  },
+  {
+    "app_name": "Oku",
+    "app_domain": "oku.club",
+    "industry_tags": ["books", "reading", "social"]
+  },
+  {
+    "app_name": "Notion",
+    "app_domain": "notion.com",
+    "industry_tags": ["productivity", "knowledge-management", "ai", "saas"]
+  },
+  {
+    "app_name": "Nike",
+    "app_domain": "nike.com",
+    "industry_tags": ["e-commerce", "sports", "fashion"]
+  },
+  {
+    "app_name": "The New Yorker",
+    "app_domain": "newyorker.com",
+    "industry_tags": ["media", "magazine", "culture"]
+  },
+  {
+    "app_name": "Netflix",
+    "app_domain": "netflix.com",
+    "industry_tags": ["streaming", "entertainment", "media"]
+  },
+  {
+    "app_name": "mymind",
+    "app_domain": "mymind.com",
+    "industry_tags": ["productivity", "ai", "note-taking"]
+  },
+  {
+    "app_name": "Mural",
+    "app_domain": "mural.co",
+    "industry_tags": ["collaboration", "design", "whiteboard"]
+  },
+  {
+    "app_name": "Monarch",
+    "app_domain": "monarchmoney.com",
+    "industry_tags": ["fintech", "personal-finance", "budgeting"]
+  },
+  {
+    "app_name": "Mixpanel",
+    "app_domain": "mixpanel.com",
+    "industry_tags": ["analytics", "product-analytics", "saas"]
+  },
+  {
+    "app_name": "Miro",
+    "app_domain": "miro.com",
+    "industry_tags": ["collaboration", "whiteboard", "design", "saas"]
+  },
+  {
+    "app_name": "Medium",
+    "app_domain": "medium.com",
+    "industry_tags": ["publishing", "writing", "social", "media"]
+  },
+  {
+    "app_name": "Maze",
+    "app_domain": "maze.co",
+    "industry_tags": ["user-research", "product-testing", "saas"]
+  },
+  {
+    "app_name": "MasterClass",
+    "app_domain": "masterclass.com",
+    "industry_tags": ["education", "e-learning", "subscription"]
+  },
+  {
+    "app_name": "Mailchimp",
+    "app_domain": "mailchimp.com",
+    "industry_tags": ["email-marketing", "marketing", "saas"]
+  },
+  {
+    "app_name": "Loom",
+    "app_domain": "loom.com",
+    "industry_tags": ["video-messaging", "communication", "productivity"]
+  },
+  {
+    "app_name": "Linktree",
+    "app_domain": "linktr.ee",
+    "industry_tags": ["link-in-bio", "social-media", "creator-economy"]
+  },
+  {
+    "app_name": "Linear",
+    "app_domain": "linear.app",
+    "industry_tags": ["project-management", "developer-tools", "saas"]
+  },
+  {
+    "app_name": "Lemon Squeezy",
+    "app_domain": "lemonsqueezy.com",
+    "industry_tags": ["payments", "saas", "creator-economy"]
+  },
+  {
+    "app_name": "Klook",
+    "app_domain": "klook.com",
+    "industry_tags": ["travel", "activities", "booking"]
+  },
+  {
+    "app_name": "Kickstarter",
+    "app_domain": "kickstarter.com",
+    "industry_tags": ["crowdfunding", "marketplace", "creative"]
+  },
+  {
+    "app_name": "June",
+    "app_domain": "june.so",
+    "industry_tags": ["analytics", "product-analytics", "saas"]
+  },
+  {
+    "app_name": "Jasper",
+    "app_domain": "jasper.ai",
+    "industry_tags": ["ai", "content-creation", "marketing"]
+  },
+  {
+    "app_name": "Intercom",
+    "app_domain": "intercom.com",
+    "industry_tags": ["customer-support", "communication", "ai", "saas"]
+  },
+  {
+    "app_name": "Cron Calendar",
+    "app_domain": "cron.com",
+    "industry_tags": ["calendar", "productivity", "saas"]
+  },
+  {
+    "app_name": "Craft",
+    "app_domain": "craft.do",
+    "industry_tags": ["note-taking", "productivity", "saas"]
+  },
+  {
+    "app_name": "Copy.ai",
+    "app_domain": "copy.ai",
+    "industry_tags": ["ai", "content-creation", "marketing"]
+  },
+  {
+    "app_name": "Coinbase",
+    "app_domain": "coinbase.com",
+    "industry_tags": ["crypto", "fintech", "exchange"]
+  },
+  {
+    "app_name": "Coda",
+    "app_domain": "coda.io",
+    "industry_tags": ["productivity", "collaboration", "no-code", "saas"]
+  },
+  {
+    "app_name": "ClickUp",
+    "app_domain": "clickup.com",
+    "industry_tags": ["project-management", "productivity", "saas"]
+  },
+  {
+    "app_name": "Clerk",
+    "app_domain": "clerk.com",
+    "industry_tags": ["authentication", "developer-tools", "saas"]
+  },
+  {
+    "app_name": "Clearbit",
+    "app_domain": "clearbit.com",
+    "industry_tags": ["data-enrichment", "sales", "saas"]
+  },
+  {
+    "app_name": "Clay",
+    "app_domain": "clay.com",
+    "industry_tags": ["crm", "sales", "data-enrichment", "saas"]
+  },
+  {
+    "app_name": "ClassPass",
+    "app_domain": "classpass.com",
+    "industry_tags": ["fitness", "wellness", "marketplace"]
+  },
+  {
+    "app_name": "Circle",
+    "app_domain": "circle.so",
+    "industry_tags": ["community", "social", "saas"]
+  },
+  {
+    "app_name": "Causal",
+    "app_domain": "causal.app",
+    "industry_tags": ["financial-planning", "analytics", "saas"]
+  },
+  {
+    "app_name": "Canny",
+    "app_domain": "canny.io",
+    "industry_tags": ["feedback", "product-management", "saas"]
+  },
+  {
+    "app_name": "Calm",
+    "app_domain": "calm.com",
+    "industry_tags": ["wellness", "meditation", "mental-health"]
+  },
+  {
+    "app_name": "Calendly",
+    "app_domain": "calendly.com",
+    "industry_tags": ["scheduling", "productivity", "saas"]
+  },
+  {
+    "app_name": "Cal.com",
+    "app_domain": "cal.com",
+    "industry_tags": ["scheduling", "productivity", "open-source"]
+  },
+  {
+    "app_name": "Buy Me a Coffee",
+    "app_domain": "buymeacoffee.com",
+    "industry_tags": ["creator-economy", "payments", "social"]
+  },
+  {
+    "app_name": "Bumble",
+    "app_domain": "bumble.com",
+    "industry_tags": ["dating", "social", "mobile"]
+  },
+  {
+    "app_name": "Blue Apron",
+    "app_domain": "blueapron.com",
+    "industry_tags": ["food", "subscription", "e-commerce"]
+  },
+  {
+    "app_name": "Bleacher Report",
+    "app_domain": "bleacherreport.com",
+    "industry_tags": ["sports", "media", "news"]
+  },
+  {
+    "app_name": "Bento",
+    "app_domain": "bento.me",
+    "industry_tags": ["link-in-bio", "creator-economy", "social"]
+  },
+  {
+    "app_name": "Behance",
+    "app_domain": "behance.net",
+    "industry_tags": ["design", "portfolio", "creative"]
+  },
+  {
+    "app_name": "Basecamp",
+    "app_domain": "basecamp.com",
+    "industry_tags": ["project-management", "team-collaboration", "saas"]
+  },
+  {
+    "app_name": "Attio",
+    "app_domain": "attio.com",
+    "industry_tags": ["crm", "ai", "sales", "saas"]
+  },
+  {
+    "app_name": "Asana",
+    "app_domain": "asana.com",
+    "industry_tags": ["project-management", "productivity", "ai", "saas"]
+  },
+  {
+    "app_name": "Amplitude",
+    "app_domain": "amplitude.com",
+    "industry_tags": ["analytics", "product-analytics", "saas"]
+  },
+  {
+    "app_name": "Amie",
+    "app_domain": "amie.so",
+    "industry_tags": ["calendar", "ai", "productivity"]
+  },
+  {
+    "app_name": "Adyen",
+    "app_domain": "adyen.com",
+    "industry_tags": ["fintech", "payments", "saas"]
+  },
+  {
+    "app_name": "37signals",
+    "app_domain": "37signals.com",
+    "industry_tags": ["saas", "productivity", "philosophy"]
+  },
+  {
+    "app_name": "1Password",
+    "app_domain": "1password.com",
+    "industry_tags": ["security", "password-manager", "saas"]
+  },
+  {
+    "app_name": "15Five",
+    "app_domain": "15five.com",
+    "industry_tags": ["hr", "performance-management", "saas"]
+  },
+  {
+    "app_name": "Oyster",
+    "app_domain": "oysterhr.com",
+    "industry_tags": ["hr", "global-employment", "saas"]
+  },
+  {
+    "app_name": "IKEA",
+    "app_domain": "ikea.com",
+    "industry_tags": ["e-commerce", "furniture", "retail"]
+  },
+  {
+    "app_name": "IFTTT",
+    "app_domain": "ifttt.com",
+    "industry_tags": ["automation", "iot", "productivity"]
+  },
+  {
+    "app_name": "HoneyBook",
+    "app_domain": "honeybook.com",
+    "industry_tags": ["client-management", "freelance", "saas"]
+  },
+  {
+    "app_name": "HODINKEE",
+    "app_domain": "hodinkee.com",
+    "industry_tags": ["watches", "luxury", "media"]
+  },
+  {
+    "app_name": "Height",
+    "app_domain": "height.app",
+    "industry_tags": ["project-management", "saas"]
+  },
+  {
+    "app_name": "Headspace",
+    "app_domain": "headspace.com",
+    "industry_tags": ["wellness", "meditation", "mental-health"]
+  },
+  {
+    "app_name": "HBO Max",
+    "app_domain": "hbomax.com",
+    "industry_tags": ["streaming", "entertainment", "media"]
+  },
+  {
+    "app_name": "Harvest",
+    "app_domain": "harvestapp.com",
+    "industry_tags": ["time-tracking", "productivity", "saas"]
+  },
+  {
+    "app_name": "Gumroad",
+    "app_domain": "gumroad.com",
+    "industry_tags": ["creator-economy", "e-commerce", "digital-products"]
+  },
+  {
+    "app_name": "Grammarly",
+    "app_domain": "grammarly.com",
+    "industry_tags": ["ai", "writing", "productivity"]
+  },
+  {
+    "app_name": "Grain",
+    "app_domain": "grain.com",
+    "industry_tags": ["ai", "meeting-notes", "productivity"]
+  },
+  {
+    "app_name": "Google",
+    "app_domain": "google.com",
+    "industry_tags": ["search", "ai", "productivity"]
+  },
+  {
+    "app_name": "Going",
+    "app_domain": "going.com",
+    "industry_tags": ["travel", "deals", "mobile"]
+  },
+  {
+    "app_name": "GoFundMe",
+    "app_domain": "gofundme.com",
+    "industry_tags": ["crowdfunding", "social", "payments"]
+  },
+  {
+    "app_name": "Glide",
+    "app_domain": "glideapps.com",
+    "industry_tags": ["no-code", "ai", "app-builder"]
+  },
+  {
+    "app_name": "GitHub",
+    "app_domain": "github.com",
+    "industry_tags": ["developer-tools", "version-control", "collaboration"]
+  },
+  {
+    "app_name": "Ghost",
+    "app_domain": "ghost.org",
+    "industry_tags": ["publishing", "blogging", "cms"]
+  },
+  {
+    "app_name": "Gamma",
+    "app_domain": "gamma.io",
+    "industry_tags": ["presentations", "ai", "productivity"]
+  },
+  {
+    "app_name": "Front",
+    "app_domain": "front.com",
+    "industry_tags": ["customer-support", "communication", "ai", "saas"]
+  },
+  {
+    "app_name": "Framer",
+    "app_domain": "framer.com",
+    "industry_tags": ["web-development", "design", "no-code"]
+  },
+  {
+    "app_name": "Frame",
+    "app_domain": "frame.so",
+    "industry_tags": ["collaboration", "creative"]
+  },
+  {
+    "app_name": "Frame.io",
+    "app_domain": "frame.io",
+    "industry_tags": ["video", "collaboration", "creative"]
+  },
+  {
+    "app_name": "Foundation",
+    "app_domain": "foundation.app",
+    "industry_tags": ["nft", "crypto", "art"]
+  },
+  {
+    "app_name": "folk",
+    "app_domain": "folk.app",
+    "industry_tags": ["crm", "sales", "saas"]
+  },
+  {
+    "app_name": "Fiverr",
+    "app_domain": "fiverr.com",
+    "industry_tags": ["freelance", "marketplace", "services"]
+  },
+  {
+    "app_name": "Firefox",
+    "app_domain": "firefox.com",
+    "industry_tags": ["browser", "privacy", "software"]
+  },
+  {
+    "app_name": "Figma",
+    "app_domain": "figma.com",
+    "industry_tags": ["design", "collaboration", "ui-ux", "saas"]
+  },
+  {
+    "app_name": "Fibery",
+    "app_domain": "fibery.io",
+    "industry_tags": ["productivity", "knowledge-management", "saas"]
+  },
+  {
+    "app_name": "FARFETCH",
+    "app_domain": "farfetch.com",
+    "industry_tags": ["e-commerce", "fashion", "luxury"]
+  },
+  {
+    "app_name": "ExpressVPN",
+    "app_domain": "expressvpn.com",
+    "industry_tags": ["vpn", "security", "privacy"]
+  },
+  {
+    "app_name": "Evernote",
+    "app_domain": "evernote.com",
+    "industry_tags": ["note-taking", "productivity", "saas"]
+  },
+  {
+    "app_name": "Eventbrite",
+    "app_domain": "eventbrite.com",
+    "industry_tags": ["events", "ticketing", "marketplace"]
+  },
+  {
+    "app_name": "Etsy",
+    "app_domain": "etsy.com",
+    "industry_tags": ["e-commerce", "handmade", "marketplace"]
+  },
+  {
+    "app_name": "Equals",
+    "app_domain": "equals.com",
+    "industry_tags": ["analytics", "spreadsheets", "saas"]
+  },
+  {
+    "app_name": "Epidemic Sound",
+    "app_domain": "epidemicsound.com",
+    "industry_tags": ["music", "audio", "creative"]
+  },
+  {
+    "app_name": "Duolingo",
+    "app_domain": "duolingo.com",
+    "industry_tags": ["education", "language-learning", "mobile"]
+  },
+  {
+    "app_name": "Dropbox",
+    "app_domain": "dropbox.com",
+    "industry_tags": ["file-storage", "collaboration", "saas"]
+  },
+  {
+    "app_name": "Dovetail",
+    "app_domain": "dovetail.com",
+    "industry_tags": ["user-research", "ai", "product", "saas"]
+  },
+  {
+    "app_name": "Disney+",
+    "app_domain": "disneyplus.com",
+    "industry_tags": ["streaming", "entertainment", "media"]
+  },
+  {
+    "app_name": "Discord",
+    "app_domain": "discord.com",
+    "industry_tags": ["communication", "gaming", "social"]
+  },
+  {
+    "app_name": "Deel",
+    "app_domain": "deel.com",
+    "industry_tags": ["hr", "payroll", "global-employment", "saas"]
+  },
+  {
+    "app_name": "Customer.io",
+    "app_domain": "customer.io",
+    "industry_tags": ["marketing-automation", "email", "saas"]
+  }
+]

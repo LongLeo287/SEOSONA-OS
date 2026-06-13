@@ -1,0 +1,23 @@
+aws_region  = "us-east-1"
+name_prefix = "agents-web"
+db_name     = "app"
+db_username = "postgres"
+
+app_instance_type          = "t3.xlarge"
+sandbox_cluster_version    = "1.31"
+sandbox_cluster_service_cidr = "172.20.0.0/16"
+sandbox_node_instance_types = ["m8i.xlarge"]
+sandbox_node_desired_size  = 2
+sandbox_node_min_size      = 1
+sandbox_node_max_size      = 6
+sandbox_node_disk_size     = 100
+opensandbox_k8s_runtime_class = "kata-fc"
+opensandbox_runtime_ecr_repository_name = "21st-agent-runtime-opensandbox"
+
+# Optional: set these if you want Terraform to create DNS records.
+# route53_zone_id = "Z1234567890"
+# root_domain     = "example.com"
+
+# Optional: enable SSH access to the app VM from known IPs only.
+# ssh_key_name       = "my-keypair"
+# ssh_ingress_cidrs  = ["203.0.113.10/32"]

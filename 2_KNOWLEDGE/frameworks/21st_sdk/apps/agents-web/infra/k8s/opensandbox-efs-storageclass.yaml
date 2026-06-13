@@ -1,0 +1,15 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: opensandbox-efs
+provisioner: efs.csi.aws.com
+parameters:
+  provisioningMode: efs-ap
+  fileSystemId: fs-REPLACE_WITH_TERRAFORM_SANDBOX_EFS_FILE_SYSTEM_ID
+  basePath: /opensandbox
+  directoryPerms: "700"
+mountOptions:
+  - tls
+reclaimPolicy: Retain
+allowVolumeExpansion: true
+volumeBindingMode: Immediate

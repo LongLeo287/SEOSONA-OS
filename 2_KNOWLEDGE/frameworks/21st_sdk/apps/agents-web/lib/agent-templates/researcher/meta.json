@@ -1,0 +1,7 @@
+{
+  "name": "Researcher",
+  "slug": "researcher",
+  "description": "A research agent that looks up topics on Wikipedia and summarizes what it finds. No API key required.",
+  "icon": "Search",
+  "ordering": 3
+}

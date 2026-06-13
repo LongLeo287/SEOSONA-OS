@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "21st-sdk"
+version = "0.0.5"
+description = "Server-side Python SDK for 21st Agents"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [
+  { name = "21st.dev" },
+]
+dependencies = [
+  "requests>=2.31.0",
+]
+keywords = [
+  "ai",
+  "agent",
+  "sandbox",
+  "21st",
+  "21st.dev",
+  "sdk",
+  "python",
+]
+
+[project.urls]
+Homepage = "https://21st.dev/agents"
+
+[tool.setuptools.package-dir]
+"" = "src"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,2530 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["postgresqlExtensions", "relationJoins", "views"]
+    output          = "./client"
+    binaryTargets   = ["native", "rhel-openssl-3.0.x", "debian-openssl-1.1.x", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+    provider   = "postgresql"
+    url        = env("DATABASE_URL")
+    directUrl  = env("DIRECT_DATABASE_URL")
+    extensions = [uuid_ossp(map: "uuid-ossp", schema: "extensions"), vector(schema: "extensions")]
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ApiKey {
+    id             String    @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+    key            String?   @unique
+    key_hash       String?   @unique
+    key_prefix     String?
+    user_id        String
+    plan           ApiPlan?  @default(free)
+    requests_count Int?      @default(0)
+    requests_limit Int?      @default(1000)
+    created_at     DateTime? @default(now()) @db.Timestamptz(6)
+    last_used_at   DateTime? @default(now()) @db.Timestamptz(6)
+    expires_at     DateTime? @db.Timestamptz(6)
+    is_active      Boolean?  @default(true)
+    project_url    String?
+    team_id        String?   @db.Uuid
+    user           User      @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    team           Team?     @relation(fields: [team_id], references: [id], onDelete: SetNull)
+
+    @@index([key])
+    @@index([key_hash])
+    @@index([user_id])
+    @@index([team_id])
+    @@map("api_keys")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model AuthorPayout {
+    id             Int       @id(map: "mcp_author_payouts_pkey") @default(autoincrement())
+    author_id      String
+    period_start   DateTime  @db.Timestamptz(6)
+    period_end     DateTime  @db.Timestamptz(6)
+    total_amount   Decimal   @db.Decimal(10, 4)
+    total_usage    Int
+    paypal_email   String
+    status         String    @default("pending")
+    transaction_id String?
+    created_at     DateTime? @default(now()) @db.Timestamptz(6)
+    processed_at   DateTime? @db.Timestamptz(6)
+    user           User      @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_author")
+
+    @@unique([author_id, period_start, period_end], map: "unique_author_period")
+    @@index([author_id], map: "idx_mcp_author_payouts_author_id")
+    @@index([period_start, period_end], map: "idx_mcp_author_payouts_period")
+    @@index([status], map: "idx_mcp_author_payouts_status")
+    @@map("author_payouts")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model BackupCodeEmbedding {
+    id         String?                @db.Uuid
+    item_id    Int?
+    item_type  String?
+    embedding  Unsupported("vector")?
+    created_at DateTime?              @db.Timestamptz(6)
+    metadata   Json?
+
+    @@map("backup_code_embeddings")
+    @@ignore
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model BackupUsageEmbedding {
+    id                String?                @db.Uuid
+    item_id           Int?
+    item_type         String?
+    embedding         Unsupported("vector")?
+    usage_description String?
+    created_at        DateTime?              @db.Timestamptz(6)
+    metadata          Json?
+
+    @@map("backup_usage_embeddings")
+    @@ignore
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model BundleItem {
+    bundle_id    Int
+    component_id Int
+    created_at   DateTime  @default(now()) @db.Timestamptz(6)
+    id           Int       @id @unique @default(autoincrement())
+    bundle       Bundle    @relation(fields: [bundle_id], references: [id], onDelete: Cascade)
+    component    Component @relation(fields: [component_id], references: [id], onDelete: Cascade)
+
+    @@map("bundle_items")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model BundlePlan {
+    id              Int              @id @default(autoincrement())
+    bundle_id       Int
+    type            BundlePlanType
+    description     String
+    price           Int
+    created_at      DateTime         @default(now()) @db.Timestamptz(6)
+    features        String[]         @default([])
+    bundle          Bundle           @relation(fields: [bundle_id], references: [id], onDelete: Cascade)
+    bundlePurchases BundlePurchase[]
+
+    @@map("bundle_plans")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model BundlePurchase {
+    user_id      String
+    bundle_id    Int
+    plan_id      Int?
+    price        Int
+    fee          Float         @db.Real
+    created_at   DateTime      @default(now()) @db.Timestamptz(6)
+    status       PaymentStatus
+    id           String        @id
+    paid_to_user Boolean       @default(false)
+    bundle       Bundle        @relation(fields: [bundle_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    bundlePlan   BundlePlan?   @relation(fields: [plan_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    users        User          @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+    @@map("bundle_purchases")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Bundle {
+    id              Int              @id @default(autoincrement())
+    name            String
+    user_id         String
+    created_at      DateTime         @default(now()) @db.Timestamptz(6)
+    is_public       Boolean          @default(false)
+    bundleItems     BundleItem[]
+    bundlePlans     BundlePlan[]
+    bundlePurchases BundlePurchase[]
+    user            User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@map("bundles")
+}
+
+model CodeEmbedding {
+    id         String                @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+    item_id    Int
+    item_type  String
+    embedding  Unsupported("vector")
+    metadata   Json?
+    created_at DateTime?             @default(now()) @db.Timestamptz(6)
+
+    @@index([embedding])
+    @@map("code_embeddings")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Collection {
+    id          String                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    name        String
+    description String?
+    cover_url   String?
+    user_id     String
+    created_at  DateTime                 @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    updated_at  DateTime                 @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    is_public   Boolean                  @default(true)
+    slug        String                   @unique
+    user        User                     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    components  ComponentsToCollection[]
+
+    @@index([slug])
+    @@map("collections")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ComponentAnalytic {
+    id            Int       @id @default(autoincrement())
+    created_at    DateTime  @default(now()) @db.Timestamptz(6)
+    component_id  Int
+    activity_type String?   @db.VarChar
+    user_id       String?
+    anon_id       String?
+    component     Component @relation(fields: [component_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    user          User?     @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@index([anon_id])
+    @@map("component_analytics")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ComponentDependenciesClosure {
+    component_id            Int
+    dependency_component_id Int
+    depth                   Int
+    is_demo_dependency      Boolean   @default(false)
+    component               Component @relation("component_dependencies_closure_component_idTocomponents", fields: [component_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    dependencyComponent     Component @relation("component_dependencies_closure_dependency_component_idTocomponents", fields: [dependency_component_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@id([component_id, dependency_component_id])
+    @@index([component_id], map: "idx_component_dependencies_closure_component_id")
+    @@map("component_dependencies_closure")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ComponentHuntRound {
+    id              Int              @id @default(autoincrement())
+    week_number     Int
+    start_at        DateTime         @db.Timestamptz(6)
+    end_at          DateTime         @db.Timestamptz(6)
+    created_at      DateTime?        @default(now()) @db.Timestamptz(6)
+    seasonal_tag_id Int?
+    tag             Tag?             @relation(fields: [seasonal_tag_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    demoHuntScores  DemoHuntScore[]
+    demoHuntVotes   DemoHuntVote[]
+    demoHuntWinners DemoHuntWinner[]
+
+    @@map("component_hunt_rounds")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ComponentLike {
+    user_id      String
+    component_id Int
+    liked_at     DateTime? @default(now()) @db.Timestamp(6)
+    component    Component @relation(fields: [component_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    user         User      @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@id([user_id, component_id])
+    @@map("component_likes")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ComponentTag {
+    component_id Int       @default(autoincrement())
+    tag_id       Int
+    component    Component @relation(fields: [component_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    tag          Tag       @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@id([component_id, tag_id])
+    @@map("component_tags")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Component {
+    id                                Int                            @id @default(autoincrement())
+    component_names                   Json
+    description                       String?
+    code                              String                         @default("N/A")
+    demo_code                         String?
+    created_at                        DateTime                       @default(now()) @db.Timestamp(6)
+    updated_at                        DateTime                       @default(now()) @db.Timestamp(6)
+    user_id                           String
+    dependencies                      Json?
+    is_public                         Boolean                        @default(true)
+    downloads_count                   Int                            @default(0)
+    likes_count                       Int                            @default(0)
+    component_slug                    String
+    name                              String
+    demo_dependencies                 Json?
+    preview_url                       String
+    license                           String                         @default("mit")
+    fts                               Unsupported("tsvector")?
+    direct_registry_dependencies      Json                           @default("[]")
+    registry                          String                         @default("ui")
+    demo_direct_registry_dependencies Json                           @default("[]")
+    video_url                         String?
+    website_url                       String?
+    tailwind_config_extension         String?
+    global_css_extension              String?
+    compiled_css                      String?
+    payment_url                       String?
+    pro_preview_image_url             String?
+    hunter_username                   String?
+    registry_url                      String?
+    sandbox_id                        String?                        @db.Uuid
+    index_css_url                     String?
+    bundleItems                       BundleItem[]
+    componentAnalytics                ComponentAnalytic[]
+    dependenciesList                  ComponentDependenciesClosure[] @relation("component_dependencies_closure_component_idTocomponents")
+    dependOnList                      ComponentDependenciesClosure[] @relation("component_dependencies_closure_dependency_component_idTocomponents")
+    componentLikes                    ComponentLike[]
+    componentTags                     ComponentTag[]
+    hunter                            User?                          @relation("components_hunter_usernameTousers", fields: [hunter_username], references: [username], onDelete: NoAction, onUpdate: NoAction)
+    sandbox                           Sandbox?                       @relation("components_sandbox_idTosandboxes", fields: [sandbox_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    sandboxReferences                 Sandbox[]                      @relation("sandboxes_component_idTocomponents")
+    user                              User                           @relation("components_user_idTousers", fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    componentsPurchases               ComponentsPurchase[]
+    componentsToCollections           ComponentsToCollection[]
+    demos                             Demo[]
+    mcpComponentUsages                McpComponentUsage[]
+    submission                        Submission?
+    socialPosts                       SocialPost[]
+    codeChunks                        CodeChunk[]
+
+    @@unique([user_id, component_slug], map: "components_user_slug_key")
+    @@index([fts], type: Gin)
+    @@index([component_slug], map: "idx_components_component_slug")
+    @@map("components")
+}
+
+model ComponentsPurchase {
+    id           String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id      String
+    component_id Int
+    price_paid   Int
+    created_at   DateTime? @default(now()) @db.Timestamptz(6)
+    component    Component @relation(fields: [component_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    user         User      @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+    @@unique([user_id, component_id])
+    @@map("components_purchases")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ComponentsToCollection {
+    collection_id String     @db.Uuid
+    component_id  Int
+    created_at    DateTime   @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    collection    Collection @relation(fields: [collection_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    component     Component  @relation(fields: [component_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@id([collection_id, component_id])
+    @@map("components_to_collections")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model DemoBookmark {
+    demo_id       Int
+    user_id       String
+    bookmarked_at DateTime? @default(now()) @db.Timestamptz(6)
+    demo          Demo      @relation(fields: [demo_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_demo")
+    user          User      @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "fk_demo_bookmarks_user")
+
+    @@id([demo_id, user_id])
+    @@index([demo_id], map: "idx_demo_bookmarks_demo_id")
+    @@index([user_id], map: "idx_demo_bookmarks_user_id")
+    @@map("demo_bookmarks")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model DemoHuntScore {
+    id                 Int                @id @default(autoincrement())
+    round_id           Int
+    demo_id            Int
+    votes              Int                @default(0)
+    installs           Int                @default(0)
+    views              Int                @default(0)
+    final_score        Decimal            @default(0) @db.Decimal
+    created_at         DateTime           @default(now()) @db.Timestamptz(6)
+    demo               Demo               @relation(fields: [demo_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    componentHuntRound ComponentHuntRound @relation(fields: [round_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@index([demo_id], map: "idx_demo_hunt_scores_demo")
+    @@index([round_id, final_score(sort: Desc)], map: "idx_demo_hunt_scores_round_score")
+    @@map("demo_hunt_scores")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model DemoHuntVote {
+    id                 Int                @id @default(autoincrement())
+    round_id           Int
+    demo_id            Int
+    user_id            String
+    voted_at           DateTime           @default(now()) @db.Timestamptz(6)
+    demo               Demo               @relation(fields: [demo_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    componentHuntRound ComponentHuntRound @relation(fields: [round_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    user               User               @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@unique([round_id, demo_id, user_id])
+    @@map("demo_hunt_votes")
+}
+
+model DemoHuntWinner {
+    id                 Int                @id @default(autoincrement())
+    round_id           Int
+    demo_id            Int
+    category           DemoHuntCategory?
+    prize_tier         Int                @db.SmallInt
+    is_global          Boolean            @default(false)
+    created_at         DateTime           @default(now()) @db.Timestamptz(6)
+    demo               Demo               @relation(fields: [demo_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    componentHuntRound ComponentHuntRound @relation(fields: [round_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@unique([round_id, demo_id, category, prize_tier, is_global])
+    @@map("demo_hunt_winners")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model DemoTag {
+    id         Int       @id @default(autoincrement())
+    demo_id    Int
+    tag_id     Int
+    created_at DateTime? @default(now()) @db.Timestamptz(6)
+    demo       Demo      @relation(fields: [demo_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    tag        Tag       @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@unique([demo_id, tag_id])
+    @@index([demo_id], map: "idx_demo_tags_demo_id")
+    @@index([tag_id], map: "idx_demo_tags_tag_id")
+    @@map("demo_tags")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Demo {
+    id                                Int                      @id @default(autoincrement())
+    component_id                      Int
+    demo_code                         String
+    created_at                        DateTime                 @default(now()) @db.Timestamptz(6)
+    updated_at                        DateTime                 @default(now()) @db.Timestamptz(6)
+    demo_dependencies                 Json?                    @default("{}")
+    preview_url                       String?
+    video_url                         String?
+    pro_preview_image_url             String?
+    compiled_css                      String?
+    demo_direct_registry_dependencies Json?                    @default("[]")
+    name                              String?
+    user_id                           String
+    fts                               Unsupported("tsvector")?
+    demo_slug                         String                   @default("default")
+    embedding                         Unsupported("vector")?
+    embedding_oai                     Unsupported("vector")?
+    bookmarks_count                   Int?                     @default(0)
+    bundle_html_url                   String?
+    bundle_hash                       String?
+    demoBookmarks                     DemoBookmark[]
+    demoHuntScores                    DemoHuntScore[]
+    demoHuntVotes                     DemoHuntVote[]
+    demoHuntWinners                   DemoHuntWinner[]
+    demoTags                          DemoTag[]
+    demoSandboxCache                  DemoSandboxCache?
+    component                         Component?               @relation(fields: [component_id], references: [id], onDelete: Cascade)
+    user                              User                     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    codeChunks                        CodeChunk[]
+    weeklyTopDemos                    WeeklyTopDemo[]
+    feedAnalytics                     FeedAnalytics[]
+    bookmarkListItems                 BookmarkListItem[]
+
+    @@unique([component_id, demo_slug])
+    @@index([embedding])
+    @@index([embedding_oai])
+    @@index([fts], type: Gin)
+    @@index([component_id], map: "idx_demos_component_id")
+    @@index([demo_slug], map: "idx_demos_demo_slug")
+    @@map("demos")
+}
+
+/// Weekly top demos - stores top 3 components for each week based on views + bookmarks
+model WeeklyTopDemo {
+    id         Int      @id @default(autoincrement())
+    week       String   @db.VarChar(8) // "2024-W41" ISO week format
+    demo_id    Int
+    prize_tier Int      @db.SmallInt // 1, 2, or 3
+    score      Int      @default(0) // score at time of recording
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+
+    demo Demo @relation(fields: [demo_id], references: [id], onDelete: Cascade)
+
+    @@unique([week, demo_id], map: "unique_week_demo")
+    @@unique([week, prize_tier], map: "unique_week_tier")
+    @@index([demo_id], map: "idx_weekly_top_demos_demo_id")
+    @@index([week], map: "idx_weekly_top_demos_week")
+    @@map("weekly_top_demos")
+}
+
+/// This table contains check constraints and requires additional setup for migrations. Visit https://pris.ly/d/check-constraints for more info.
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Feedback {
+    id         Int      @id @default(autoincrement())
+    user_id    String
+    type       String
+    content    String
+    created_at DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    status     String?  @default("pending")
+    response   String?
+    user       User     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+    @@map("feedback")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model McpComponentUsage {
+    id                    Int                  @id @default(autoincrement())
+    generation_request_id Int
+    component_id          Int
+    author_id             String
+    author_share          Decimal              @db.Decimal(10, 4)
+    payout_status         String               @default("pending")
+    payout_id             Int?
+    created_at            DateTime?            @default(now()) @db.Timestamptz(6)
+    user                  User                 @relation(fields: [author_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_author")
+    component             Component            @relation(fields: [component_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_component")
+    mcpGenerationRequest  McpGenerationRequest @relation(fields: [generation_request_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_generation_request")
+
+    @@index([author_id], map: "idx_mcp_component_usage_author_id")
+    @@index([component_id], map: "idx_mcp_component_usage_component_id")
+    @@index([payout_status], map: "idx_mcp_component_usage_payout_status")
+    @@map("mcp_component_usage")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model McpGenerationRequest {
+    id                 Int                 @id @default(autoincrement())
+    user_id            String
+    api_key            String
+    search_query       String
+    subscription_plan  String
+    generation_cost    Decimal             @db.Decimal(10, 4)
+    created_at         DateTime?           @default(now()) @db.Timestamptz(6)
+    mcpComponentUsages McpComponentUsage[]
+    user               User                @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_user")
+
+    @@index([created_at], map: "idx_mcp_generation_requests_created_at")
+    @@index([user_id], map: "idx_mcp_generation_requests_user_id")
+    @@map("mcp_generation_requests")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model PayoutRate {
+    id            Int       @id @default(autoincrement())
+    user_id       String?
+    price         Float
+    activity_type String    @db.VarChar
+    active_from   DateTime  @db.Date
+    created_at    DateTime  @default(now()) @db.Timestamptz(6)
+    active_till   DateTime? @db.Date
+    user          User?     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@map("payout_rates")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Plan {
+    id              Int                 @id @default(autoincrement())
+    created_at      DateTime            @default(now()) @db.Timestamptz(6)
+    stripe_plan_id  String?
+    type            String?
+    price           Float?              @db.Real
+    env             String?
+    period          String?
+    add_usage       Int?
+    version         Int                 @default(1) @db.SmallInt
+    usersInfo       UsersToPlan[]
+    agentsUsersInfo UsersToPlanAgents[]
+
+    @@map("plans")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model PromptRule {
+    id                 Int       @id @default(autoincrement())
+    user_id            String
+    name               String
+    tech_stack         Json?     @default("[]")
+    theme              Json?     @default("{}")
+    additional_context String?
+    created_at         DateTime? @default(now()) @db.Timestamptz(6)
+    updated_at         DateTime? @default(now()) @db.Timestamptz(6)
+    user               User      @relation(fields: [user_id], references: [id], onDelete: Cascade, map: "fk_prompt_rules_user")
+
+    @@index([user_id], map: "idx_prompt_rules_user_id")
+    @@map("prompt_rules")
+}
+
+model ReferralPayment {
+    id               Int           @id @default(autoincrement())
+    user_id          String
+    amount           Decimal       @db.Decimal(10, 2)
+    currency         String        @default("USD")
+    payment_date     DateTime      @db.Timestamptz(6)
+    status           PaymentStatus @default(paid)
+    reference_number String?
+    notes            String?
+    created_at       DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    updated_at       DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    user             User          @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+    @@index([payment_date])
+    @@index([user_id])
+    @@map("referral_payments")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model AgentInvite {
+    id              String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    code            String                  @unique
+    inviter_user_id String
+    max_uses        Int                     @default(2)
+    uses_count      Int                     @default(0)
+    created_at      DateTime                @default(now()) @db.Timestamptz(6)
+    expires_at      DateTime?               @db.Timestamptz(6)
+    last_reset_at   DateTime                @default(now()) @db.Timestamptz(6)
+    is_active       Boolean                 @default(true)
+    inviter         User                    @relation("AgentInvites", fields: [inviter_user_id], references: [id], onDelete: Cascade)
+    acceptances     AgentInviteAcceptance[]
+
+    @@index([code])
+    @@index([inviter_user_id])
+    @@map("agent_invites")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model AgentInviteAcceptance {
+    id              String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    invite_code     String
+    invited_user_id String
+    accepted_at     DateTime    @default(now()) @db.Timestamptz(6)
+    ip_address      String?
+    user_agent      String?
+    invite          AgentInvite @relation(fields: [invite_code], references: [code], onDelete: Cascade)
+    user            User        @relation("AgentInviteAcceptances", fields: [invited_user_id], references: [id], onDelete: Cascade)
+
+    @@unique([invite_code, invited_user_id])
+    @@index([invited_user_id])
+    @@map("agent_invite_acceptances")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Sandbox {
+    id                  String      @id(map: "sandbox_pkey") @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    created_at          DateTime    @default(now()) @db.Timestamptz(6)
+    updated_at          DateTime    @default(now()) @db.Timestamp(6)
+    user_id             String
+    codesandbox_id      String?
+    name                String      @default("Untitled")
+    status              String?     @default("draft")
+    component_id        Int?
+    user                User        @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "sandbox_user_id_fkey")
+    component           Component?  @relation("sandboxes_component_idTocomponents", fields: [component_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    componentReferences Component[] @relation("components_sandbox_idTosandboxes")
+
+    @@map("sandboxes")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Submission {
+    id                  Int              @id @default(autoincrement())
+    created_at          DateTime         @default(now()) @db.Timestamptz(6)
+    component_id        Int              @unique
+    moderators_feedback String?
+    status              SubmissionStatus @default(on_review)
+    component           Component        @relation(fields: [component_id], references: [id], onDelete: Cascade)
+
+    @@map("submissions")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Tag {
+    id                  Int                  @id @default(autoincrement())
+    name                String               @unique
+    slug                String               @unique
+    componentHuntRounds ComponentHuntRound[]
+    componentTags       ComponentTag[]
+    demoTags            DemoTag[]
+    templatesTags       TemplatesTag[]
+    crawledAppTags      CrawledAppTag[]
+
+    @@map("tags")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Template {
+    id                  Int            @id @default(autoincrement())
+    name                String
+    description         String?
+    preview_url         String
+    video_url           String?
+    website_preview_url String
+    price               Decimal        @default(0) @db.Decimal(10, 2)
+    payment_url         String?
+    created_at          DateTime       @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    updated_at          DateTime       @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    user_id             String
+    is_public           Boolean?       @default(false)
+    downloads_count     Int?           @default(0)
+    likes_count         Int?           @default(0)
+    template_slug       String         @unique(map: "templates_template_slug_unique_idx")
+    user                User           @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    templatesTags       TemplatesTag[]
+
+    @@index([created_at])
+    @@index([user_id])
+    @@map("templates")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model TemplatesTag {
+    id          Int       @id @default(autoincrement())
+    created_at  DateTime? @default(now()) @db.Timestamptz(6)
+    template_id Int
+    tag_id      Int
+    tag         Tag       @relation(fields: [tag_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    template    Template  @relation(fields: [template_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@unique([template_id, tag_id])
+    @@map("templates_tags")
+}
+
+model UsageEmbedding {
+    id                String                @id @default(dbgenerated("uuid_generate_v4()")) @db.Uuid
+    item_id           Int
+    item_type         String
+    embedding         Unsupported("vector")
+    usage_description String?
+    metadata          Json?
+    created_at        DateTime?             @default(now()) @db.Timestamptz(6)
+
+    @@unique([item_id, item_type], map: "usage_embeddings_item_unique")
+    @@index([embedding])
+    @@map("usage_embeddings")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Usage {
+    id         Int      @id(map: "usage_pkey") @default(autoincrement())
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    user_id    String?  @unique
+    limit      Int?     @default(0)
+    usage      Float?   @default(0)
+    user       User?    @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "usage_user_id_fkey")
+
+    @@map("usages")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model User {
+    id                            String                     @id
+    created_at                    DateTime                   @default(now()) @db.Timestamptz(6)
+    updated_at                    DateTime?                  @default(now()) @db.Timestamptz(6)
+    image_url                     String?
+    username                      String?                    @unique
+    name                          String?
+    email                         String                     @unique @default("")
+    email_verified                Boolean                    @default(false)
+    manually_added                Boolean                    @default(false)
+    is_admin                      Boolean                    @default(false)
+    twitter_url                   String?
+    bio                           String?
+    github_url                    String?
+    pro_referral_url              String?
+    website_url                   String?
+    pro_banner_url                String?
+    donation_url                  String?
+    display_name                  String?
+    display_username              String?
+    display_image_url             String?
+    ref                           String?
+    paypal_email                  String?
+    role                          UserRole?
+    is_partner                    Boolean?                   @default(false)
+    bundles_fee                   Float                      @default(0.3) @db.Real
+    stripe_id                     String?
+    what_describes_you_best       String?
+    what_describes_you_best_other String?
+    company_size                  String?
+    onboarding_referral           String?
+    primary_coding_agent          String?
+    primary_coding_agent_other    String?
+    onboarding_industry           String?
+    onboarding_platform           String?
+    onboarding_completed_at       DateTime?                  @db.Timestamptz(6)
+    github_installations          Json?                      @db.JsonB
+    apiKeys                       ApiKey[]
+    authorPayouts                 AuthorPayout[]
+    bundlePurchases               BundlePurchase[]
+    bundles                       Bundle[]
+    collections                   Collection[]
+    componentAnalytics            ComponentAnalytic[]
+    componentLikes                ComponentLike[]
+    huntedComponents              Component[]                @relation("components_hunter_usernameTousers")
+    components                    Component[]                @relation("components_user_idTousers")
+    componentsPurchases           ComponentsPurchase[]
+    demoHuntVotes                 DemoHuntVote[]
+    demos                         Demo[]
+    feedbacks                     Feedback[]
+    mcpComponentUsages            McpComponentUsage[]
+    mcpGenerationRequests         McpGenerationRequest[]
+    payoutRates                   PayoutRate[]
+    referralPayments              ReferralPayment[]
+    sandboxes                     Sandbox[]
+    templates                     Template[]
+    usage                         Usage?
+    plansInfo                     UsersToPlan?
+    agentsPlansInfo               UsersToPlanAgents?
+    magicProjects                 MagicProject[]
+    productFeedback               ProductFeedback[]
+    toolbarTokens                 ToolbarToken[]
+    teams                         Team[]
+    projectFavorites              ProjectFavorite[]
+    teamMemberships               TeamMember[]               @relation("TeamMemberUser")
+    teamInviteLinksCreated        TeamInviteLink[]           @relation("TeamInviteLinkCreator")
+    sentPendingInvites            TeamPendingInvite[]        @relation("TeamPendingInviteInviter")
+    canvasAccess                  CanvasAccess[]             @relation("CanvasAccessUser")
+    canvasAccessGrants            CanvasAccess[]             @relation("CanvasAccessGrantedBy")
+    crawledPageBookmarks          CrawledPageBookmark[]
+    crawledComponentBookmarks     CrawledComponentBookmark[]
+    crawledAppBookmarks           CrawledAppBookmark[]
+    scheduledEmails               ScheduledEmail[]
+    demoBookmarks                 DemoBookmark[]
+    promptRules                   PromptRule[]
+    followers                     UserFollow[]               @relation("UserFollowing")
+    following                     UserFollow[]               @relation("UserFollowers")
+    feedAnalytics                 FeedAnalytics[]
+    emailPreferences              EmailPreferences?
+    agentChats                    AgentChat[]
+    agentInvites                  AgentInvite[]              @relation("AgentInvites")
+    agentInviteAcceptances        AgentInviteAcceptance[]    @relation("AgentInviteAcceptances")
+    desktopAuthCodes              DesktopAuthCode[]
+    desktopSessions               DesktopSession[]
+    betterAuthSessions            BetterAuthSession[]
+    betterAuthAccounts            BetterAuthAccount[]
+    ssoProviders                  SsoProvider[]
+    discordUserLinks              DiscordUserLink[]
+    inboxReads                    InboxRead[]
+    anApiKeys                     AnApiKey[]  @relation("AnApiKeyUser")
+    bookmarkLists                 BookmarkList[]
+    bookmarkListItems             BookmarkListItem[]
+    studioProjects                StudioProject[]
+
+    @@index([display_username], map: "idx_users_display_username")
+    @@index([username], map: "idx_users_username")
+    @@index([onboarding_completed_at], map: "idx_users_onboarding_completed_at")
+    @@index([primary_coding_agent], map: "idx_users_primary_coding_agent")
+    @@index([onboarding_industry], map: "idx_users_onboarding_industry")
+    @@index([onboarding_referral], map: "idx_users_onboarding_referral")
+    @@map("users")
+}
+
+model BetterAuthSession {
+    id         String   @id
+    user_id    String
+    expires_at DateTime @db.Timestamptz(6)
+    token      String   @unique
+    ip_address String?
+    user_agent String?
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@index([expires_at])
+    @@map("better_auth_sessions")
+}
+
+model BetterAuthAccount {
+    id                       String    @id
+    user_id                  String
+    provider_id              String
+    account_id               String
+    access_token             String?
+    refresh_token            String?
+    id_token                 String?
+    access_token_expires_at  DateTime? @db.Timestamptz(6)
+    refresh_token_expires_at DateTime? @db.Timestamptz(6)
+    scope                    String?
+    password                 String?
+    created_at               DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at               DateTime  @default(now()) @db.Timestamptz(6)
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@unique([provider_id, account_id])
+    @@index([user_id])
+    @@map("better_auth_accounts")
+}
+
+model BetterAuthVerification {
+    id         String   @id
+    value      String
+    expires_at DateTime @db.Timestamptz(6)
+    identifier String
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
+
+    @@index([identifier])
+    @@index([expires_at])
+    @@map("better_auth_verifications")
+}
+
+model SsoProvider {
+    id              String  @id
+    issuer          String
+    oidc_config     String?
+    saml_config     String?
+    user_id         String
+    provider_id     String  @unique
+    organization_id String?
+    domain          String
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@index([domain])
+    @@map("sso_providers")
+}
+
+/// Email preferences for newsletter and notifications
+model EmailPreferences {
+    id                      String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id                 String    @unique
+    newsletter_subscribed   Boolean   @default(true)
+    include_trending        Boolean   @default(true)
+    include_personalized    Boolean   @default(true)
+    include_from_followed   Boolean   @default(true)
+    resend_contact_id       String?
+    last_newsletter_sent_at DateTime? @db.Timestamptz(6)
+    created_at              DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at              DateTime  @default(now()) @updatedAt @db.Timestamptz(6)
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([newsletter_subscribed])
+    @@index([last_newsletter_sent_at])
+    @@map("email_preferences")
+}
+
+/// Track which demos were sent in newsletter digests to avoid duplicates
+model NewsletterSentDemo {
+    id      String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id String
+    demo_id Int
+    sent_at DateTime @default(now()) @db.Timestamptz(6)
+
+    @@unique([user_id, demo_id])
+    @@index([user_id, sent_at])
+    @@map("newsletter_sent_demos")
+}
+
+/// User follow relationships for subscription system
+model UserFollow {
+    id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    follower_id  String
+    following_id String
+    followed_at  DateTime @default(now()) @db.Timestamptz(6)
+
+    follower  User @relation("UserFollowers", fields: [follower_id], references: [id], onDelete: Cascade)
+    following User @relation("UserFollowing", fields: [following_id], references: [id], onDelete: Cascade)
+
+    @@unique([follower_id, following_id])
+    @@index([follower_id])
+    @@index([following_id])
+    @@index([followed_at])
+    @@map("user_follows")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Team {
+    id                           String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    name                         String
+    description                  String?
+    image_url                    String?
+    website_url                  String?
+    user_id                      String
+    created_at                   DateTime                @default(now()) @db.Timestamptz(6)
+    updated_at                   DateTime                @default(now()) @db.Timestamptz(6)
+    onboarding_completed         Boolean?                @default(false)
+    figma_integration            Json?                   @default("{}")
+    github_integration           Json?                   @default("{}")
+    cursor_integration           Json?                   @default("{}")
+    claude_code_integration      Json?                   @default("{}")
+    stripe                       Json?                   @default("{}")
+    linear_integration           Json?                   @default("{}")
+    discord_integration          Json?
+    discord_guild_id             String? // Discord guild ID for quick lookups
+    github_installation_id       String? // Primary GitHub App installation ID for quick lookups
+    enterprise_domain            String?   @unique // e.g. "acme.com" — marks this team as the enterprise GitHub source for all teams with this email domain
+    meta                         Json?     @db.JsonB
+    github_sandbox_id            String?
+    github_sandbox_preview_token String?
+    github_sandbox_env_vars      Json?
+    github_sandbox_config        Json?
+    user                         User                    @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    magicProjects                MagicProject[]
+    teamStyleProfiles            TeamStyleProfile[]
+    members                      TeamMember[]
+    inviteLink                   TeamInviteLink?
+    repositorySandboxes          TeamRepositorySandbox[]
+    pendingInvites               TeamPendingInvite[]
+    agentChats                   AgentChat[]
+    integrationTasks             IntegrationTask[]
+    automations                  Automation[]
+    apiKeys                      ApiKey[]
+    anApiKeys                    AnApiKey[]
+    anAgentConfigs               AnAgentConfig[]
+    anMcpVaults                  AnMcpVault[]
+    studioProjects               StudioProject[]
+    agentSkills                  AgentSkill[]
+    agentsCouponRedemptions       AgentsCouponRedemption[]
+
+    @@unique([user_id, name])
+    @@index([user_id])
+    @@index([created_at])
+    @@index([github_installation_id])
+    @@index([discord_guild_id])
+    @@map("teams")
+}
+
+model TeamMember {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id    String   @db.Uuid
+    user_id    String
+    email      String
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+
+    team Team @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    user User @relation("TeamMemberUser", fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@unique([team_id, user_id])
+    @@index([team_id])
+    @@index([user_id])
+    @@map("team_members")
+}
+
+model StudioProject {
+    id                   String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id              String
+    team_id              String    @db.Uuid
+    name                 String
+    workspace_files      Json      @default("{}") @db.JsonB
+    deployed_slug        String
+    deployed_agent_id    String?   @unique @db.Uuid
+    sandbox_id           String?
+    thread_id            String?   @db.Uuid
+    session_status       String?
+    session_last_seen_at DateTime? @db.Timestamptz(6)
+    created_at           DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at           DateTime  @default(now()) @db.Timestamptz(6)
+
+    user          User           @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    team          Team           @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    deployedAgent AnAgentConfig? @relation(fields: [deployed_agent_id], references: [id], onDelete: SetNull)
+
+    @@unique([team_id, deployed_slug])
+    @@index([user_id, updated_at(sort: Desc)])
+    @@index([team_id, updated_at(sort: Desc)])
+    @@map("studio_projects")
+}
+
+model TeamInviteLink {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id    String   @unique @db.Uuid
+    token      String   @unique @db.VarChar(12)
+    created_by String
+    is_active  Boolean  @default(true)
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+
+    team    Team @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    creator User @relation("TeamInviteLinkCreator", fields: [created_by], references: [id], onDelete: Cascade)
+
+    @@index([token])
+    @@index([team_id])
+    @@map("team_invite_links")
+}
+
+model TeamRepositorySandbox {
+    id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id         String   @db.Uuid
+    repository      String
+    sandbox_id      String?
+    sandbox_config  Json?
+    env_vars        Json?
+    setup_status    String   @default("not_setup")
+    setup_error     String?
+    framework       String?
+    wizard_messages Json?
+    file_tree       Json?
+    installation_id String?
+    created_at      DateTime @default(now()) @db.Timestamptz(6)
+    updated_at      DateTime @default(now()) @db.Timestamptz(6)
+
+    team Team @relation(fields: [team_id], references: [id], onDelete: Cascade)
+
+    @@unique([team_id, repository])
+    @@index([team_id])
+    @@map("team_repository_sandboxes")
+}
+
+model TeamPendingInvite {
+    id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id      String   @db.Uuid
+    email        String
+    invited_by   String
+    status       String   @default("pending") // pending, accepted, revoked
+    created_at   DateTime @default(now()) @db.Timestamptz(6)
+    last_sent_at DateTime @default(now()) @db.Timestamptz(6)
+
+    team    Team @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    inviter User @relation("TeamPendingInviteInviter", fields: [invited_by], references: [id], onDelete: Cascade)
+
+    @@unique([team_id, email])
+    @@index([team_id])
+    @@index([email])
+    @@index([status])
+    @@map("team_pending_invites")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model UsersToPlan {
+    id           Int       @id @default(autoincrement())
+    created_at   DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at   DateTime  @default(now()) @db.Timestamp(6)
+    user_id      String?   @unique
+    plan_id      Int?
+    status       String?
+    meta         Json?     @db.Json
+    last_paid_at DateTime? @db.Timestamp(6)
+    plan         Plan?     @relation(fields: [plan_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    user         User?     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+    @@map("users_to_plans")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model UsersToPlanAgents {
+    id           BigInt    @id @default(autoincrement())
+    created_at   DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at   DateTime  @default(now()) @db.Timestamp(6)
+    user_id      String?   @unique
+    plan_id      Int?
+    status       String?
+    meta         Json?     @db.Json
+    last_paid_at DateTime? @db.Timestamp(6)
+    plan         Plan?     @relation(fields: [plan_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+    user         User?     @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+    @@map("users_to_plans_agents")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicProject {
+    id              String            @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id         String
+    name            String
+    is_mcp          Boolean           @default(false)
+    is_public       Boolean           @default(false)
+    created_at      DateTime          @default(now()) @db.Timestamptz(6)
+    team_id         String?           @db.Uuid
+    preview_url     String?
+    user            User              @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    team            Team?             @relation(fields: [team_id], references: [id], onDelete: SetNull)
+    chats           MagicChat[]
+    canvas_snapshot Json?
+    favorites       ProjectFavorite[]
+    deleted_at      DateTime?         @db.Timestamptz(6)
+
+    @@index([team_id])
+    @@map("magic_projects")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicCloneSiteCache {
+    id         Int      @id @default(autoincrement())
+    url        String
+    sandbox_id String
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+
+    @@map("magic_clone_site_cache")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicChat {
+    id                  String                         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    project_id          String                         @db.Uuid
+    name                String
+    messages            Json?
+    sandbox_id          String?
+    sandbox_url         String?
+    config_slug         String?
+    stream_id           String?
+    explore_tag         String?
+    explore_sandbox_id  String?
+    created_at          DateTime                       @default(now()) @db.Timestamptz(6)
+    deploy_slug         String?
+    deployed_at         DateTime?                      @db.Timestamptz(6)
+    deleted_at          DateTime?                      @db.Timestamptz(6)
+    project             MagicProject                   @relation(fields: [project_id], references: [id], onDelete: Cascade)
+    userMessages        MagicChatMessageUser[]
+    assistantMessages   MagicChatMessageAssistant[]
+    commitHashToMessage MagicChatCommitHashToMessage[]
+    subChats            MagicSubChat[]
+
+    @@map("magic_chats")
+}
+
+model MagicSubChat {
+    id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    chat_id    String    @db.Uuid
+    name       String
+    stream_id  String?
+    created_at DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at DateTime  @default(now()) @db.Timestamptz(6)
+    deleted_at DateTime? @db.Timestamptz(6)
+    messages   Json?
+
+    chat MagicChat @relation(fields: [chat_id], references: [id], onDelete: Cascade)
+
+    @@map("magic_sub_chats")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicChatCommitHashToMessage {
+    id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    commit_hash   String
+    magic_chat_id String
+    message_id    String
+    created_at    DateTime @default(now()) @db.Timestamptz(6)
+
+    chat MagicChat @relation(fields: [magic_chat_id], references: [id], onDelete: Cascade)
+
+    @@map("magic_chat_commit_hash_to_message")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicChatMessageUser {
+    id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    chat_id    String    @db.Uuid
+    content    String
+    context    Json? // Component selections and generation context
+    created_at DateTime  @default(now()) @db.Timestamptz(6)
+    deleted_at DateTime? @db.Timestamptz(6)
+
+    chat     MagicChat       @relation(fields: [chat_id], references: [id], onDelete: Cascade)
+    chatLogs MagicChatLogs[]
+
+    @@index([chat_id, created_at])
+    @@index([chat_id, deleted_at])
+    @@map("magic_chat_messages_users")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicChatMessageAssistant {
+    id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    chat_id     String    @db.Uuid
+    content     String
+    status      String
+    error       String?
+    snapshot_id String?   @db.Uuid
+    created_at  DateTime  @default(now()) @db.Timestamptz(6)
+    deleted_at  DateTime? @db.Timestamptz(6)
+
+    chat     MagicChat          @relation(fields: [chat_id], references: [id], onDelete: Cascade)
+    snapshot MagicChatSnapshot? @relation(fields: [snapshot_id], references: [id], onDelete: SetNull)
+
+    @@index([chat_id, created_at])
+    @@index([chat_id, deleted_at])
+    @@map("magic_chat_messages_assistants")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicChatSnapshot {
+    id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    code           String?
+    preview_url    String?
+    codesandbox_id String?
+    created_at     DateTime @default(now()) @db.Timestamptz(6)
+
+    assistantMessages MagicChatMessageAssistant[]
+    analytics         MagicChatAnalytics[]
+
+    @@map("magic_chat_snapshots")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicChatLogs {
+    id              Int      @id @default(autoincrement())
+    log             String
+    error_log       String?
+    profile_log     String
+    profile         Json
+    total_time      Float    @db.Real
+    config          Json
+    user_message_id String   @db.Uuid
+    created_at      DateTime @default(now()) @db.Timestamptz(6)
+
+    userMessage MagicChatMessageUser @relation(fields: [user_message_id], references: [id], onDelete: Cascade)
+
+    @@index([user_message_id])
+    @@map("magic_chat_logs")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicChatAnalytics {
+    id          Int               @id @default(autoincrement())
+    snapshot_id String            @db.Uuid
+    action      String?
+    source      String? // "magic-chat", "magic-chat-old", "canvas"
+    project_id  String?           @db.Uuid // Add project context for better analytics
+    metadata    Json? // Additional properties like Amplitude
+    created_at  DateTime          @default(now()) @db.Timestamptz(6)
+    snapshot    MagicChatSnapshot @relation(fields: [snapshot_id], references: [id], onDelete: Cascade)
+
+    @@index([snapshot_id])
+    @@index([action])
+    @@index([source])
+    @@index([project_id])
+    @@map("magic_chat_analytics")
+}
+
+/// Track feed interactions for analytics
+model FeedAnalytics {
+    id          Int      @id @default(autoincrement())
+    user_id     String
+    feed_type   String // "foryou" | "followed"
+    source_type String // "trending" | "from_bookmarked_author" | "similar" | "demo" | "bookmark"
+    demo_id     Int
+    action      String // "view" | "click" | "bookmark" | "copy_prompt"
+    created_at  DateTime @default(now()) @db.Timestamptz(6)
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    demo Demo @relation(fields: [demo_id], references: [id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@index([feed_type])
+    @@index([source_type])
+    @@index([action])
+    @@index([created_at])
+    @@map("feed_analytics")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model SystemStatus {
+    id         Int      @id @default(autoincrement())
+    message    String
+    severity   String   @default("info")
+    is_active  Boolean  @default(false)
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
+    created_by String
+    updated_by String
+
+    @@map("system_status")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model SocialPost {
+    component_id  Int              @map("component_id")
+    platform      SocialPlatform
+    post_id       String?          @map("post_id")
+    created_at    DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+    posted_at     DateTime?        @map("posted_at") @db.Timestamptz(6)
+    scheduled_for DateTime?        @map("scheduled_for") @db.Timestamptz(6)
+    status        SocialPostStatus @default(awaiting_approval)
+    notes         String? // For approval workflow notes
+    approved_by   String?          @map("approved_by") // User who approved the post
+    approved_at   DateTime?        @map("approved_at") @db.Timestamptz(6)
+    component     Component        @relation(fields: [component_id], references: [id], onDelete: Cascade)
+
+    @@id([component_id, platform])
+    @@index([component_id])
+    @@index([platform])
+    @@index([created_at])
+    @@index([posted_at])
+    @@index([scheduled_for])
+    @@index([status])
+    @@map("social_posts")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model MagicPrefillText {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    text       String
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+
+    @@map("magic_prefill_text")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model DemoSandboxCache {
+    id             Int      @id @default(autoincrement())
+    demo_id        Int      @unique
+    codesandbox_id String
+    created_at     DateTime @default(now()) @db.Timestamptz(6)
+    demo           Demo     @relation(fields: [demo_id], references: [id], onDelete: Cascade)
+
+    @@index([demo_id])
+    @@map("demo_sandbox_cache")
+}
+
+/// Materialized view for component analytics aggregated by activity type
+view MvComponentAnalytics {
+    component_id  Int
+    activity_type String @db.VarChar
+    count         Float
+
+    @@unique([component_id, activity_type])
+    @@map("mv_component_analytics")
+}
+
+view MvDemoBookmarks {
+    demo_id         Int
+    bookmarks_count Int
+
+    @@unique([demo_id])
+    @@map("demo_bookmarks_mv")
+}
+
+view MvComponentActivity {
+    component_id    Int
+    downloads_count Int
+    view_count      Int
+
+    @@unique([component_id])
+    @@map("component_activity_mv")
+}
+
+view TagDemoStats {
+    tag_slug        String   @db.VarChar
+    demo_id         Int
+    bookmarks_count Int
+    created_at      DateTime @db.Timestamptz(6)
+    component_id    Int
+    downloads_count Int
+
+    @@unique([tag_slug, demo_id])
+    @@map("tag_demo_stats_mv")
+}
+
+enum ApiPlan {
+    free
+    pro
+    enterprise
+
+    @@map("api_plan")
+}
+
+enum BundlePlanType {
+    individual
+    team
+    enterprise
+
+    @@map("bundle_plan_type")
+}
+
+enum DemoHuntCategory {
+    marketing
+    ui
+    seasonal
+
+    @@map("demo_hunt_category")
+}
+
+enum PaymentStatus {
+    pending
+    paid
+    rejected
+    refunded
+
+    @@map("payment_status")
+}
+
+/// This enum is commented in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+enum SubmissionStatus {
+    on_review
+    featured
+    posted
+    rejected
+
+    @@map("submission_status")
+}
+
+enum UserRole {
+    designer
+    frontend_developer
+    backend_developer
+    product_manager
+    entrepreneur
+
+    @@map("user_role")
+}
+
+enum SocialPlatform {
+    twitter
+    instagram
+    linkedin
+    facebook
+    pinterest
+
+    @@map("social_platform")
+}
+
+enum SocialPostStatus {
+    awaiting_approval
+    approved
+    posted
+    scheduled
+    failed
+
+    @@map("social_post_status")
+}
+
+enum ProcessingStatus {
+    pending
+    processing
+    completed
+    failed
+    retrying
+
+    @@map("processing_status")
+}
+
+model ProductFeedback {
+    id        String   @id @default(cuid())
+    userId    String?  @map("user_id") // nullable для неавторизованных пользователей
+    product   String // "magic" | "21st"
+    pmfScore  Int?     @map("pmf_score") // 0 = Not disappointed, 1 = Somewhat, 2 = Very disappointed
+    npsScore  Int?     @map("nps_score") // 0-10
+    comment   String?
+    createdAt DateTime @default(now()) @map("created_at")
+
+    // Связь с пользователем
+    user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+    @@index([userId])
+    @@index([product])
+    @@index([createdAt])
+    @@index([product, createdAt])
+    @@map("product_feedback")
+}
+
+model BookmarkList {
+    id         String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id    String
+    name       String
+    created_at DateTime           @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    updated_at DateTime           @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    user       User               @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    items      BookmarkListItem[]
+
+    @@unique([user_id, name])
+    @@index([user_id])
+    @@map("bookmark_lists")
+}
+
+model BookmarkListItem {
+    bookmark_list_id String       @db.Uuid
+    demo_id          Int
+    user_id          String
+    added_at         DateTime     @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+    bookmarkList     BookmarkList @relation(fields: [bookmark_list_id], references: [id], onDelete: Cascade)
+    demo             Demo         @relation(fields: [demo_id], references: [id], onDelete: Cascade)
+    user             User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@id([bookmark_list_id, demo_id])
+    @@index([bookmark_list_id])
+    @@index([demo_id, user_id])
+    @@map("bookmark_list_items")
+}
+
+/// Model for storing toolbar authentication tokens
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ToolbarToken {
+    id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id       String
+    token         String    @unique
+    refresh_token String?   @unique
+    expires_at    DateTime  @db.Timestamptz(6)
+    created_at    DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at    DateTime  @default(now()) @db.Timestamptz(6)
+    last_used_at  DateTime? @db.Timestamptz(6)
+    user_agent    String?
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@index([token])
+    @@index([expires_at])
+    @@map("toolbar_tokens")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ProjectFavorite {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id    String
+    project_id String   @db.Uuid
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
+
+    user    User         @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    project MagicProject @relation(fields: [project_id], references: [id], onDelete: Cascade)
+
+    @@unique([user_id, project_id])
+    @@index([user_id])
+    @@index([project_id])
+    @@index([created_at])
+    @@map("project_favorites")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model StyleProfile {
+    id                 String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    url                String             @unique
+    url_slug           String
+    site_name          String?
+    css                String? // Complete CSS theme with :root, .dark, and @theme inline
+    markdown_content   String
+    structured_data    Json?
+    generated_at       DateTime?          @default(now()) @db.Timestamptz(6)
+    updated_at         DateTime?          @default(now()) @db.Timestamptz(6)
+    status             String?            @default("completed")
+    error_message      String?
+    // New fields for improved architecture
+    source_type        String?            @default("community") // preset, community, custom
+    created_by_team_id String?            @db.Uuid
+    is_public          Boolean?           @default(true)
+    teamStyleProfiles  TeamStyleProfile[]
+
+    @@index([url])
+    @@index([url_slug])
+    @@index([generated_at])
+    @@index([status])
+    @@index([source_type])
+    @@index([is_public])
+    @@index([created_by_team_id])
+    @@map("style_profiles")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model TeamStyleProfile {
+    id                String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id           String   @db.Uuid
+    style_profile_id  String   @db.Uuid
+    created_at        DateTime @default(now()) @db.Timestamptz(6)
+    updated_at        DateTime @default(now()) @db.Timestamptz(6)
+    // New fields for improved relationships
+    relationship_type String?  @default("saved") // saved, custom
+    is_active         Boolean? @default(false)
+
+    team         Team         @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    styleProfile StyleProfile @relation(fields: [style_profile_id], references: [id], onDelete: Cascade)
+
+    @@unique([team_id, style_profile_id])
+    @@index([team_id])
+    @@index([style_profile_id])
+    @@index([relationship_type])
+    @@index([is_active])
+    @@map("team_style_profiles")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CrawledApp {
+    id             String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    created_at     DateTime             @default(now()) @db.Timestamptz(6)
+    name           String
+    icon           String
+    public         Boolean              @default(false)
+    domain         String
+    pages          CrawledPage[]
+    crawledAppTags CrawledAppTag[]
+    flows          CrawledAppFlow[]
+    bookmarks      CrawledAppBookmark[]
+
+    @@map("crawled_apps")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CrawledPage {
+    id                      String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    html_source             String?
+    html_processed          String?
+    html_source_url         String?
+    html_processed_url      String?
+    css_full                String?
+    css_full_url            String?
+    screenshot_url          String?
+    preview_screenshot_url  String?
+    video_preview_url       String?
+    decomposition           Json?
+    tags_page               Json?
+    created_at              DateTime               @default(now()) @db.Timestamptz(6)
+    tags_all                Json?
+    url                     String
+    name                    String?
+    description             String?
+    embedding               Unsupported("vector")?
+    public                  Boolean                @default(false)
+    app_id                  String                 @db.Uuid
+    processing_status       ProcessingStatus       @default(pending)
+    processing_started_at   DateTime?              @db.Timestamptz(6)
+    processing_completed_at DateTime?              @db.Timestamptz(6)
+    processing_error        String?
+    processing_attempts     Int                    @default(0)
+    app                     CrawledApp             @relation(fields: [app_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    components              CrawledComponent[]
+    bookmarks               CrawledPageBookmark[]
+
+    @@index([processing_status])
+    @@index([processing_started_at])
+    @@map("crawled_pages")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CrawledPageBookmark {
+    page_id       String      @db.Uuid
+    user_id       String
+    bookmarked_at DateTime?   @default(now()) @db.Timestamptz(6)
+    page          CrawledPage @relation(fields: [page_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    user          User        @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@id([page_id, user_id], map: "crawled_page_bookmarks_pkey")
+    @@index([page_id], map: "idx_crawled_page_bookmarks_page_id")
+    @@index([user_id], map: "idx_crawled_page_bookmarks_user_id")
+    @@map("crawled_page_bookmarks")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CrawledComponentBookmark {
+    component_id  String           @db.Uuid
+    user_id       String
+    bookmarked_at DateTime?        @default(now()) @db.Timestamptz(6)
+    component     CrawledComponent @relation(fields: [component_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    user          User             @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@id([component_id, user_id], map: "crawled_component_bookmarks_pkey")
+    @@index([component_id], map: "idx_crawled_component_bookmarks_component_id")
+    @@index([user_id], map: "idx_crawled_component_bookmarks_user_id")
+    @@map("crawled_component_bookmarks")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CrawledAppBookmark {
+    app_id        String     @db.Uuid
+    user_id       String
+    bookmarked_at DateTime?  @default(now()) @db.Timestamptz(6)
+    app           CrawledApp @relation(fields: [app_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+    user          User       @relation(fields: [user_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+    @@id([app_id, user_id], map: "crawled_apps_bookmarks_pkey")
+    @@index([app_id], map: "idx_crawled_apps_bookmarks_app_id")
+    @@index([user_id], map: "idx_crawled_apps_bookmarks_user_id")
+    @@map("crawled_apps_bookmarks")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CrawledComponent {
+    id                      String                     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    page_id                 String                     @db.Uuid
+    name                    String?
+    description             String?
+    tags                    Json?
+    html_id                 String?
+    html_styled             String?
+    html_styled_url         String?
+    embedding               Unsupported("vector")?
+    screenshot_url          String?
+    video_preview_url       String?
+    created_at              DateTime                   @default(now()) @db.Timestamptz(6)
+    public                  Boolean                    @default(false)
+    processing_status       ProcessingStatus           @default(pending)
+    processing_started_at   DateTime?                  @db.Timestamptz(6)
+    processing_completed_at DateTime?                  @db.Timestamptz(6)
+    processing_error        String?
+    processing_attempts     Int                        @default(0)
+    page                    CrawledPage                @relation(fields: [page_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+    bookmarks               CrawledComponentBookmark[]
+
+    @@index([page_id])
+    @@index([embedding])
+    @@index([processing_status])
+    @@index([processing_started_at])
+    @@map("crawled_components")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CrawledAppTag {
+    id         Int        @id @default(autoincrement())
+    app_id     String     @db.Uuid
+    tag_id     Int
+    created_at DateTime   @default(now()) @db.Timestamptz(6)
+    app        CrawledApp @relation(fields: [app_id], references: [id], onDelete: Cascade)
+    tag        Tag        @relation(fields: [tag_id], references: [id], onDelete: Cascade)
+
+    @@unique([app_id, tag_id])
+    @@index([app_id])
+    @@index([tag_id])
+    @@map("crawled_app_tags")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CrawledAppFlow {
+    id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    app_id     String     @db.Uuid
+    pages      String[]   @default([]) @db.Uuid
+    created_at DateTime   @default(now()) @db.Timestamptz(6)
+    name       String     @default("")
+    app        CrawledApp @relation(fields: [app_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+    @@index([app_id])
+    @@map("crawled_app_flows")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CanvasAccess {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id    String? // ID пользователя, которому выдан доступ (может быть null для email-only записей)
+    email      String   @unique
+    granted_by String? // ID пользователя-админа, который выдал доступ
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    notes      String? // Опциональные заметки об этом пользователе
+
+    user      User? @relation("CanvasAccessUser", fields: [user_id], references: [id], onDelete: SetNull)
+    grantedBy User? @relation("CanvasAccessGrantedBy", fields: [granted_by], references: [id], onDelete: SetNull)
+
+    @@index([user_id])
+    @@index([email])
+    @@index([created_at])
+    @@map("canvas_access")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CanvasOnboardingSubmission {
+    id      String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id String // Clerk user ID
+    email   String
+
+    // User type from banner
+    user_type String // 'landing' | 'app_developer' | 'testing'
+
+    // Product info
+    product_link String?
+
+    // GitHub connection
+    github_username   String?
+    github_repository String? // Repository name or URL
+
+    // Onboarding type choice
+    onboarding_type String? // 'call' | 'waitlist' | 'sf_offline'
+
+    // Metadata
+    booking_metadata Json? // JSONB for Cal.com booking details
+
+    // Status workflow: pending → repo_setup → access_granted → onboarded
+    status      String    @default("pending") // 'pending' | 'repo_setup' | 'access_granted' | 'onboarded' | 'rejected'
+    reviewed_by String? // Admin user ID who reviewed
+    reviewed_at DateTime? @db.Timestamptz(6)
+
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
+
+    @@index([email])
+    @@index([user_id])
+    @@index([status])
+    @@index([created_at])
+    @@map("canvas_onboarding_submissions")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model CodeChunk {
+    id                String                       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    component_id      Int?
+    demo_id           Int?
+    chunk_text        String
+    code_type         String                       @db.VarChar(50)
+    start_line        Int
+    end_line          Int
+    file_path         String                       @db.VarChar(500)
+    component_name    String?                      @db.VarChar(255)
+    symbols           Json                         @default("[]")
+    imports           Json                         @default("[]")
+    language          String                       @default("typescript") @db.VarChar(50)
+    uses_hooks        Boolean                      @default(false)
+    has_jsx           Boolean                      @default(false)
+    /// Flag set by AST pass to mark trivial demo wrappers (import + render only)
+    is_simple_wrapper Boolean                      @default(false)
+    contains_api      Json                         @default("[]")
+    complexity_score  Int                          @default(0)
+    tags              Json                         @default("{}")
+    embedding         Unsupported("vector(2560)")?
+    created_at        DateTime                     @default(now()) @db.Timestamptz(6)
+    updated_at        DateTime                     @default(now()) @db.Timestamptz(6)
+
+    component Component? @relation(fields: [component_id], references: [id], onDelete: Cascade)
+    demo      Demo?      @relation(fields: [demo_id], references: [id], onDelete: Cascade)
+
+    @@index([component_id])
+    @@index([demo_id])
+    @@index([code_type])
+    @@index([file_path])
+    @@index([uses_hooks])
+    @@index([has_jsx])
+    @@index([is_simple_wrapper])
+    @@index([embedding])
+    @@map("code_chunks")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model ScheduledEmail {
+    id            String             @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id       String
+    email         String
+    email_type    ScheduledEmailType
+    scheduled_for DateTime           @db.Timestamptz(6)
+    sent_at       DateTime?          @db.Timestamptz(6)
+    status        EmailStatus        @default(pending)
+    created_at    DateTime           @default(now()) @db.Timestamptz(6)
+    error_message String?
+    user_data     Json? // Store user info (firstName, username) at time of scheduling
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@index([email])
+    @@index([scheduled_for])
+    @@index([status])
+    @@index([email_type])
+    @@map("scheduled_emails")
+}
+
+enum ScheduledEmailType {
+    magic_promo
+    canvas_feedback_request
+}
+
+enum EmailStatus {
+    pending
+    sent
+    failed
+    cancelled
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model Waitlist {
+    id                            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    name                          String
+    email                         String
+    what_describes_you_best       String
+    what_describes_you_best_other String?
+    company_size                  String
+    created_at                    DateTime @default(now()) @db.Timestamptz(6)
+
+    @@index([email])
+    @@index([created_at])
+    @@map("waitlist")
+}
+
+model AgentsWaitlist {
+    id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    email      String
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+
+    @@index([email])
+    @@index([created_at])
+    @@map("agents_waitlist")
+}
+
+/// Logs for sandbox keep-alive cron job runs
+model SandboxKeepaliveLog {
+    id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    created_at  DateTime @default(now()) @db.Timestamptz(6)
+    total       Int
+    success     Int
+    failed      Int
+    skipped     Int      @default(0)
+    errors      Json?
+    duration_ms Int?
+
+    @@index([created_at(sort: Desc)])
+    @@map("sandbox_keepalive_logs")
+}
+
+/// Announcement campaigns for displaying banners to users
+model AnnouncementCampaign {
+    id                    String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    exp_id                String                @default(dbgenerated("gen_random_uuid()"))
+    name                  String
+    description           String?
+    is_active             Boolean               @default(true)
+    priority              Int                   @default(0)
+    banner_image_url      String?
+    banner_image_url_dark String?
+    cta_url               String?
+    target_pages          String[]              @default([])
+    target_roles          String[]              @default([])
+    target_plans          String[]              @default([])
+    starts_at             DateTime?             @db.Timestamptz(6)
+    ends_at               DateTime?             @db.Timestamptz(6)
+    created_at            DateTime              @default(now()) @db.Timestamptz(6)
+    updated_at            DateTime              @default(now()) @db.Timestamptz(6)
+    messages              AnnouncementMessage[]
+    events                AnnouncementEvent[]
+
+    @@index([is_active])
+    @@index([priority(sort: Desc)])
+    @@index([starts_at, ends_at])
+    @@map("announcement_campaigns")
+}
+
+/// Messages displayed within an announcement campaign
+model AnnouncementMessage {
+    id          String               @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    campaign_id String               @db.Uuid
+    icon        String
+    title       String
+    description String
+    sort_order  Int                  @default(0)
+    created_at  DateTime             @default(now()) @db.Timestamptz(6)
+    campaign    AnnouncementCampaign @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
+
+    @@index([campaign_id])
+    @@index([sort_order])
+    @@map("announcement_messages")
+}
+
+/// Events tracking for announcement campaigns (shown, clicked, closed, etc.)
+model AnnouncementEvent {
+    id          String                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id     String?
+    campaign_id String                @db.Uuid
+    event_type  AnnouncementEventType
+    page_source String?
+    metadata    Json?
+    created_at  DateTime              @default(now()) @db.Timestamptz(6)
+    campaign    AnnouncementCampaign  @relation(fields: [campaign_id], references: [id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@index([campaign_id])
+    @@index([event_type])
+    @@index([created_at(sort: Desc)])
+    @@index([campaign_id, event_type])
+    @@index([campaign_id, event_type, user_id, created_at])
+    @@map("announcement_events")
+}
+
+enum AnnouncementEventType {
+    shown
+    clicked_lets_go
+    clicked_remind_later
+    closed
+
+    @@map("announcement_event_type")
+}
+
+model AgentChat {
+    id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id       String
+    team_id       String
+    name          String
+    sandbox_id    String?
+    credit_source String  @default("personal")
+
+    meta        Json?
+    created_at  DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at  DateTime  @default(now()) @db.Timestamptz(6)
+    deleted_at  DateTime? @db.Timestamptz(6)
+    archived_at DateTime? @db.Timestamptz(6)
+
+    user            User             @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    team            Team             @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    subChats        AgentSubChat[]
+    integrationTask IntegrationTask?
+
+    @@index([user_id, deleted_at])
+    @@index([team_id, deleted_at])
+    @@index([team_id, archived_at])
+    @@map("agent_chats")
+}
+
+model AgentSubChat {
+    id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    chat_id    String    @db.Uuid
+    name       String
+    mode       String    @default("agent") // "plan" or "agent"
+    stream_id  String? // Same pattern as MagicSubChat
+    messages   Json? // Same structure as MagicSubChat
+    created_at DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at DateTime  @default(now()) @db.Timestamptz(6)
+    deleted_at DateTime? @db.Timestamptz(6)
+
+    chat AgentChat @relation(fields: [chat_id], references: [id], onDelete: Cascade)
+
+    @@index([chat_id, deleted_at])
+    @@map("agent_sub_chats")
+}
+
+/// Tracks external integrations (Linear, GitHub, etc.) that trigger agent work
+model IntegrationTask {
+    id      String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    chat_id String? @unique @db.Uuid // Optional - null when pending repo selection
+    team_id String  @db.Uuid
+
+    // Source platform info
+    platform       String // "linear" | "github" | "slack" | "discord"
+    external_id    String // Issue ID, PR ID, thread ID, etc.
+    external_url   String? // Link back to the issue/thread
+    external_title String?
+
+    // Metadata (platform-specific data as JSON)
+    metadata Json? // { repo, branch, assignee, labels, etc. }
+
+    // Status tracking
+    status String  @default("pending") // pending, pending_repo, in_progress, completed, failed
+    pr_url String? // Created PR URL
+
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
+
+    chat AgentChat? @relation(fields: [chat_id], references: [id], onDelete: Cascade)
+    team Team       @relation(fields: [team_id], references: [id], onDelete: Cascade)
+
+    @@index([team_id, platform])
+    @@index([platform, external_id])
+    @@map("integration_tasks")
+}
+
+/// Desktop authentication - one-time codes for OAuth-like flow
+model DesktopAuthCode {
+    id         String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    code       String    @unique
+    user_id    String
+    expires_at DateTime  @db.Timestamptz(6)
+    used_at    DateTime? @db.Timestamptz(6)
+    created_at DateTime  @default(now()) @db.Timestamptz(6)
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([code])
+    @@index([user_id])
+    @@index([expires_at])
+    @@map("desktop_auth_codes")
+}
+
+/// Desktop sessions - long-lived tokens for desktop app
+model DesktopSession {
+    id            String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id       String
+    token         String    @unique
+    refresh_token String    @unique
+    expires_at    DateTime  @db.Timestamptz(6)
+    created_at    DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at    DateTime  @default(now()) @db.Timestamptz(6)
+    last_used_at  DateTime? @db.Timestamptz(6)
+    device_info   String?
+    revoked_at    DateTime? @db.Timestamptz(6)
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([user_id])
+    @@index([token])
+    @@index([refresh_token])
+    @@index([expires_at])
+    @@map("desktop_sessions")
+}
+
+/// Discord user links - maps Discord users to 1Code accounts for /1code command
+model DiscordUserLink {
+    id               String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    discord_user_id  String   @unique // Discord user ID
+    user_id          String // 1Code user ID
+    discord_username String? // Cached Discord username
+    created_at       DateTime @default(now()) @db.Timestamptz(6)
+    updated_at       DateTime @default(now()) @db.Timestamptz(6)
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([discord_user_id])
+    @@index([user_id])
+    @@map("discord_user_links")
+}
+
+/// Automation - triggers that auto-start agents on GitHub events
+model Automation {
+    id          String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id     String  @db.Uuid
+    name        String
+    description String?
+
+    platform          String  @default("github") // "github" for v1
+    triggers          Json    @default("[]") // Array of { id, trigger_type, filters }[]
+    agent_prompt      String? // Custom instructions for agent
+    target_repository String? // Target repo for Linear triggers (e.g., "owner/repo")
+
+    is_enabled         Boolean   @default(true)
+    add_to_inbox       Boolean   @default(false)
+    respond_to_trigger Boolean   @default(true)
+    execution_count    Int       @default(0)
+    last_executed   DateTime? @db.Timestamptz(6)
+
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+    updated_at DateTime @default(now()) @db.Timestamptz(6)
+    created_by String
+
+    team       Team                  @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    executions AutomationExecution[]
+
+    @@unique([team_id, name])
+    @@index([team_id, is_enabled])
+    @@map("automations")
+}
+
+/// Automation execution log
+model AutomationExecution {
+    id            String  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    automation_id String  @db.Uuid
+    chat_id       String? @db.Uuid
+
+    external_id   String
+    external_url  String?
+    status        String  @default("pending") // pending | success | failed | skipped
+    error_message String?
+
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+
+    automation Automation  @relation(fields: [automation_id], references: [id], onDelete: Cascade)
+    inboxReads InboxRead[]
+
+    @@index([automation_id])
+    @@map("automation_executions")
+}
+
+/// Tracks which inbox items a user has read
+model InboxRead {
+    id           String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    user_id      String
+    execution_id String   @db.Uuid
+    read_at      DateTime @default(now()) @db.Timestamptz(6)
+
+    user      User                @relation(fields: [user_id], references: [id], onDelete: Cascade)
+    execution AutomationExecution @relation(fields: [execution_id], references: [id], onDelete: Cascade)
+
+    @@unique([user_id, execution_id])
+    @@index([user_id])
+    @@index([execution_id])
+    @@map("inbox_reads")
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model AnAgentConfig {
+    id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id     String    @db.Uuid
+    name        String
+    slug        String
+    runtime     String    @default("claude-code")
+    bundle_hash String?
+    bundle_url  String?
+    env_vars    Json?     @db.JsonB
+    deployed_at DateTime? @db.Timestamptz(6)
+    created_at  DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at  DateTime  @default(now()) @db.Timestamptz(6)
+
+    active_deployment_id String? @unique @db.Uuid
+
+    team             Team                    @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    activeDeployment AnDeployment?           @relation("ActiveDeployment", fields: [active_deployment_id], references: [id], onDelete: SetNull)
+    deployments      AnDeployment[]          @relation("AgentDeployments")
+    sandboxes        AnSandbox[]
+    classifications  AnAgentClassification[]
+    studioProjects   StudioProject[]
+
+    @@unique([team_id, slug])
+    @@index([team_id])
+    @@index([active_deployment_id])
+    @@map("an_agent_configs")
+}
+
+model AnAgentClassification {
+    id                   String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    agent_id             String   @db.Uuid
+    bundle_hash          String
+    category             String
+    subcategory          String
+    summary              String
+    tool_categories      String[] @default([])
+    tool_classifications Json     @default("[]") @db.JsonB
+    classified_at        DateTime @default(now()) @db.Timestamptz(6)
+    created_at           DateTime @default(now()) @db.Timestamptz(6)
+
+    agent AnAgentConfig @relation(fields: [agent_id], references: [id], onDelete: Cascade)
+
+    @@unique([agent_id, bundle_hash])
+    @@index([agent_id])
+    @@index([category])
+    @@map("an_agent_classifications")
+}
+
+model AnDeployment {
+    id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    agent_id    String   @db.Uuid
+    version     Int      @default(1)
+    bundle_url  String
+    bundle_hash    String
+    sandbox_config Json?          @db.JsonB
+    metadata       Json?          @db.JsonB
+    status         String         @default("ready")
+    error          String?
+    deployed_at    DateTime       @default(now()) @db.Timestamptz(6)
+    created_at     DateTime       @default(now()) @db.Timestamptz(6)
+    completed_at   DateTime?      @db.Timestamptz(6)
+
+    agent          AnAgentConfig  @relation("AgentDeployments", fields: [agent_id], references: [id], onDelete: Cascade)
+    activeForAgent AnAgentConfig? @relation("ActiveDeployment")
+    sandboxes      AnSandbox[]
+    threads        AnThread[]
+
+    @@unique([agent_id, version])
+    @@index([agent_id])
+    @@index([agent_id, deployed_at(sort: Desc)])
+    @@index([agent_id, status])
+    @@map("an_deployments")
+}
+
+model AnMcpVault {
+    id          String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id     String    @db.Uuid
+    name        String
+    description String?
+    metadata    Json      @default("{}") @db.JsonB
+    is_default  Boolean   @default(false)
+    status      String    @default("active")
+    created_at  DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at  DateTime  @default(now()) @db.Timestamptz(6)
+    archived_at DateTime? @db.Timestamptz(6)
+
+    team        Team              @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    credentials AnMcpCredential[]
+    threads     AnThread[]
+
+    @@index([team_id])
+    @@index([team_id, status])
+    @@index([team_id, is_default])
+    @@map("an_mcp_vaults")
+}
+
+model AnMcpCredential {
+    id                    String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    vault_id              String    @db.Uuid
+    name                  String?
+    server_url            String
+    server_url_normalized String
+    host_pattern          String?
+    inject                Json      @default("{}") @db.JsonB
+    auth_type             String
+    encrypted_auth        String?
+    auth_meta             Json?     @db.JsonB
+    metadata              Json      @default("{}") @db.JsonB
+    status                String    @default("active")
+    last_error            String?
+    last_resolved_at      DateTime? @db.Timestamptz(6)
+    created_at            DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at            DateTime  @default(now()) @db.Timestamptz(6)
+    archived_at           DateTime? @db.Timestamptz(6)
+
+    vault                 AnMcpVault @relation(fields: [vault_id], references: [id], onDelete: Cascade)
+
+    @@index([vault_id])
+    @@index([vault_id, status])
+    @@index([vault_id, host_pattern])
+    @@map("an_mcp_credentials")
+}
+
+model AgentSkill {
+    id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    team_id     String   @db.Uuid
+    name        String
+    slug        String
+    description String?
+    content     String
+    tags        String[] @default([])
+    created_at  DateTime @default(now()) @db.Timestamptz(6)
+    updated_at  DateTime @default(now()) @db.Timestamptz(6)
+
+    team Team @relation(fields: [team_id], references: [id], onDelete: Cascade)
+
+    @@unique([team_id, slug])
+    @@index([team_id])
+    @@map("agent_skills")
+}
+
+model AnSandbox {
+    id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    agent_id          String    @db.Uuid
+    deployment_id     String?   @db.Uuid
+    client_sandbox_id String
+    sandbox_id        String?
+    status            String    @default("active")
+    error             String?
+    meta              Json?     @db.JsonB
+    invocation_team_id String?  @db.Uuid
+    created_at        DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at        DateTime  @default(now()) @db.Timestamptz(6)
+
+    agent      AnAgentConfig  @relation(fields: [agent_id], references: [id], onDelete: Cascade)
+    deployment AnDeployment?  @relation(fields: [deployment_id], references: [id], onDelete: SetNull)
+    threads    AnThread[]
+
+    @@unique([agent_id, client_sandbox_id])
+    @@index([agent_id])
+    @@index([status])
+    @@index([deployment_id])
+    @@map("an_sandboxes")
+}
+
+model AnThread {
+    id                String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    sandbox_id        String    @db.Uuid
+    deployment_id     String?   @db.Uuid
+    vault_id          String?   @db.Uuid
+    vault_ids         String[]  @default([]) @db.Uuid
+    name              String?
+    mode              String    @default("chat")
+    messages          Json?
+    stream_id         String?
+    claude_session_id String?
+    status            String    @default("streaming")
+    input_tokens      Int?
+    output_tokens     Int?
+    total_tokens      Int?
+    total_cost_usd    Float?
+    duration_ms       Int?
+    error             String?
+    created_at        DateTime  @default(now()) @db.Timestamptz(6)
+    updated_at        DateTime  @default(now()) @db.Timestamptz(6)
+    completed_at      DateTime? @db.Timestamptz(6)
+
+    sandbox    AnSandbox    @relation(fields: [sandbox_id], references: [id], onDelete: Cascade)
+    deployment AnDeployment? @relation(fields: [deployment_id], references: [id], onDelete: SetNull)
+    vault      AnMcpVault?  @relation(fields: [vault_id], references: [id], onDelete: SetNull)
+    spans      AnSpan[]
+
+    @@index([sandbox_id])
+    @@index([sandbox_id, status])
+    @@index([stream_id])
+    @@index([deployment_id])
+    @@index([vault_id])
+    @@map("an_threads")
+}
+
+model AnSpan {
+    id              String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    thread_id       String   @db.Uuid
+    span_id         String
+    parent_span_id  String?
+    trace_id        String
+    name            String
+    kind            String
+    start_time      BigInt
+    end_time        BigInt?
+    duration_ms     Int?
+    status          String
+    error           String?
+    input           Json?
+    output          Json?
+    attributes      Json?
+    created_at      DateTime @default(now()) @db.Timestamptz(6)
+
+    thread AnThread @relation(fields: [thread_id], references: [id], onDelete: Cascade)
+
+    @@index([thread_id])
+    @@index([trace_id])
+    @@map("an_spans")
+}
+
+model AnApiKey {
+    id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    key            String?   @unique
+    key_hash       String?   @unique
+    key_prefix     String?
+    team_id        String    @db.Uuid
+    user_id        String
+    name           String    @default("Default")
+    is_active      Boolean   @default(true)
+    created_at     DateTime  @default(now()) @db.Timestamptz(6)
+    last_used_at   DateTime? @db.Timestamptz(6)
+    expires_at     DateTime? @db.Timestamptz(6)
+    requests_limit Int       @default(1000)
+    requests_count Int       @default(0)
+
+    team Team @relation(fields: [team_id], references: [id], onDelete: Cascade)
+    user User @relation("AnApiKeyUser", fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@index([key])
+    @@index([key_hash])
+    @@index([team_id])
+    @@index([user_id])
+    @@map("an_api_keys")
+}
+
+model AgentsCoupon {
+    id              String                    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    code            String                    @unique
+    amount_cents    Int
+    max_redemptions Int?
+    is_active       Boolean                   @default(true)
+    created_at      DateTime                  @default(now()) @db.Timestamptz(6)
+    created_by      String
+    redemptions     AgentsCouponRedemption[]
+
+    @@index([code])
+    @@index([is_active])
+    @@map("agents_coupons")
+}
+
+model AgentsCouponRedemption {
+    id                  String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    coupon_id           String       @db.Uuid
+    team_id             String       @db.Uuid
+    user_id             String
+    metronome_credit_id String?
+    redeemed_at         DateTime     @default(now()) @db.Timestamptz(6)
+    coupon              AgentsCoupon @relation(fields: [coupon_id], references: [id], onDelete: Cascade)
+    team                Team         @relation(fields: [team_id], references: [id], onDelete: Cascade)
+
+    @@unique([coupon_id, team_id])
+    @@index([coupon_id])
+    @@index([team_id])
+    @@map("agents_coupon_redemptions")
+}
+
+/// Records search queries submitted via UI or external API for market analytics
+model SearchQuery {
+    id         BigInt   @id @default(autoincrement())
+    query      String
+    /// 'ui' = command-menu / community search bar, 'api' = external REST API
+    source     String   @default("ui")
+    created_at DateTime @default(now()) @db.Timestamptz(6)
+
+    @@index([created_at(sort: Desc)])
+    @@index([source])
+    @@map("search_queries")
+}

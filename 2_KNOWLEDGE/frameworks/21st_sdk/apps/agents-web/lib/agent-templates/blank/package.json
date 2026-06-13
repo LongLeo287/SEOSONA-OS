@@ -1,0 +1,9 @@
+{
+  "name": "blank-agent",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@21st-sdk/agent": "0.0.16"
+  }
+}

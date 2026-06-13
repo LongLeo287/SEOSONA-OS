@@ -1,0 +1,52 @@
+fullnameOverride: "opensandbox-server"
+namespaceOverride: "opensandbox-system"
+
+server:
+  replicaCount: 1
+  image:
+    repository: 308657715298.dkr.ecr.us-east-1.amazonaws.com/21st-opensandbox-server
+    tag: "block-pvc-poc-20260416-02"
+  nodeSelector:
+    workload: general
+    opensandbox-role: reference
+  tolerations: []
+  affinity: {}
+  gateway:
+    enabled: false
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 4Gi
+
+configToml: |
+  [server]
+  host = "0.0.0.0"
+  port = 80
+  log_level = "INFO"
+  api_key = "__REPLACE_WITH_TERRAFORM_OPEN_SANDBOX_API_KEY__"
+
+  [runtime]
+  type = "kubernetes"
+  execd_image = "opensandbox/execd:v1.0.11"
+
+  [kubernetes]
+  namespace = "opensandbox"
+  informer_enabled = true
+  informer_resync_seconds = 300
+  informer_watch_timeout_seconds = 60
+  workload_provider = "batchsandbox"
+  batchsandbox_template_file = "/etc/opensandbox/example.batchsandbox-template.yaml"
+
+  [secure_runtime]
+  type = "firecracker"
+  k8s_runtime_class = "kata-fc"
+
+  [storage]
+  allowed_host_paths = []
+
+  [egress]
+  image = "sandbox-registry.cn-zhangjiakou.cr.aliyuncs.com/opensandbox/egress:v1.0.7"
+  mode = "dns+nft"

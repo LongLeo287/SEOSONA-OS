@@ -1,0 +1,31 @@
+{
+  "name": "typeui",
+  "description": "Connect GitHub Copilot in VS Code to TypeUI for curated design systems, UI prompts, and layout variations.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Bergside LLC",
+    "email": "zoltan@bergside.com",
+    "url": "https://www.typeui.sh"
+  },
+  "homepage": "https://www.typeui.sh",
+  "repository": "https://github.com/bergside/typeui",
+  "license": "MIT",
+  "category": "Design",
+  "keywords": [
+    "typeui",
+    "vscode",
+    "github-copilot",
+    "mcp",
+    "ui",
+    "design-systems",
+    "prompts"
+  ],
+  "tags": [
+    "mcp",
+    "ui",
+    "design-systems",
+    "prompts",
+    "frontend"
+  ],
+  "mcpServers": ".mcp.json"
+}

@@ -1,0 +1,31 @@
+{
+  "name": "@bergside/opencode-typeui",
+  "version": "1.0.0",
+  "description": "OpenCode helper plugin and MCP configuration for TypeUI.",
+  "type": "module",
+  "main": "index.js",
+  "exports": "./index.js",
+  "files": [
+    "index.js",
+    "opencode.json",
+    "README.md"
+  ],
+  "keywords": [
+    "typeui",
+    "opencode",
+    "mcp",
+    "ui",
+    "design-systems",
+    "prompts"
+  ],
+  "homepage": "https://www.typeui.sh",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bergside/typeui.git",
+    "directory": "plugins/opencode/typeui"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@opencode-ai/plugin": "latest"
+  }
+}

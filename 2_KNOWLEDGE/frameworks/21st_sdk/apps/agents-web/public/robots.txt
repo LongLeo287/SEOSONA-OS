@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /auth/
+Disallow: /admin/
+Disallow: /preview/
+Disallow: /waitlist
+Disallow: /community/feed/
+Disallow: /community/bookmarks/
+
+User-agent: GPTBot
+Allow: /community/
+Disallow: /community/feed/
+Disallow: /community/bookmarks/
+
+User-agent: ClaudeBot
+Allow: /community/
+Disallow: /community/feed/
+Disallow: /community/bookmarks/
+
+User-agent: PerplexityBot
+Allow: /community/
+Disallow: /community/feed/
+Disallow: /community/bookmarks/
+
+Sitemap: https://21st.dev/sitemap.xml
+Sitemap: https://21st.dev/agents/sitemap.xml

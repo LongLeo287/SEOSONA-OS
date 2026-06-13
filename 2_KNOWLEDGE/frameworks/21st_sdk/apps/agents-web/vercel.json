@@ -1,0 +1,42 @@
+{
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "an": false,
+      "fix-*": false,
+      "feature-*": false
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/canvas/homepage",
+      "destination": "https://21st-dev-waitlist.vercel.app/"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/subscription/stripe-cron",
+      "schedule": "0 0 1 * *"
+    },
+    {
+      "path": "/api/cron/gen-usage-embeddings",
+      "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/cron/send-scheduled-emails",
+      "schedule": "*/15 * * * *"
+    },
+    {
+      "path": "/api/cron/weekly-top",
+      "schedule": "0 0 * * 1"
+    },
+    {
+      "path": "/api/cron/gen-code-embeddings",
+      "schedule": "0 1 * * *"
+    },
+    {
+      "path": "/api/cron/desktop-auth-cleanup",
+      "schedule": "0 3 * * *"
+    }
+  ]
+}

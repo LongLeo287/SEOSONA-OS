@@ -1,0 +1,10 @@
+id = "typeui"
+name = "TypeUI"
+description = "Model Context Protocol server for TypeUI design systems, UI prompts, and layout variations"
+version = "1.0.0"
+schema_version = 1
+authors = ["Bergside LLC <zoltan@bergside.com>"]
+repository = "https://github.com/bergside/typeui"
+
+[context_servers.typeui]
+name = "TypeUI MCP"

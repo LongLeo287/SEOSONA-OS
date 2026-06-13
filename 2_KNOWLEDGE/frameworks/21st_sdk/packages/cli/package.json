@@ -1,0 +1,41 @@
+{
+  "name": "@21st-sdk/cli",
+  "version": "0.0.28",
+  "description": "CLI for deploying AI agents to 21st Agents",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "bin": {
+    "21st": "dist/index.js",
+    "an": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "docs/**/*",
+    "src",
+    "!src/**/*.test.ts",
+    "AGENTS.md",
+    "README.md"
+  ],
+  "directories": {
+    "doc": "./docs"
+  },
+  "scripts": {
+    "prepack": "cp -r ../docs ./docs",
+    "postpack": "rm -rf ./docs",
+    "build": "tsup",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@clack/prompts": "^1.0.1",
+    "esbuild": "^0.24.0",
+    "tar": "^7.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsup": "^8.0.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

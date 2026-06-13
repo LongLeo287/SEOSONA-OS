@@ -1,0 +1,149 @@
+---
+title: "CLI Deploy"
+description: "Deploy agents from your terminal with the 21st SDK CLI. Bundle, deploy, and manage agents in cloud sandboxes."
+---
+
+# CLI Deploy
+
+Deploy agents from your terminal. The CLI bundles your code, uploads it, and spins up a cloud sandbox — all in one command.
+
+## Install
+
+```bash
+# Run directly with npx
+npx @21st-sdk/cli login
+npx @21st-sdk/cli deploy
+
+# Or install globally
+npm install -g @21st-sdk/cli
+an login
+an deploy
+```
+
+## Login
+
+Authenticate with your API key from the [dashboard](/an/api).
+
+```bash
+$ an login
+  Enter your API key: 21st_sk_...
+  Authenticated as John (team: my-team)
+```
+
+Credentials are saved to `~/.an/credentials`. You only need to log in once.
+
+## Create your agent
+
+```bash
+npm init -y
+npm install @21st-sdk/agent zod
+```
+
+Create `agents/my-agent/index.ts`:
+
+```ts
+import { agent, tool } from "@21st-sdk/agent"
+import { z } from "zod"
+
+export default agent({
+  model: "claude-sonnet-4-6",
+  systemPrompt: "You are a helpful coding assistant.",
+  tools: {
+    add: tool({
+      description: "Add two numbers",
+      inputSchema: z.object({ a: z.number(), b: z.number() }),
+      execute: async ({ a, b }) => ({
+        content: [{ type: "text", text: `${a + b}` }],
+      }),
+    }),
+  },
+})
+```
+
+## Deploy
+
+```bash
+$ an deploy
+  Bundling agents/my-agent/index.ts...
+  Bundled (12.3kb)
+  Deploying my-agent...
+
+  ✓ https://api.an.dev/v1/chat/my-agent
+
+  Agent: my-agent
+  Sandbox: sbx_abc123
+```
+
+Each deployable agent should live at `agents/<slug>/index.ts` or `agents/<slug>/index.js`. The CLI scans `./agents/` and deploys matching entry points it finds.
+
+## How deploy works
+
+1. **Bundle** — The CLI bundles your code with esbuild (Node 22, ESM, minified). `@21st-sdk/agent` is externalized — the sandbox provides it at runtime.
+2. **Upload** — The bundle is base64-encoded and sent to the deploy API with your agent slug and API key.
+3. **Sandbox** — The server creates an E2B sandbox with the 21st Agents runtime template (Node 24, git, curl, ripgrep, GitHub CLI). The agent bundle, credentials, and environment variables are injected.
+4. **Live** — The agent config is saved to the database. Your agent is immediately available at its chat endpoint.
+
+## Architecture
+
+```
+CLI (your machine)              Deploy API                    E2B Sandbox
+  │                                │                              │
+  ├─ Find entry point              │                              │
+  ├─ esbuild bundle (ESM)         │                              │
+  ├─ Base64 encode                │                              │
+  │                                │                              │
+  ├── POST /agents/deploy ───────>│                              │
+  │   { slug, bundle, apiKey }    │── Auth & validate            │
+  │                                │── Kill old sandbox (if any)  │
+  │                                │── Create sandbox ──────────>│
+  │                                │── Write agent-bundle.js ──>│
+  │                                │── Write .claude-proxy ────>│
+  │                                │── Write .env ─────────────>│
+  │                                │── Upsert AgentConfig (DB)   │
+  │                                │                              │
+  │<── 200 { slug, sandboxId, ────│                              │
+  │         url, deployedAt }      │                       Port 3003
+  ├─ Save .an/project.json        │                   Express server
+  └─ Print success                │                   ready for chat
+```
+
+## Agent configuration
+
+| Option | Default | Description |
+|--------|---------|-------------|
+| `model` | `"claude-sonnet-4-6"` | Model to use |
+| `runtime` | `"claude-code"` | `"claude-code"` or `"codex"` |
+| `systemPrompt` | `undefined` | Custom instructions |
+| `tools` | `{}` | Custom tool definitions |
+| `permissionMode` | `"default"` | `"default"`, `"acceptEdits"`, or `"bypassPermissions"` |
+| `maxTurns` | `50` | Max reasoning steps (1-500) |
+| `maxBudgetUsd` | `undefined` | Max spend in USD |
+
+## Lifecycle hooks
+
+- `onStart` — Runs when the agent starts
+- `onToolCall` — Runs before each tool call (return `false` to block)
+- `onToolResult` — Runs after each tool call
+- `onStepFinish` — Runs after each reasoning step
+- `onFinish` — Runs on successful completion
+- `onError` — Runs on error
+
+## Environment variables
+
+Set env vars from the [dashboard](/an/environment-variables). Defined tools can read them via `process.env` in the trusted remote environment. They are not injected into the sandbox itself.
+
+- **Storage**: JSON on the AgentConfig in the database
+- **Injection**: Injected into the defined tools' trusted remote environment, not the sandbox itself
+- **Updates**: Take effect on the next deploy
+
+## Project linking
+
+After first deploy, `.an/project.json` is created with `agentId` and `slug`. Subsequent deploys reuse the same slug. The slug defaults to your directory name. Add `.an/` to your `.gitignore`.
+
+## Sandbox runtime
+
+Each agent runs in an isolated E2B sandbox with Node.js 24, git, curl, ripgrep, and GitHub CLI. The sandbox auto-pauses after 30 minutes of inactivity and wakes on the next chat request.
+
+## Redeploying
+
+Run `an deploy` again to update. The old sandbox is killed, a new one is created with the updated bundle, and the agent URL stays the same.

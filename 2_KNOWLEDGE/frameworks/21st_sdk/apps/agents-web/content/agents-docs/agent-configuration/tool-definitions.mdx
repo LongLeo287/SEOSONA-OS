@@ -1,0 +1,79 @@
+---
+title: "Tools"
+description: "Built-in tools available to deployed agents."
+---
+
+# Tools
+
+Every agent comes with a set of built-in tools that can be individually enabled or disabled in the agent config. Tools are organized by category.
+
+## Read-only tools
+
+Search and read files without modifying anything.
+
+| Tool     | Description                                  |
+| -------- | -------------------------------------------- |
+| **Read** | Read file contents from the filesystem       |
+| **Glob** | Find files by glob pattern (e.g. `**/*.tsx`) |
+| **Grep** | Search file contents with regex patterns     |
+
+## Edit tools
+
+Create and modify files.
+
+| Tool      | Description                                              |
+| --------- | -------------------------------------------------------- |
+| **Edit**  | Make targeted edits to existing files (find and replace) |
+| **Write** | Create new files or overwrite existing ones              |
+
+## Execution tools
+
+Run commands in the sandbox environment.
+
+| Tool     | Description                                  |
+| -------- | -------------------------------------------- |
+| **Bash** | Execute shell commands with optional timeout |
+
+## Web tools
+
+Access external information.
+
+| Tool          | Description                             |
+| ------------- | --------------------------------------- |
+| **WebFetch**  | Fetch content from a URL and process it |
+| **WebSearch** | Search the web for information          |
+
+## MCP tools
+
+Agents can now connect to remote HTTP MCP servers.
+
+- Define servers inline with `mcpServers` in your agent config.
+- Attach one or more workspace vaults at run time with `vaultIds`.
+- Internal agents can pin vaults in code with `agent({ vaultIds: ["..."] })`.
+- If no `vaultIds` are passed, the relay tries `externalUserId`, then agent-pinned vaults, then the workspace default vault.
+- Pass `vaultIds: []` to deliberately run with no vaults.
+- When multiple vaults cover the same MCP URL, the first vault in the array wins.
+- Use vault metadata such as `{ "external_user_id": "usr_123" }` with `externalUserId` for per-end-user lookup. Metadata is returned in clear text, so do not store secrets there.
+- Coverage preflight can warn or reject when an agent declares MCP servers that the resolved vaults do not cover.
+- OAuth credentials can refresh server-side when they include `tokenEndpoint`, `clientId`, and `refreshToken`; supported token endpoint auth modes are `none`, `client_secret_basic`, and `client_secret_post`.
+- Each vault can contain up to 20 active credentials. Archive purges encrypted secret material; permanent delete uses `?force=true`.
+- Keep `.mcp.json` only for legacy compatibility.
+- See [/agents/docs/build/mcp-servers](/agents/docs/build/mcp-servers) for the current MCP flow.
+
+## Configuring tools
+
+In the agent config dialog, use the **Tools** section to select which tools are available:
+
+- **All tools** toggle — Enable or disable everything at once
+- **Category toggles** — Enable/disable an entire category
+- **Individual toggles** — Fine-grained control per tool
+
+By default, all tools are enabled when creating a new agent.
+
+## Tool permissions
+
+Tool execution is governed by the agent's [permission mode](/an/docs/agent-configuration/execution-modes):
+
+- **Default** — Agent asks for approval before risky actions (e.g. Bash commands, file writes)
+- **Accept Edits** — File edits are auto-approved, other risky actions still require approval
+- **Bypass All** — No approval needed, recommended for fully sandboxed environments

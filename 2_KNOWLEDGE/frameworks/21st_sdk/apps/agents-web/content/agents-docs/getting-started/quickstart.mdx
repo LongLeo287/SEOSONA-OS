@@ -1,0 +1,124 @@
+---
+title: "Quickstart"
+description: "Get your first AI agent running with 21st Agents in minutes."
+---
+
+# Quickstart
+
+Get your first AI agent running with 21st Agents in minutes.
+
+## 1. Get an API key
+
+Grab your API key (`21st_sk_...`) from the [dashboard](/an/app). 21st Agents automatically provisions one for your team, or you can create additional keys manually.
+
+## 2. Create an agent
+
+```bash
+npm init -y
+npm install @21st-sdk/agent zod
+```
+
+Create `agents/my-agent/index.ts`:
+
+```ts
+import { agent, tool } from "@21st-sdk/agent"
+import { z } from "zod"
+
+export default agent({
+  model: "claude-sonnet-4-6",
+  systemPrompt: "You are a helpful coding assistant.",
+  tools: {
+    add: tool({
+      description: "Add two numbers",
+      inputSchema: z.object({ a: z.number(), b: z.number() }),
+      execute: async ({ a, b }) => ({
+        content: [{ type: "text", text: `${a + b}` }],
+      }),
+    }),
+  },
+})
+```
+
+Deploy:
+
+```bash
+npx @21st-sdk/cli login    # authenticate with your API key
+npx @21st-sdk/cli deploy   # bundle and deploy to E2B sandbox
+```
+
+## 3. Get a session token
+
+Exchange your API key for a temporary session token:
+
+```bash
+curl -X POST https://your-app.com/api/an/token \
+  -H "Content-Type: application/json" \
+  -d '{ "teamId": "YOUR_TEAM_ID", "agent": "your-agent-slug" }'
+```
+
+This returns a JWT token scoped to your agent.
+
+## 4. Chat with the agent
+
+Send a message to the Relay Chat API:
+
+```bash
+curl -N -X POST https://relay.an.dev/v1/chat/YOUR_AGENT_SLUG \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "my-project-id",
+    "messages": [{
+      "id": "msg-1",
+      "role": "user",
+      "parts": [{ "type": "text", "text": "Hello, help me build a React component" }]
+    }]
+  }'
+```
+
+The response streams back as Server-Sent Events (SSE).
+
+## 5. Integrate with React
+
+Use the Vercel AI SDK for a drop-in React integration:
+
+```tsx
+import { Chat, DefaultChatTransport } from "ai"
+import { useChat } from "@ai-sdk/react"
+
+const chat = new Chat({
+  id: "my-project-id",
+  transport: new DefaultChatTransport({
+    api: "https://relay.an.dev/v1/chat/YOUR_AGENT_SLUG",
+    headers: { Authorization: "Bearer YOUR_TOKEN" },
+  }),
+})
+
+export function AgentChat() {
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    chat,
+    resume: true,
+  })
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {messages.map((m) => (
+        <div key={m.id}>{m.content}</div>
+      ))}
+      <input value={input} onChange={handleInputChange} />
+    </form>
+  )
+}
+```
+
+## 6. Test in the dashboard
+
+Before writing integration code, you can chat with your agent directly in the dashboard. Navigate to the [Playground](/an/playground), find your agent, and click the **Chat** button.
+
+## Next steps
+
+- [Build & Deploy](/an/docs/agent-projects) — Project structure, CLI, and deploy reference.
+- [Core concepts](/an/docs/getting-started/core-concepts) — Understand agents, skills, projects, and dialogs.
+- [Models](/an/docs/agent-configuration/models) — See all available models.
+- [Tools](/an/docs/agent-configuration/tool-definitions) — Learn about built-in agent tools.
+- [Chat API Reference](/an/docs/reference/api/chat) — Full API documentation.

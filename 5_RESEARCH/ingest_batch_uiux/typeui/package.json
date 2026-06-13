@@ -1,0 +1,56 @@
+{
+  "name": "typeui.sh",
+  "version": "0.7.1",
+  "description": "Generate design system specifications and style guides as skill files for AI coding providers",
+  "main": "dist/cli.js",
+  "bin": {
+    "typeui.sh": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "scripts": {
+    "dev": "tsx src/cli.ts",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "prepack": "npm run build",
+    "release:check": "npm run typecheck && npm run test && npm pack --dry-run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bergside/typeui"
+  },
+  "keywords": [
+    "cli",
+    "design system",
+    "skills",
+    "ai",
+    "design md",
+    "design skills",
+    "claude skills",
+    "ai skills",
+    "ui",
+    "ux"
+  ],
+  "author": "https://bergside.com",
+  "license": "MIT License",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18"
+  },
+  "homepage": "https://www.typeui.sh",
+  "dependencies": {
+    "commander": "^14.0.3",
+    "inquirer": "^12.11.1",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.18"
+  }
+}

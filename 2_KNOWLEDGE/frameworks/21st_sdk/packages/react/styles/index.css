@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * AN Agent Chat - CSS Custom Properties
+ * These are the default values. Consumers override via <AnAgentChat theme={...} />
+ * which calls applyTheme() to set these vars on the root element.
+ */
+:root, .an-root {
+  /* Typography */
+  --an-font-family: system-ui, sans-serif;
+  --an-text-size: 14px;
+  --an-text-size-sm: 13px;
+  --an-text-size-xs: 11px;
+  --an-line-height: 1.6;
+  --an-font-weight: 400;
+  --an-font-weight-medium: 500;
+  --an-font-weight-semibold: 600;
+
+  /* Geometry — all radii derive from --an-border-radius */
+  --an-border-radius: 16px;
+  --an-message-border-radius: var(--an-border-radius);
+  --an-input-border-radius: var(--an-border-radius);
+  --an-tool-border-radius: var(--an-border-radius);
+  --an-code-border-radius: var(--an-border-radius);
+
+  /* Layout — --an-message-gap is intentionally unset; density config provides the default */
+  --an-user-message-padding: 10px 14px;
+  --an-input-padding: 12px 16px;
+
+  /* Sizes */
+  --an-send-button-size: 32px;
+  --an-stop-button-size: 32px;
+  --an-send-button-border-radius: 9999px;
+
+  /* Colors - Light mode defaults */
+  --an-background: #ffffff;
+  --an-background-secondary: #f0f0f0;
+  --an-background-tertiary: #f8f8f8;
+  --an-foreground: #1a1a1a;
+  --an-foreground-muted: #737373;
+  --an-foreground-subtle: #a3a3a3;
+  --an-border-color: #e4e4e7;
+  --an-border-color-light: #ededf0;
+  --an-primary-color: #3b82f6;
+
+  /* User Messages */
+  --an-user-message-bg: #f5f5f5;
+  --an-user-message-text: #1a1a1a;
+
+  /* Input */
+  --an-input-background: #ffffff;
+  --an-input-border-color: #e4e4e7;
+  --an-input-color: #1a1a1a;
+  --an-input-placeholder-color: #a3a3a3;
+
+  /* Send/Stop Buttons */
+  --an-send-button-bg: #3b82f6;
+  --an-send-button-color: #ffffff;
+  --an-stop-button-bg: #1a1a1a;
+  --an-stop-button-color: #ffffff;
+
+  /* Tools */
+  --an-tool-background: #f7f7f8;
+  --an-tool-border-color: #e4e4e7;
+  --an-tool-color: #1a1a1a;
+  --an-tool-color-muted: #737373;
+
+  /* Code */
+  --an-code-background: #1e1e1e;
+  --an-code-color: #d4d4d4;
+  --an-code-font-family: ui-monospace, monospace;
+  --an-code-font-size: 13px;
+
+  /* Diff colors */
+  --an-diff-added-bg: rgba(34, 197, 94, 0.1);
+  --an-diff-added-border: rgba(34, 197, 94, 0.5);
+  --an-diff-added-text: #15803d;
+  --an-diff-removed-bg: rgba(239, 68, 68, 0.1);
+  --an-diff-removed-border: rgba(239, 68, 68, 0.5);
+  --an-diff-removed-text: #dc2626;
+}
+
+/* Dark mode defaults */
+.dark, .an-root.dark, .dark .an-root {
+  --an-background: #0a0a0a;
+  --an-background-secondary: #242424;
+  --an-background-tertiary: #141414;
+  --an-foreground: #fafafa;
+  --an-foreground-muted: #8c8c8c;
+  --an-foreground-subtle: #71717a;
+  --an-border-color: #2a2a2a;
+  --an-border-color-light: #1f1f1f;
+  --an-primary-color: #60a5fa;
+
+  --an-user-message-bg: #1a1a1a;
+  --an-user-message-text: #fafafa;
+
+  --an-input-background: #0a0a0a;
+  --an-input-border-color: #2a2a2a;
+  --an-input-color: #fafafa;
+  --an-input-placeholder-color: #71717a;
+
+  --an-send-button-bg: #60a5fa;
+  --an-send-button-color: #ffffff;
+  --an-stop-button-bg: #fafafa;
+  --an-stop-button-color: #0a0a0a;
+
+  --an-tool-background: #141414;
+  --an-tool-border-color: #2a2a2a;
+  --an-tool-color: #fafafa;
+  --an-tool-color-muted: #8c8c8c;
+
+  --an-code-background: #0a0a0a;
+  --an-code-color: #d4d4d4;
+
+  --an-diff-added-bg: rgba(34, 197, 94, 0.15);
+  --an-diff-added-border: rgba(34, 197, 94, 0.4);
+  --an-diff-added-text: #4ade80;
+  --an-diff-removed-bg: rgba(239, 68, 68, 0.15);
+  --an-diff-removed-border: rgba(239, 68, 68, 0.4);
+  --an-diff-removed-text: #f87171;
+}
+
+/* TextShimmer animation */
+@keyframes an-shimmer {
+  from { background-position: 100% center; }
+  to { background-position: 0% center; }
+}
+
+.an-text-shimmer {
+  display: inline-block;
+  background-size: 250% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  background-image:
+    linear-gradient(90deg, transparent calc(50% - var(--an-shimmer-spread, 100px)), var(--an-foreground-muted, #737373), transparent calc(50% + var(--an-shimmer-spread, 100px))),
+    linear-gradient(var(--an-foreground-subtle, #a3a3a3), var(--an-foreground-subtle, #a3a3a3));
+  background-repeat: no-repeat, padding-box;
+}
+
+.an-text-shimmer--active {
+  animation: an-shimmer var(--an-shimmer-duration, 2s) linear infinite;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Spinner animation */
+@keyframes an-spinner-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}

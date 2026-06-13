@@ -1,0 +1,141 @@
+---
+title: "Chat API"
+description: "Send messages to deployed agents and receive streaming responses via Server-Sent Events."
+---
+
+# Chat API
+
+The Chat API is the primary way to integrate deployed agents into your product. It accepts messages and streams responses in real time via Server-Sent Events (SSE).
+
+## Send a message
+
+```
+POST https://relay.an.dev/v1/chat/:slug
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `:slug` | path | The agent config slug (e.g. `my-agent`) |
+
+### Headers
+
+| Header | Value |
+|--------|-------|
+| `Authorization` | `Bearer <token>` — JWT token from `/api/an/token` |
+| `Content-Type` | `application/json` |
+
+### Request body
+
+```json
+{
+  "id": "my-project-id",
+  "messages": [
+    {
+      "id": "msg-1",
+      "role": "user",
+      "parts": [{ "type": "text", "text": "Your message here" }]
+    }
+  ]
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | string | Stable client project ID. Maps to a server-side Project and sandbox. Keep this stable across page refreshes. Rotate it to start a new conversation. |
+| `messages` | array | Array of message objects |
+| `messages[].id` | string | Unique message identifier |
+| `messages[].role` | string | `"user"` or `"assistant"` |
+| `messages[].parts` | array | Message content parts |
+
+### SSE response
+
+The response is a stream of Server-Sent Events:
+
+```
+data: {"type":"start"}
+data: {"type":"text-start","id":"..."}
+data: {"type":"text-delta","id":"...","delta":"Hello world"}
+data: {"type":"text-end","id":"..."}
+data: {"type":"message-metadata","messageMetadata":{
+  "sessionId":"...",
+  "totalCostUsd":0.034,
+  "inputTokens":3,
+  "outputTokens":5,
+  "durationMs":2487
+}}
+data: {"type":"finish"}
+data: [DONE]
+```
+
+## Resume a stream
+
+```
+GET https://relay.an.dev/v1/chat/:slug/:projectId/stream
+```
+
+Reconnect to an active stream after a disconnect. The project ID must match a project with an active streaming dialog.
+
+## Cancel a stream
+
+```
+DELETE https://relay.an.dev/v1/chat/:slug/:projectId/stream
+```
+
+Deterministically cancel an active stream. The server clears the `streamId` and marks the dialog as cancelled.
+
+## cURL example
+
+```bash
+curl -N -X POST https://relay.an.dev/v1/chat/YOUR_AGENT_SLUG \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "id": "project-frontend-redesign",
+    "messages": [{
+      "id": "msg-1",
+      "role": "user",
+      "parts": [{ "type": "text", "text": "Hello" }]
+    }]
+  }'
+```
+
+## React integration
+
+Use the Vercel AI SDK for streaming chat in React:
+
+```tsx
+import { Chat, DefaultChatTransport } from "ai"
+import { useChat } from "@ai-sdk/react"
+
+const projectId = "project-frontend-redesign"
+
+const chat = new Chat({
+  id: projectId,
+  transport: new DefaultChatTransport({
+    api: "https://relay.an.dev/v1/chat/YOUR_AGENT_SLUG",
+    headers: { Authorization: "Bearer YOUR_TOKEN" },
+  }),
+})
+
+export function AgentChat() {
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    chat,
+    resume: true,
+  })
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {messages.map((m) => (
+        <div key={m.id}>{m.content}</div>
+      ))}
+      <input value={input} onChange={handleInputChange} />
+    </form>
+  )
+}
+```
+
+## Project ID behavior
+
+- **Same project ID** across requests = continuation of the same conversation (server uses persisted `claudeSessionId` from the latest completed dialog)
+- **New project ID** = fresh conversation with a new sandbox
+- Store the project ID in `localStorage` to survive page refreshes

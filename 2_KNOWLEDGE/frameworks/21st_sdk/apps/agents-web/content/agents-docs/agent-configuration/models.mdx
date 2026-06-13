@@ -1,0 +1,46 @@
+---
+title: "Models"
+description: "Available models for Claude Code and Codex runtimes."
+---
+
+# Models
+
+21st Agents supports two runtimes — **Claude Code** (Anthropic) and **Codex** (OpenAI) — each with multiple model options. Select the runtime and model when creating an agent config in the dashboard.
+
+## Claude Code
+
+Anthropic's agent runtime for coding tasks with tool calling, file editing, and terminal execution.
+
+| Model | ID | Description |
+|-------|----|-------------|
+| Claude Sonnet 4.6 | `claude-sonnet-4-6` | Balanced performance — best for most agents (default) |
+| Claude Opus 4.6 | `claude-opus-4-6` | Most capable for complex reasoning tasks |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | Fast and efficient for simple tasks |
+
+## Codex
+
+OpenAI's agent runtime with strong code generation and reasoning capabilities.
+
+| Model | ID | Description |
+|-------|----|-------------|
+| GPT 5.4 | `gpt-5.4/medium` | Best for most coding tasks (medium reasoning) |
+| GPT 5.4 (High) | `gpt-5.4/high` | More reasoning for complex tasks |
+| GPT 5.4 (XHigh) | `gpt-5.4/xhigh` | Maximum reasoning effort |
+| GPT-5.3 Codex | `gpt-5.3-codex/medium` | Previous generation (medium reasoning) |
+| GPT-5.3 Codex (High) | `gpt-5.3-codex/high` | Previous generation (high reasoning) |
+| GPT-5.3 Codex (XHigh) | `gpt-5.3-codex/xhigh` | Previous generation (maximum reasoning) |
+| GPT-5.2 Codex | `gpt-5.2-codex/medium` | Legacy (medium reasoning) |
+| GPT-5.2 Codex (High) | `gpt-5.2-codex/high` | Legacy (high reasoning) |
+| GPT-5.2 Codex (XHigh) | `gpt-5.2-codex/xhigh` | Legacy (maximum reasoning) |
+| GPT-5.1 Codex Mini | `gpt-5.1-codex-mini/medium` | Fast and cost-effective |
+| GPT-5.2 | `gpt-5.2/medium` | General-purpose agentic model |
+
+## Choosing a model
+
+- **For most use cases**, start with `claude-sonnet-4-6` (Claude Code) or `gpt-5.4/medium` (GPT 5.4). These provide the best balance of quality and speed.
+- **For complex reasoning**, use `claude-opus-4-6` or `gpt-5.4/xhigh`.
+- **For speed-sensitive tasks**, use `claude-haiku-4-5-20251001` or `gpt-5.1-codex-mini/medium`.
+
+## Switching models
+
+To change an agent's model, edit the agent config in the [dashboard](/an/app) and select a different model. The change takes effect on the next chat session.

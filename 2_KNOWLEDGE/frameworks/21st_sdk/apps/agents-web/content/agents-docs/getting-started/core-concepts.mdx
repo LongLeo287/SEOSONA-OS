@@ -1,0 +1,104 @@
+---
+title: "Core concepts"
+description: "Understand the key building blocks of 21st Agents: agents, skills, projects, dialogs, and the Relay runtime."
+---
+
+# Core concepts
+
+21st Agents is built around a few key primitives that work together to deliver production-grade agent experiences.
+
+## Agent configs
+
+An agent config defines how an AI agent behaves. Each config is scoped to a team and includes:
+
+| Field | Description |
+|-------|-------------|
+| **Name & slug** | Human-readable name and URL-safe identifier |
+| **Runtime** | `claude-code` (Anthropic) or `codex` (OpenAI) |
+| **Model** | Specific model for the runtime (e.g. `claude-sonnet-4-6`) |
+| **System prompt** | Custom instructions, optionally layered on the default prompt |
+| **Tools** | Which built-in tools the agent can use |
+| **Permission mode** | How the agent handles tool approvals |
+| **Max turns** | Maximum reasoning steps before stopping (1–500) |
+| **Skills** | Attached reusable prompt snippets |
+
+Agents are **code-first** — you define them in code using `@21st-sdk/agent` and deploy via the CLI. The dashboard is for API keys, environment variables, monitoring, and logs. See [Build & Deploy](/an/docs/agent-projects) for details.
+
+## Skills
+
+A skill is a reusable prompt snippet that can be attached to any agent. Skills let you define domain-specific capabilities once and share them across multiple agents.
+
+Each skill has:
+
+- **Name & slug** — Identifier
+- **Description** — What the skill does
+- **Content** — The actual prompt instructions
+- **Tags** — For organization and filtering
+
+Create and manage skills in the [Skills](/an/skills) page.
+
+## Projects
+
+A project represents a workspace for an agent — it maps a client-provided project ID to server-side state. Each project is linked to:
+
+- An **agent config** that defines the agent's behavior
+- An optional **sandbox** (E2B) for isolated code execution
+- One or more **dialogs** (conversation turns)
+
+The project ID is stable across page refreshes and reconnections. Start a new conversation by rotating the project ID.
+
+## Dialogs
+
+A dialog is a single conversation turn within a project. Each dialog records:
+
+- **Messages** — Full conversation history (user + assistant + tool calls)
+- **Status** — `streaming`, `completed`, `error`, or `cancelled`
+- **Token usage** — Input tokens, output tokens, total tokens
+- **Cost** — Computed USD cost for the turn
+- **Duration** — Execution time in milliseconds
+- **Stream ID** — For reconnecting to an active stream
+
+View dialog details in the [Logs](/an/logs) page.
+
+## Relay
+
+Relay is the runtime service that manages agent execution. It handles:
+
+1. Receiving chat messages via the [Chat API](/an/docs/reference/api/chat)
+2. Routing to the configured agent runtime (Claude Code or Codex)
+3. Managing sandboxed execution environments
+4. Streaming responses back via Server-Sent Events
+5. Persisting session state for conversation continuation
+
+The Relay endpoint is: `https://relay.an.dev/v1/chat/:slug`
+
+## API keys
+
+API keys authenticate requests to the 21st Agents platform. Each key:
+
+- Has the format `21st_sk_` followed by 64 hex characters. Legacy `an_sk_` keys still work.
+- Is scoped to a team
+- Can be created, revoked, or rotated from the dashboard
+- Is automatically provisioned the first time a team uses the platform
+
+Keys are exchanged for temporary JWT tokens via `/api/an/token` before making chat requests.
+
+## Architecture overview
+
+```
+Your App (Frontend)
+    │
+    ├── Dashboard (API keys, skills, env vars, logs)
+    │       ↕ tRPC
+    │   21st Agents Backend (Next.js)
+    │       ↕ Prisma
+    │   PostgreSQL (configs, keys, projects, dialogs)
+    │
+    └── Chat integration
+            ↕ SSE streaming
+        Relay Runtime (Fly.io)
+            ↕
+        Agent execution (Claude Code / Codex)
+            ↕
+        E2B Sandbox (isolated execution)
+```

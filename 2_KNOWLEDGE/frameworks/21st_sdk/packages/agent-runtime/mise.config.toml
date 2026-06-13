@@ -1,0 +1,11 @@
+[tools]
+python = "3.12"
+uv = "latest"
+node = "20"
+yarn = "1.22.22"
+pnpm = "8.15.6"
+go = "1.22"
+rust = "1.77"
+java = "21"
+maven = "latest"
+gradle = "latest"

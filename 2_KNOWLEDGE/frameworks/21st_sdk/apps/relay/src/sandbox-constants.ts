@@ -1,0 +1,2 @@
+export const SANDBOX_TIMEOUT_MS = 30_000;
+export const SANDBOX_KEEPALIVE_INTERVAL_MS = 10_000;

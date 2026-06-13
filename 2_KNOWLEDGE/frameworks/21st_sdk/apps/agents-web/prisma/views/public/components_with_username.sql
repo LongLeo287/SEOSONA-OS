@@ -1,0 +1,30 @@
+SELECT
+  components.id,
+  components.component_names,
+  components.description,
+  components.code,
+  components.demo_code,
+  components.created_at,
+  components.updated_at,
+  components.user_id,
+  components.dependencies,
+  components.is_public,
+  components.downloads_count,
+  components.likes_count,
+  components.component_slug,
+  components.name,
+  components.demo_dependencies,
+  components.preview_url,
+  components.license,
+  components.fts,
+  components.direct_registry_dependencies,
+  components.registry,
+  components.demo_direct_registry_dependencies,
+  components.video_url,
+  users.username,
+  to_jsonb(users.*) AS "user"
+FROM
+  (
+    components
+    JOIN users ON ((components.user_id = users.id))
+  );

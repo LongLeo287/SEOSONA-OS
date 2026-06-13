@@ -1,0 +1,38 @@
+---
+title: "System prompts"
+description: "Configure agent behavior with custom system prompts."
+---
+
+# System prompts
+
+System prompts define the agent's behavior, personality, and domain knowledge. Each agent config has an optional system prompt field.
+
+## Default prompt
+
+When creating a Claude Code agent, you can toggle **"Include default Claude Code prompt"**. When enabled, the agent uses the built-in Claude Code system prompt as a base — your custom prompt is appended on top.
+
+This is recommended for most use cases, as the default prompt includes important instructions for tool usage, safety, and code quality.
+
+## Custom prompt
+
+Write your own instructions to customize the agent for your use case:
+
+```
+You are a frontend assistant for Acme Corp.
+
+Guidelines:
+- Always use TypeScript with strict mode
+- Prefer React Server Components where possible
+- Use Tailwind CSS for styling, never inline styles
+- Follow the existing patterns in the codebase
+- Run tests after making changes
+```
+
+When the default prompt toggle is **off**, your custom prompt is the only system prompt the agent receives.
+
+## Best practices
+
+- **Be specific** — Describe the agent's role, the tech stack, and coding conventions.
+- **Layer on defaults** — Keep the default prompt enabled and add domain-specific instructions on top.
+- **Keep it focused** — A concise, clear prompt performs better than a long, vague one.
+- **Test iteratively** — Use the [Chat](/an/playground) feature in the dashboard to test your prompt before deploying.

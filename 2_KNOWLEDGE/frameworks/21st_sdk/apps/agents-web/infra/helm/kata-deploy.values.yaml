@@ -1,0 +1,31 @@
+imagePullPolicy: IfNotPresent
+
+k8sDistribution: "k8s"
+
+nodeSelector:
+  workload: sandbox
+  self-managed: "true"
+
+tolerations:
+  - key: runtime
+    operator: Equal
+    value: kata-fc
+    effect: NoSchedule
+
+shims:
+  disableAll: true
+  fc:
+    enabled: true
+    containerd:
+      snapshotter: "devmapper"
+
+defaultShim:
+  amd64: fc
+  arm64: fc
+
+runtimeClasses:
+  enabled: true
+  createDefault: false
+
+node-feature-discovery:
+  enabled: false

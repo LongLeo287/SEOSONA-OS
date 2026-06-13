@@ -1,0 +1,91 @@
+{
+  "name": "@21st-sdk/react",
+  "version": "0.2.3",
+  "license": "MIT",
+  "description": "React components for 21st Agents chat UIs",
+  "homepage": "https://21st.dev/agents",
+  "publishConfig": {
+    "access": "public"
+  },
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./styles.css": "./dist/styles.css",
+    "./styles/index.css": "./styles/index.css"
+  },
+  "files": [
+    "dist",
+    "docs/**/*",
+    "styles",
+    "src",
+    "!src/**/*.test.ts",
+    "AGENTS.md",
+    "LICENSE",
+    "README.md"
+  ],
+  "directories": {
+    "doc": "./docs"
+  },
+  "keywords": [
+    "react",
+    "ai",
+    "agent",
+    "chat",
+    "ai-sdk",
+    "21st",
+    "21st.dev",
+    "components",
+    "ui"
+  ],
+  "sideEffects": [
+    "./dist/styles.css"
+  ],
+  "scripts": {
+    "prepack": "cp -r ../docs ./docs",
+    "postpack": "rm -rf ./docs",
+    "build": "tsup && tailwindcss -i styles/index.css -o dist/styles.css --minify",
+    "dev": "tsup --watch",
+    "lint": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "@ai-sdk/react": "^2.0.0",
+    "ai": "^5.0.0"
+  },
+  "dependencies": {
+    "motion": "^12.0.0",
+    "clsx": "^2.1.0",
+    "tailwind-merge": "^2.5.0",
+    "react-markdown": "^10.0.0",
+    "remark-gfm": "^4.0.0",
+    "react-syntax-highlighter": "^15.0.0",
+    "lucide-react": "^0.460.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/react-syntax-highlighter": "^15.0.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@ai-sdk/react": "^2.0.0",
+    "ai": "^5.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.4.5",
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0"
+  }
+}

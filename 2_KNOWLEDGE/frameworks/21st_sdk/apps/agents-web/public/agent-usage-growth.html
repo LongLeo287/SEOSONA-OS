@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agent Usage Growth — 21st.dev</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Google Sans", Roboto, sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      padding: 32px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .card {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 32px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6b7280;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+
+    .big-number {
+      font-size: 40px;
+      font-weight: 500;
+      color: #111;
+      line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    .growth-row {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    .growth-row svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .growth-text {
+      font-size: 13px;
+      color: #16a34a;
+      font-weight: 600;
+    }
+
+    .header-right {
+      text-align: right;
+      color: #6b7280;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .period-tag {
+      display: inline-block;
+      margin-top: 3px;
+      padding: 2px 8px;
+      background: #f3f4f6;
+      border-radius: 6px;
+      font-size: 11px;
+      color: #6b7280;
+      font-weight: 500;
+    }
+
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+    }
+
+    svg.chart {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="header">
+      <div>
+        <div class="subtitle">Agent usage — last week</div>
+        <div class="big-number">870,700</div>
+        <div class="growth-row">
+          <svg viewBox="0 0 24 24" fill="#16a34a"><path d="M7 14l5-5 5 5H7z"/></svg>
+          <span class="growth-text">10.6× growth over 4 weeks</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div>Mar 01 — Mar 29, 2026</div>
+        <span class="period-tag">weekly</span>
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <svg class="chart" viewBox="0 0 620 280" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8B7BF7" />
+            <stop offset="100%" stop-color="#7C6BF0" />
+          </linearGradient>
+        </defs>
+
+        <!--
+          Data: 81.9K, 336.0K, 465.5K, 870.7K
+          Chart area: x=60..590, y=20..230 (height=210)
+          Y range: 0..950K
+          Bar centers: 140, 270, 400, 530  |  bar width: 80
+        -->
+
+        <!-- Grid lines: 0, 200K, 400K, 600K, 800K -->
+        <line x1="60" y1="230" x2="580" y2="230" stroke="#e5e7eb" stroke-width="1"/>
+        <line x1="60" y1="185.8" x2="580" y2="185.8" stroke="#f0f0f0" stroke-width="1"/>
+        <line x1="60" y1="141.6" x2="580" y2="141.6" stroke="#f0f0f0" stroke-width="1"/>
+        <line x1="60" y1="97.4" x2="580" y2="97.4" stroke="#f0f0f0" stroke-width="1"/>
+        <line x1="60" y1="53.2" x2="580" y2="53.2" stroke="#f0f0f0" stroke-width="1"/>
+
+        <!-- Y-axis labels -->
+        <text x="52" y="234" text-anchor="end" fill="#9ca3af" font-size="10" font-family="-apple-system, sans-serif">0</text>
+        <text x="52" y="189.8" text-anchor="end" fill="#9ca3af" font-size="10" font-family="-apple-system, sans-serif">200K</text>
+        <text x="52" y="145.6" text-anchor="end" fill="#9ca3af" font-size="10" font-family="-apple-system, sans-serif">400K</text>
+        <text x="52" y="101.4" text-anchor="end" fill="#9ca3af" font-size="10" font-family="-apple-system, sans-serif">600K</text>
+        <text x="52" y="57.2" text-anchor="end" fill="#9ca3af" font-size="10" font-family="-apple-system, sans-serif">800K</text>
+
+        <!--
+          Bar Y positions (0..950K → y 230..230-210*val/950):
+          81.9K  → 230 - 210*(81.9/950)  = 230 - 18.1  = 211.9  h=18.1
+          336.0K → 230 - 210*(336/950)    = 230 - 74.3  = 155.7  h=74.3
+          465.5K → 230 - 210*(465.5/950)  = 230 - 102.9 = 127.1  h=102.9
+          870.7K → 230 - 210*(870.7/950)  = 230 - 192.4 = 37.6   h=192.4
+        -->
+
+        <!-- Bar 1: 81.9K -->
+        <rect x="100" y="212" width="80" height="18" rx="4" ry="4" fill="url(#barGrad)"/>
+        <text x="140" y="204" text-anchor="middle" fill="#6b7280" font-size="11" font-weight="600" font-family="-apple-system, sans-serif">81.9K</text>
+
+        <!-- Bar 2: 336.0K  (center=270) -->
+        <rect x="230" y="156" width="80" height="74" rx="4" ry="4" fill="url(#barGrad)"/>
+        <text x="270" y="148" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">
+          <tspan fill="#6b7280">336.0K </tspan><tspan fill="#16a34a">+310%</tspan>
+        </text>
+
+        <!-- Bar 3: 465.5K  (center=400) -->
+        <rect x="360" y="127" width="80" height="103" rx="4" ry="4" fill="url(#barGrad)"/>
+        <text x="400" y="119" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">
+          <tspan fill="#6b7280">465.5K </tspan><tspan fill="#16a34a">+38.5%</tspan>
+        </text>
+
+        <!-- Bar 4: 870.7K  (center=530) -->
+        <rect x="490" y="38" width="80" height="192" rx="4" ry="4" fill="url(#barGrad)"/>
+        <text x="530" y="30" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="11" font-weight="600">
+          <tspan fill="#6b7280">870.7K </tspan><tspan fill="#16a34a">+87.1%</tspan>
+        </text>
+
+        <!-- X-axis labels -->
+        <text x="140" y="252" text-anchor="middle" fill="#9ca3af" font-size="12" font-family="-apple-system, sans-serif">Mar 01</text>
+        <text x="270" y="252" text-anchor="middle" fill="#9ca3af" font-size="12" font-family="-apple-system, sans-serif">Mar 08</text>
+        <text x="400" y="252" text-anchor="middle" fill="#9ca3af" font-size="12" font-family="-apple-system, sans-serif">Mar 15</text>
+        <text x="530" y="252" text-anchor="middle" fill="#9ca3af" font-size="12" font-family="-apple-system, sans-serif">Mar 22</text>
+      </svg>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "@21st-sdk/agent-runtime",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/claude-agent-sdk": "0.2.32",
+    "express": "^4.21.2",
+    "cors": "^2.8.5",
+    "uuid": "^11.0.3",
+    "zod": "^4.0.0",
+    "tsx": "^4.19.2"
+  }
+}

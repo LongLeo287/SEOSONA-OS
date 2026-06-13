@@ -1,0 +1,20 @@
+node_modules
+dist
+.DS_Store
+.env
+.typeui-sh
+coverage
+.tmp-tests
+/agent
+/agents
+/cursor
+/claude
+/codex
+/opencode
+/mistral-vibe
+.package-lock.json
+.mcpregistry_*
+
+# Zed extension build output
+plugins/zed/**/target/
+plugins/zed/**/extension.wasm

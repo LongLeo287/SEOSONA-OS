@@ -1,0 +1,47 @@
+---
+title: "API Reference"
+description: "REST API reference for integrating deployed agents into your product."
+---
+
+# API Reference
+
+21st Agents provides a streaming Chat API via the Relay runtime and REST endpoints for managing agents and API keys.
+
+## Relay Chat API
+
+The primary integration point. Send messages to an agent and receive streaming responses.
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| [/v1/chat/:slug](/an/docs/reference/api/chat) | POST | Send a message and stream the response |
+| /v1/chat/:slug/:projectId/stream | GET | Resume an active stream |
+| /v1/chat/:slug/:projectId/stream | DELETE | Cancel an active stream |
+
+Base URL: `https://relay.an.dev`
+
+## Authentication
+
+Chat API requests require a Bearer token obtained by exchanging an API key:
+
+```bash
+# 1. Get a session token
+curl -X POST https://your-app.com/api/an/token \
+  -H "Content-Type: application/json" \
+  -d '{ "teamId": "YOUR_TEAM_ID" }'
+
+# 2. Use the token for chat requests
+curl -N -X POST https://relay.an.dev/v1/chat/YOUR_SLUG \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{ "id": "project-id", "messages": [...] }'
+```
+
+## API Keys
+
+API keys have the format `21st_sk_` followed by 64 hex characters. Legacy `an_sk_` keys still work. Keys are scoped to a team and can be managed from the dashboard.
+
+| Operation | Description |
+|-----------|-------------|
+| Create | Generate a new key (full key shown only once) |
+| Revoke | Deactivate a key without deleting it |
+| Rotate | Atomically create a new key and deactivate the old one |
