@@ -23,3 +23,21 @@
 1. **The `SKILL.md` Standard:** Every skill inside `frameworks/` MUST have a `SKILL.md` file at its root with valid YAML Frontmatter (`name`, `description`, `keywords`). If it doesn't, the Knowledge Graph cannot index it.
 2. **Dynamic Reading:** Agents should not brute-force read files here. Consult `SKILLS_ROUTER.md` first to find exactly which skill matches the task intent.
 3. **Knowledge vs Logic:** This directory is strictly for storing knowledge, prompts, and context. Active Python/Node orchestrator logic must reside in `1_CORE/scripts/`.
+
+## Contents
+
+| Folder | What's inside |
+|---|---|
+| `frameworks/` | The curated skill/framework library (SEO, marketing, design, …) — scanned into the router. |
+| `skills/` | Additional skill packages. |
+| `commands/` · `workflows/` · `output_styles/` | Reusable commands, workflows, and output-style presets. |
+| `sops/` | Standard operating procedures. |
+| `raw_data/` | Raw ingested source dumps (gitignored where large). |
+| `schemas/` · `scripts/` | Knowledge schemas + generation scripts. |
+
+| File | Purpose |
+|---|---|
+| `SKILLS_ROUTER.md` | **Auto-generated** semantic index of every routable skill (do not hand-edit — regen via `plugin_manager.py`). |
+| `MASTER_INDEX.md` | Human index of the knowledge base. |
+| `skills-lock.json` | Lockfile pinning the resolved skill set. |
+| `seosona_ai_agent_master_recap.md` | Master recap of the agent/skill design. |
