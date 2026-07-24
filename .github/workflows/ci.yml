@@ -18,7 +18,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'   # node --test glob patterns need >= 21 (the hooks test script uses one)
           cache: 'npm'
 
       - uses: actions/setup-python@v5
