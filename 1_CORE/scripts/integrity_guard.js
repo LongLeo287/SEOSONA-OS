@@ -22,13 +22,21 @@ function git(args) {
   try {
     return execFileSync('git', args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
   } catch {
-    return '';
+    return null; // null = the git call FAILED (distinct from '' = ran but no output)
   }
 }
 
 if (process.env.SEOSONA_ALLOW_MASS_DELETE === '1') process.exit(0);
 
-const deleted = git(['diff', '--cached', '--name-only', '--diff-filter=D'])
+const rawDeleted = git(['diff', '--cached', '--name-only', '--diff-filter=D']);
+if (rawDeleted === null) {
+  // Fail CLOSED: if we can't read the staged deletions, block rather than let a mass delete
+  // slip through on a swallowed git error. Override with SEOSONA_ALLOW_MASS_DELETE=1.
+  console.error('[integrity-guard] could not read staged deletions — blocking (fail-closed).');
+  process.exit(1);
+}
+
+const deleted = rawDeleted
   .split(/\r?\n/)
   .filter(Boolean);
 

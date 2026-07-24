@@ -138,7 +138,7 @@ npm run project:init
 ## 🚀 Quick start
 
 A fresh clone is **complete and runnable** — all code, config, personas, the skill library, the knowledge
-base, and 37 vendored agent skills ship in the repo. See **[SETUP.md](SETUP.md)** for the full guide.
+base, and 35 vendored agent skills ship in the repo. See **[SETUP.md](SETUP.md)** for the full guide.
 
 ```bash
 git clone https://github.com/LongLeo287/SEOSONA-OS.git
@@ -167,7 +167,7 @@ SEOSONA-OS/
 ├── 3_MEMORY/       # The memory: knowledge_items (KIs), project namespaces, plans
 ├── 4_AGENTS/       # Agent personas
 ├── 5_RESEARCH/     # Vetted reference material from ingestion
-├── .agents/skills/ # 37 vendored agent skills (heavy assets fetched on setup)
+├── .agents/skills/ # 35 vendored agent skills (heavy assets fetched on setup)
 ├── cli/            # Node.js CLI package
 ├── docs/           # Architecture wiki + audit records
 ├── .mcp.json       # Registers the codebase-memory + seosona-knowledge MCP servers

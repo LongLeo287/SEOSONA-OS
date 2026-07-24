@@ -1,7 +1,7 @@
 # SEOSONA OS - GLOBAL SYSTEM SETTINGS
 # ===================================
 
-os_version: "6.0"
+os_version: "9.0"
 mode: "auto-pilot"          # Options: "auto-pilot" (Zero-Touch), "interactive"
 
 # --- Directory Mapping ---

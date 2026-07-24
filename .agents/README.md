@@ -7,7 +7,7 @@ runtime; the skills here are auto-indexed into [`2_KNOWLEDGE/SKILLS_ROUTER.md`](
 
 | Folder | What's inside |
 |---|---|
-| `skills/` | 37 vendored agent skills — each a self-contained `SKILL.md` package (video editing, browser search, code review, design, marketing, meta-skill tooling, …). The router selects the relevant ones per task. |
+| `skills/` | 35 vendored agent skills — each a self-contained `SKILL.md` package (video editing, browser search, code review, design, marketing, meta-skill tooling, …). The router selects the relevant ones per task. |
 | `rules/` | Agent guardrail rules (e.g. malware-protection, plugin-tier protocol) applied across skills. |
 | `INBOX/` | Intake staging for new skills/tasks before they're vetted and wired in. |
 

@@ -35,9 +35,11 @@ DEFAULT_TIMEOUT = 600
 # credentials, payments, remote sync). This protects direct callers of dispatch_match(), which do
 # NOT re-check safeToAutoExecute. A blocked script isn't lost — it is returned for the human to run.
 _SIDE_EFFECT_RE = re.compile(
-    r"(push|deploy|publish|release|upload|delete|destroy|wipe|drop|"
-    r"credential|secret|token|migrat|production|payment|charge|refund|"
-    r"send_|email|git_push|sync_remote|force)",
+    r"(push|deploy|publish|release|upload|delete|destroy|wipe|drop|remove|purge|truncate|"
+    r"clear|reset|revoke|overwrite|rollback|terminate|"
+    r"credential|secret|token|migrat|production|payment|charge|refund|pay|bill|transfer|grant|"
+    r"send|email|sms|post|tweet|dm|slack|webhook|notify|broadcast|commit|merge|"
+    r"git_push|sync_remote|force)",
     re.IGNORECASE,
 )
 
