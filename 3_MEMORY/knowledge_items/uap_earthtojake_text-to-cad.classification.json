@@ -1,0 +1,22 @@
+{
+  "system": "seosona-os",
+  "function": "reference",
+  "score": 22,
+  "matched": [
+    "playwright"
+  ],
+  "strong_matched": [
+    "playwright"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 22,
+    "seosona-video": 22,
+    "seosona-content": 22,
+    "seosona-ux-ui": 22,
+    "seosona-flow": 6
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}
