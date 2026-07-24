@@ -1,19 +1,22 @@
 {
   "system": "seosona-os",
   "function": "agent",
-  "score": 44,
+  "score": 28,
   "matched": [
-    "agent",
+    "workflow",
+    "agent"
+  ],
+  "strong_matched": [
     "workflow"
   ],
   "push": true,
   "path": "D:\\SEOSONA AI\\SEOSONA OS",
   "all_scores": {
-    "seosona-os": 44,
-    "seosona-video": 28,
-    "seosona-content": 33,
-    "seosona-ux-ui": 33,
-    "seosona-flow": 28
+    "seosona-os": 28,
+    "seosona-video": 6,
+    "seosona-content": 22,
+    "seosona-ux-ui": 22,
+    "seosona-flow": 22
   },
   "auto_apply": false,
   "uap_relevant": [

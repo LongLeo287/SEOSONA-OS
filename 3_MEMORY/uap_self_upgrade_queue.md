@@ -190,3 +190,5 @@
 - anil-matcha/open-generative-ai (fit 50) — UAP-relevant: ast — review to upgrade the pipeline
 - Bomx/super-video-maker-skill (fit 88) — UAP-relevant: ast — review to upgrade the pipeline
 - direct_audio_cpp (fit 12) — UAP-relevant: ast — review to upgrade the pipeline
+- indranilbanerjee/digital-marketing-pro (fit 50) — UAP-relevant: ast — review to upgrade the pipeline
+- Comfy-Org/ComfyUI (fit 28) — UAP-relevant: ast — review to upgrade the pipeline
