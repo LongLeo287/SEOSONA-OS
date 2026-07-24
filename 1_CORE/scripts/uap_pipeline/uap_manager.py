@@ -67,13 +67,17 @@ def run_pipeline(max_loops=10):
                 print(f"[!] {label} errored on this repo: {e}")
                 try:
                     conn = sqlite3.connect(QUEUE_DB_PATH)
+                    # Mark only the SINGLE oldest in-flight repo FAILED — not a blanket UPDATE that
+                    # would nuke every other legitimately-mid-flight row and lose their work.
                     conn.execute(
-                        "UPDATE queue SET status='FAILED' "
-                        "WHERE status IN ('CLONED','AUDITED','ASSIMILATED')"
+                        "UPDATE queue SET status='FAILED', retry_count = retry_count + 1 "
+                        "WHERE id = (SELECT id FROM queue "
+                        "           WHERE status IN ('CLONED','AUDITED','ASSIMILATED') "
+                        "           ORDER BY id LIMIT 1)"
                     )
                     conn.commit()
                     conn.close()
-                    print("    -> in-flight repo marked FAILED; continuing the batch.")
+                    print("    -> the in-flight repo was marked FAILED; continuing the batch.")
                 except Exception as e2:
                     print(f"    -> could not mark FAILED: {e2}")
         

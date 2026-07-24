@@ -1,7 +1,7 @@
 # SEOSONA OS — Setup (clone → run)
 
 A fresh clone is **complete and runnable**: all code, config, agent personas, the framework/skill
-library, the knowledge base (KIs), and 37 vendored agent skills ship in the repo. Only a few
+library, the knowledge base (KIs), and 35 vendored agent skills ship in the repo. Only a few
 genuinely-heavy or fetch-on-demand binaries are pulled by the steps below — nothing else is needed.
 
 ## 1. Install dependencies
@@ -45,7 +45,7 @@ npm run project:init      # from inside a satellite repo: writes seosona.project
 ## What is / isn't in git
 
 - **In git (full):** `1_CORE` code, `1_CONFIG`, `4_AGENTS` personas, `2_KNOWLEDGE` framework/skill
-  library, `3_MEMORY/knowledge_items` (the knowledge base), 37 vendored `.agents/skills`, docs.
+  library, `3_MEMORY/knowledge_items` (the knowledge base), 35 vendored `.agents/skills`, docs.
 - **Not in git (fetched/local):** the `.exe` (step 2), heavy skill assets (kami fonts, notebooklm
   cassettes), generated runtime state (`vector_index/`, `uap_queue.*`, routing logs), secrets
   (`.env`, `*_credentials.json` — copy `.env.example`), `node_modules`.

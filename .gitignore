@@ -136,7 +136,7 @@ _QUARANTINE/
 2_KNOWLEDGE/raw_data/ingested_data/
 
 # codebase-memory-mcp binary (local, regenerable from release)
-1_CORE/bin/
+1_CORE/bin/**/*.exe
 
 # TF-IDF KI index — build artifact, rebuilt from KIs on demand (self-heals if missing)
 3_MEMORY/vector_index/
