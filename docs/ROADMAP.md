@@ -24,10 +24,13 @@ and the system's architecture. Ordered by return-on-investment. Status: ✅ done
   `allow_redirects=False` on the WP publish POST. +5 pytest cases. Remaining (deferred): pin the
   validated IP into the socket to fully close DNS-rebinding TOCTOU.
 - ⬜ **Dispatcher guard → allowlist** — the denylist is now broad, but a backstop should be
-  allowlist-based (only names/paths explicitly marked safe auto-run).
-- ⬜ **Sandbox vendored-skill execution** — `.agents/skills` + `2_KNOWLEDGE/frameworks` are third-party
-  code (the real attack surface). Anything that *runs* a skill should sandbox it (restricted subprocess,
-  no network by default).
+  allowlist-based (only names/paths explicitly marked safe auto-run). *(Deferred by owner: an
+  over-tight allowlist risks breaking existing auto-run automation — revisit deliberately.)*
+- ✅ **Sandbox vendored-skill execution** — `core/skill_sandbox.py` confines every vendored-script run
+  (via `dispatcher.run_script`) with a pre-exec HARD re-scan, secret-stripped env, throwaway temp cwd,
+  POSIX RLIMIT caps + timeout; the assimilator's in-process mempalace import is HARD-scanned too. OS
+  scripts still run with full context. **Remaining (needs OS-level sandbox):** network egress and
+  absolute-path FS access aren't blocked — that requires a container/job-object, the documented next step.
 
 ## Tier 3 — Intelligence / architecture
 
@@ -58,7 +61,9 @@ and the system's architecture. Ordered by return-on-investment. Status: ✅ done
 
 ---
 
-*The bounded ROI group is done (SSRF hop-revalidation, portable-root junction, docs/00 rewrite,
-`seosona doctor`). Remaining work is strategic and needs a decision: sandbox vendored-skill
-execution, split OS code from the vendored vault for real SAST, move the dispatcher guard to an
-allowlist, and pin the validated IP to fully close SSRF DNS-rebinding.*
+*Done: the bounded ROI group (SSRF hop-revalidation, junction, docs/00, `seosona doctor`) plus the
+owner-approved security set — **vendored-skill sandbox** and **SSRF IP-pinning** (DNS-rebinding
+closed). Deliberately NOT done: splitting OS code from the vendored vault (would break every
+`~/.seosona/...` portable path — owner vetoed) and the dispatcher allowlist (breakage risk). The one
+remaining hardening with real value is an OS-level sandbox (container/job-object) to add network +
+absolute-path isolation on top of the in-process least-privilege sandbox.*
