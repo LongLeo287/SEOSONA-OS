@@ -12,14 +12,17 @@ and the system's architecture. Ordered by return-on-investment. Status: ✅ done
   guard (HARD/SOFT), the dispatcher side-effect + path-confinement guard, and the vector-memory brain.
   Expand coverage to the classifier and connectors next.
 - ✅ **`_extract_domain` TLD fix** — audit dispatch no longer mistakes version numbers ("2.0") for domains.
-- ⬜ **Remaining OPEN bug fixes** — `setup-hooks.js` clobbering existing hooks; `seosona setup` not
-  creating the `~/.seosona` junction; ~~assimilator sqlite leak~~ (✅ fixed).
+- ✅ **Remaining OPEN bug fixes** — ~~`setup-hooks.js` clobbering existing hooks~~ (✅); ~~`seosona
+  setup` not creating the `~/.seosona` junction~~ (✅ — `lib/ensure-junction.js`, wired into postinstall
+  + `seosona setup`, idempotent, never clobbers a real folder); ~~assimilator sqlite leak~~ (✅).
 
 ## Tier 2 — Security hardening
 
-- ⬜ **SSRF: pin-and-connect + no-redirect** — `url_guard.assert_safe_url` re-resolves DNS at fetch
-  (rebinding) and follows 3xx to private hosts; 3 connectors skip the guard entirely. Resolve once,
-  connect to the validated IP, disable auto-redirect + re-validate each hop.
+- ✅ **SSRF: no-redirect + re-validate each hop** — added `url_guard.safe_urlopen` (validates the
+  initial URL AND every 3xx target via `_ValidatingRedirectHandler`); migrated ALL urllib connectors
+  (backlink/keyword/psi/eeat/schema/serp/aeo/technical) — several were previously unguarded — and set
+  `allow_redirects=False` on the WP publish POST. +5 pytest cases. Remaining (deferred): pin the
+  validated IP into the socket to fully close DNS-rebinding TOCTOU.
 - ⬜ **Dispatcher guard → allowlist** — the denylist is now broad, but a backstop should be
   allowlist-based (only names/paths explicitly marked safe auto-run).
 - ⬜ **Sandbox vendored-skill execution** — `.agents/skills` + `2_KNOWLEDGE/frameworks` are third-party
@@ -46,13 +49,16 @@ and the system's architecture. Ordered by return-on-investment. Status: ✅ done
 
 ## Tier 5 — Process
 
-- ⬜ **Docs sync** — `docs/00_master_architecture.md` still describes the old Excel-driven UAP model;
-  rewrite its UAP section to match `docs/03` + the live pipeline. Consider generating structure docs
-  from code to stop drift.
-- ⬜ **`seosona doctor` health command** — one command: lint + bridge + tests + a knowledge-brain smoke
-  query → an OS health report.
+- ✅ **Docs sync** — `docs/00_master_architecture.md` UAP section rewritten to the live pipeline
+  (SQLite-queue daemon, real stage numbers, classifier fit-gate, HARD/SOFT drop path). Still worth
+  doing later: generate structure docs from code to stop future drift.
+- ✅ **`seosona doctor` health command** — `seosona doctor` from the OS root now reports portable-root
+  link + lint + capability bridge + security pytest + a live knowledge-brain query, each with a fix
+  hint. Exit 1 on any fail; `--json` supported.
 
 ---
 
-*Recommended next three (if choosing): the OPEN Tier-1 bug fixes, then Tier-2 SSRF hardening, then
-Tier-3 BM25 fusion — foundation solid, then safe, then smarter.*
+*The bounded ROI group is done (SSRF hop-revalidation, portable-root junction, docs/00 rewrite,
+`seosona doctor`). Remaining work is strategic and needs a decision: sandbox vendored-skill
+execution, split OS code from the vendored vault for real SAST, move the dispatcher guard to an
+allowlist, and pin the validated IP to fully close SSRF DNS-rebinding.*
