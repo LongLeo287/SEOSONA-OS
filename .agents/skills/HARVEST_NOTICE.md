@@ -1,29 +1,16 @@
 # Harvested Skills — Attribution & License
 
-Some skills in this directory were harvested (2026-07-24) from third-party MIT-licensed repositories
-during a UAP ingest wave. They are redistributed here under the MIT License, with the original
-copyright and permission notice retained below as MIT requires.
+Skills harvested (2026-07-24) from third-party MIT-licensed repositories during a UAP ingest wave,
+redistributed here under the MIT License with the original copyright/permission notice retained.
 
-## Sources
-
-**Vietnamese writing skills** — from `github.com/longhang2004/vietnamese-humanizer`
-Skills: `grammar-checker-vi`, `humanizer-vi`, `style-guide-vi`, `translationese-cleaner-vi`
-
-**Digital marketing / SEO skills** — from `github.com/indranilbanerjee/digital-marketing-pro`
-(a curated, self-contained subset — the full plugin ships 158 skills; the ones with
-`${CLAUDE_PLUGIN_ROOT}/scripts/...` engine dependencies were intentionally NOT harvested to avoid
-broken references)
-Skills: `seo-plan`, `content-brief`, `content-calendar`, `page-seo-analysis`, `landing-page-audit`,
-`image-seo-audit`, `programmatic-seo`, `competitor-analysis`, `competitor-pages`, `serp-tracker`,
-`rank-monitor`, `language-audit`
-
-## MIT License notices (retained per license terms)
+## Vietnamese writing skills (in this directory)
+From `github.com/longhang2004/vietnamese-humanizer` (MIT).
+Skills: `grammar-checker-vi`, `humanizer-vi`, `style-guide-vi`, `translationese-cleaner-vi`.
 
 ```
 MIT License
 
 Copyright (c) 2026 Vietnamese Writing Skills contributors
-Copyright (c) 2026 Digital Marketing Pro
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -43,3 +30,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## Digital marketing / SEO plugin (vendored as a framework)
+The full `github.com/indranilbanerjee/digital-marketing-pro` plugin (MIT) — all 158 skills + 89
+engine scripts — is vendored at `2_KNOWLEDGE/frameworks/digital-marketing-pro/`. Its upstream
+`LICENSE` (MIT, Copyright (c) 2026 Digital Marketing Pro) ships inside that directory and governs it.
+See that folder's `SOURCE.md` for provenance and runtime notes (`CLAUDE_PLUGIN_ROOT`).
