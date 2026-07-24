@@ -33,6 +33,8 @@ def google_autocomplete(query, lang="vi", country="vn"):
     url = f"https://suggestqueries.google.com/complete/search?client=firefox&q={urllib.parse.quote(query)}&hl={lang}&gl={country}"
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        from url_guard import assert_safe_url
+        assert_safe_url(url)  # SSRF guard: block private/loopback/metadata hosts
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read())
         return data[1] if len(data) > 1 else []

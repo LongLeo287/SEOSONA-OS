@@ -53,11 +53,22 @@ try {
     process.exit(0);
   }
 
-  fs.writeFileSync(PRE_PUSH_PATH, PRE_PUSH_SCRIPT, { mode: 0o755 });
-  console.log('✅ Git hook installed: .git/hooks/pre-push');
+  // Never clobber a pre-existing non-SEOSONA hook (husky, custom, etc.) — overwriting would
+  // silently destroy the developer's own hook. Only (re)install our own.
+  const installHook = (hookPath, script, label) => {
+    if (fs.existsSync(hookPath)) {
+      const existing = fs.readFileSync(hookPath, 'utf8');
+      if (!existing.includes('SEOSONA')) {
+        console.warn(`⚠️  ${label}: a non-SEOSONA hook already exists — left untouched. Merge our check manually if you need both.`);
+        return;
+      }
+    }
+    fs.writeFileSync(hookPath, script, { mode: 0o755 });
+    console.log(`✅ Git hook installed: ${label}`);
+  };
 
-  fs.writeFileSync(PRE_COMMIT_PATH, PRE_COMMIT_SCRIPT, { mode: 0o755 });
-  console.log('✅ Git hook installed: .git/hooks/pre-commit (integrity guard)');
+  installHook(PRE_PUSH_PATH, PRE_PUSH_SCRIPT, '.git/hooks/pre-push');
+  installHook(PRE_COMMIT_PATH, PRE_COMMIT_SCRIPT, '.git/hooks/pre-commit (integrity guard)');
 } catch (err) {
   console.warn('⚠️  Could not install git hook:', err.message);
 }
