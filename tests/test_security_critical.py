@@ -113,6 +113,22 @@ class TestUrlGuard:
         with pytest.raises(g.UnsafeURLError):
             h.redirect_request(req, None, 302, "Found", {}, "http://169.254.169.254/")
 
+    def test_validated_ips_blocks_internal_returns_public(self):
+        # _validated_ips is the pin source: it raises if ANY resolved address is non-public, and
+        # otherwise returns the concrete IP(s) the socket will be pinned to.
+        g = self._guard()
+        with pytest.raises(g.UnsafeURLError):
+            g._validated_ips("localhost", 80)          # -> 127.0.0.1 / ::1
+
+    def test_pinned_connection_class_preserves_type(self):
+        # The pinned subclass must stay a real http.client connection (so urllib's do_open drives
+        # it normally) while overriding connect() to hit a fixed IP.
+        g = self._guard()
+        import http.client
+        cls = g._pinned_connection_class(http.client.HTTPSConnection, "93.184.216.34")
+        assert issubclass(cls, http.client.HTTPSConnection)
+        assert "connect" in cls.__dict__      # connect() is overridden to pin the IP
+
 
 class TestVectorMemory:
     """The knowledge brain must answer a query without crashing (self-heals its index)."""
