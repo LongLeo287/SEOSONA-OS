@@ -1,0 +1,21 @@
+{
+  "system": "seosona-os",
+  "function": "agent",
+  "score": 66,
+  "matched": [
+    "orchestrat",
+    "workflow",
+    "mcp"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 66,
+    "seosona-video": 0,
+    "seosona-content": 33,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 56
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}

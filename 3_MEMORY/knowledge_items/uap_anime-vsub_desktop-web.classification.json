@@ -1,0 +1,20 @@
+{
+  "system": "seosona-ux-ui",
+  "function": "component",
+  "score": 66,
+  "matched": [
+    ".vue",
+    "component"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA UX-UI",
+  "all_scores": {
+    "seosona-os": 41,
+    "seosona-video": 28,
+    "seosona-content": 33,
+    "seosona-ux-ui": 66,
+    "seosona-flow": 0
+  },
+  "auto_apply": true,
+  "uap_relevant": []
+}

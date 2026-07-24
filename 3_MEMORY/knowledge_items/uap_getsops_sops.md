@@ -1,0 +1,208 @@
+# KI: getsops/sops
+
+## Overview
+**SOPS** is an editor of encrypted files that supports YAML, JSON, ENV, INI and BINARY
+formats and encrypts with AWS KMS, GCP KMS, Azure Key Vault, HuaweiCloud KMS, age, and PGP.
+(`demo <https://www.youtube.com/watch?v=YTEVyLXFiq0>`_)
+
+## Architecture & Tech Stack
+- Go
+- **Total files:** 107 files across 39 directories
+- **File types:** .go: 47, .yaml: 14, .py: 6, .yml: 5, .md: 4, .rst: 4, .json: 4
+
+## Core Structure
+```
+  .git-blame-ignore-revs
+  .gitignore
+  .goreleaser.yaml
+  .sops.yaml
+  CHANGELOG.md
+  CHANGELOG.rst
+  CODE_OF_CONDUCT.md
+  CONTRIBUTING.md
+  DCO
+  LICENSE
+  Makefile
+  README.rst
+  example.ini
+  example.json
+  example.txt
+  example.yaml
+  go.mod
+  go.sum
+  rust-toolchain.toml
+  sops.go
+  sops_test.go
+  usererrors.go
+  .github/
+    dependabot.yaml
+    workflows/
+      cli.yml
+      codeql.yml
+      docs.yml
+      linters.yml
+      release.yml
+  .release/
+    Dockerfile
+    alpine.Dockerfile
+  aes/
+    cipher.go
+    cipher_test.go
+  age/
+    encrypted_keys.go
+    keysource.go
+    keysource_test.go
+    ssh_parse.go
+    tui.go
+  audit/
+    audit.go
+    schema.sql
+  azkv/
+    keysource.go
+    keysource_integration_test.go
+    keysource_test.go
+  cmd/
+    sops/
+      completion.go
+      decrypt.go
+      edit.go
+      encrypt.go
+      main.go
+      rotate.go
+      set.go
+      unset.go
+      codes/
+        codes.go
+      common/
+        common.go
+      formats/
+        formats.go
+        formats_test.go
+      subcommand/
+        exec/
+          exec.go
+          exec_unix.go
+          exec_windows.go
+        filestatus/
+          filestatus.go
+          filestatus_internal_test.go
+        groups/
+          add.go
+          delete.go
+        keyservice/
+          keyservice.go
+        publish/
+          publish.go
+        updatekeys/
+          updatekeys.go
+  config/
+    config.go
+    config_test.go
+    test_resources/
+      example.yaml
+  decrypt/
+    decrypt.go
+    example_test.go
+  docs/
+    release.md
+    images/
+      cncf-color-bg.svg
+  examples/
+    all_in_one/
+      .gitignore
+      README.rst
+      main.py
+      bin/
+        decrypt-config.sh
+        edit-config-file.sh
+      config/
+        __init__.py
+        secret.enc.json
+        static.py
+    per_file/
+      .gitignore
+      README.rst
+      main.py
+      bin/
+        decrypt-config.sh
+        edit-config-file.sh
+      config.enc/
+        __init__.py
+        static.py
+        static_github.json
+  functional-tests/
+    .sops.yaml
+    Cargo.lock
+    Cargo.toml
+    bin/
+      editor.rs
+    res/
+      comments.enc.yaml
+      comments.yaml
+      comments_list.yaml
+      comments_unencrypted_comments.yaml
+      format-2.enc.ini
+      format.enc.env
+      format.enc.ini
+      format.enc.json
+      format.enc.yaml
+      multiple_keys.yaml
+      no_mac.yaml
+      plainfile.yaml
+    src/
+      lib.rs
+  gcpkms/
+    keysource.go
+    keysource_test.go
+    mock_kms_server_test.go
+  hckms/
+    keysource.go
+    ke
+```
+
+## Agent Configuration
+
+--- CONTRIBUTING.md ---
+# Contributing to SOPS
+
+The SOPS project welcomes contributions from everyone. Here are a few guidelines
+and instructions if you are thinking of helping with the development of SOPS.
+
+## Getting started
+
+- Make sure you have Go 1.25 or greater installed. You can find information on
+  how to install Go [here](https://go.dev/doc/install)
+- Clone the Git repository and switch into SOPS's directory.
+- Run the tests with `make test`. They should all pass.
+- New documentation needs to be added to the [github.com/getsops/docs/](https://github.com/getsops/docs/)
+  repository. See the [documentation contribution guidelines](https://getsops.io/docs/contribution-guidelines/)
+  for more details.
+- If you need help in fixing issues, create a pull request (see below) and
+  ask for help.
+- Fork the project on GitHub.
+- Add your fork to Git's remotes:
+   - If you use SSH authentication:
+     `git remote add <your username> git@github.com:<your username>/sops.git`.
+   - Otherwise: `git remote add <your username> https://github.com/<your username>/sops.git`.
+- Make any changes you want to SOPS, commit them, and push them to your fork.
+- **Create a pull request against `main`**, and a maintainer will come by and
+  review your code. They may ask for some changes, and hopefully your
+  contribution will be merged!
+
+## Guidelines
+
+- Unless it's particularly hard, changes that fix a bug should have a regression
+  test to make sure that the bug is not introduced again.
+- New features and changes to existing features should be documented, and, if
+  possible, tested.
+
+## Communication
+
+If you need any help contributing to SOPS, several maintainers are on the
+[`#sops-dev` channel](https://cloud-native.slack.com/archives/C059800AJBT) on
+the [CNCF Slack](https://slack.cncf.io).
+
+
+
+## Analysis Note
+> This KI was generated by **enhanced local structural analysis** (no LLM API was available at generation time). It includes full tech stack detection, README parsing, dependency analysis, and feature extraction. For deeper semantic analysis, re-run with an active Gemini or OpenAI API key.

@@ -1,0 +1,108 @@
+---
+name: skill
+description: Launch and manage the Marketing Dashboard
+argument-hint: "[subcommand] [args]"
+metadata:
+  author: claudekit
+  version: "1.0.0"
+---
+
+# Command: /dashboard
+
+Launch the Marketing Dashboard web application.
+
+## Description
+
+Starts the full-stack Marketing Dashboard with Vue 3 frontend and Hono API backend. Provides visual interface for campaign management, content creation, asset organization, and AI-powered automation recipes.
+
+## Usage
+
+```bash
+/dashboard [mode]
+```
+
+## Arguments
+
+- `mode` (optional): Start mode
+  - `dev` (default): Development mode with HMR
+  - `prod`: Production mode (requires build first)
+  - `build`: Build for production
+  - `stop`: Stop running servers
+
+## Examples
+
+```bash
+# Start development mode (default)
+/dashboard
+/dashboard dev
+
+# Build for production
+/dashboard build
+
+# Start production mode
+/dashboard prod
+
+# Stop all servers
+/dashboard stop
+```
+
+## Features
+
+### Dashboard Features
+- **Campaign Board**: Kanban view with drag-drop status management
+- **Content Library**: Grid view with filters (type, campaign, status)
+- **Asset Gallery**: Link assets to campaigns with AI enhancement
+- **Automation Panel**: Pre-built recipes for common tasks:
+  - Blog Post Generator
+  - Social Media Pack
+  - Campaign Brief Creator
+  - SEO Audit Tool
+
+### Tech Stack
+- **Frontend**: Vue 3 + Vite + Pinia + Tailwind CSS
+- **Backend**: Hono + Node.js
+- **Database**: SQLite (local)
+- **AI**: Claude integration via API
+
+## URLs (Development Mode)
+
+- **Frontend**: htt~/.seosona/path/:5173
+- **API**: htt~/.seosona/path/:3457
+- **Health Check**: htt~/.seosona/path/:3457/health
+
+## URLs (Production Mode)
+
+- **Application**: htt~/.seosona/path/:3457 (serves built Vue app)
+- **Health Check**: htt~/.seosona/path/:3457/health
+
+## Requirements
+
+- Node.js 18+
+- NPM dependencies installed (auto-installs on first run)
+
+## Notes
+
+- API key required (set via Settings page or sessionStorage)
+- Dev mode uses HMR for instant updates
+- Production mode serves optimized build (56 KB gzipped)
+- All data stored locally in SQLite database
+
+## Related Files
+
+- Skill: `.opencode/skills/marketing-dashboard/`
+- Scripts: `start.sh`, `build.sh`, `stop.sh`, `start-production.sh`
+- Server: `server/index.js`
+- Frontend: `app/src/`
+
+
+## Subcommands
+
+| Subcommand | Description | Reference |
+|------------|-------------|-----------|
+| `check` | Check Marketing Dashboard server status | `references/check.md` |
+
+## Routing
+
+1. Parse subcommand from `$ARGUMENTS` (first word)
+2. Load corresponding `references/{subcommand}.md`
+3. Execute with remaining arguments

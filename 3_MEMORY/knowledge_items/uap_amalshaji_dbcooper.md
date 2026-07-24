@@ -1,0 +1,201 @@
+# KI: amalshaji/dbcooper
+
+## Overview
+A database client for PostgreSQL, SQLite, Redis, and ClickHouse, built with Tauri, React, and TypeScript.
+
+## Architecture & Tech Stack
+- Node.js / TypeScript / JavaScript
+- **Total files:** 125 files across 24 directories
+- **File types:** .tsx: 64, .json: 14, .webp: 10, .yml: 6, .md: 5, .svg: 5, .png: 4
+- **Key dependencies:** @base-ui/react, @codemirror/lang-sql, @codemirror/state, @codemirror/theme-one-dark, @codemirror/view, @fontsource-variable/google-sans-code, @fontsource/google-sans-flex, @phosphor-icons/react, @radix-ui/react-scroll-area, @tailwindcss/vite, @tanstack/react-table, @tanstack/react-virtual
+- **Dev dependencies:** @biomejs/biome, @eslint/js, @tauri-apps/cli, @types/node, @types/react, @types/react-dom, @types/dagre, @vitejs/plugin-react-swc
+
+## Core Capabilities
+Check out the full list of features on our [documentation site](https://dbcooper.amal.sh/#features).
+
+## Documentation Sections
+- DBcooper
+- Installation
+- Homebrew (recommended)
+- Direct download
+- Features
+- FAQ
+- Tech Stack
+- Development
+- Prerequisites
+- Setup
+- Install dependencies
+- Run in development mode
+- Build for production
+- AI SQL Generation
+- Building
+- Releases
+- Required Secrets
+- License
+
+## Available Commands
+- `npm run dev` -- vite
+- `npm run build` -- vite build
+- `npm run lint` -- eslint .
+- `npm run preview` -- vite preview
+- `npm run tauri` -- tauri
+
+## Core Structure
+```
+  .gitignore
+  AGENTS.md
+  LICENSE
+  README.md
+  biome.json
+  bun.lock
+  docker-compose.yml
+  icon.png
+  index.html
+  package.json
+  tsconfig.json
+  tsconfig.node.json
+  vite.config.ts
+  .cursor/
+    commands/
+      address-pr-comments.md
+  .github/
+    workflows/
+      publish.yml
+      stale.yml
+      tag-on-merge.yml
+      test.yml
+      update-brew-cask.yml
+  .vscode/
+    extensions.json
+  docs/
+    .gitignore
+    README.md
+    astro.config.mjs
+    bun.lock
+    package.json
+    tsconfig.json
+    wrangler.jsonc
+    .vscode/
+      extensions.json
+      launch.json
+    public/
+      favicon.svg
+      og.png
+      images/
+        aggregate.png
+        dbcooper.png
+      screenshots/
+        cmd-dark.webp
+        cmd-light.webp
+        query-dark.webp
+        query-light.webp
+        simple-dark.webp
+        simple-light.webp
+        structure-dark.webp
+        structure-light.webp
+        visual-dark.webp
+        visual-light.webp
+    src/
+      components/
+        Compare.tsx
+        DatabaseIcons.tsx
+        DownloadButton.tsx
+        FAQ.tsx
+        Features.tsx
+        SEO.astro
+        ScreenshotCarousel.tsx
+        Testimonials.tsx
+        ThemeSwitcher.tsx
+      icons/
+        clickhouse.tsx
+        postgres.tsx
+        redis.tsx
+        sqlite.tsx
+      pages/
+        index.astro
+      styles/
+        global.css
+  public/
+    tauri.svg
+    vite.svg
+  src/
+    App.css
+    App.tsx
+    README.md
+    components.json
+    eslint.config.js
+    index.css
+    index.html
+    main.tsx
+    package.json
+    tsconfig.app.json
+    tsconfig.json
+    tsconfig.node.json
+    assets/
+      favicon.svg
+      react.svg
+    components/
+      CommandPalette.tsx
+      ConnectionForm.tsx
+      ConnectionStatus.tsx
+      DataTable.tsx
+      EmptyState.tsx
+      ExpandableText.tsx
+      InlineEditableCell.tsx
+      QueryResultSheet.tsx
+      RedisKeySheet.tsx
+      RowEditSheet.tsx
+      RowInsertSheet.tsx
+      SchemaVisualizer.tsx
+      SettingsDialog.tsx
+      SettingsForm.tsx
+      SqlEditor.tsx
+      TabBar.tsx
+      UpdateChecker.tsx
+      component-example.tsx
+      example.tsx
+      SchemaVisualizer/
+        TableNode.tsx
+      connection-details/
+        ConnectionWelcome.tsx
+        FunctionDefinitionView.tsx
+        ObjectExplorer.tsx
+      field-inputs/
+        BooleanFieldInput.tsx
+        DefaultFieldInput.tsx
+        FieldInput.tsx
+        FunctionCombobox.tsx
+        JsonFieldInput.tsx
+        NullButton.tsx
+        NumericFieldInput.tsx
+        SqlFunctionBad
+```
+
+## Quick Start
+```bash
+brew install --cask --force amalshaji/taps/dbcooper
+xattr -cr /Applications/DBcooper.app
+bun install
+bun run tauri dev
+bun run tauri build
+```
+
+## Agent Configuration
+
+--- AGENTS.md ---
+## DBcooper
+
+- Do not add unnecessary comments unless absolutely necessary
+- The project uses tauri for the backend (https://v2.tauri.app/)
+- The project uses bun + react (ts) for the frontend
+- The project uses sqlite as the primary database
+- The project uses sqlx as the querybuilder and for database connections (https://sqlx.io/)
+- For loading state, use shadcn spinner. If the button text is 'Test', the loading state should be '<Spinner> Test'. Do not alter the text
+- Do not add any gap between icon and text in button, as the component already has it
+- Run shadcn commands inside the src/ directory. Use shadcn cli to install components.
+- Make sure components files don't get too big, split into multiple files if needed.
+- Release PRs should have the `release` tag/label.
+
+
+## Analysis Note
+> This KI was generated by **enhanced local structural analysis** (no LLM API was available at generation time). It includes full tech stack detection, README parsing, dependency analysis, and feature extraction. For deeper semantic analysis, re-run with an active Gemini or OpenAI API key.

@@ -1,0 +1,23 @@
+{
+  "system": "seosona-video",
+  "function": "video-render",
+  "score": 66,
+  "matched": [
+    "ffmpeg",
+    "render",
+    "hyperframe"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Video",
+  "all_scores": {
+    "seosona-os": 44,
+    "seosona-video": 66,
+    "seosona-content": 41,
+    "seosona-ux-ui": 33,
+    "seosona-flow": 28
+  },
+  "auto_apply": true,
+  "uap_relevant": [
+    "ast"
+  ]
+}

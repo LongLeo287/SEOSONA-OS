@@ -1,0 +1,27 @@
+.pytest_cache/
+__pycache__/
+*.py[cod]
+.coverage
+dist/
+build/
+*.egg-info/
+
+# Local Looper state and generated scratch output.
+.looper-tmp/
+tmp/
+scratch/
+~/
+
+# Generated example runs can contain user/project context.
+looper-output/
+loop-workspace/
+state.json
+
+# Secrets should never be published.
+.env
+.env.*
+secrets/
+*.key
+
+# Machine-local Claude Code settings (personal paths, never shared).
+.claude/settings.local.json

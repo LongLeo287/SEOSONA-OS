@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "seosona-memory": {
+      "command": "engram",
+      "args": [
+        "serve",
+        "--db-path", "~/.seosona/3_MEMORY/knowledge.db",
+        "--port", "8080"
+      ],
+      "env": {
+        "ENGRAM_API_KEY": "${SEOSONA_ENGRAM_KEY}"
+      }
+    }
+  }
+}

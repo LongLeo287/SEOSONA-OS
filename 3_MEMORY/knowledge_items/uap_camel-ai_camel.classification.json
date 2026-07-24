@@ -1,0 +1,31 @@
+{
+  "system": "seosona-os",
+  "function": "llm",
+  "score": 96,
+  "matched": [
+    "openai",
+    "rag",
+    "vector",
+    "llm",
+    "anthropic",
+    "ollama",
+    "gemini",
+    "embedding"
+  ],
+  "strong_matched": [
+    "openai",
+    "rag",
+    "vector"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 96,
+    "seosona-video": 0,
+    "seosona-content": 0,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 6
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}

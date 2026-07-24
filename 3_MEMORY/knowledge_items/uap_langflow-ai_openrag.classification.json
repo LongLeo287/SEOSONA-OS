@@ -1,0 +1,23 @@
+{
+  "system": "seosona-os",
+  "function": "llm",
+  "score": 100,
+  "matched": [
+    "llm",
+    "openai",
+    "ollama",
+    "embedding",
+    "rag"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 100,
+    "seosona-video": 0,
+    "seosona-content": 0,
+    "seosona-ux-ui": 33,
+    "seosona-flow": 28
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}

@@ -1,0 +1,49 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "{product_name}",
+  "description": "{product_description}",
+  "image": [
+    "{product_image_url_1}",
+    "{product_image_url_2}",
+    "{product_image_url_3}"
+  ],
+  "brand": {
+    "@type": "Brand",
+    "name": "{brand_name}"
+  },
+  "sku": "{sku}",
+  "mpn": "{manufacturer_part_number}",
+  "gtin": "{gtin}",
+  "offers": {
+    "@type": "Offer",
+    "url": "{product_url}",
+    "priceCurrency": "{currency_code}",
+    "price": "{price}",
+    "priceValidUntil": "{price_valid_until_date}",
+    "availability": "https://schema.org/{availability_status}",
+    "_comment": "availability_status options: InStock, OutOfStock, PreOrder, Discontinued, LimitedAvailability"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "{average_rating}",
+    "reviewCount": "{total_reviews}"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "{reviewer_name}"
+      },
+      "datePublished": "{review_date}",
+      "reviewBody": "{review_text}",
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "{rating_value}",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "reference": {
+    "repo": "shiyu-coder/Kronos",
+    "signal": 24.0,
+    "fit": 24,
+    "priority": 0
+  },
+  "agent": {
+    "repo": "vudovn/antigravity-kit",
+    "signal": 100.0,
+    "fit": 100,
+    "priority": 0
+  },
+  "llm": {
+    "repo": "giancarloerra/SocratiCode",
+    "signal": 100.0,
+    "fit": 100,
+    "priority": 0
+  },
+  "srt": {
+    "repo": "chidiwilliams/buzz",
+    "signal": 99.0,
+    "fit": 99,
+    "priority": 0
+  },
+  "design-system": {
+    "repo": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "signal": 84.0,
+    "fit": 84,
+    "priority": 0
+  },
+  "skill": {
+    "repo": "WordPress/agent-skills",
+    "signal": 100.0,
+    "fit": 100,
+    "priority": 0
+  },
+  "component": {
+    "repo": "cytostack/openwolf",
+    "signal": 66.0,
+    "fit": 66,
+    "priority": 0
+  },
+  "motion": {
+    "repo": "motiondivision/motion",
+    "signal": 100.0,
+    "fit": 100,
+    "priority": 0
+  },
+  "seo": {
+    "repo": "aaron-he-zhu/seo-geo-claude-skills",
+    "signal": 82.0,
+    "fit": 82,
+    "priority": 0
+  },
+  "ai-image": {
+    "repo": "YouMind-OpenLab/awesome-nano-banana-pro-prompts",
+    "signal": 28.0,
+    "fit": 28,
+    "priority": 0
+  },
+  "browser-extension": {
+    "repo": "GoogleChromeLabs/picture-in-picture-chrome-extension",
+    "signal": 33.0,
+    "fit": 33,
+    "priority": 0
+  },
+  "scraping": {
+    "repo": "D4Vinci/Scrapling",
+    "signal": 100.0,
+    "fit": 100,
+    "priority": 0
+  },
+  "workflow-automation": {
+    "repo": "alchaincyf/huashu-design",
+    "signal": 56.0,
+    "fit": 56,
+    "priority": 0
+  },
+  "asr": {
+    "repo": "chubbyguan/chubbyskills",
+    "signal": 98.0,
+    "fit": 98,
+    "priority": 0
+  },
+  "accessibility": {
+    "repo": "midudev/autoskills",
+    "signal": 100.0,
+    "fit": 100,
+    "priority": 0
+  },
+  "seo-metadata": {
+    "repo": "GargantuaX/gemini-watermark-remover",
+    "signal": 66.0,
+    "fit": 66,
+    "priority": 0
+  },
+  "video-render": {
+    "repo": "calesthio/OpenMontage",
+    "signal": 100.0,
+    "fit": 100,
+    "priority": 0
+  },
+  "tts": {
+    "repo": "pnnbao97/VieNeu-TTS",
+    "signal": 61.0,
+    "fit": 61,
+    "priority": 0
+  },
+  "subtitle": {
+    "repo": "digitalsamba/claude-code-video-toolkit",
+    "signal": 100.0,
+    "fit": 100,
+    "priority": 0
+  },
+  "content-script": {
+    "repo": "bergside/design-md-chrome",
+    "signal": 56.0,
+    "fit": 56,
+    "priority": 0
+  },
+  "data": {
+    "repo": "c2g-dev/city2graph",
+    "signal": 49.0,
+    "fit": 49,
+    "priority": 0
+  },
+  "prompt": {
+    "repo": "kadevin/ilab-gpt-conjure",
+    "signal": 82.0,
+    "fit": 82,
+    "priority": 0
+  },
+  "ai-video": {
+    "repo": "Anil-matcha/vox-ai-motion-graphics-generator",
+    "signal": 44.0,
+    "fit": 44,
+    "priority": 0
+  }
+}

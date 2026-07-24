@@ -1,0 +1,22 @@
+{
+  "system": "seosona-os",
+  "function": "llm",
+  "score": 41,
+  "matched": [
+    "llm",
+    "anthropic"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 41,
+    "seosona-video": 24,
+    "seosona-content": 33,
+    "seosona-ux-ui": 33,
+    "seosona-flow": 28
+  },
+  "auto_apply": false,
+  "uap_relevant": [
+    "ast"
+  ]
+}

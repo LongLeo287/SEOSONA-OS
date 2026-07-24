@@ -1,0 +1,192 @@
+- lbjlaq/Antigravity-Manager (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- vudovn/antigravity-kit (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- HKUDS/ClawWork (fit 89) — UAP-relevant: classifier — review to upgrade the pipeline
+- daominhhiep/codex-kit (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- nagisanzenin/claude-code-production-grade-plugin (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- mvanhorn/last30days-skill (fit 89) — UAP-relevant: ast — review to upgrade the pipeline
+- msitarzewski/agency-agents (fit 66) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- coderamp-labs/gitingest (fit 33) — UAP-relevant: gitingest — review to upgrade the pipeline
+- upstash/context7 (fit 44) — UAP-relevant: ast, classifier — review to upgrade the pipeline
+- Yue-plus/astro-endfield (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- firecrawl/open-lovable (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- heyhuynhgiabuu/proxypal (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- ericosiu/ai-marketing-skills (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- alchaincyf/huashu-design (fit 56) — UAP-relevant: ast — review to upgrade the pipeline
+- Draculabo/AntigravityManager (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- kaida-palooza/ccpoke (fit 41) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- openclaw/lobster (fit 56) — UAP-relevant: ast — review to upgrade the pipeline
+- SawyerHood/dev-browser (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- alibaba/OpenSandbox (fit 33) — UAP-relevant: ast — review to upgrade the pipeline
+- cytostack/openwolf (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- Houseofmvps/codesight (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- numman-ali/n-skills (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- Shpigford/chops (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- xingkongliang/skills-manager (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- giancarloerra/SocratiCode (fit 100) — UAP-relevant: codebase — review to upgrade the pipeline
+- theexperiencecompany/gaia-ui (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- nclamvn/Dich-Viet (fit 100) — UAP-relevant: classifier — review to upgrade the pipeline
+- billtruong003/git-profile-awaken (fit 22) — UAP-relevant: ast — review to upgrade the pipeline
+- GoogleCloudPlatform/generative-ai (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- FalkorDB/QueryWeaver (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- Leonxlnx/taste-skill (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- tranhieutt/for-learn-claude-cli (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- HoangNguyen0403/agent-skills-standard (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- BlockRunAI/ClawRouter (fit 82) — UAP-relevant: classifier — review to upgrade the pipeline
+- RightNow-AI/openfang (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- pnnbao97/VieNeu-TTS (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- claudekit/claudekit-docs (fit 89) — UAP-relevant: ast, repomix, codebase — review to upgrade the pipeline
+- pinchtab/pinchtab (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- AstrBotDevs/AstrBot (fit 89) — UAP-relevant: ast — review to upgrade the pipeline
+- Lum1104/Understand-Anything (fit 41) — UAP-relevant: ast, classifier — review to upgrade the pipeline
+- abhigyanpatwari/GitNexus (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- tang-vu/ContribAI (fit 100) — UAP-relevant: ast, repomix — review to upgrade the pipeline
+- FrancyJGLisboa/agent-skill-creator (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- lamngockhuong/termote (fit 41) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- winfunc/opcode (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- topoteretes/cognee (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- WEIFENG2333/VideoCaptioner (fit 84) — UAP-relevant: ast — review to upgrade the pipeline
+- BloopAI/vibe-kanban (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- rtk-ai/rtk (fit 82) — UAP-relevant: codebase — review to upgrade the pipeline
+- langchain-ai/deepagents (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- PaddlePaddle/PaddleOCR (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- swagger-api/swagger-ui (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- awesome-skills/code-review-skill (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- carlrannaberg/claudekit (fit 66) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- duthaho/claudekit (fit 89) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- Egonex-AI/Understand-Anything (fit 41) — UAP-relevant: ast, classifier — review to upgrade the pipeline
+- Lichas/maxclaw (fit 44) — UAP-relevant: classifier — review to upgrade the pipeline
+- ntd4996/agentpet (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- raulvidis/openclaw-multi-agent-kit (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- smallnest/goclaw (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- mattpocock/skills (fit 82) — UAP-relevant: codebase — review to upgrade the pipeline
+- Affitor/open-affiliate (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- agentskills/agentskills (fit 22) — UAP-relevant: ast — review to upgrade the pipeline
+- aidenybai/react-grab (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- HKUDS/DeepTutor (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- katanemo/plano (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- minhnv0807/fullstack-mkt-skills (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- screenpipe/screenpipe (fit 99) — UAP-relevant: ast — review to upgrade the pipeline
+- tqdat410/agentune (fit 44) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- zhongyu09/openchatbi (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- hugohe3/ppt-master (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- mmethodz/dreamgraph (fit 44) — UAP-relevant: codebase, classifier — review to upgrade the pipeline
+- Anil-matcha/Open-Higgsfield-AI (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- ashishpatel26/LLM-Finetuning (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- google-research/timesfm (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- matthartman/ghost-pepper (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- originalankur/maptoposter (fit 28) — UAP-relevant: ast — review to upgrade the pipeline
+- nashsu/AutoCLI (fit 33) — UAP-relevant: ast — review to upgrade the pipeline
+- tobi/qmd (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- opendataloader-project/opendataloader-pdf (fit 33) — UAP-relevant: ast — review to upgrade the pipeline
+- mistralai/mistral-vibe (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- Nebulock-Inc/agentic-threat-hunting-framework (fit 100) — UAP-relevant: classifier — review to upgrade the pipeline
+- pbakaus/impeccable (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- VoltAgent/awesome-design-md (fit 20) — UAP-relevant: ast — review to upgrade the pipeline
+- chubbyguan/chubbyskills (fit 98) — UAP-relevant: ast — review to upgrade the pipeline
+- feature-sliced/documentation (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- google-labs-code/stitch-skills (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- jupediaz/chatgpt-prompt-splitter (fit 0) — UAP-relevant: ast — review to upgrade the pipeline
+- anime-vsub/app (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- anl331/goey-toast (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- Blaizzy/mlx-vlm (fit 28) — UAP-relevant: ast — review to upgrade the pipeline
+- RVC-Boss/GPT-SoVITS (fit 49) — UAP-relevant: ast — review to upgrade the pipeline
+- lfnovo/open-notebook (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- hesamsheikh/awesome-openclaw-usecases (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- jontsai/openclaw-command-center (fit 41) — UAP-relevant: classifier — review to upgrade the pipeline
+- mergisi/awesome-openclaw-agents (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- nexu-io/html-anything (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- ooples/token-optimizer-mcp (fit 82) — UAP-relevant: code-analysis, ast — review to upgrade the pipeline
+- puaclaw/PUAClaw (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- Rune-kit/rune (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- stellarlinkco/myclaude (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- warengonzaga/tinyclaw (fit 66) — UAP-relevant: classifier — review to upgrade the pipeline
+- x1xhlol/system-prompts-and-models-of-ai-tools (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- yazinsai/town (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- zilliztech/claude-context (fit 100) — UAP-relevant: ast, tree-sitter — review to upgrade the pipeline
+- cclank/lanshu-awesome-ai-video-kit (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- goldynlabs/prr-kit (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- midudev/autoskills (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- Anil-matcha/Open-Generative-AI (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- DavidHDev/react-bits (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- FunAudioLLM/CosyVoice (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- jamiepine/voicebox (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- coqui-ai/TTS (fit 41) — UAP-relevant: ast, classifier — review to upgrade the pipeline
+- yazinsai/OpenOats (fit 49) — UAP-relevant: ast — review to upgrade the pipeline
+- Gentleman-Programming/engram (fit 44) — UAP-relevant: codebase — review to upgrade the pipeline
+- google-labs-code/design.md (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- HKUDS/VideoAgent (fit 98) — UAP-relevant: ast — review to upgrade the pipeline
+- HKUDS/ViMax (fit 89) — UAP-relevant: ast — review to upgrade the pipeline
+- joonspk-research/generative_agents (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- ksimback/hermes-ecosystem (fit 89) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- lewislulu/html-ppt-skill (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- loerei/HoverSource (fit 82) — UAP-relevant: codebase — review to upgrade the pipeline
+- mem0ai/mem0 (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- microsoft/agent-lightning (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- minhtri22/mcp-server (fit 41) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- mrquangthai278/prr-kit (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- nexu-io/harness-engineering-guide (fit 44) — UAP-relevant: ast, classifier — review to upgrade the pipeline
+- NVIDIA/SkillSpector (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- skawld/skawld-sdk (fit 61) — UAP-relevant: repomix — review to upgrade the pipeline
+- skillhub-club/skillhub-desktop (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- TencentCloud/TencentDB-Agent-Memory (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- tensortrade-org/tensortrade (fit 33) — UAP-relevant: ast — review to upgrade the pipeline
+- tinyfish-io/tinyfish-cookbook (fit 89) — UAP-relevant: classifier — review to upgrade the pipeline
+- vstorm-co/full-stack-ai-agent-template (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- HKUSTDial/Supervisor-Skills (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- ibelick/ui-skills (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- HarleyCoops/Math-To-Manim (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- HBAI-Ltd/Toonflow-app (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- kaixxx/noScribe (fit 74) — UAP-relevant: ast — review to upgrade the pipeline
+- karpathy/llm.c (fit 20) — UAP-relevant: classifier — review to upgrade the pipeline
+- SandAI-org/MagiCompiler (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- zaina-ml/ml_forge (fit 28) — UAP-relevant: classifier — review to upgrade the pipeline
+- aishwaryanr/awesome-generative-ai-guide (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- coleam00/Archon (fit 100) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- Crosstalk-Solutions/project-nomad (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- event-catalog/fieldtrip (fit 20) — UAP-relevant: ast — review to upgrade the pipeline
+- getmaxun/maxun (fit 89) — UAP-relevant: ast — review to upgrade the pipeline
+- github/codeql (fit 28) — UAP-relevant: ast — review to upgrade the pipeline
+- kieraneglin/pinchflat (fit 33) — UAP-relevant: ast — review to upgrade the pipeline
+- nateherkai/hyperframes-student-kit (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- ScrapeGraphAI/Scrapegraph-ai (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- towfiqi/serpbear (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- every-app/open-seo (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- usestrix/strix (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- abus-aikorea/voice-pro (fit 49) — UAP-relevant: ast — review to upgrade the pipeline
+- Cur10s1tyByt3/GenP (fit 0) — UAP-relevant: ast — review to upgrade the pipeline
+- Kuberwastaken/claude-code (fit 44) — UAP-relevant: codebase, classifier — review to upgrade the pipeline
+- asgeirtj/system_prompts_leaks (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- nikaiw/VMkatz (fit 0) — UAP-relevant: ast — review to upgrade the pipeline
+- DeusData/codebase-memory-mcp (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- CubeStar1/omni-agent (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- vercel/ai (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- voocel/ainovel-cli (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- StarTrail-org/PixelRAG (fit 100) — UAP-relevant: ast — review to upgrade the pipeline
+- cjpais/handy (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- NVIDIA/skills (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- NVIDIA/DeepLearningExamples (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- ByteByteGoHq/system-design-101 (fit 56) — UAP-relevant: ast — review to upgrade the pipeline
+- palmier-io/palmier-pro (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- ArcReel/ArcReel (fit 66) — UAP-relevant: codebase — review to upgrade the pipeline
+- OpenMOSS/MOSS-TTS (fit 41) — UAP-relevant: ast — review to upgrade the pipeline
+- comfy-org/comfyui (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- facebook/astryx (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- opendatalab/MinerU (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- knowns-dev/knowns (fit 82) — UAP-relevant: ast, tree-sitter — review to upgrade the pipeline
+- google-research/tabfm (fit 41) — UAP-relevant: classifier — review to upgrade the pipeline
+- kadevin/ilab-gpt-conjure (fit 82) — UAP-relevant: ast — review to upgrade the pipeline
+- CameronFoxly/Ascii-Motion (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- LingyiChen-AI/AIComicBuilder (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- hans1801/hans-n8n (fit 61) — UAP-relevant: ast — review to upgrade the pipeline
+- undertheseanlp/underthesea (fit 61) — UAP-relevant: ast, classifier — review to upgrade the pipeline
+- YILS-LIN/short-video-factory (fit 44) — UAP-relevant: ast — review to upgrade the pipeline
+- nexu-io/motion-anything (fit 12) — UAP-relevant: ast — review to upgrade the pipeline
+- DeusData/codebase-memory-mcp (fit 22) — UAP-relevant: ast — review to upgrade the pipeline
+- krusemediallc/arcads-claude-code (fit 6) — UAP-relevant: ast — review to upgrade the pipeline
+- msitarzewski/agency-agents (fit 18) — UAP-relevant: ast, codebase — review to upgrade the pipeline
+- every-app/open-seo (fit 66) — UAP-relevant: ast — review to upgrade the pipeline
+- lidge-jun/ima2-gen (fit 88) — UAP-relevant: ast — review to upgrade the pipeline
+- 302ai/302_video_generator (fit 22) — UAP-relevant: ast — review to upgrade the pipeline
+- anil-matcha/open-generative-ai (fit 50) — UAP-relevant: ast — review to upgrade the pipeline
+- Bomx/super-video-maker-skill (fit 88) — UAP-relevant: ast — review to upgrade the pipeline
+- direct_audio_cpp (fit 12) — UAP-relevant: ast — review to upgrade the pipeline

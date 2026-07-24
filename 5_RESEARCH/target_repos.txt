@@ -1,0 +1,5 @@
+https://github.com/yuqie6/ProductFlow
+https://github.com/bytedance/deer-flow
+https://github.com/microsoft/AI-For-Beginners
+https://github.com/zebbern/claude-code-guide
+https://github.com/nduckmink/arkon

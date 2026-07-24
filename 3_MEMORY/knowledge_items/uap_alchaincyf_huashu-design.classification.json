@@ -1,0 +1,22 @@
+{
+  "system": "seosona-flow",
+  "function": "workflow-automation",
+  "score": 56,
+  "matched": [
+    "workflow",
+    "pipeline"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Workflow\\stickman-explainer-v2",
+  "all_scores": {
+    "seosona-os": 41,
+    "seosona-video": 22,
+    "seosona-content": 0,
+    "seosona-ux-ui": 44,
+    "seosona-flow": 56
+  },
+  "auto_apply": true,
+  "uap_relevant": [
+    "ast"
+  ]
+}

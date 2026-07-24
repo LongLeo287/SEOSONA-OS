@@ -1,0 +1,21 @@
+{
+  "system": "seosona-content",
+  "function": "srt",
+  "score": 99,
+  "matched": [
+    "srt",
+    "subtitle",
+    "transcript"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Content",
+  "all_scores": {
+    "seosona-os": 44,
+    "seosona-video": 56,
+    "seosona-content": 99,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 0
+  },
+  "auto_apply": true,
+  "uap_relevant": []
+}

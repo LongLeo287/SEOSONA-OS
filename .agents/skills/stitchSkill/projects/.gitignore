@@ -1,0 +1,6 @@
+# Ignore all runtime project output
+*
+
+# But keep this .gitignore and README
+!.gitignore
+!README.md

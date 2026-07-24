@@ -1,0 +1,21 @@
+{
+  "system": "seosona-os",
+  "function": "scraping",
+  "score": 66,
+  "matched": [
+    "scrap",
+    "crawl",
+    "playwright"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 66,
+    "seosona-video": 0,
+    "seosona-content": 33,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 0
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}

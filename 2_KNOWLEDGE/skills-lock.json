@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "seo-migration-assistant": {
+      "source": "~/.seosona/2_KNOWLEDGE/frameworks/seo_marketing/seo-migration-assistant",
+      "sourceType": "local",
+      "computedHash": "55947a5dd92b451b0abbeadb238def44bcdd35aab7edea5b0a0a3fbe6833def8"
+    }
+  }
+}
+

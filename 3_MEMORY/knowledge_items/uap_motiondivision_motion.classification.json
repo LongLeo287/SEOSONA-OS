@@ -1,0 +1,23 @@
+{
+  "system": "seosona-ux-ui",
+  "function": "motion",
+  "score": 100,
+  "matched": [
+    "gsap",
+    "animejs",
+    "framer-motion",
+    "motion",
+    "animation"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA UX-UI",
+  "all_scores": {
+    "seosona-os": 82,
+    "seosona-video": 44,
+    "seosona-content": 0,
+    "seosona-ux-ui": 100,
+    "seosona-flow": 0
+  },
+  "auto_apply": true,
+  "uap_relevant": []
+}

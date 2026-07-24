@@ -1,0 +1,31 @@
+{
+    "timestamp": "2026-06-23T16:47:40.036107",
+    "syntax_errors": [],
+    "path_violations": [
+        {
+            "file": "1_CORE\\scripts\\core\\plugin_manager.py",
+            "type": "HardcodedPathViolation",
+            "line": 17,
+            "pattern": "E:\\"
+        },
+        {
+            "file": "1_CORE\\scripts\\system_daemons\\auto_linter_daemon.py",
+            "type": "HardcodedPathViolation",
+            "line": 45,
+            "pattern": "D:\\"
+        },
+        {
+            "file": "1_CORE\\scripts\\system_daemons\\auto_linter_daemon.py",
+            "type": "HardcodedPathViolation",
+            "line": 45,
+            "pattern": "E:\\"
+        },
+        {
+            "file": "1_CORE\\scripts\\uap_pipeline\\01_finder.py",
+            "type": "HardcodedPathViolation",
+            "line": 8,
+            "pattern": "D:\\"
+        }
+    ],
+    "total_issues": 4
+}

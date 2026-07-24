@@ -1,0 +1,22 @@
+{
+  "system": "seosona-os",
+  "function": "llm",
+  "score": 41,
+  "matched": [
+    "llm",
+    "embedding"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 41,
+    "seosona-video": 20,
+    "seosona-content": 0,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 28
+  },
+  "auto_apply": false,
+  "uap_relevant": [
+    "ast"
+  ]
+}

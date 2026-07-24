@@ -1,0 +1,10 @@
+# Dev/test artifacts — not part of the installed skill
+skills-dev/
+awp-skill-workspace/
+evals/
+AWP_RootNet_SKILL.md
+*.skill
+*.html
+*.log
+contracts/
+__pycache__/

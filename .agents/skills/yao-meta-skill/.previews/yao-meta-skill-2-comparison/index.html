@@ -1,0 +1,1336 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Yao Meta Skill 1.0 vs Skill OS 2.0</title>
+  <style>
+    @font-face {
+      font-family: "TsangerJinKai02";
+      src: url("file:///Users/laoyao/.codex/skills/kami/assets/fonts/TsangerJinKai02-W04.ttf") format("truetype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "TsangerJinKai02";
+      src: url("file:///Users/laoyao/.codex/skills/kami/assets/fonts/TsangerJinKai02-W05.ttf") format("truetype");
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    :root {
+      --serif: "TsangerJinKai02", "Source Han Serif SC", "Noto Serif CJK SC", "Songti SC", "STSong", Georgia, serif;
+      --mono: "JetBrains Mono", "SF Mono", Consolas, "TsangerJinKai02", "Source Han Serif SC", monospace;
+      --ink: #1b365d;
+      --ink-soft: #35527b;
+      --text: #141413;
+      --muted: #504e49;
+      --stone: #6b6a64;
+      --line: #e8e6dc;
+      --line-strong: #d7d2c4;
+      --canvas: #f5f4ed;
+      --paper: #faf9f5;
+      --warm: #fffefa;
+      --warm-2: #f0eee5;
+      --green: #355e4a;
+      --amber: #8a6428;
+      --red: #8d3a35;
+      --blue-pale: #e8eff7;
+      --shadow: 0 6px 28px rgba(20, 20, 19, 0.06);
+      --radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--canvas);
+      color: var(--text);
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      margin: 0;
+      background: var(--canvas);
+      font-family: var(--serif);
+      line-height: 1.55;
+      letter-spacing: 0.02em;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1180px, calc(100vw - 220px));
+      margin: 0 auto;
+      padding: 28px 0 56px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 14px 0 12px;
+      background: rgba(245, 244, 237, 0.96);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 220px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-weight: 500;
+      letter-spacing: 0;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: var(--paper);
+      background: var(--ink);
+      font-family: var(--serif);
+      font-weight: 500;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      font-family: var(--serif);
+      font-size: 12px;
+      color: var(--ink-soft);
+    }
+
+    .nav a {
+      text-decoration: none;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--paper);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--warm);
+      font-family: var(--serif);
+    }
+
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      min-height: 28px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink-soft);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    body[data-report-lang="zh-CN"] [data-set-lang="zh-CN"],
+    body[data-report-lang="en"] [data-set-lang="en"] {
+      color: var(--paper);
+      background: var(--ink);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(360px, 0.9fr);
+      gap: 42px;
+      padding: 56px 0 34px;
+      align-items: end;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .section-title::before {
+      content: "";
+      width: 46px;
+      height: 3px;
+      background: var(--ink);
+      display: inline-block;
+      border-radius: 999px;
+    }
+
+    h1 {
+      margin: 0;
+      color: var(--ink);
+      font-size: clamp(36px, 4.2vw, 64px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      text-wrap: balance;
+    }
+
+    .hero-copy {
+      max-width: 820px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: clamp(15px, 1.35vw, 18px);
+      line-height: 1.62;
+      text-wrap: pretty;
+    }
+
+    .verdict {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--warm);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .verdict h2 {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-size: 24px;
+      line-height: 1.18;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+
+    .verdict p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .status-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .status {
+      min-height: 76px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+
+    .status b {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 19px;
+      line-height: 1;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .status span {
+      display: block;
+      margin-top: 9px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .section {
+      padding: 42px 0 10px;
+    }
+
+    .section-head {
+      display: block;
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      color: var(--text);
+      font-size: clamp(26px, 2.4vw, 38px);
+      line-height: 1.08;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .kpi {
+      min-height: 146px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: 0 4px 20px rgba(20, 20, 19, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .kpi .label {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .kpi .number {
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 38px;
+      line-height: 1;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0;
+    }
+
+    .kpi .delta {
+      color: var(--green);
+      font-family: var(--serif);
+      font-size: 11.5px;
+      line-height: 1.35;
+      font-weight: 500;
+    }
+
+    .compare {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--paper);
+      box-shadow: var(--shadow);
+      table-layout: fixed;
+    }
+
+    .compare th,
+    .compare td {
+      vertical-align: top;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .compare th {
+      color: var(--ink);
+      background: var(--warm);
+      font-family: var(--serif);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .compare tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .compare th:nth-child(1),
+    .compare td:nth-child(1) {
+      width: 17%;
+    }
+
+    .compare th:nth-child(2),
+    .compare td:nth-child(2),
+    .compare th:nth-child(3),
+    .compare td:nth-child(3) {
+      width: 31.5%;
+    }
+
+    .compare th:nth-child(4),
+    .compare td:nth-child(4) {
+      width: 20%;
+    }
+
+    .compare td {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .compare .dim {
+      color: var(--ink);
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 13px;
+    }
+
+    .compare b {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+    }
+
+    .chart-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 20px;
+      box-shadow: 0 4px 24px rgba(20, 20, 19, 0.05);
+      min-width: 0;
+    }
+
+    .chart-card.wide {
+      grid-column: 1 / -1;
+    }
+
+    .chart-card h3 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.2;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+
+    .chart-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .caption {
+      margin-top: 14px;
+      padding-top: 13px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+      padding-top: 10px;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      top: 34px;
+      left: 5%;
+      right: 5%;
+      height: 2px;
+      background: var(--line-strong);
+    }
+
+    .step {
+      position: relative;
+      padding: 48px 15px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      min-height: 178px;
+    }
+
+    .step::before {
+      content: attr(data-n);
+      position: absolute;
+      top: 0;
+      left: 15px;
+      transform: translateY(-50%);
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 999px;
+      color: var(--paper);
+      background: var(--ink);
+      font-family: var(--serif);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      box-shadow: 0 0 0 8px var(--paper);
+    }
+
+    .step b {
+      display: block;
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 13px;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .step span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .scenario-grid,
+    .advantage-grid,
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .analysis-card,
+    .scenario-card,
+    .example-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 18px;
+      box-shadow: 0 4px 22px rgba(20, 20, 19, 0.045);
+    }
+
+    .scenario-card h3,
+    .analysis-card h3,
+    .example-card h3 {
+      margin: 0 0 8px;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .scenario-card p,
+    .analysis-card p,
+    .example-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    .tagline {
+      display: inline-flex;
+      margin-bottom: 10px;
+      padding: 3px 7px;
+      border-radius: 4px;
+      color: var(--ink);
+      background: #eef2f7;
+      font-size: 11px;
+      line-height: 1.3;
+      letter-spacing: 0.04em;
+    }
+
+    .advantage-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+
+    .advantage-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .advantage-list li {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 14px 16px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.48;
+    }
+
+    .advantage-list b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .principle-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .layer {
+      display: grid;
+      grid-template-columns: 138px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+    }
+
+    .layer strong {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .layer span {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    .example-card ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.48;
+    }
+
+    .example-card li + li {
+      margin-top: 6px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      color: var(--ink-soft);
+      font-family: var(--serif);
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .dot.warn {
+      background: var(--amber);
+    }
+
+    .dot.block {
+      background: var(--red);
+    }
+
+    @media (max-width: 1120px) {
+      .hero,
+      .section-head,
+      .advantage-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .charts,
+      .timeline,
+      .scenario-grid,
+      .example-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline::before {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page {
+        width: calc(100vw - 28px);
+        padding-top: 14px;
+      }
+
+      .topbar {
+        position: static;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 6px;
+        font-size: 12px;
+      }
+
+      .top-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      .nav a {
+        padding: 6px 8px;
+        flex: 0 1 auto;
+      }
+
+      .hero {
+        padding-top: 36px;
+      }
+
+      .status-row,
+      .kpi-grid,
+      .scenario-grid,
+      .advantage-grid,
+      .example-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .layer {
+        grid-template-columns: 1fr;
+      }
+
+      .compare,
+      .compare thead,
+      .compare tbody,
+      .compare th,
+      .compare td,
+      .compare tr {
+        display: block;
+        width: 100% !important;
+      }
+
+      .compare thead {
+        display: none;
+      }
+
+      .compare td {
+        border-bottom: 0;
+        padding: 12px 16px;
+        overflow-wrap: anywhere;
+      }
+
+      .compare tr {
+        border-bottom: 1px solid var(--line);
+        padding: 8px 0;
+      }
+
+      .compare tr:last-child {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body data-report-lang="zh-CN">
+  <main class="page">
+    <header class="topbar" aria-label="报告导航">
+      <div class="brand"><span class="mark">Y</span><span data-i18n="brand">Yao Meta Skill 对比图</span></div>
+      <div class="top-actions">
+        <nav class="nav">
+          <a href="#summary" data-i18n="navSummary">关键结论</a>
+          <a href="#metrics" data-i18n="navMetrics">核心指标</a>
+          <a href="#charts" data-i18n="navCharts">图表分析</a>
+          <a href="#dimensions" data-i18n="navDimensions">维度对比</a>
+          <a href="#scenarios" data-i18n="navScenarios">场景原理</a>
+          <a href="#examples" data-i18n="navExamples">示例说明</a>
+        </nav>
+        <div class="lang-switch" aria-label="语言切换">
+          <button type="button" data-set-lang="zh-CN">中文</button>
+          <button type="button" data-set-lang="en">EN</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero" id="summary">
+      <div>
+        <p class="eyebrow" data-i18n="eyebrow">版本对比 · 2026-06-17</p>
+        <h1 data-i18n="heroTitle">从技能创建器，升级为技能操作系统 2.0</h1>
+        <p class="hero-copy" data-i18n="heroCopy">
+          1.0 的重点是把重复工作流整理成可安装、可阅读、可跨平台的技能包。当前 2.0 版本已经把范围推进到
+          Skill IR（技能中间表示）、编译适配、评测实验室、Review Studio（评审工作台）、证据账本、包体验证和发布门禁。
+          核心变化是从“生成一个技能”变成“治理一个可测试、可审计、可迭代的技能系统”。
+        </p>
+      </div>
+      <aside class="verdict">
+        <h2 data-i18n="verdictTitle">2.0 优势判断</h2>
+        <div class="status-row">
+          <div class="status"><b data-i18n="statusReadyTitle">可治理</b><span data-i18n="statusReadyCopy">从“生成技能”升级为包含门禁、证据和复盘的治理流程。</span></div>
+          <div class="status"><b data-i18n="statusClaimTitle">可验证</b><span data-i18n="statusClaimCopy">评测、包体验证、安装模拟和证据一致性让质量判断更可复查。</span></div>
+          <div class="status"><b data-i18n="statusLedgerTitle">可迁移</b><span data-i18n="statusLedgerCopy">通过中间表示和适配器覆盖更多运行环境，降低跨平台迁移成本。</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="metrics">
+      <div class="section-head">
+        <div class="section-title">
+          <h2 data-i18n="metricsTitle">核心指标</h2>
+        </div>
+      </div>
+      <div class="kpi-grid">
+        <article class="kpi">
+          <span class="label" data-i18n="kpiTargetsLabel">目标平台</span>
+          <span class="number">3 → 5</span>
+          <span class="delta" data-i18n="kpiTargetsDelta">从 OpenAI、Claude、Generic（通用平台）扩展到 Agent Skills（代理技能规范）和 VS Code（编辑器环境）。</span>
+        </article>
+        <article class="kpi">
+          <span class="label" data-i18n="kpiCompatLabel">兼容检查</span>
+          <span class="number">3 → 6</span>
+          <span class="delta" data-i18n="kpiCompatDelta">当前 registry（注册表）记录 6 项 compatibility pass（兼容通过）。</span>
+        </article>
+        <article class="kpi">
+          <span class="label" data-i18n="kpiReviewLabel">评审工作台</span>
+          <span class="number">16</span>
+          <span class="delta" data-i18n="kpiReviewDelta">Review Studio（评审工作台）汇总 16 个门禁，无阻塞，3 个 warning（警告）。</span>
+        </article>
+        <article class="kpi">
+          <span class="label" data-i18n="kpiEvidenceLabel">证据一致性</span>
+          <span class="number">39/39</span>
+          <span class="delta" data-i18n="kpiEvidenceDelta">evidence_consistency（证据一致性）决策为 consistent（一致）。</span>
+        </article>
+        <article class="kpi">
+          <span class="label" data-i18n="kpiReproLabel">复现实验包</span>
+          <span class="number">25</span>
+          <span class="delta" data-i18n="kpiReproDelta">required artifacts（必需证据产物）全部存在，missing（缺失）=0。</span>
+        </article>
+        <article class="kpi">
+          <span class="label" data-i18n="kpiScoreLabel">世界级评分</span>
+          <span class="number">91</span>
+          <span class="delta" data-i18n="kpiScoreDelta">Review Studio（评审工作台）评分高，但不是 public claim（公开宣传）许可。</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="charts">
+      <div class="section-head">
+        <div class="section-title">
+          <h2 data-i18n="chartsTitle">图表分析</h2>
+        </div>
+      </div>
+
+      <div class="charts">
+        <article class="chart-card">
+          <h3 data-i18n="radarTitle">能力雷达</h3>
+          <p data-i18n="radarIntro">1.0 在创建链路上已经可用，2.0 在评测、治理、发布安全和运营闭环上明显拉开差距。</p>
+          <svg viewBox="0 0 640 500" role="img" aria-label="能力雷达图">
+            <defs>
+              <style>
+                .axis{stroke:#d8cfc3;stroke-width:1}
+                .grid{fill:none;stroke:#e7ded2;stroke-width:1}
+                .poly1{fill:rgba(165,101,22,.16);stroke:#a56516;stroke-width:3}
+                .poly2{fill:rgba(27,54,93,.16);stroke:#1b365d;stroke-width:4}
+                .label{font:16px Georgia,serif;fill:#26221f}
+                .small{font:13px system-ui,sans-serif;fill:#716b64}
+              </style>
+            </defs>
+            <g transform="translate(320 245)">
+              <polygon class="grid" points="0,-190 164,-95 164,95 0,190 -164,95 -164,-95"></polygon>
+              <polygon class="grid" points="0,-142 123,-71 123,71 0,142 -123,71 -123,-71"></polygon>
+              <polygon class="grid" points="0,-95 82,-48 82,48 0,95 -82,48 -82,-48"></polygon>
+              <polygon class="grid" points="0,-48 41,-24 41,24 0,48 -41,24 -41,-24"></polygon>
+              <line class="axis" x1="0" y1="0" x2="0" y2="-205"></line>
+              <line class="axis" x1="0" y1="0" x2="177" y2="-102"></line>
+              <line class="axis" x1="0" y1="0" x2="177" y2="102"></line>
+              <line class="axis" x1="0" y1="0" x2="0" y2="205"></line>
+              <line class="axis" x1="0" y1="0" x2="-177" y2="102"></line>
+              <line class="axis" x1="0" y1="0" x2="-177" y2="-102"></line>
+              <polygon class="poly1" points="0,-124 104,-60 69,40 0,76 -104,60 -130,-75"></polygon>
+              <polygon class="poly2" points="0,-181 164,-95 159,92 0,175 -153,88 -164,-95"></polygon>
+              <text class="label" text-anchor="middle" x="0" y="-224" data-i18n="radarMethod">方法论</text>
+              <text class="label" text-anchor="start" x="190" y="-106" data-i18n="radarEval">评测</text>
+              <text class="label" text-anchor="start" x="190" y="112" data-i18n="radarGovern">治理</text>
+              <text class="label" text-anchor="middle" x="0" y="238" data-i18n="radarRelease">发布安全</text>
+              <text class="label" text-anchor="end" x="-190" y="112" data-i18n="radarOps">运营闭环</text>
+              <text class="label" text-anchor="end" x="-190" y="-106" data-i18n="radarPort">跨端适配</text>
+            </g>
+            <g transform="translate(38 422)">
+              <rect width="16" height="16" fill="rgba(165,101,22,.18)" stroke="#a56516" stroke-width="2"></rect>
+              <text class="small" x="24" y="13" data-i18n="radarLegendV1">1.0 定性能力面</text>
+              <rect x="164" width="16" height="16" fill="rgba(27,54,93,.18)" stroke="#1b365d" stroke-width="2"></rect>
+              <text class="small" x="188" y="13" data-i18n="radarLegendV2">2.0 当前能力面</text>
+            </g>
+          </svg>
+          <div class="caption" data-i18n="radarCaption">洞察：2.0 的提升集中在“评测、治理、发布安全、运营闭环”，这也是从工具变成系统的核心证据。</div>
+        </article>
+
+        <article class="chart-card">
+          <h3 data-i18n="evidenceTitle">证据阶梯</h3>
+          <p data-i18n="evidenceIntro">2.0 的证据链从文件存在性扩展到执行记录、hash（哈希）、安装模拟、复现实验和公开声明约束。</p>
+          <svg viewBox="0 0 640 500" role="img" aria-label="证据阶梯图">
+            <defs>
+              <style>
+                .bar1{fill:#d7b98e}
+                .bar2{fill:#1b365d}
+                .axisText{font:13px system-ui,sans-serif;fill:#716b64}
+                .num{font:700 20px system-ui,sans-serif;fill:#1b365d}
+                .line{stroke:#e7ded2;stroke-width:1}
+              </style>
+            </defs>
+            <g transform="translate(54 38)">
+              <line class="line" x1="0" y1="390" x2="535" y2="390"></line>
+              <g transform="translate(0 0)">
+                <text class="axisText" x="0" y="412" data-i18n="evidenceCompat">兼容项</text>
+                <rect class="bar1" x="8" y="235" width="44" height="155" rx="4"></rect>
+                <rect class="bar2" x="58" y="80" width="44" height="310" rx="4"></rect>
+                <text class="num" x="12" y="226">3</text>
+                <text class="num" x="62" y="70">6</text>
+              </g>
+              <g transform="translate(118 0)">
+                <text class="axisText" x="0" y="412" data-i18n="evidenceGates">评审门禁</text>
+                <rect class="bar1" x="8" y="333" width="44" height="57" rx="4"></rect>
+                <rect class="bar2" x="58" y="52" width="44" height="338" rx="4"></rect>
+                <text class="num" x="12" y="324" data-i18n="evidenceBasic">基础</text>
+                <text class="num" x="62" y="42">16</text>
+              </g>
+              <g transform="translate(260 0)">
+                <text class="axisText" x="0" y="412" data-i18n="evidenceConsistency">证据一致性</text>
+                <rect class="bar1" x="8" y="350" width="44" height="40" rx="4"></rect>
+                <rect class="bar2" x="58" y="0" width="44" height="390" rx="4"></rect>
+                <text class="num" x="12" y="340" data-i18n="evidenceUncounted1">未计</text>
+                <text class="num" x="62" y="-10">39/39</text>
+              </g>
+              <g transform="translate(404 0)">
+                <text class="axisText" x="0" y="412" data-i18n="evidenceRepro">复现实验包</text>
+                <rect class="bar1" x="8" y="350" width="44" height="40" rx="4"></rect>
+                <rect class="bar2" x="58" y="106" width="44" height="284" rx="4"></rect>
+                <text class="num" x="12" y="340" data-i18n="evidenceUncounted2">未计</text>
+                <text class="num" x="62" y="96">25</text>
+              </g>
+            </g>
+          </svg>
+          <div class="caption" data-i18n="evidenceCaption">洞察：2.0 把“能不能发布”拆成可检查的证据包，而不是只看技能文档是否完整。</div>
+        </article>
+
+        <article class="chart-card wide">
+          <h3 data-i18n="workflowTitle">2.0 工作流</h3>
+          <p data-i18n="workflowIntro">新的流程按照从上游输入到下游发布的顺序展开，避免报告和门禁散落在多个无关联文件中。</p>
+          <div class="timeline">
+            <div class="step" data-n="1"><b data-i18n="step1Title">输入归一</b><span data-i18n="step1Copy">工作流、提示词、转录、文档先进入 intent（意图记录）和 Skill IR（技能中间表示），不直接堆进 SKILL.md（技能入口文件）。</span></div>
+            <div class="step" data-n="2"><b data-i18n="step2Title">编译适配</b><span data-i18n="step2Copy">由 Skill IR（技能中间表示）生成 OpenAI、Claude、Generic（通用平台）、Agent Skills（代理技能规范）、VS Code（编辑器环境）等目标平台产物。</span></div>
+            <div class="step" data-n="3"><b data-i18n="step3Title">评测实验</b><span data-i18n="step3Copy">触发、输出质量、失败披露、模型运行、token（上下文用量）和耗时证据进入报告。</span></div>
+            <div class="step" data-n="4"><b data-i18n="step4Title">审计工作台</b><span data-i18n="step4Copy">Review Studio（评审工作台）汇总 16 个 gates（门禁），给出阻塞、警告、行动项和证据路径。</span></div>
+            <div class="step" data-n="5"><b data-i18n="step5Title">受控发布</b><span data-i18n="step5Copy">package verification（包体验证）、install simulation（安装模拟）、release lock（发布锁定）和 public claim guard（公开宣传守卫）共同决定发布边界。</span></div>
+          </div>
+          <div class="caption" data-i18n="workflowCaption">洞察：2.0 最重要的结构变化是“先建模，再编译，再验证，再发布”，这让后续自动化和团队协作有稳定接口。</div>
+        </article>
+      </div>
+    </section>
+
+
+
+    <section class="section" id="dimensions">
+      <div class="section-head">
+        <div class="section-title">
+          <h2 data-i18n="dimensionsTitle">维度对比</h2>
+        </div>
+      </div>
+      <table class="compare" aria-label="Yao Meta Skill 1.0 和 Skill OS 2.0 维度对比">
+        <thead>
+          <tr>
+            <th data-i18n="thDimension">维度</th>
+            <th data-i18n="thV1">1.0 版本</th>
+            <th data-i18n="thV2">2.0 版本</th>
+            <th data-i18n="thChange">显著变化</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="dim" data-i18n="rowProduct">产品定位</td>
+            <td data-i18n="rowProductV1">面向个人和团队的 <b>技能创建、重构、评估、打包助手</b>，强调把流程转成 SKILL.md（技能入口文件）、reports（报告目录）和 metadata（元数据）。</td>
+            <td data-i18n="rowProductV2">面向团队发布的 <b>Skill OS（技能操作系统）</b>，覆盖创建、编译、评测、治理、发布、反馈和证据追踪。</td>
+            <td data-i18n="rowProductChange">从“产物生成”升级为“生命周期治理”。</td>
+          </tr>
+          <tr>
+            <td class="dim" data-i18n="rowArch">架构模型</td>
+            <td data-i18n="rowArchV1">以 SKILL.md（技能入口文件）、agents/interface.yaml（代理接口配置）、manifest（清单）和基础 reports（报告）为主，文件结构相对直观。</td>
+            <td data-i18n="rowArchV2">引入 Skill IR（技能中间表示）、target compiler（目标编译器）、adapter（适配器）、gate contract（门禁契约）、release evidence（发布证据）、world-class ledger（世界级证据账本）等模块化结构。</td>
+            <td data-i18n="rowArchChange">从文件模板升级为中间表示驱动的工程系统。</td>
+          </tr>
+          <tr>
+            <td class="dim" data-i18n="rowPort">跨端适配</td>
+            <td data-i18n="rowPortV1">registry（注册表）快照记录 3 个目标平台：OpenAI、Claude、Generic（通用平台）。</td>
+            <td data-i18n="rowPortV2">当前 package（包体记录）记录 5 个 targets（目标平台），compatibility（兼容性）记录 6 项 pass（通过），增加 Agent Skills Compatible（代理技能兼容规范）和 VS Code（编辑器环境）。</td>
+            <td data-i18n="rowPortChange">覆盖范围扩大，适配结果可被 registry（注册表）读取。</td>
+          </tr>
+          <tr>
+            <td class="dim" data-i18n="rowEval">评测体系</td>
+            <td data-i18n="rowEvalV1">已有概览、信任报告、conformance matrix（符合性矩阵），但评测链路较轻。</td>
+            <td data-i18n="rowEvalV2">增加 trigger eval（触发评测）、output eval（输出评测）、benchmark reproducibility（基准复现）、provider evidence（真实模型证据）、blind review pack（盲评材料包）和 failure disclosure（失败披露）。</td>
+            <td data-i18n="rowEvalChange">从“检查文件是否像样”升级为“验证输出是否可靠”。</td>
+          </tr>
+          <tr>
+            <td class="dim" data-i18n="rowReport">报告体验</td>
+            <td data-i18n="rowReportV1">提供 overview HTML（概览网页）和 Review Studio HTML（评审工作台网页），偏概览和基础审计。</td>
+            <td data-i18n="rowReportV2">升级为双语 Skill Overview v2（技能概览第二版）、Review Studio 2.0（评审工作台第二版）、review viewer（评审查看器）、图表化 evidence（证据）和 action cards（行动卡片）。</td>
+            <td data-i18n="rowReportChange">报告从说明页升级为可审计工作台。</td>
+          </tr>
+          <tr>
+            <td class="dim" data-i18n="rowRelease">发布门禁</td>
+            <td data-i18n="rowReleaseV1">1.0 registry（注册表）中 archive_verified（归档已验证）=false，package_verification（包体验证）为空。</td>
+            <td data-i18n="rowReleaseV2">archive_verified（归档已验证）=true，install_simulated（安装已模拟）=true，package_verification（包体验证）和 install_simulation（安装模拟）均有报告，failure（失败）=0。</td>
+            <td data-i18n="rowReleaseChange">从可打包升级为可验证、可模拟安装。</td>
+          </tr>
+          <tr>
+            <td class="dim" data-i18n="rowSafety">安全边界</td>
+            <td data-i18n="rowSafetyV1">已有 trust_report（信任报告），但主要是基础扫描和文档式边界。</td>
+            <td data-i18n="rowSafetyV2">153 个脚本纳入 trust scan（信任扫描），secret findings（敏感信息发现）=0，permission required（所需权限）3 项且 approved（已批准）3 项，help smoke（帮助命令冒烟测试）86/86 通过。</td>
+            <td data-i18n="rowSafetyChange">安全从静态声明变成门禁数据。</td>
+          </tr>
+          <tr>
+            <td class="dim" data-i18n="rowOps">运营闭环</td>
+            <td data-i18n="rowOpsV1">更多依赖人工复盘和手动记录。</td>
+            <td data-i18n="rowOpsV2">增加 adoption drift（采用漂移）、metadata telemetry（元数据遥测）、SkillOps（技能运营）日报/周报、adaptive proposal loop（自适应改进建议循环）和 release runbook（发布运行手册）。</td>
+            <td data-i18n="rowOpsChange">从一次性发布升级为持续迭代机制。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="section" id="scenarios">
+      <div class="section-head">
+        <div class="section-title">
+          <h2 data-i18n="scenariosTitle">使用场景</h2>
+        </div>
+      </div>
+      <div class="scenario-grid">
+        <article class="scenario-card">
+          <span class="tagline" data-i18n="scenario1Tag">从零创建</span>
+          <h3 data-i18n="scenario1Title">把重复工作流沉淀成技能</h3>
+          <p data-i18n="scenario1Copy">当团队已经反复执行同一类提示词、文档整理或代码审查流程时，2.0 会先抽取意图、输入输出、边界和证据，再生成可安装的技能包。</p>
+        </article>
+        <article class="scenario-card">
+          <span class="tagline" data-i18n="scenario2Tag">升级治理</span>
+          <h3 data-i18n="scenario2Title">把个人技能升级成团队资产</h3>
+          <p data-i18n="scenario2Copy">当一个技能要被多人复用时，2.0 会补齐接口、清单、适配、信任扫描、评测报告和 Review Studio（评审工作台），让维护责任变清楚。</p>
+        </article>
+        <article class="scenario-card">
+          <span class="tagline" data-i18n="scenario3Tag">发布验证</span>
+          <h3 data-i18n="scenario3Title">给发布前的技能做证据闭环</h3>
+          <p data-i18n="scenario3Copy">当技能准备进入测试版或外部试用时，2.0 会检查包体验证、安装模拟、兼容矩阵和公开声明边界，避免“看起来能用”但证据不足。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="advantages">
+      <div class="section-head">
+        <div class="section-title">
+          <h2 data-i18n="advantagesTitle">优势分析</h2>
+        </div>
+      </div>
+      <div class="advantage-grid">
+        <article class="analysis-card">
+          <h3 data-i18n="advantageSummaryTitle">核心增量</h3>
+          <p data-i18n="advantageSummaryCopy">2.0 将技能从单个文件集合提升为有中间表示、有门禁、有证据账本、有发布边界的系统。它牺牲了一点轻量感，换来更强的可审计性和可迁移性。</p>
+        </article>
+        <ul class="advantage-list">
+          <li><b data-i18n="advantage1Title">更稳的输入边界</b><span data-i18n="advantage1Copy">先确定任务意图、触发方式、输入文件和排除项，再生成技能，减少“描述很宽、执行很散”的问题。</span></li>
+          <li><b data-i18n="advantage2Title">更强的质量证据</b><span data-i18n="advantage2Copy">通过触发评测、输出评测、复现实验和失败披露，把“好不好用”转成可以复查的证据。</span></li>
+          <li><b data-i18n="advantage3Title">更清楚的发布口径</b><span data-i18n="advantage3Copy">区分测试版就绪、公开宣传就绪和世界级声明就绪，避免把内部验证夸大成市场承诺。</span></li>
+          <li><b data-i18n="advantage4Title">更低的迁移成本</b><span data-i18n="advantage4Copy">通过目标编译器和适配器，把同一套技能意图输出到 OpenAI、Claude、Agent Skills、VS Code 等环境。</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="process">
+      <div class="section-head">
+        <div class="section-title">
+          <h2 data-i18n="processTitle">流程拆解</h2>
+        </div>
+      </div>
+      <div class="principle-stack">
+        <div class="layer"><strong data-i18n="process1Title">识别阶段</strong><span data-i18n="process1Copy">确认这是重复 workflow（工作流）而不是一次性任务，并记录使用人、触发语、输入文件、输出格式和不做什么。</span></div>
+        <div class="layer"><strong data-i18n="process2Title">生成阶段</strong><span data-i18n="process2Copy">生成 SKILL.md（技能入口文件）、references（参考资料）、scripts（脚本）和 reports（报告），但只为已证明需要的能力增加目录。</span></div>
+        <div class="layer"><strong data-i18n="process3Title">评测阶段</strong><span data-i18n="process3Copy">用触发样例、输出样例、失败披露和真实模型调用检查技能是否能稳定完成目标，而不是只检查文件是否存在。</span></div>
+        <div class="layer"><strong data-i18n="process4Title">发布阶段</strong><span data-i18n="process4Copy">运行包体验证、安装模拟、兼容检查和证据一致性检查，明确这是测试版、生产版还是仍需补证据。</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="principles">
+      <div class="section-head">
+        <div class="section-title">
+          <h2 data-i18n="principlesTitle">底层原理</h2>
+        </div>
+      </div>
+      <div class="principle-stack">
+        <div class="layer"><strong data-i18n="principle1Title">第一层：意图建模</strong><span data-i18n="principle1Copy">从原始材料中抽取任务目标、适用场景、触发方式、输入输出、边界和失败模式，形成可审查的技能意图。</span></div>
+        <div class="layer"><strong data-i18n="principle2Title">第二层：中间表示</strong><span data-i18n="principle2Copy">用 Skill IR（技能中间表示）承载结构化信息，让后续编译、评测和报告不依赖某一个平台的文件格式。</span></div>
+        <div class="layer"><strong data-i18n="principle3Title">第三层：目标编译</strong><span data-i18n="principle3Copy">通过 target compiler（目标编译器）和 adapter（适配器）生成不同运行环境需要的技能文件、接口配置和清单。</span></div>
+        <div class="layer"><strong data-i18n="principle4Title">第四层：证据门禁</strong><span data-i18n="principle4Copy">通过触发评测、输出评测、信任扫描、包体验证、安装模拟和 Review Studio（评审工作台）形成发布前证据链。</span></div>
+        <div class="layer"><strong data-i18n="principle5Title">第五层：运营反馈</strong><span data-i18n="principle5Copy">通过采用漂移、元数据遥测、改进建议循环和 SkillOps（技能运营）报告，把发布后的问题带回下一轮迭代。</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="examples">
+      <div class="section-head">
+        <div class="section-title">
+          <h2 data-i18n="examplesTitle">示例说明</h2>
+        </div>
+      </div>
+      <div class="example-grid">
+        <article class="example-card">
+          <h3 data-i18n="example1Title">案例一：内容工作流技能</h3>
+          <p data-i18n="example1Copy">输入是一组文章改写提示词和历史输出。2.0 会识别触发语、输入文档类型、质量标准和失败样例。</p>
+          <ul>
+            <li data-i18n="example1Li1">输出：SKILL.md、接口配置、示例报告、触发评测。</li>
+            <li data-i18n="example1Li2">价值：减少“什么文章都能改”的过宽承诺。</li>
+          </ul>
+        </article>
+        <article class="example-card">
+          <h3 data-i18n="example2Title">案例二：团队审查技能</h3>
+          <p data-i18n="example2Copy">输入是代码审查规范、历史 PR 评论和团队约定。2.0 会把评审维度、阻塞项、警告项和豁免规则固化。</p>
+          <ul>
+            <li data-i18n="example2Li1">输出：Review Studio（评审工作台）、豁免记录、行动项。</li>
+            <li data-i18n="example2Li2">价值：新人也能按同一套判断口径执行。</li>
+          </ul>
+        </article>
+        <article class="example-card">
+          <h3 data-i18n="example3Title">案例三：外部分发技能</h3>
+          <p data-i18n="example3Copy">输入是准备发布的技能包。2.0 会检查归档哈希、安装模拟、兼容矩阵和公开宣传边界。</p>
+          <ul>
+            <li data-i18n="example3Li1">输出：包体验证、安装模拟、证据一致性报告。</li>
+            <li data-i18n="example3Li2">价值：让测试版发布有证据，不靠人工印象。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+  </main>
+  <script>
+    const translations = {
+      en: {
+        brand: "Yao Meta Skill comparison",
+        navSummary: "Summary",
+        navMetrics: "Metrics",
+        navDimensions: "Dimensions",
+        navScenarios: "Use cases",
+        navExamples: "Examples",
+        navCharts: "Charts",
+        eyebrow: "Version comparison · 2026-06-17",
+        heroTitle: "From skill creator to Skill OS 2.0",
+        heroCopy: "Version 1.0 focused on turning repeated workflows into installable, readable, cross-platform skills. The current 2.0 architecture expands into Skill IR, compilation adapters, evaluation labs, Review Studio, evidence ledgers, package verification, and release gates. The core shift is from generating a skill to governing a testable, auditable, and iterative skill system.",
+        verdictTitle: "2.0 advantage summary",
+        statusReadyTitle: "Governable",
+        statusReadyCopy: "Moves from skill generation to a governed workflow with gates, evidence, and review loops.",
+        statusClaimTitle: "Verifiable",
+        statusClaimCopy: "Evaluation, package verification, install simulation, and evidence consistency make quality reviewable.",
+        statusLedgerTitle: "Portable",
+        statusLedgerCopy: "Skill IR and adapters cover more runtimes and reduce cross-platform migration cost.",
+        metricsTitle: "Core metrics",
+        metricsIntro: "These numbers use verifiable fields from the current local reports, without presenting unfinished human review or real telemetry as complete evidence.",
+        kpiTargetsLabel: "Target platforms",
+        kpiTargetsDelta: "Expanded from OpenAI, Claude, and Generic to Agent Skills and VS Code.",
+        kpiCompatLabel: "Compatibility",
+        kpiCompatDelta: "The current registry records 6 compatibility pass results.",
+        kpiReviewLabel: "Review Studio",
+        kpiReviewDelta: "Review Studio summarizes 16 gates, no blockers, and 3 warnings.",
+        kpiEvidenceLabel: "Evidence consistency",
+        kpiEvidenceDelta: "evidence_consistency is consistent across 39 of 39 checks.",
+        kpiReproLabel: "Repro bundle",
+        kpiReproDelta: "All required artifacts are present, missing=0.",
+        kpiScoreLabel: "World-class score",
+        kpiScoreDelta: "Review Studio scores high, but this is not permission for a public claim.",
+        dimensionsTitle: "Dimension comparison",
+        dimensionsIntro: "The comparison separates product positioning, architecture, evaluation, governance, experience, release, and operations. The main 2.0 value is not more pages, but a traceable evidence chain.",
+        thDimension: "Dimension",
+        thV1: "Version 1.0",
+        thV2: "Version 2.0",
+        thChange: "Notable change",
+        rowProduct: "Product role",
+        rowProductV1: "A <b>skill creation, refactoring, evaluation, and packaging assistant</b> for individuals and teams, centered on SKILL.md, reports, and metadata.",
+        rowProductV2: "A team-oriented <b>Skill OS</b> covering creation, compilation, evaluation, governance, release, feedback, and evidence tracking.",
+        rowProductChange: "Upgraded from artifact generation to lifecycle governance.",
+        rowArch: "Architecture",
+        rowArchV1: "Centered on SKILL.md, agents/interface.yaml, manifest, and basic reports, with a direct file structure.",
+        rowArchV2: "Adds Skill IR, target compiler, adapters, gate contracts, release evidence, and a world-class evidence ledger.",
+        rowArchChange: "Moves from file templates to an IR-driven engineering system.",
+        rowPort: "Portability",
+        rowPortV1: "The registry snapshot records 3 targets: OpenAI, Claude, and Generic.",
+        rowPortV2: "The current package records 5 targets and 6 compatibility pass results, adding Agent Skills Compatible and VS Code.",
+        rowPortChange: "Broader coverage with registry-readable adaptation results.",
+        rowEval: "Evaluation",
+        rowEvalV1: "Includes overview, trust report, and conformance matrix, but the evaluation chain is light.",
+        rowEvalV2: "Adds trigger eval, output eval, benchmark reproducibility, provider evidence, blind review pack, and failure disclosure.",
+        rowEvalChange: "Moves from checking whether files look complete to verifying output reliability.",
+        rowReport: "Report experience",
+        rowReportV1: "Provides overview HTML and Review Studio HTML for basic overview and audit.",
+        rowReportV2: "Upgrades to bilingual Skill Overview v2, Review Studio 2.0, review viewer, charted evidence, and action cards.",
+        rowReportChange: "Reports become an auditable workspace instead of static explanation pages.",
+        rowRelease: "Release gates",
+        rowReleaseV1: "In the 1.0 registry, archive_verified=false and package_verification is empty.",
+        rowReleaseV2: "archive_verified=true, install_simulated=true, package verification and install simulation reports exist, failure=0.",
+        rowReleaseChange: "Moves from packageable to verifiable and install-simulated.",
+        rowSafety: "Safety boundary",
+        rowSafetyV1: "Has a trust_report, mostly as basic scan and documented boundary.",
+        rowSafetyV2: "153 scripts are included in trust scan, secret findings=0, permission required 3 and approved 3, help smoke 86/86 passed.",
+        rowSafetyChange: "Safety moves from static declaration to gate data.",
+        rowOps: "Operations loop",
+        rowOpsV1: "Relies more on manual review and hand-written records.",
+        rowOpsV2: "Adds adoption drift, metadata telemetry, SkillOps daily and weekly reports, adaptive proposal loop, and release runbook.",
+        rowOpsChange: "Moves from one-time release to continuous iteration.",
+        scenariosTitle: "Use cases",
+        scenariosIntro: "Version 2.0 is not only for creating a new skill. It supports the whole path from idea, materials, evaluation, to release. These are the use cases where it creates the clearest incremental value over 1.0.",
+        scenario1Tag: "From zero",
+        scenario1Title: "Turn repeated workflows into skills",
+        scenario1Copy: "When a team repeatedly uses the same prompts, document workflows, or code review routines, 2.0 extracts intent, input and output contracts, boundaries, and evidence before generating an installable skill package.",
+        scenario2Tag: "Governance",
+        scenario2Title: "Upgrade personal skills into team assets",
+        scenario2Copy: "When a skill needs reuse by multiple people, 2.0 adds interface files, manifest, adapters, trust scan, evaluation reports, and Review Studio so ownership and maintenance become explicit.",
+        scenario3Tag: "Verification",
+        scenario3Title: "Close evidence before release",
+        scenario3Copy: "When a skill is entering beta or external trial, 2.0 checks package verification, install simulation, compatibility matrix, and public-claim boundaries instead of relying on visual completeness.",
+        advantagesTitle: "Advantage analysis",
+        advantagesIntro: "Version 1.0 is light, fast, and direct. Version 2.0 connects creation, evaluation, release, and operations. It is better suited to skills that require long-term maintenance, cross-platform distribution, and team collaboration.",
+        advantageSummaryTitle: "Core increment",
+        advantageSummaryCopy: "Version 2.0 turns a skill from a set of files into a system with an intermediate representation, gates, evidence ledger, and release boundary. It trades a little lightness for stronger auditability and portability.",
+        advantage1Title: "More stable input boundaries",
+        advantage1Copy: "It defines task intent, trigger surface, input files, outputs, and exclusions before generation, reducing broad descriptions and scattered execution.",
+        advantage2Title: "Stronger quality evidence",
+        advantage2Copy: "Trigger eval, output eval, reproducibility, and failure disclosure turn usability into evidence that can be reviewed.",
+        advantage3Title: "Clearer release language",
+        advantage3Copy: "It separates beta readiness, public-claim readiness, and world-class claim readiness, preventing internal validation from becoming market overclaim.",
+        advantage4Title: "Lower migration cost",
+        advantage4Copy: "Target compilers and adapters let one skill intent produce artifacts for OpenAI, Claude, Agent Skills, VS Code, and related environments.",
+        processTitle: "Process breakdown",
+        processIntro: "Version 2.0 is not about writing one file. It splits creation into checkable stages. Each stage has inputs, artifacts, and exit criteria so a team can decide whether to keep moving.",
+        process1Title: "Identify",
+        process1Copy: "Confirm this is a repeated workflow, not a one-off task, and record users, trigger phrases, input files, output shape, and explicit exclusions.",
+        process2Title: "Generate",
+        process2Copy: "Generate SKILL.md, references, scripts, and reports, but add directories only for capabilities with a clear need.",
+        process3Title: "Evaluate",
+        process3Copy: "Use trigger examples, output examples, failure disclosure, and provider-backed model runs to check whether the skill reliably completes the job.",
+        process4Title: "Release",
+        process4Copy: "Run package verification, install simulation, compatibility checks, and evidence consistency checks to decide whether this is beta, production, or evidence-pending.",
+        principlesTitle: "Underlying principles",
+        principlesIntro: "The 2.0 logic is: model the skill first, compile the model into platform-specific artifacts, then use evidence gates to decide whether it can be released. This is slower than directly writing SKILL.md, but easier to govern.",
+        principle1Title: "Layer 1: Intent modeling",
+        principle1Copy: "Extract goals, use cases, trigger modes, inputs, outputs, boundaries, and failure modes from raw materials into a reviewable skill intent.",
+        principle2Title: "Layer 2: Intermediate representation",
+        principle2Copy: "Skill IR carries structured information so compilation, evaluation, and reporting do not depend on one platform's file format.",
+        principle3Title: "Layer 3: Target compilation",
+        principle3Copy: "Target compilers and adapters generate the skill files, interface settings, and manifests required by different runtime environments.",
+        principle4Title: "Layer 4: Evidence gates",
+        principle4Copy: "Trigger evals, output evals, trust scans, package verification, install simulation, and Review Studio form a pre-release evidence chain.",
+        principle5Title: "Layer 5: Operational feedback",
+        principle5Copy: "Adoption drift, metadata telemetry, adaptive proposals, and SkillOps reports feed post-release issues back into the next iteration.",
+        examplesTitle: "Examples",
+        examplesIntro: "These three examples show what 2.0 adds beyond 1.0. The point is not more files, but evidence, boundaries, and maintenance entry points.",
+        example1Title: "Example 1: Content workflow skill",
+        example1Copy: "The input is a set of article rewriting prompts and historical outputs. 2.0 identifies trigger phrases, document types, quality standards, and failure examples.",
+        example1Li1: "Output: SKILL.md, interface config, sample report, trigger eval.",
+        example1Li2: "Value: avoids an overbroad promise that any article can be rewritten.",
+        example2Title: "Example 2: Team review skill",
+        example2Copy: "The input is code review rules, historical PR comments, and team conventions. 2.0 codifies review dimensions, blockers, warnings, and waiver rules.",
+        example2Li1: "Output: Review Studio, waiver records, action items.",
+        example2Li2: "Value: new team members can follow the same judgment standard.",
+        example3Title: "Example 3: External distribution skill",
+        example3Copy: "The input is a skill package ready for release. 2.0 checks archive hash, install simulation, compatibility matrix, and public-claim boundary.",
+        example3Li1: "Output: package verification, install simulation, evidence consistency report.",
+        example3Li2: "Value: beta release is backed by evidence, not by manual impression.",
+        chartsTitle: "Chart analysis",
+        chartsIntro: "Charts help scan the differences quickly. Radar values are qualitative summaries from the read reports. The repository JSON and Markdown reports remain the source of truth.",
+        radarTitle: "Capability radar",
+        radarIntro: "Version 1.0 is already usable on the creation path. Version 2.0 is much stronger in evaluation, governance, release safety, and operations.",
+        radarMethod: "Method",
+        radarEval: "Evaluation",
+        radarGovern: "Governance",
+        radarRelease: "Release safety",
+        radarOps: "Operations",
+        radarPort: "Portability",
+        radarLegendV1: "1.0 qualitative surface",
+        radarLegendV2: "2.0 current surface",
+        radarCaption: "Insight: The main 2.0 lift is evaluation, governance, release safety, and operations. That is the evidence of moving from tool to system.",
+        evidenceTitle: "Evidence ladder",
+        evidenceIntro: "The 2.0 evidence chain expands from file existence to execution records, hashes, install simulation, reproducibility, and public-claim constraints.",
+        evidenceCompat: "Compatibility",
+        evidenceGates: "Review gates",
+        evidenceBasic: "Basic",
+        evidenceConsistency: "Consistency",
+        evidenceUncounted1: "N/A",
+        evidenceRepro: "Repro bundle",
+        evidenceUncounted2: "N/A",
+        evidenceCaption: "Insight: 2.0 splits release readiness into checkable evidence packages instead of only checking whether skill docs are complete.",
+        workflowTitle: "2.0 workflow",
+        workflowIntro: "The new process expands from upstream inputs to downstream release, keeping reports and gates connected across files.",
+        step1Title: "Normalize input",
+        step1Copy: "Workflows, prompts, transcripts, and documents first enter intent records and Skill IR, instead of being pasted directly into SKILL.md.",
+        step2Title: "Compile targets",
+        step2Copy: "Skill IR generates target artifacts for OpenAI, Claude, Generic, Agent Skills, VS Code, and related environments.",
+        step3Title: "Run evals",
+        step3Copy: "Trigger quality, output quality, failure disclosure, model runs, token usage, and timing evidence are captured in reports.",
+        step4Title: "Audit workspace",
+        step4Copy: "Review Studio summarizes 16 gates and surfaces blockers, warnings, actions, and evidence paths.",
+        step5Title: "Controlled release",
+        step5Copy: "Package verification, install simulation, release lock, and public claim guard jointly define the release boundary.",
+        workflowCaption: "Insight: The key structural change is model first, compile second, verify third, release last. That gives automation and team collaboration stable interfaces.",
+      }
+    };
+
+    function setLanguage(lang) {
+      const next = lang === "en" ? "en" : "zh-CN";
+      document.body.dataset.reportLang = next;
+      document.documentElement.lang = next;
+      document.querySelectorAll("[data-i18n]").forEach((node) => {
+        const key = node.dataset.i18n;
+        if (!node.dataset.zh) {
+          node.dataset.zh = node.innerHTML.trim();
+        }
+        node.innerHTML = next === "en" ? (translations.en[key] || node.dataset.zh) : node.dataset.zh;
+      });
+      document.querySelectorAll("[data-set-lang]").forEach((button) => {
+        const active = button.dataset.setLang === next;
+        button.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+    }
+
+    document.querySelectorAll("[data-set-lang]").forEach((button) => {
+      button.addEventListener("click", () => setLanguage(button.dataset.setLang));
+    });
+
+    const queryLang = new URLSearchParams(window.location.search).get("lang");
+    setLanguage(queryLang || "zh-CN");
+  </script>
+</body>
+</html>

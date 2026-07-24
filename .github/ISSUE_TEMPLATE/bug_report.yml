@@ -1,0 +1,38 @@
+name: Bug report / Báo lỗi
+description: Create a report to help us improve (Tạo báo cáo để giúp chúng tôi cải thiện)
+title: "[BUG] "
+labels: ["bug"]
+assignees: ""
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time to file a bug report for SEOSONA OS!
+        *(Cảm ơn bạn đã dành thời gian báo cáo lỗi cho SEOSONA OS!)*
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description (Mô tả lỗi)
+      description: A clear and concise description of what the bug is. (Mô tả rõ ràng và ngắn gọn về lỗi bạn gặp phải.)
+      placeholder: Describe the issue... (Mô tả chi tiết vấn đề...)
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce (Các bước tái tạo lỗi)
+      description: How can we reproduce this issue? (Làm cách nào chúng tôi có thể tự tạo lại lỗi này trên máy mình?)
+      placeholder: |
+        1. Run `seosona init`
+        2. Open folder...
+    validations:
+      required: true
+  - type: input
+    id: os
+    attributes:
+      label: Operating System (Hệ điều hành)
+      description: e.g. Windows 11, macOS Sonoma (Ví dụ: Windows 11, macOS)
+      placeholder: Windows 11
+    validations:
+      required: true
