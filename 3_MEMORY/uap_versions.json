@@ -2288,5 +2288,23 @@
   },
   "direct_audio_cpp": {
     "head": "365b4f6e322f8f5423f04884a1edcc4a72b5df80"
+  },
+  "StableDiffusionVN/aPix_Builder": {
+    "head": "405afc14bfd51f131f88bb5bc39db6f6271a5893"
+  },
+  "longhang2004/vietnamese-humanizer": {
+    "head": "77fdf643dc75e1bfdc32639e14ca99249732ea99"
+  },
+  "indranilbanerjee/digital-marketing-pro": {
+    "head": "be8b31bb137e69ef152cc5f141d3adfbbe9fd2a8"
+  },
+  "petergyang/no-ai-slop": {
+    "head": "61c21c351da4dcb40946a11fead978f2078a2c65"
+  },
+  "Comfy-Org/ComfyUI": {
+    "head": "0cb84e7e6e0bdce2fa6e352aa07c6ea9c7cc984b"
+  },
+  "earthtojake/text-to-cad": {
+    "head": "fdbb4b4fb62d95ae298cfe9a46fdc7092bdaf423"
   }
 }
