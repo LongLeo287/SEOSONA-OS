@@ -1,0 +1,348 @@
+{
+  "id": "content-engine",
+  "name": "SEO Content Engine",
+  "version": "1.0.0",
+  "author": {
+    "name": "ClaudeKit",
+    "url": "https://claudekit.cc"
+  },
+  "tags": [
+    "seo",
+    "content",
+    "organic",
+    "evergreen"
+  ],
+  "estimatedDuration": "30 days",
+  "difficulty": "intermediate",
+  "ai_models_used": [
+    "claude-sonnet",
+    "claude-opus"
+  ],
+  "inputs": {
+    "required": [
+      {
+        "key": "domain",
+        "type": "url",
+        "prompt": "Your website domain"
+      },
+      {
+        "key": "niche",
+        "type": "string",
+        "prompt": "Your primary niche or industry"
+      },
+      {
+        "key": "target_keywords",
+        "type": "array",
+        "prompt": "Seed keywords you want to rank for (3-5)"
+      }
+    ],
+    "optional": [
+      {
+        "key": "gsc_access",
+        "type": "boolean",
+        "default": false,
+        "prompt": "Do you have Google Search Console access?"
+      },
+      {
+        "key": "existing_content_count",
+        "type": "number",
+        "default": 0,
+        "prompt": "Number of existing blog posts/pages"
+      },
+      {
+        "key": "publish_frequency",
+        "type": "string",
+        "default": "2x/week",
+        "prompt": "Target publishing frequency"
+      },
+      {
+        "key": "competitor_domains",
+        "type": "array",
+        "default": [],
+        "prompt": "Competitor domains to analyze"
+      }
+    ]
+  },
+  "goal_targets": {
+    "organic_traffic": {
+      "default": 5000,
+      "metric": "ga4"
+    },
+    "keywords_top10": {
+      "default": 30,
+      "metric": "gsc"
+    },
+    "content_velocity": {
+      "default": 8,
+      "metric": "manual"
+    },
+    "avg_time_on_page": {
+      "default": 180,
+      "metric": "ga4"
+    }
+  },
+  "stages": [
+    {
+      "id": "foundation",
+      "name": "Content Foundation",
+      "steps": [
+        {
+          "id": "keyword-research",
+          "name": "Keyword & Gap Research",
+          "strategy": "Start with GSC data — your existing impressions reveal what Google already associates with your domain. Cross-reference with competitor keyword profiles to find gaps where they rank and you do not. Prioritize keywords by business value, not just volume. A 200-search keyword that converts at 5% beats a 10K keyword that converts at 0.1%.",
+          "ai_execution": "Pull GSC impression data and cluster by intent. Scrape competitor SERPs for your seed keywords. Build a keyword universe with volume, difficulty, and intent classification. Identify quick wins (positions 11-20 you can push to page 1).",
+          "human_decision": "Validate keyword business relevance — some high-volume keywords attract the wrong audience. Prioritize based on your actual conversion data and sales team feedback. Remove keywords where you genuinely cannot compete.",
+          "command": "/ckm:seo/keywords",
+          "agent": "researcher",
+          "skills": [
+            "seo",
+            "marketing-research",
+            "competitor"
+          ],
+          "outputs": [
+            "keyword-universe.md",
+            "gap-analysis.md",
+            "quick-wins.md"
+          ],
+          "dependsOn": [],
+          "parallel": true,
+          "gate": null
+        },
+        {
+          "id": "content-audit",
+          "name": "Existing Content Audit",
+          "strategy": "Audit every existing page by traffic trend (growing, stable, declining), keyword cannibalization, and conversion contribution. Most sites have 30-40% zombie content that dilutes authority. Decide for each: keep, merge, update, or prune. Pruning underperforming content often lifts the entire site.",
+          "ai_execution": "Crawl all existing URLs and map to GA4 traffic data. Identify cannibalization clusters (multiple pages targeting same keyword). Score content freshness, word count, and backlink profile. Generate a prioritized action list for every existing page.",
+          "human_decision": "Make the prune/keep/merge calls — some low-traffic content serves brand or sales enablement purposes that data cannot capture. Decide which legacy content reflects your current positioning versus outdated messaging.",
+          "command": "/ckm:seo/audit",
+          "agent": "researcher",
+          "skills": [
+            "seo",
+            "analytics",
+            "content-marketing"
+          ],
+          "outputs": [
+            "content-audit.md",
+            "prune-list.md",
+            "update-priorities.md"
+          ],
+          "dependsOn": [],
+          "parallel": true,
+          "gate": null
+        },
+        {
+          "id": "topic-clusters",
+          "name": "Topic Cluster Strategy",
+          "strategy": "Build pillar-cluster architecture: 3-5 pillar pages covering broad topics, each supported by 8-12 cluster articles targeting long-tail variations. Internal linking between cluster and pillar creates topical authority signals. The pillar page should be the definitive resource — 3000+ words, regularly updated, designed to earn backlinks.",
+          "ai_execution": "Map keyword universe into topic clusters using semantic similarity. Generate pillar page outlines with comprehensive subtopic coverage. Create cluster article titles optimized for long-tail queries. Build internal linking map showing how clusters connect to pillars.",
+          "human_decision": "Select which pillars align with your product positioning and sales funnel. Ensure cluster topics match real customer questions, not just keyword variations. Validate that you have genuine expertise to create authoritative pillar content.",
+          "command": "/ckm:seo/keywords",
+          "agent": "researcher",
+          "skills": [
+            "seo",
+            "content-marketing",
+            "marketing-research"
+          ],
+          "outputs": [
+            "pillar-pages.md",
+            "cluster-map.md",
+            "internal-linking-plan.md"
+          ],
+          "dependsOn": [
+            "keyword-research",
+            "content-audit"
+          ],
+          "parallel": false,
+          "gate": "brand-review"
+        }
+      ]
+    },
+    {
+      "id": "production",
+      "name": "Content Production",
+      "steps": [
+        {
+          "id": "content-briefs",
+          "name": "SEO Content Briefs",
+          "strategy": "A brief is not a keyword-stuffed outline. Analyze the top 5 ranking pages for each target keyword: what questions do they answer, what do they miss, what format works. Your brief should define the unique angle — the reason your piece deserves to outrank existing results. Include target word count, mandatory subtopics, internal links, and CTA placement.",
+          "ai_execution": "SERP-analyze top 10 results for each target keyword. Extract common headings, questions answered, content gaps. Generate structured briefs with unique angle, outline, word count target, semantic keywords to include, and internal linking targets.",
+          "human_decision": "Approve the unique angle for each brief — this is your editorial differentiation. Add proprietary data, case studies, or original insights that competitors cannot replicate. Reject briefs that just rewrite existing content without adding value.",
+          "command": "/ckm:write/blog",
+          "agent": "content-creator",
+          "skills": [
+            "seo",
+            "content-marketing",
+            "copywriting"
+          ],
+          "outputs": [
+            "content-briefs/"
+          ],
+          "dependsOn": [
+            "topic-clusters"
+          ],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "content-creation",
+          "name": "AI-Assisted Content Drafting",
+          "strategy": "Use AI for first drafts but inject brand voice, original examples, and real data. The best AI-assisted content follows a pattern: AI handles research synthesis and structure, human adds stories, opinions, and proprietary insights. Every piece needs at least one element that only you can provide — a customer quote, original data, contrarian take, or personal experience.",
+          "ai_execution": "Generate first drafts following the approved briefs. Apply brand voice guidelines and tone patterns. Include semantic keyword variations naturally. Draft meta titles, descriptions, and social share copy for each piece. Flag sections where human expertise or data is needed.",
+          "human_decision": "Add original insights, data, and examples to every piece. Edit for brand voice authenticity — AI-generated content has a detectable 'smoothness' that needs roughening. Ensure every article has a genuine point of view, not just information synthesis.",
+          "command": "/ckm:write/blog",
+          "agent": "copywriter",
+          "skills": [
+            "copywriting",
+            "content-marketing",
+            "seo"
+          ],
+          "outputs": [
+            "drafts/"
+          ],
+          "dependsOn": [
+            "content-briefs"
+          ],
+          "parallel": true,
+          "gate": "brand-review"
+        },
+        {
+          "id": "seo-optimization",
+          "name": "On-Page SEO Optimization",
+          "strategy": "On-page SEO is the last 20% that separates ranking from not ranking. Optimize title tags for CTR (not just keyword inclusion), write meta descriptions that drive clicks, structure H2/H3 hierarchy for featured snippets, add schema markup for rich results. Internal link every new piece to 3-5 existing pages and vice versa.",
+          "ai_execution": "Audit each draft for on-page SEO factors: title tag optimization, meta description CTR potential, header hierarchy, keyword density, schema markup opportunities, image alt texts, and internal linking. Generate optimized versions of all on-page elements.",
+          "human_decision": "Balance SEO optimization with readability — over-optimized content reads like spam. Approve title tags that are compelling to humans first, optimized for search second. Ensure internal links feel natural and helpful, not forced.",
+          "command": "/ckm:seo/audit",
+          "agent": "content-creator",
+          "skills": [
+            "seo",
+            "content-marketing"
+          ],
+          "outputs": [
+            "seo-checklist.md",
+            "optimized-drafts/"
+          ],
+          "dependsOn": [
+            "content-creation"
+          ],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    },
+    {
+      "id": "distribution",
+      "name": "Content Distribution",
+      "steps": [
+        {
+          "id": "repurpose-content",
+          "name": "Content Repurposing (1 to 100)",
+          "strategy": "Every pillar article should generate 10+ derivative pieces: Twitter thread, LinkedIn post, email newsletter section, infographic data points, short-form video script, podcast talking points, slide deck, quote graphics, community discussion starters, and a summary for your docs. The 1-to-10-to-100 framework: 1 anchor piece becomes 10 formats becomes 100 platform-native posts.",
+          "ai_execution": "Transform each published article into platform-native formats: extract key insights for Twitter threads, rewrite for LinkedIn's professional tone, create email-friendly summaries, generate quote graphics copy, write video scripts from key sections. Maintain core message consistency across formats.",
+          "human_decision": "Choose which articles deserve full repurposing effort vs light distribution. Adapt voice for each platform — your LinkedIn tone should differ from Twitter. Add platform-specific context and engagement hooks that AI cannot contextually generate.",
+          "command": "/ckm:social",
+          "agent": "content-creator",
+          "skills": [
+            "social",
+            "content-marketing",
+            "copywriting"
+          ],
+          "outputs": [
+            "repurpose-plan.md",
+            "derivative-content/"
+          ],
+          "dependsOn": [
+            "seo-optimization"
+          ],
+          "parallel": true,
+          "gate": null
+        },
+        {
+          "id": "social-distribution",
+          "name": "Platform-Native Social Distribution",
+          "strategy": "Each platform has different algorithmic triggers. Twitter rewards threads and engagement bait. LinkedIn rewards long-form with a hook and personal stories. Reddit rewards genuine helpfulness with zero self-promotion in the post itself. Schedule posts at platform-specific optimal times and engage actively in the first hour after posting.",
+          "ai_execution": "Generate platform-native versions of each content piece. Optimize posting schedule based on audience timezone data. Create engagement-optimized hooks for each platform. Draft follow-up comments and responses to seed discussion.",
+          "human_decision": "Personally engage in comments for the first hour after posting — algorithmic boost requires authentic interaction. Decide which communities to cross-post to and tailor the framing. Monitor for negative reactions and adjust messaging.",
+          "command": "/ckm:social/schedule",
+          "agent": "social-media-manager",
+          "skills": [
+            "social",
+            "content-marketing"
+          ],
+          "outputs": [
+            "social-calendar.md",
+            "platform-posts/"
+          ],
+          "dependsOn": [
+            "repurpose-content"
+          ],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    },
+    {
+      "id": "measurement",
+      "name": "Performance Measurement",
+      "steps": [
+        {
+          "id": "performance-tracking",
+          "name": "Content Performance Tracking",
+          "strategy": "Track three tiers of metrics: vanity (pageviews, social shares), engagement (time on page, scroll depth, comments), and business (conversions, pipeline influenced, revenue attributed). Set up content grouping in GA4 by topic cluster to measure pillar authority growth. Review weekly for the first month, then biweekly.",
+          "ai_execution": "Pull GA4 and GSC data for all published content. Calculate content ROI by piece (traffic, engagement, conversions). Identify top performers and underperformers. Generate trend reports showing cluster authority growth over time. Flag declining content for refresh.",
+          "human_decision": "Interpret performance in context — a low-traffic piece that converts well is more valuable than a viral post with zero conversions. Decide budget allocation based on channel performance. Adjust publishing frequency based on diminishing returns analysis.",
+          "command": "/ckm:analyze/report",
+          "agent": "analytics-analyst",
+          "skills": [
+            "analytics",
+            "seo"
+          ],
+          "outputs": [
+            "performance-report.md",
+            "content-roi.md"
+          ],
+          "dependsOn": [
+            "social-distribution"
+          ],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "content-refresh",
+          "name": "Content Refresh & Update Cycle",
+          "strategy": "Content decay is real — most articles lose 10-20% of traffic after 6 months without updates. Identify declining content early and refresh with new data, updated examples, expanded sections, and freshened internal links. Updating existing high-authority content is 3x more efficient than creating new content for competitive keywords.",
+          "ai_execution": "Identify content with declining traffic trends (30/60/90 day comparison). Analyze what changed in SERPs — new competitors, SERP feature changes, intent shifts. Generate update recommendations: sections to expand, outdated info to refresh, new internal links to add, schema to update.",
+          "human_decision": "Prioritize refreshes by business impact, not just traffic decline. Some content declines because the topic is no longer relevant — recognize when to sunset vs refresh. Add new proprietary data and examples that keep content genuinely current.",
+          "command": "/ckm:seo/audit",
+          "agent": "content-creator",
+          "skills": [
+            "seo",
+            "content-marketing",
+            "analytics"
+          ],
+          "outputs": [
+            "refresh-queue.md",
+            "update-briefs/"
+          ],
+          "dependsOn": [
+            "performance-tracking"
+          ],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    }
+  ],
+  "gates": {
+    "brand-review": {
+      "type": "auto",
+      "checker": "content-reviewer",
+      "criteria": [
+        "brand-voice-consistency",
+        "seo-quality",
+        "originality",
+        "factual-accuracy"
+      ],
+      "pass_threshold": 0.8
+    }
+  }
+}

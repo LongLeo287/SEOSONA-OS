@@ -1,0 +1,27 @@
+name: Feature request / Đề xuất tính năng
+description: Suggest an idea for this project (Đề xuất ý tưởng cho dự án)
+title: "[FEATURE] "
+labels: ["enhancement"]
+assignees: ""
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a feature for SEOSONA OS!
+        *(Cảm ơn bạn đã đề xuất một tính năng mới cho SEOSONA OS!)*
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem (Vấn đề)
+      description: Is your feature request related to a problem? Please describe. (Tính năng bạn đề xuất có nhằm giải quyết vấn đề nào không? Vui lòng mô tả.)
+      placeholder: I'm always frustrated when... (Tôi luôn cảm thấy khó chịu khi...)
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution (Giải pháp đề xuất)
+      description: Describe the solution you'd like. (Mô tả giải pháp/tính năng mà bạn mong muốn.)
+    validations:
+      required: true

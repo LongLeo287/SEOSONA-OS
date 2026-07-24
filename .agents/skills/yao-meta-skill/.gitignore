@@ -1,0 +1,35 @@
+.DS_Store
+dist/
+*.zip
+__pycache__/
+tests/tmp/
+tests/tmp_*/
+tests/tmp_snapshot/
+tests/tmp_cli/
+tests/tmp_skill_overview/
+tests/tmp_skill_preview/
+tests/tmp_reference_scan/
+tests/tmp_iteration_directions/
+tests/tmp_review_viewer/
+tests/tmp_feedback/
+tests/tmp_github_benchmark_scan/
+tests/tmp_intent_confidence/
+tests/tmp_reference_synthesis/
+tests/tmp_output_risk_profile/
+tests/tmp_artifact_design_profile/
+tests/tmp_prompt_quality_profile/
+tests/tmp_system_model/
+tests/tmp_security/
+tests/tmp_baseline_compare.*
+reports/release_snapshots/
+reports/telemetry_events.jsonl
+.yao/
+evidence/world_class/submission-kit/
+evidence/world_class/submissions/
+
+# Local business-skill experiments belong outside this meta-skill repo unless promoted intentionally.
+geo-ranking-article-generator/
+
+# Private or one-off pattern analysis reports should not be committed as factory evidence.
+reports/*pattern-analysis*.md
+reports/*research-plan*.md

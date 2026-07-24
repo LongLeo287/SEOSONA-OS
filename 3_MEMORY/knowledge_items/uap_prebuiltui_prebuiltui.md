@@ -1,0 +1,211 @@
+# KI: prebuiltui/prebuiltui
+
+## Overview
+**PrebuiltUI** is a growing collection of beautifully crafted, ready-to-use UI components built with **Tailwind CSS**. Whether you're creating a **landing page**, **dashboard** or a full **SaaS application**, PrebuiltUI helps you build faster with clean, responsive and production-ready components.
+
+## Architecture & Tech Stack
+- Could not detect automatically
+- **Total files:** 133 files across 17 directories
+- **File types:** .svg: 76, .png: 53, .md: 4
+
+## Documentation Sections
+- PrebuiltUI – The Ultimate Collection of UI Components
+- Features
+- Support
+- Contributing
+
+## Core Structure
+```
+  CODE_OF_CONDUCT.md
+  CONTRIBUTING.md
+  LICENSE.md
+  README.md
+  assets/
+    aboutSection/
+      bookEmoji.png
+      boxEmoji.png
+      brainEmoji.png
+      colorsEmoji.png
+      flashEmoji.png
+      puzzelEmoji.png
+    appDownload/
+      appleStoreBtn.svg
+      appleStoreBtnBlack.svg
+      appleStoreBtnBlue.svg
+      appleStoreBtnWhite.svg
+      excitedWomenImage.png
+      googlePlayBtn.svg
+      googlePlayBtnBlack.svg
+      googlePlayBtnBlue.svg
+      googlePlayBtnWhite.svg
+    banners/
+      image-1.png
+      image-2.png
+    card/
+      girlWithHeadphone.png
+      hoverCardImg1.png
+      hoverCardImg2.png
+      officeImage.png
+      productImage.png
+      productImage2.png
+      productImage3.png
+      productImage4.png
+      productImageWithoutBg.png
+    companyLogo/
+      airtable.svg
+      asana.svg
+      clickup.svg
+      facebook.svg
+      framer.svg
+      google.svg
+      huawei.svg
+      instagram.svg
+      linkedin.svg
+      miro.svg
+      netflix.svg
+      slack.svg
+      mark/
+        Airbnb.svg
+        CloudFlare.svg
+        Discord.svg
+        Dribbble.svg
+        Dropbox.svg
+        Figma.svg
+        Framer.svg
+        GitHub.svg
+        GitLab.svg
+        GoDaddy.svg
+        Google.svg
+        GoogleAds.svg
+        GoogleAnalytics.svg
+        Microsoft.svg
+        Pinterest.svg
+        Postman.svg
+        Reddit.svg
+        Spline.svg
+        Spotify.svg
+        Vercel.svg
+        figma.png
+        miro.png
+        webflow.png
+    companyLogoDark/
+      amazon.svg
+      discord.svg
+      dropbox.svg
+      github.svg
+      slack.svg
+      uber.svg
+    cookies/
+      cookieImage1.svg
+      cookieImage2.svg
+    dummyLogo/
+      dummyFavicon.svg
+      dummyFaviconLight.svg
+      dummyLogoColored.svg
+      dummyLogoDark.svg
+      dummyLogoLight.svg
+      dummyLogoWhite.svg
+      prebuiltuiDummyLogo.svg
+      prebuiltuiLogoSquareShape.svg
+      prebuiltuiLogoSquareShapeDark.svg
+    e-commerce/
+      boxIcon.svg
+      uploadArea.png
+    features/
+      card-image-1.png
+      group-image-1.png
+      image-1.png
+      image-2.png
+      image-3.png
+      image-4.png
+      image-5.svg
+      image-6.svg
+      image-7.svg
+      image-8.svg
+    gallery/
+      slide1.png
+      slide2.png
+      slide3.png
+      slide4.png
+      slide5.png
+    github/
+      prebuiltui-homepage.png
+    hero/
+      backgroundImageWithGirl.png
+      bg-gradient-2.png
+      bg-gradient-3.svg
+      bg-gradient-4.svg
+      bg-gradient-5.svg
+      bg-gradient.png
+      bg-image-
+```
+
+## Agent Configuration
+
+--- CONTRIBUTING.md ---
+# Contributing to PrebuiltUI
+
+Thanks for your interest in contributing! We truly appreciate your efforts to make **PrebuiltUI** better for everyone.  
+Please read these guidelines before you start contributing.
+
+---
+
+## Contribution Workflow
+
+Follow these steps to add a new component:
+
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/prebuiltui/prebuiltui.git
+   cd prebuiltui
+   ````
+
+2. **Create a new branch**
+
+   ```bash
+   git checkout -b add-my-component
+   ```
+
+3. **Create a component folder**
+
+   * Navigate to the correct category (e.g., `components/buttons/`, `components/cards/`)
+   * Create a new folder for your component (e.g., `fancy-button/`)
+
+4. **Add your files**
+
+   * If you have **HTML only** → add `component.html`
+     *(If there’s no `<script>` tag, JSX will be auto-generated on the website)*
+   * If you have **JSX only** → add `component.jsx`
+     *(HTML will not be auto-generated)*
+   * If you have **both** → add both `component.html` and `component.jsx`
+   * (Optional) Add preview images inside the same folder
+
+5. **Commit & Push**
+
+   ```bash
+   git add .
+   git commit -m "Added FancyButton component"
+   git push origin add-my-component
+   ```
+
+6. **Open a Pull Request**
+
+   * Go to the original repo on GitHub
+   * Click **New Pull Request**
+   * Add a clear description and (if possible) screenshots of your component
+
+---
+
+## Guidelines
+
+* Name files in **CamelCase** (e.g., `HoverButton.jsx`, `InteractiveCard.jsx`, `DarkThemeFooter.html`).
+* Keep components clean and reusable.
+* Add a short description in your PR.
+* Include comments if the code isn’t self-explanatory.
+* Add screenshots (optional but recommended) in your PR.
+
+> Your contribution makes PrebuiltUI better for everyone!
+
+
+## Analysis Note
+> This KI was generated by **enhanced local structural analysis** (no LLM API was available at generation time). It includes full tech stack detection, README parsing, dependency analysis, and feature extraction. For deeper semantic analysis, re-run with an active Gemini or OpenAI API key.

@@ -1,0 +1,24 @@
+{
+  "system": "seosona-ux-ui",
+  "function": "accessibility",
+  "score": 100,
+  "matched": [
+    "a11y",
+    "accessibility",
+    "wcag",
+    "aria"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA UX-UI",
+  "all_scores": {
+    "seosona-os": 89,
+    "seosona-video": 22,
+    "seosona-content": 0,
+    "seosona-ux-ui": 100,
+    "seosona-flow": 28
+  },
+  "auto_apply": true,
+  "uap_relevant": [
+    "ast"
+  ]
+}

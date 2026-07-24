@@ -1,0 +1,20 @@
+{
+  "system": "seosona-os",
+  "function": "skill",
+  "score": 82,
+  "matched": [
+    "capability",
+    "plugin"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 82,
+    "seosona-video": 24,
+    "seosona-content": 0,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 0
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}

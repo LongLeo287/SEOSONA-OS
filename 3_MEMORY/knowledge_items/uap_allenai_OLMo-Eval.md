@@ -1,0 +1,193 @@
+# KI: allenai/OLMo-Eval
+
+## Overview
+This project provides a unified workbench for evaluating language models throughout the model development loop.
+
+## Architecture & Tech Stack
+- Python
+- **Total files:** 114 files across 32 directories
+- **File types:** .py: 68, .md: 10, .sh: 10, .yaml: 7, .yml: 3, .mako: 3, .png: 3
+
+## Documentation Sections
+- olmo-eval
+- Overview
+- Quick Start
+- Run Your First Eval
+- Install uv if not already installed
+- Install Python 3.12 if your machine does not already have it
+- Install dependencies + the package (editable) from the lockfile.
+- The default groups (`dev` + `vllm`) are installed automatically, which
+- pulls in storage, beaker, hf, and the vLLM inference provider. vLLM
+- deps are marked Linux-only via PEP 508 markers, so this works on macOS
+- too — no extra flags needed.
+- Install pre-commit hooks
+- To update the lockfile after changing pyproject.toml
+- Add an optional extra on top of the defaults (e.g. agents, litellm)
+- `openhands` conflicts with vllm — opt out of the vllm group when using it
+- Browse a few suites
+- Preview a run without loading a model
+- Preview another run with a different task spec
+- Key Concepts
+- Tasks
+- Built-in example: uv run olmo-eval run -m llama3.1-8b -t humaneval:3shot:bpb
+- Suites
+- Nested suite with 3 tasks
+- Parent suite using average of averages
+- Results:
+
+## Core Structure
+```
+  .dockerignore
+  .gitignore
+  .pre-commit-config.yaml
+  CLAUDE.md
+  DEVELOPMENT.md
+  Dockerfile
+  LICENSE
+  Makefile
+  README.md
+  pyproject.toml
+  uv.lock
+  .github/
+    dependabot.yml
+    pull_request_template.md
+    ISSUE_TEMPLATE/
+      bug_report.md
+      config.yml
+      feature_request.md
+    workflows/
+      ci.yml
+  alembic/
+    README.md
+    metrics.ini
+    results.ini
+    script.py.mako
+    metrics/
+      env.py
+      script.py.mako
+      versions/
+        20260219_initial_schema.py
+        20260220_add_gpu_summary_index.py
+        20260220_drop_percentile_latencies.py
+        20260220_rename_to_samples.py
+    results/
+      env.py
+      script.py.mako
+      versions/
+        20260127_add_keyset_pagination_index.py
+        20260127_initial_schema.py
+        20260128_add_experiment_group.py
+        20260130_add_agent_metrics.py
+        20260201_add_duration_metrics.py
+        20260201_nested_metrics.py
+        20260427_add_results_viewer_perf_indexes.py
+  examples/
+    beaker/
+      configs/
+        basic_eval.yaml
+        large_model.yaml
+        mixed_gpu.yaml
+        model_comparison.yaml
+        parallel_eval.yaml
+        prioritized_tasks.yaml
+  plans/
+    001_oracle_no_gpu_task_pipeline_tests.md
+  scripts/
+    build_config.sh
+    build_image.sh
+    build_matrix.sh
+    fix.sh
+    publish.sh
+    verify.sh
+    baselines/
+      launch_olmo3_baselines_0426.sh
+    beaker/
+      copy_beaker_secrets.sh
+      get_beaker_image.sh
+      push_beaker_image.sh
+    internal/
+      db-migrate
+  src/
+    olmo_eval/
+      __init__.py
+      analysis/
+        README.md
+        __init__.py
+        eval_power.py
+        latest_run_merge.py
+        pairwise.py
+        pairwise_metrics.py
+        pairwise_viewer_payload.py
+        scope_scores.py
+        examples/
+          results-viewer/
+            paired-test-tooltip.png
+            paired-test.png
+            results-table.png
+        pairwise_viewer/
+          __init__.py
+          assets.py
+          static/
+            browser.css
+            browser.js
+            shared.css
+          templates/
+            browser.html
+      cli/
+        __init__.py
+        run_external.py
+        utils.py
+        beaker/
+          __init__.py
+          config_loader.py
+          credentials.py
+          experiment_builder.py
+          experiment_plan.py
+          group.py
+          job_assembler.py
+          launch.py
+          task_validator.py
+          watch.py
+        metrics/
+          __init__.py
+          app.py
+```
+
+## Quick Start
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv python install 3.12
+uv sync --frozen
+make setup
+uv lock
+uv sync --frozen --extra agents
+uv sync --frozen --no-group vllm --extra openhands
+uv run olmo-eval suite inspect mmlu
+uv run olmo-eval suite inspect gpqa
+uv run olmo-eval suite inspect olmobase:code
+```
+
+## Agent Configuration
+
+--- CLAUDE.md ---
+# Development Commands
+
+- Use `uv run` for Python commands
+- Use `uv run ruff check src/ tests/` and `uv run ruff format --check src/ tests/` for linting
+- Use `uv run ty check src/ alembic/` and `uv run pytest tests/ --ignore=tests/integration -v` for local verification
+
+# Code Style
+
+- Keep docstrings general; avoid implementation details that become stale
+- Avoid comments that explain temporary or in-progress changes
+- Design classes with stable interfaces; avoid coupling methods to specific fields
+
+# Testing
+
+- Adapt tests to match source code, not the reverse
+- Ask before adding or modifying tests alongside functional changes
+
+
+
+## Analysis Note
+> This KI was generated by **enhanced local structural analysis** (no LLM API was available at generation time). It includes full tech stack detection, README parsing, dependency analysis, and feature extraction. For deeper semantic analysis, re-run with an active Gemini or OpenAI API key.

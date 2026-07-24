@@ -1,0 +1,270 @@
+{
+  "$schema": "SEOSONA OS V5 Tool Registry",
+  "version": "5.0.0",
+  "description": "Standardized registry of all audit connectors. Each tool declares its interface (inputs, outputs, dependencies) for dynamic orchestration.",
+  "connectors": {
+    "psi_connector": {
+      "label": "PageSpeed Insights / CWV",
+      "module": "psi_connector",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "url": {"type": "string", "required": false}
+      },
+      "outputs": {
+        "pattern": "cwv_report_*.csv",
+        "columns": ["strategy", "performance_score", "lcp_display", "cls_display"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 2, "failure_types": ["network", "rate_limit", "timeout"]},
+      "priority": 1,
+      "category": "performance"
+    },
+    "keyword_connector": {
+      "label": "Keyword Research",
+      "module": "keyword_connector",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "seeds": {"type": "list", "required": false}
+      },
+      "outputs": {
+        "pattern": "keyword_research_*_autocomplete.csv",
+        "columns": ["keyword", "group", "priority", "intent"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 2, "failure_types": ["network", "rate_limit"]},
+      "priority": 2,
+      "category": "content"
+    },
+    "serp_competitor": {
+      "label": "SERP Competitor Analyzer",
+      "module": "serp_competitor",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true}
+      },
+      "outputs": {
+        "pattern": "serp_competitor_*.csv",
+        "columns": ["competitor_domain", "h1", "title"]
+      },
+      "dependencies": ["keyword_connector"],
+      "retry_policy": {"max_retries": 1, "failure_types": ["network"]},
+      "priority": 3,
+      "category": "competitive"
+    },
+    "backlink_connector": {
+      "label": "Backlink Intelligence",
+      "module": "backlink_connector",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true}
+      },
+      "outputs": {
+        "pattern": "backlink_report_*.csv",
+        "columns": ["source_domain", "target_domain", "notes", "data_source"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 2, "failure_types": ["network", "rate_limit"]},
+      "priority": 4,
+      "category": "authority"
+    },
+    "gsc_connector": {
+      "label": "Google Search Console",
+      "module": "gsc_connector",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "days": {"type": "integer", "required": false, "default": 90}
+      },
+      "outputs": {
+        "pattern": "gsc_report_*.csv",
+        "columns": ["query", "clicks", "impressions", "avg_position"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 1, "failure_types": ["network", "auth"]},
+      "priority": 5,
+      "category": "rankings"
+    },
+    "rank_tracker": {
+      "label": "Rank Tracker",
+      "module": "rank_tracker",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true}
+      },
+      "outputs": {
+        "pattern": "rank_tracker_*.csv",
+        "columns": ["keyword", "position", "bucket"]
+      },
+      "dependencies": ["gsc_connector"],
+      "retry_policy": {"max_retries": 1, "failure_types": ["data_quality"]},
+      "priority": 6,
+      "category": "rankings"
+    },
+    "ga4_connector": {
+      "label": "Google Analytics 4",
+      "module": "ga4_connector",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "days": {"type": "integer", "required": false, "default": 90}
+      },
+      "outputs": {
+        "pattern": "ga4_report_*.csv",
+        "columns": ["metric_type", "dimension", "value_1"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 1, "failure_types": ["network", "auth"]},
+      "priority": 7,
+      "category": "analytics"
+    },
+    "technical_seo_scanner": {
+      "label": "Technical SEO Scanner",
+      "module": "technical_seo_scanner",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "url": {"type": "string", "required": false},
+        "max_pages": {"type": "integer", "required": false, "default": 20}
+      },
+      "outputs": {
+        "pattern": "technical_seo_*.csv",
+        "columns": ["url", "status", "title_len", "meta_desc_len", "issue_count"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 2, "failure_types": ["network", "timeout"]},
+      "priority": 8,
+      "category": "technical"
+    },
+    "schema_validator": {
+      "label": "Schema.org Validator",
+      "module": "schema_validator",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "url": {"type": "string", "required": false}
+      },
+      "outputs": {
+        "pattern": "schema_report_*.csv",
+        "columns": ["url", "schema_types", "severity", "issue", "fix"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 1, "failure_types": ["network"]},
+      "priority": 9,
+      "category": "structured_data"
+    },
+    "eeat_analyzer": {
+      "label": "E-E-A-T Analyzer",
+      "module": "eeat_analyzer",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "url": {"type": "string", "required": false},
+        "max_pages": {"type": "integer", "required": false, "default": 25}
+      },
+      "outputs": {
+        "pattern": "eeat_report_*.csv",
+        "columns": ["url", "is_thin", "word_count"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 1, "failure_types": ["network", "timeout"]},
+      "priority": 10,
+      "category": "content_quality"
+    },
+    "log_analyzer": {
+      "label": "Log Analyzer",
+      "module": "log_analyzer",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "log_file": {"type": "string", "required": false}
+      },
+      "outputs": {
+        "pattern": "log_analysis_*.csv",
+        "columns": ["bot", "url", "status"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 0, "failure_types": []},
+      "priority": 11,
+      "category": "crawl_analysis"
+    },
+    "aeo_ai_search_analyzer": {
+      "label": "AEO / AI Search Readiness",
+      "module": "aeo_ai_search_analyzer",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "url": {"type": "string", "required": false},
+        "max_pages": {"type": "integer", "required": false, "default": 10}
+      },
+      "outputs": {
+        "pattern": "aeo_readiness_*.csv",
+        "columns": ["url"]
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 1, "failure_types": ["network"]},
+      "priority": 12,
+      "category": "ai_search"
+    },
+    "dashboard_generator_v4": {
+      "label": "Premium Dashboard v4",
+      "module": "dashboard_generator_v4",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true}
+      },
+      "outputs": {
+        "pattern": "seo_dashboard_v4_*.html",
+        "columns": []
+      },
+      "dependencies": ["psi_connector", "keyword_connector", "gsc_connector", "technical_seo_scanner", "schema_validator", "eeat_analyzer", "backlink_connector"],
+      "retry_policy": {"max_retries": 1, "failure_types": ["data_quality"]},
+      "priority": 99,
+      "category": "reporting"
+    },
+    "wp_rest_connector": {
+      "label": "WordPress REST API Connector",
+      "module": "wp_rest_connector",
+      "function": "run",
+      "inputs": {
+        "wp_url": {"type": "string", "required": true},
+        "title": {"type": "string", "required": true},
+        "content_html": {"type": "string", "required": true},
+        "status": {"type": "string", "required": false, "default": "draft"}
+      },
+      "outputs": {
+        "pattern": null,
+        "columns": []
+      },
+      "dependencies": [],
+      "retry_policy": {"max_retries": 3, "failure_types": ["network", "timeout", "rate_limit"]},
+      "priority": 100,
+      "category": "automation"
+    },
+    "technical_seo_autofixer": {
+      "label": "Technical SEO Auto-Fixer",
+      "module": "technical_seo_autofixer",
+      "function": "run",
+      "inputs": {
+        "domain": {"type": "string", "required": true},
+        "url": {"type": "string", "required": true},
+        "issue_type": {"type": "string", "required": true},
+        "params": {"type": "string", "required": true}
+      },
+      "outputs": {
+        "pattern": null,
+        "columns": []
+      },
+      "dependencies": ["technical_seo_scanner"],
+      "retry_policy": {"max_retries": 1, "failure_types": ["data_quality"]},
+      "priority": 101,
+      "category": "automation"
+    }
+  },
+  "execution_groups": {
+    "parallel_safe": ["psi_connector", "keyword_connector", "backlink_connector", "gsc_connector", "ga4_connector", "wp_rest_connector", "technical_seo_autofixer"],
+    "sequential_required": ["rank_tracker", "serp_competitor"],
+    "final": ["dashboard_generator_v4"]
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "system": "seosona-os",
+  "function": "llm",
+  "score": 28,
+  "matched": [
+    "gemini",
+    "vector"
+  ],
+  "strong_matched": [
+    "gemini"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 28,
+    "seosona-video": 6,
+    "seosona-content": 28,
+    "seosona-ux-ui": 6,
+    "seosona-flow": 22
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}

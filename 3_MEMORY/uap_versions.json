@@ -1,0 +1,2292 @@
+{
+  "tranmmainhi/Tiem_Nuoc_Nho_v2": {
+    "head": "4964353561a485bac4b1da6873f608f4091b031e"
+  },
+  "decolua/9router": {
+    "head": "b10b8070632cbdeb3c6b26b0ccf60f433ebf5014"
+  },
+  "thedotmack/claude-mem": {
+    "head": "312d640b0188753acd92a1a82d95a84d5c7c43db"
+  },
+  "openai/codex": {
+    "head": "f1affbac5e5164b2bae825e9b39e9868bc4e0be2"
+  },
+  "VoltAgent/awesome-openclaw-skills": {
+    "head": "34a20c3862fb17800da122f98f559be33b374114"
+  },
+  "nextlevelbuilder/ui-ux-pro-max-skill": {
+    "head": "12b486b22e67f5d887962ef8351c1ac863bfaeb9"
+  },
+  "lbjlaq/Antigravity-Manager": {
+    "head": "cfe989353c4d769211c4ee3fe982e2822ef60891"
+  },
+  "vudovn/antigravity-kit": {
+    "head": "a877989f892339efb8dd57d7c3ae3e238d68533a"
+  },
+  "HKUDS/ClawWork": {
+    "head": "9c73ac05fdb0bffdb23febdd971eb70f44dd46eb"
+  },
+  "ComposioHQ/awesome-claude-skills": {
+    "head": "92568c1edaff1bde5371154f036d959346c145a8"
+  },
+  "xmanrui/OpenClaw-bot-review": {
+    "head": "6a1225a6b77dd729ebab9f403aeebc3b69ebfdbb"
+  },
+  "longtho638-jpg/openclaw-worker": {
+    "head": "68adc6bcad75b902d2a39b5182a69f26a9965e0c"
+  },
+  "tysonnbt/Antigravity-Deck": {
+    "head": "fbede73b7d84df302b9dd9abbf6965bb25af1d1b"
+  },
+  "ringhyacinth/Star-Office-UI": {
+    "head": "f29c107e9728a72f2635f10b4e8203b29b37221d"
+  },
+  "addyosmani/agent-skills": {
+    "head": "70b7506ce90e200cb47645ddb3f6b8e84fecc047"
+  },
+  "apps/google-ai-studio": {
+    "head": "64aa95aa4fa4b362f0c99605f45aa68dec127a4d"
+  },
+  "obra/superpowers": {
+    "head": "d884ae04edebef577e82ff7c4e143debd0bbec99"
+  },
+  "daominhhiep/codex-kit": {
+    "head": "4b9a40b1b333d323afb8ffabcbd9af29f8b3aef0"
+  },
+  "anthropics/skills": {
+    "head": "9d2f1ae187231d8199c64b5b762e1bdf2244733d"
+  },
+  "FutureisinPast/antigravity-conversation-fix": {
+    "head": "70c77e9c764992f8b07d038e330dad2df6d4a300"
+  },
+  "jlcodes99/vscode-antigravity-cockpit": {
+    "head": "eb6c469982d5ae86a524c26e04a9fc4236fdb063"
+  },
+  "google/gemma-4-31B-it": {
+    "head": "771b7265e55dbff8bd3171b31b683fc8a11d93df"
+  },
+  "Qwen/Qwen3-Coder-Next": {
+    "head": "f17b39074a452a5337029faab13ea83aded2649b"
+  },
+  "kunitai052/Research_Endfield": {
+    "head": "84fbc92974be2cb94037c896bcdfde8201634964"
+  },
+  "breferrari/obsidian-mind": {
+    "head": "9ae6860d01c4bb563dfe972dae89515866f4fbff"
+  },
+  "nagisanzenin/claude-code-production-grade-plugin": {
+    "head": "ec525f169fc50513b419d5fc366efb771435800d"
+  },
+  "TranHuuDat2004/anime.tv": {
+    "head": "67cba80988f93e7d9a6e4b87c7951f9e6c3cf9e2"
+  },
+  "anime-vsub/extension-animevsub-helper": {
+    "head": "375f2950d6b8f4b416cc4bcf85edf8822736d637"
+  },
+  "mvanhorn/last30days-skill": {
+    "head": "ee04fba1168c3af78dc80d0e65a090b8b1c1a81d"
+  },
+  "vercel-labs/agent-skills": {
+    "head": "f8a72b9603728bb92a217a879b7e62e43ad76c81"
+  },
+  "Aikoyori/ProgrammingVTuberLogos": {
+    "head": "0e8b7520b97c1d0ab997488da38bb4b1ad67c06d"
+  },
+  "arm64x/PHP-Lazada-Affiliate-API-Tool": {
+    "head": "5998b9a015bf021b422cb7a3da1fb61584e00a71"
+  },
+  "stars/LongLeo287": {
+    "head": "aa174dd966891c97fe38362e36bcde7d682bd8d0"
+  },
+  "JamboChen/endfield-calc": {
+    "head": "eec9f1be750d52afbe1498938b1525ca55d7eb41"
+  },
+  "zhouxiaoka/autoclip": {
+    "head": "17100c05252b9a947ea1a857f8d0ea4f3af2317b"
+  },
+  "microsoft/markitdown": {
+    "head": "e144e0a2be95b34df17433bac904e635f2c5e551"
+  },
+  "msitarzewski/agency-agents": {
+    "head": "ee5e758c10b412cf905f8984a02c5c016315e1ec"
+  },
+  "Escartem/AnimeStudio": {
+    "head": "7cfb26b9c158f6150c887f9157de97a3fa7672e1"
+  },
+  "daydreamer-json/ak-endfield-api-archive": {
+    "head": "97b1cda8a867484a7e5c3bec870f54ec9af7f3e8"
+  },
+  "JCodesMore/ai-website-cloner-template": {
+    "head": "58e00d5369181dc0b84b45a2a55e6f64a017f59b"
+  },
+  "TauricResearch/TradingAgents": {
+    "head": "01477f9afb7a47b849ed4c9259d3a9a4738d9fda"
+  },
+  "WordPress/agent-skills": {
+    "head": "aecc4d6f6f1ffcc0b508cddc5c40f55bae324ad1"
+  },
+  "coderamp-labs/gitingest": {
+    "head": "4e259a02fe72115bee538271622f1234a81c8e1a"
+  },
+  "YouMind-OpenLab/awesome-nano-banana-pro-prompts": {
+    "head": "9865d39ff1986ea54a9a603e54224f2c52581725"
+  },
+  "OminousIndustries/PhoneDriver": {
+    "head": "a89b1044bb551693e458f5e2a8c19395291d75f8"
+  },
+  "upstash/context7": {
+    "head": "503abf87743abf6bb2fa6de3228ce81dc43c9953"
+  },
+  "xNasuni/artlist-downloader": {
+    "head": "ddf553f6d35dfd900f948fa24fc0a99496284cee"
+  },
+  "mmarinovic/tailwindsql": {
+    "head": "c9d7aa7cf6badca620775084a1a695144f07dfd5"
+  },
+  "Binhnguyen041280/ePACK_packet": {
+    "head": "ecded47dfe1fadeb754b4abc57e662a29cfe3db9"
+  },
+  "Yue-plus/astro-endfield": {
+    "head": "5ca0933923017326f821ea17cffbe02302b2d4ee"
+  },
+  "LinesYu/trainingAI": {
+    "head": "3767d35bd6e17238495c35b82ea6df0cfa874ab9"
+  },
+  "sessions/two-factor": {
+    "head": "1fb17896da3fd34a67af4f1122c23d32991446da"
+  },
+  "vietmap-company/vietnam_administrative_address": {
+    "head": "8451235ee1f555dd3d7e69fec0b55b87770d6120"
+  },
+  "GoogleChromeLabs/picture-in-picture-chrome-extension": {
+    "head": "510371261eb48a422482aae1d52f1889f7f06e7c"
+  },
+  "aourednik/historical-basemaps": {
+    "head": "62d8f1a03a71f2d3ff17f2d166f7553f256bce68"
+  },
+  "mostteapot/EF-Tools": {
+    "head": "25ab47702cc5ff85f85428df143e7366922116d4"
+  },
+  "sessions/social": {
+    "head": "e91d5b06629827e41ab39b626fcb6fd8785b486d"
+  },
+  "Dimbreath/EndfieldData": {
+    "head": "bc1b4bba0a620263fceb4e9bfd69b206459fb6d5"
+  },
+  "thanhkeke97/RSTGameTranslation": {
+    "head": "3619e3adb5fb75d7a51c34e86dcc5068917fca4d"
+  },
+  "hugle2012/win-network-config": {
+    "head": "8b1e4b713efe391b6ad57dd919a5480e41cb2e98"
+  },
+  "ArthurSav/ultimate-web-scraper": {
+    "head": "f3c418e28fe7b04e997ca3afb5cc659f0476f161"
+  },
+  "Generator/Awesome-Android-TV-FOSS-Apps": {
+    "head": "24edaf07d37383593806b5a106bc897cd996d8f6"
+  },
+  "hoangvu12/subgrid": {
+    "head": "57c93598a3d2959c8cd07ddfa7e3e03ca997c6ed"
+  },
+  "fdhhhdjd/Class_Docker_Systems": {
+    "head": "d02e1a4764b82f96ffcd60fe7f829775cc36febc"
+  },
+  "firecrawl/open-lovable": {
+    "head": "69bd93bae7a9c97ef989eb70aabe6797fb3dac89"
+  },
+  "aiming-lab/AutoResearchClaw": {
+    "head": "ea77ec19fefe9198ac1364d2cdb4f9e928cf0705"
+  },
+  "darkamenosa/openzalo": {
+    "head": "e93b324ef9a9b9fadb1f1c448ae8d7b69ab3f9cf"
+  },
+  "jinq51187/auto-accept-antigravity": {
+    "head": "9db6c3af693c1ff9680db6901e3563be41cd7f85"
+  },
+  "heyhuynhgiabuu/proxypal": {
+    "head": "3c0f0cf5704aff82426e73a7b95a87d05b2b25c6"
+  },
+  "coreyhaines31/marketingskills": {
+    "head": "6c6017451dcd340f3aaab3e354e28eed8aa782aa"
+  },
+  "slavingia/skills": {
+    "head": "eb9f57fba03ddb0382ed3bfe6654d3d7df128c70"
+  },
+  "bergside/typeui": {
+    "head": "2a977f1f6616ae8a5ea84a478ca35601c67f4322"
+  },
+  "Donchitos/Claude-Code-Game-Studios": {
+    "head": "984023ddac0d5e27624f2baacde6105e45de375f"
+  },
+  "codeaholicguy/ai-devkit": {
+    "head": "1ed5d9a54fb0bfca7ef6bd349012afd0db7f1af3"
+  },
+  "ericosiu/ai-marketing-skills": {
+    "head": "a9f11007aca31cc85f231698e22b64412f847b76"
+  },
+  "nguyenphutrong/quotio": {
+    "head": "705270ecfe8eb22e26c135d23f1c9ab208441e78"
+  },
+  "nhonn/antigravity-switcher": {
+    "head": "c7d6f7172c921245bb1172afc96ce56b40243dd9"
+  },
+  "VoltAgent/awesome-agent-skills": {
+    "head": "2fcbf138f63697e999d26c6266eea597e6564a23"
+  },
+  "aaron-he-zhu/seo-geo-claude-skills": {
+    "head": "fe4e8e7d67fe8ee56e8fa572082f598acd4407c4"
+  },
+  "alchaincyf/huashu-design": {
+    "head": "0e7ec8aca0058184c1a9e06e57697e84f68a3f0f"
+  },
+  "Draculabo/AntigravityManager": {
+    "head": "27b519028acff5370ea5cbec2a6660cbe873e527"
+  },
+  "ericblue/claude-openclaw-bridge": {
+    "head": "a5d44a122cbadfdbf6e1e009dfa3fe3ad458450b"
+  },
+  "fdhhhdjd/Class-AI-Agent": {
+    "head": "62ea04bebbea42c6fb5ecededa6a25a48ac1f468"
+  },
+  "forrestchang/andrej-karpathy-skills": {
+    "head": "2c606141936f1eeef17fa3043a72095b4765b9c2"
+  },
+  "jarrodwatts/claude-hud": {
+    "head": "b83b44593af24de1db6183788a51d08715501c02"
+  },
+  "kaida-palooza/ccpoke": {
+    "head": "f020a322c01c70601ce5f10d28ebbac4038a785a"
+  },
+  "openclaw/lobster": {
+    "head": "d9a0fe7e02dc8ab6efde1c29d8b11a898487a158"
+  },
+  "SawyerHood/dev-browser": {
+    "head": "5736fc28f4dd588c0a8cd354839cda3e1c14c0fb"
+  },
+  "shareAI-lab/learn-claude-code": {
+    "head": "a9cafe953aa714f9cb1171f217d96bd2734bbcc7"
+  },
+  "Zaious/Antigravity-Skills-Chronicle": {
+    "head": "6331d579403e5433c10bf9716419c8d2453832ca"
+  },
+  "alibaba/OpenSandbox": {
+    "head": "6c98cc631fad021b7fd098933d4629317bc4c18d"
+  },
+  "ashishpatel26/500-AI-Agents-Projects": {
+    "head": "9fda658c735ac50a64afd3b1a1c8f99e28595ebd"
+  },
+  "pablodelucca/pixel-agents": {
+    "head": "928ccd463bf516d67e0700af7e767ca083f795d8"
+  },
+  "phuryn/pm-skills": {
+    "head": "18468a95b427e70e258b51389796367c6f684e7d"
+  },
+  "GnikDroy/AnimeTV": {
+    "head": "5c96fd4c4505a184bb6ae07696194d65a4de5b04"
+  },
+  "google/langextract": {
+    "head": "0dff5479aa51934c7d5833a7c38e2a5abba4e0c2"
+  },
+  "Terra-Online/Talos-WIKI": {
+    "head": "b7c8dc278e7262fd90f56771dd543002481a94e8"
+  },
+  "AgentSeal/codeburn": {
+    "head": "cc6d84a6ca7deced9ea64b3a21a4a26b04e38bc1"
+  },
+  "carlvellotti/antigravity-pm-course": {
+    "head": "96bfcfeade62098600b2d57689f8f4dfc24e25d0"
+  },
+  "conorbronsdon/avoid-ai-writing": {
+    "head": "0a347d5be9c0cc5ff571ec073c43dba4f7215bbe"
+  },
+  "cytostack/openwolf": {
+    "head": "bd69835121b75da8cbfdcc49c763c5fc00b0c884"
+  },
+  "dinhlinh86/claw_code": {
+    "head": "a8ec31858aafc83350ac1be06009f5bdcf08b815"
+  },
+  "f/agentlytics": {
+    "head": "4cba3d84f87516243cad14c802291e52d0f9df2a"
+  },
+  "Houseofmvps/codesight": {
+    "head": "c2d49a5068661740dd4a70c8c078ee0f8061a9e4"
+  },
+  "jiulingyun/Claw-CLI": {
+    "head": "e98d08a839cec3aa6a300d66d4e9d6cf972a57eb"
+  },
+  "DietrichGebert/ponytail": {
+    "head": "8e69b4a55f735e1319999064f82786b838cb3d7b"
+  },
+  "juliusbrussee/caveman": {
+    "head": "0d95a81d35a9f2d123a5e9430d1cfc43d55f1bb0",
+    "note": "installed as .agents/skills/caveman (curated SKILL.md)"
+  },
+  "letta-ai/claude-subconscious": {
+    "head": "365e7e6e0d788f9f6d5c3066d1421474653081cc"
+  },
+  "manhvicky/openclaw-admin": {
+    "head": "b9cb6064efd57cace33f48237b12669c9df8d380"
+  },
+  "Ngxba/claude-code-agents-ui": {
+    "head": "46494279f514d7116b08311c32dd6a1c510a6f7a"
+  },
+  "numman-ali/n-skills": {
+    "head": "a518c67eab71c9b24b08c20a4abf08b318368463"
+  },
+  "shengyu-meng/ClawLibrary": {
+    "head": "b29d67dee36590eb7f61476192584029c5f1f26d"
+  },
+  "shin315/antigravity-conversation-fixer": {
+    "head": "656b0776b26e6fad91b0c06c73b4b69901725c6c"
+  },
+  "Shpigford/chops": {
+    "head": "1a1ff0de324abffda35c3fbdee90f79deb3d3dfa"
+  },
+  "vdsmon/claude-warmup": {
+    "head": "4502285be4f744b44a279366c093d678e573190d"
+  },
+  "xingkongliang/skills-manager": {
+    "head": "e78649c0a9c72b122120f334c86bb2824ddce27e"
+  },
+  "bsquang/claude-comstyle": {
+    "head": "3fb4c41965000f3a282a7fb23b6114d512430f4b"
+  },
+  "ivanpham86/Claude-code-skill-manager": {
+    "head": "b627e56fd78f71880b576c8deecebd84a45a77c7"
+  },
+  "giancarloerra/SocratiCode": {
+    "head": "1d80c601e04538a4d71216ac0c9b5cf8b2daa825"
+  },
+  "huggingface/agents-course": {
+    "head": "8c0832eae634ebb34541c65265caa6da4c5d2c57"
+  },
+  "theexperiencecompany/gaia-ui": {
+    "head": "95b94a542f6e7d87125f0d8f477be2b4ce92f118"
+  },
+  "waoowaooAI/waoowaoo": {
+    "head": "34971db723bb87625033610bb717c6e425d599d9"
+  },
+  "promptslab/Awesome-Prompt-Engineering": {
+    "head": "f30f5c2d9531ca733c24affd62f91d3bf4c84d21"
+  },
+  "GoogleCloudPlatform/knowledge-catalog": {
+    "head": "d44368c15e38e7c92481c5992e4f9b5b421a801d"
+  },
+  "erenjugs/OpenGork": {
+    "head": "86565bf4c76fa4dacc1f4c44b70da959f414f6e4"
+  },
+  "ericblue/mac-agent-gateway": {
+    "head": "5beaa72cbf02151e7e7cfa4dfa9d494e34e54050"
+  },
+  "gnekt/My-Brain-Is-Full-Crew": {
+    "head": "238ae8c45301cc1ad8ef338288720cee1f0ada93"
+  },
+  "QwenLM/Qwen-Agent": {
+    "head": "31a4d36d123688581a9e9744427272b33ce940e0"
+  },
+  "ashishps1/learn-ai-engineering": {
+    "head": "3e7ccb4e9154b94b578d1ff8257fc5446abbc7cb"
+  },
+  "harry0703/MoneyPrinterTurbo": {
+    "head": "18d577f980c1ea571b60e09cf71b33b6a838f8ea"
+  },
+  "JasonHonKL/HashIndex": {
+    "head": "24d148c98d9d7c0488bc2fbccb234c54f8bd5d1e"
+  },
+  "NVIDIA/nim-anywhere": {
+    "head": "8d614e1cf3af86f82243ee73a7f25ab390337ee7"
+  },
+  "nclamvn/Dich-Viet": {
+    "head": "7db6265a9e1d72b25bcf0cdbea7542eaa4d2e78b"
+  },
+  "Ramakm/ai-hands-on": {
+    "head": "2084cbe26408bd6ef4c0a32d1262bedfb7560aea"
+  },
+  "devanshug2307/antigravity-discussions": {
+    "head": "d4220da97d13b66ffd9c2cfbd953076e707ad21f"
+  },
+  "piercelamb/deep-project": {
+    "head": "c5436d57feaf86f8d49fc31926312725252d47d3"
+  },
+  "young-lillo/codexkit-marketing": {
+    "head": "9b24399b8f4860f8984d5c946d0e49788a6ea7a5"
+  },
+  "AgriciDaniel/claude-obsidian": {
+    "head": "cb93ff6d82f9c35a08bf6010e7fac36dfddc827b"
+  },
+  "Zen4-bit/Proxima": {
+    "head": "0aa6914b878f38ceb7d278403496db49505a6fcf"
+  },
+  "billtruong003/git-profile-awaken": {
+    "head": "5dcf07a2476f4addf222c7d7457c526d5425dcff"
+  },
+  "GoogleCloudPlatform/generative-ai": {
+    "head": "f06becccff6f6a161068822a1618baf448285d97"
+  },
+  "immodded/animeTV": {
+    "head": "2410cd11173e5ba2ec5d2c819d977e0549c12c3a"
+  },
+  "nashsu/llm_wiki": {
+    "head": "c03c6be16a8be2a996a2c63fde235136c2a66f01"
+  },
+  "Sumanth077/ai-engineering-toolkit": {
+    "head": "266879b5ada9aebc90dc6c8c7daebdaeea9aaa5f"
+  },
+  "FalkorDB/QueryWeaver": {
+    "head": "37c2013f5b87f8ec13f47424fac62813b73d1a6d"
+  },
+  "ALGOREX-PH/Molten-Agent-Kit": {
+    "head": "93a14419da8bf1dd7ddc4842080c97c1675998d9"
+  },
+  "ericblue/habit-sprint": {
+    "head": "b86c8062d958220363f78bc53236b60885338957"
+  },
+  "ericblue/memspan": {
+    "head": "e1f7a6563db1a5ac51e5efe9711b86b7a78323d5"
+  },
+  "gkamradt/agenttrafficcontrol": {
+    "head": "a9389d9aea79d0e676a4151a05f79658b4adb372"
+  },
+  "googleworkspace/cli": {
+    "head": "a3768d0e82ad83cca2da97724e46bea4ff0e6dbd"
+  },
+  "landing-ai/ade-python": {
+    "head": "744b922cd0fbc342adf1642b8f525c86392752c8"
+  },
+  "nexu-io/html-video": {
+    "head": "c414ecc07f795add03807d5d9ce4baefd807cea2"
+  },
+  "saturndec/waoowaoo": {
+    "head": "34971db723bb87625033610bb717c6e425d599d9"
+  },
+  "vakra-dev/reader": {
+    "head": "2d3c9c7166d54bc1568aab0ad7df4edf6f99e8a5"
+  },
+  "Leonxlnx/taste-skill": {
+    "head": "b17742737e796305d829b3ad39eda3add0d79060"
+  },
+  "serenakeyitan/awesome-notebookLM-prompts": {
+    "head": "20e4f95137c53c6576769d4b3eac5cd79925e4c0"
+  },
+  "Upload-Post/skill-autoshorts": {
+    "head": "e902b2a8d9dcd0ee98e776b5e0455c6c1f30618a"
+  },
+  "anthropics/claude-code": {
+    "head": "d0f5bebd40c098c5913b6419a2ecfc7104f0cd41"
+  },
+  "marketingjuliancongdanh79-pixel/skill-generator": {
+    "head": "7e62eb0710038f47ce7576ab4fe5f3acbe7da7da"
+  },
+  "anthropics/claude-plugins-official": {
+    "head": "72a63d5d082937f3af121354e0c168bee1be4b56"
+  },
+  "sipeed/picoclaw": {
+    "head": "c87b154b61321fdf47a31398e1c746249f71c1fc"
+  },
+  "tranhieutt/for-learn-claude-cli": {
+    "head": "b365c6e0d052773f2e746f153560cf61e29a4015"
+  },
+  "shanraisshan/claude-code-best-practice": {
+    "head": "03b910c8f3381ae2be64cf474f4b7978439fac41"
+  },
+  "HoangNguyen0403/agent-skills-standard": {
+    "head": "092f05ec9b0c7e57f4d1058bcee4b1f425054386"
+  },
+  "BlockRunAI/ClawRouter": {
+    "head": "9ae23c38ee74976958c34e80c3f939e1e221dc5b"
+  },
+  "RightNow-AI/openfang": {
+    "head": "acf2587e46be174c10200489c9a2d23a39a98aeb"
+  },
+  "pnnbao97/VieNeu-TTS": {
+    "head": "9526b5ca17878d6fd0ec5327f1107af9cd963f39"
+  },
+  "claudekit/claudekit-docs": {
+    "head": "63d6126c1e4ca99e45f2270ade722381bd566402"
+  },
+  "TUAN130294/awf": {
+    "head": "2ddbbb88a29ef6eddd76d7c6f17f323cf2cff20c"
+  },
+  "pinchtab/pinchtab": {
+    "head": "28f1b56c9b08700d93c384dc9bbabe717d437050"
+  },
+  "Affitor/affiliate-skills": {
+    "head": "ed17ef37bc167b52d9596cbe0292507f001c483d"
+  },
+  "ultraworkers/claw-code": {
+    "head": "4ea31c1bc91c4e9bcbd67d51c550c01e127e6d0d"
+  },
+  "qwibitai/nanoclaw": {
+    "head": "559bb5ca1a665b6b073e45777827e167ff1c64e5"
+  },
+  "AstrBotDevs/AstrBot": {
+    "head": "0be821afc600a8b47d583d7952a1d1b1d605e534"
+  },
+  "JuliusBrussee/caveman": {
+    "head": "0d95a81d35a9f2d123a5e9430d1cfc43d55f1bb0"
+  },
+  "Lum1104/Understand-Anything": {
+    "head": "267fe13036faf0e6daeb1dd832b7f97b94b2e259"
+  },
+  "TinyAGI/tinyclaw": {
+    "head": "2db3a03a891b302c460f624d6c5a0523b8aa3528"
+  },
+  "WW-AI-Lab/openclaw-office": {
+    "head": "def631a4533df2b0c8bb6aa19ef3e07c81f4fbc6"
+  },
+  "zhukunpenglinyutong/jetbrains-cc-gui": {
+    "head": "6a181f8220d78f60d95e9c2bbc0ab06fc743a225"
+  },
+  "abhigyanpatwari/GitNexus": {
+    "head": "840296319818177b3195c5b13d92c8f57224b0ee"
+  },
+  "tang-vu/ContribAI": {
+    "head": "d3e548165b12697a6420bd6d567c77efb7231407"
+  },
+  "vercel-labs/agent-browser": {
+    "head": "ed2e10598c9064aecfaeb7cf21b540684db4be2c"
+  },
+  "ZeroLeaks/zeroleaks": {
+    "head": "ca8e58020520c158cd7ba3c6680a451e4fb9ac9a"
+  },
+  "AgriciDaniel/claude-ads": {
+    "head": "283d9d4917cb7c4f2ce9181e125bb1970f74ab04"
+  },
+  "FrancyJGLisboa/agent-skill-creator": {
+    "head": "f8ebbf6fe9262b716b02790fcd75f9922c3c048b"
+  },
+  "frank-luongt/faos-skills-marketplace": {
+    "head": "a991acae1b74d338ca89ec2245eaa13ad680dc8f"
+  },
+  "instructkr/claw-code": {
+    "head": "4ea31c1bc91c4e9bcbd67d51c550c01e127e6d0d"
+  },
+  "lamngockhuong/termote": {
+    "head": "305b22abcd5a4454b203bbdd191a3edaafc60695"
+  },
+  "managedcode/dotnet-skills": {
+    "head": "89a1a2168e1440c2eaa21034151d49322d1fab8a"
+  },
+  "MINT-SJTU/RoboClaw": {
+    "head": "e9b28f9a7bca03f431501fcdfa2f6e1c7ef991e5"
+  },
+  "nyldn/claude-octopus": {
+    "head": "b17d1b793f69d687e8c0c7f2ba61ed61771d251d"
+  },
+  "santifer/career-ops": {
+    "head": "e9bacc484185f56cec210ea821bf1774e989acea"
+  },
+  "win4r/openclaw-a2a-gateway": {
+    "head": "b894e6e8447dabd598df50824672a422dccb011f"
+  },
+  "winfunc/opcode": {
+    "head": "70c16d8a4910db48cd9684aeacdd431caefd7d71"
+  },
+  "zeroclaw-labs/zeroclaw": {
+    "head": "e7b9d960fd7b2719b0688cc4b3a34c3c94761c4a"
+  },
+  "topoteretes/cognee": {
+    "head": "5b32da7c08237e7274342114a72d82667d97c1f4"
+  },
+  "bmad-code-org/BMAD-METHOD": {
+    "head": "49069b8b5276afd21402bc3b978b69ad78a7d2ef"
+  },
+  "WEIFENG2333/VideoCaptioner": {
+    "head": "95842ecb5618c0b6a548a336bdfb0eb859bdb501"
+  },
+  "YARlabs/hyperspace-db": {
+    "head": "e48b7066d107974e4e0869d14ae1cc24cd20cd5c"
+  },
+  "BloopAI/vibe-kanban": {
+    "head": "4deb7eca8f381f7cbc1f9d15515a9ab8f8009053"
+  },
+  "opencudem/openclaw-101": {
+    "head": "c734705de2f29375f650c458862c6a01d1b9e55e"
+  },
+  "agentscope-ai/agentscope": {
+    "head": "ded7ccd72505ee50586fd2e7270fadde02575898"
+  },
+  "cloudflare/skills": {
+    "head": "27ce0c0e159225caa7ed30ebefd4107aa6c52497"
+  },
+  "MiniMax-AI/skills": {
+    "head": "60aaae52bb2af8162732751a4332f62a5fef518b"
+  },
+  "anime-vsub/desktop-web": {
+    "head": "b2d86e026578fb117b1adf34d2290fba33e7a44b"
+  },
+  "rtk-ai/rtk": {
+    "head": "d823aaf76721d9b0a02cd428ea714980ef80df2c"
+  },
+  "huggingface/skills": {
+    "head": "89d91fd4d0e6d4330471ba35f1c388489e94b496"
+  },
+  "langchain-ai/deepagents": {
+    "head": "bd9bafaad3f51d426563aa24658bbb3a089d4825"
+  },
+  "open-gitagent/gitagent": {
+    "head": "cc81c6764ecf831bbcd67f24079d59477c8a11e3"
+  },
+  "chwshuang/Stable_diffusion_remove_background_model": {
+    "head": "0aab135592aeb3431cb217903084d2f2486d9879"
+  },
+  "fal/flux-2-klein-4B-background-remove-lora": {
+    "head": "c9ca21e89710920ae1f38e19ee4b61112f85485e"
+  },
+  "juliangarnier/anime": {
+    "head": "2c9cf8ea00329f6768c7d7902252ed977d75ce42"
+  },
+  "openai/openai-cookbook": {
+    "head": "5feca506ccaefa0f94278f356e0ec1514c76033d"
+  },
+  "PaddlePaddle/PaddleOCR": {
+    "head": "211989f046cc1878460f9e65574690c00a127a1a"
+  },
+  "rasbt/LLMs-from-scratch": {
+    "head": "ff0b3d92e3383f52aa732366024c601c45d869a6"
+  },
+  "shiyu-coder/Kronos": {
+    "head": "67b630e67f6a18c9e9be918d9b4337c960db1e9a"
+  },
+  "SylphAI-Inc/LLM-engineer-handbook": {
+    "head": "2b1e84dea80d276a9ff9c1c0c9df5dc13f64cea6"
+  },
+  "bsquang/naotab": {
+    "head": "ed23f22c804b4e00a2aa21149ff95484fe582e1a"
+  },
+  "etewiah/awesome-notebooklm": {
+    "head": "107ac7176ec9b4539648f14ba6ec78b3306ffdd0"
+  },
+  "git/git": {
+    "head": "f85a7e662054a7b0d9070e432508831afa214b47"
+  },
+  "obsidianmd/obsidian-releases": {
+    "head": "a7f57588680f072847546cd1acec0e9fd99372e8"
+  },
+  "swagger-api/swagger-ui": {
+    "head": "832008ad5cfc49e6fc1a1a5590c0a285ac91acef"
+  },
+  "aiming-lab/MetaClaw": {
+    "head": "922caf3a1cd093fb316e95183a8acc8aa47b3b21"
+  },
+  "awesome-skills/code-review-skill": {
+    "head": "28e918267d5e4536d22ea4469bf58ccfe8a95f1f"
+  },
+  "carlrannaberg/claudekit": {
+    "head": "f22a4f9030520394bf1a517b46ad7585badf5130"
+  },
+  "cloudflare/moltworker": {
+    "head": "7b00c1d7292190f2327e93bdcc7a0eabb0a26123"
+  },
+  "ComposioHQ/open-claude-cowork": {
+    "head": "52335ef50fd033cb5ce87068be0b5b546fa5b73d"
+  },
+  "duthaho/claudekit": {
+    "head": "52e2cd6b4bf0e3b9145c992150d6d38ad2ad177a"
+  },
+  "Egonex-AI/Understand-Anything": {
+    "head": "267fe13036faf0e6daeb1dd832b7f97b94b2e259"
+  },
+  "frankbria/ralph-claude-code": {
+    "head": "0c1d7bf8395ceb669482c3443162e2cf381f2040"
+  },
+  "Gen-Verse/OpenClaw-RL": {
+    "head": "f48ac358adf9873b5cb2210f1cb234a52ed8a8a3"
+  },
+  "hesreallyhim/awesome-claude-code": {
+    "head": "53376a9663dfc1e806c1c44f91057a989212ea69"
+  },
+  "JohnRiceML/clawport-ui": {
+    "head": "40db84d69b793048a9f738db57fe6e5db9751df3"
+  },
+  "Lichas/maxclaw": {
+    "head": "a5f3a8d32bc8ff9ffe619ab369dd58acd7d5ed70"
+  },
+  "machinae/awesome-claws": {
+    "head": "ed70e80d412aff0a69a2f1eaed6a77520cf5de1d"
+  },
+  "microclaw/microclaw": {
+    "head": "a14e8432be657fb2f7778838a26b556aad717802"
+  },
+  "nowork-studio/NotFair": {
+    "head": "0feb9f77b4092117a70e9f1c09dc05613c8b761a"
+  },
+  "ntd4996/agentpet": {
+    "head": "20ae837bf9782d8f8732d95a55a2877880e480af"
+  },
+  "openai/codex-plugin-cc": {
+    "head": "db52e28f4d9ded852ab3942cea316258ae4ef346"
+  },
+  "PleasePrompto/notebooklm-skill": {
+    "head": "eea5cb28ba79ab8b078a1eaa44ce9ec44f75dbf8"
+  },
+  "raulvidis/openclaw-multi-agent-kit": {
+    "head": "89f196042d9f87b40d72a397b8109641ebcc972b"
+  },
+  "scottconverse/stack": {
+    "head": "a9510f020c1dced47b946d42a780820d0f9192b5"
+  },
+  "shinshin86/oh-my-logo": {
+    "head": "9601a0d81c6820678456f04f0471a68bd6fe825d"
+  },
+  "smallnest/goclaw": {
+    "head": "e05c79d44dee419bdf1ac9d8d441de1a47397c80"
+  },
+  "ValueCell-ai/ClawX": {
+    "head": "d7671a42e6b15813f660a0048d2aaeac26b27e59"
+  },
+  "YishenTu/claudian": {
+    "head": "943e403a951a53d2f5c38766a0e6287ace9419b3"
+  },
+  "mattpocock/skills": {
+    "head": "896f14d9c25659f03b24e08e4efc3ee69bbade08"
+  },
+  "nidhinjs/prompt-master": {
+    "head": "d15eabbe5d2122eedc060bae8a771381e9873d1b"
+  },
+  "conorluddy/LiquidGlassReference": {
+    "head": "b3312351da9faca5c8d3f771c6c90fc707420ad6"
+  },
+  "1Panel-dev/MaxKB": {
+    "head": "14db7a91d88cc86b9600b6c5d6f52e8ef84ef242"
+  },
+  "Affitor/open-affiliate": {
+    "head": "5194e097f98cc1bed7d8770e1c3143011d8193e8"
+  },
+  "agentskills/agentskills": {
+    "head": "0c0c5673846d0a1c983d910b189e329ef3ab8f2a"
+  },
+  "ai-boost/awesome-harness-engineering": {
+    "head": "01d4b4aaf00361a4a827f23c1b7176959f3f950d"
+  },
+  "aidenybai/react-grab": {
+    "head": "2c6b6831d9f7a986f088f7ec6a52273049612116"
+  },
+  "awp-core/awp-skill": {
+    "head": "b7dbddf19e81c6e45772b8331d8177d31353e3e3"
+  },
+  "code-on-sunday/slide-deck-generator": {
+    "head": "a6369f31b0cc4dd5830796455326777a8fe4c7c6"
+  },
+  "cporter202/agentic-ai-starters": {
+    "head": "077820244c7b617f1f702df15055ddee0cb7c2db"
+  },
+  "fainir/most-capable-agent-system-prompt": {
+    "head": "ce9b3f5a326b81a5bf64f3ec75e992d0d66b653a"
+  },
+  "FareedKhan-dev/all-agentic-architectures": {
+    "head": "cf9d620a8cc55d59589399c30f305e6dfaa428ec"
+  },
+  "Hesper-Labs/owly": {
+    "head": "430c646e51aea8367d1e1a88953e9b56d059fa8d"
+  },
+  "HKUDS/DeepTutor": {
+    "head": "df6922bb1bc186c938f5c9fb8e7762abe16ea16e"
+  },
+  "iuyup/AgentFlow": {
+    "head": "2915b1719a1743f29308a1e69379e60458378b8c"
+  },
+  "JackChen-me/open-multi-agent": {
+    "head": "ef03695d290691dddab1b8193d2803fd1c5ac65e"
+  },
+  "katanemo/plano": {
+    "head": "dc522d8bfcf79cb9ae8351b6769a605fe3cbb262"
+  },
+  "kepano/obsidian-skills": {
+    "head": "a1dc48e68138490d522c04cbf5822214c6eb1202"
+  },
+  "LeDat98/NexusRAG": {
+    "head": "1d4791c6b352091f773f276ccbc86a605f55e5b2"
+  },
+  "leminhthanh1998/DuckPentest-Project": {
+    "head": "aef9c5b60a358705047d70012b3461bdd60d5263"
+  },
+  "Memento-Teams/Memento-Skills": {
+    "head": "e7687d9c14b87c424d39498a1e8e91afd7c57d9f"
+  },
+  "minhnv0807/fullstack-mkt-skills": {
+    "head": "2c1b802b5504e14974d0231e1d74cc204bb17858"
+  },
+  "motiful/skill-forge": {
+    "head": "c63281b42fb5b476b63f8eb0e1d8bbc97f700335"
+  },
+  "plannotator/effective-html": {
+    "head": "63b1bf04d3e48b426a31fdb82b1319c33663fde4"
+  },
+  "screenpipe/screenpipe": {
+    "head": "5a4443f3b6cd2bc7ffb0776873146b706d219e61"
+  },
+  "Shubhamsaboo/awesome-llm-apps": {
+    "head": "e707bf8d0ad4bb4185bc80a385c699d249e04572"
+  },
+  "steel-dev/awesome-web-agents": {
+    "head": "3455f8ed8f01cdab1af1d30ef33d1d246aca885e"
+  },
+  "tanviet12/chat-quality-agent": {
+    "head": "5fface73d8c60f83aeb4481d917193acb83991bc"
+  },
+  "tqdat410/agentune": {
+    "head": "5de5913071420546bf53c76972a1193620ab5a1d"
+  },
+  "VanitasTran/AI-Agent-TFT": {
+    "head": "8a23cd4e499f9e228e1e95b6e2435d5db4cfb810"
+  },
+  "vercel-labs/skills": {
+    "head": "4ce6d48ac44c8b637db87b2102fea3baca719df1"
+  },
+  "zhongyu09/openchatbi": {
+    "head": "54a278a208c6ea38a749ad6f35a6b074ce3f3a55"
+  },
+  "bergside/design-md-chrome": {
+    "head": "8e07614fb18752ab1ee14dd65a8ff93e63c9b13b"
+  },
+  "dart-lang/skills": {
+    "head": "8ce8492c4a5b8bdb29472eaa1785957891730f77"
+  },
+  "hugohe3/ppt-master": {
+    "head": "37427f940014c7d1aa122a3faf9cc16d64d573b6"
+  },
+  "mmethodz/dreamgraph": {
+    "head": "97ab2fa99f75f89b9fbbfceadfb14598c9e45211"
+  },
+  "Unclecheng-li/AI-Animation-Skill": {
+    "head": "4b107ddc68deacb7201cf1975d7e9b487cb2bf75"
+  },
+  "vythanhtra/skillsentry": {
+    "head": "83080095768ecfb4644b4e0bda46281bf3294e38"
+  },
+  "k2-fsa/OmniVoice": {
+    "head": "3d2bd9d07bbe8d16c2439745b0ded450dc41e215"
+  },
+  "Anil-matcha/Open-Higgsfield-AI": {
+    "head": "7d125445f937433e4b063fbab479fa9f43f3d97a"
+  },
+  "arman-bd/guppylm": {
+    "head": "a30df3091cff73a259ce581dd8439271084bca40"
+  },
+  "ashishpatel26/LLM-Finetuning": {
+    "head": "af69f999a48e05a15520684fb5cad78ce9c49c23"
+  },
+  "fdhhhdjd/Class_NodeJs_Systems": {
+    "head": "53c59392d58e2301a70d51893ed778595eada111"
+  },
+  "google-research/timesfm": {
+    "head": "4a6c5cdae7ac73a450843e035fbfc3ffa08e9caf"
+  },
+  "JuliaGPU/JACC.jl": {
+    "head": "8f76791e7856e38b3a8b71138a9b7d00f4e7bbdc"
+  },
+  "madroidmaq/mlx-omni-server": {
+    "head": "4f8e9ef623808b876d2fd08df8fe11745d5a2751"
+  },
+  "matthartman/ghost-pepper": {
+    "head": "fbfe41d6f1564c94ee41698008e7634d75e22902"
+  },
+  "midudev/tailwind-animations": {
+    "head": "117e13b30437724adea42362bcbc90e4ecd8f2f0"
+  },
+  "mnfst/awesome-free-llm-apis": {
+    "head": "56387fdf0b3d843b16b80ff1c2486a894b7b76b7"
+  },
+  "NexaAI/nexa-sdk": {
+    "head": "30c1aef84b98a5c388c715c9586bf46b4edc3e02"
+  },
+  "originalankur/maptoposter": {
+    "head": "6d03069f34558494ccc7fc2a7de87df7a7543fd5"
+  },
+  "phanxuanquang/EmbeddingGemma.NET": {
+    "head": "11f8ebe1aeccf579b34a67eb49c8cad3b0621321"
+  },
+  "xming521/WeClone": {
+    "head": "26eefcc981e6fdaaf6f1dae7f625cce221795f14"
+  },
+  "zebbern/no-cost-ai": {
+    "head": "e58d5eb807b8c482aa78dfdcbdefa50ca6f3dd2c"
+  },
+  "langflow-ai/openrag": {
+    "head": "893f66eaceea706459c2b433b7449772d94e5d7e"
+  },
+  "mrT4ntr4/NtWarden": {
+    "head": "5de4bf7c9df2c6cfffff5780b4df575380a1bd3b"
+  },
+  "nashsu/AutoCLI": {
+    "head": "c0969e2c83b29a7528452b1ba555085deca8e00d"
+  },
+  "shsarv/Machine-Learning-Projects": {
+    "head": "eca2a66a80cc5ca54ac3ebf8ecbf4d9c53c2db53"
+  },
+  "tobi/qmd": {
+    "head": "e428df76bc0274d9e93eb7ca3e95673315c42e90"
+  },
+  "github/spec-kit": {
+    "head": "0da969df14fc67feec44a53e30f78a486d5a652e"
+  },
+  "D4Vinci/Scrapling": {
+    "head": "67b66666af28204c14bdfb4b61bb785fa12a462f"
+  },
+  "opendataloader-project/opendataloader-pdf": {
+    "head": "ddd3d8e9607a525cc3d00d4b05448a10c89c6935"
+  },
+  "braedonsaunders/codeflow": {
+    "head": "af3b0073f2b41c9f54938c6520509fd97d133803"
+  },
+  "amruth-sn/kong": {
+    "head": "8c4ee4bf52e0eb9efc3a0b22ad6da03387543fd2"
+  },
+  "mrexodia/ida-pro-mcp": {
+    "head": "abb2732ad0d759d750c2e38b616f7f3e949ed2f9"
+  },
+  "ComposioHQ/agent-orchestrator": {
+    "head": "992e3d01127873eb2ed97b5bd5513f48a4114b23"
+  },
+  "cporter202/agentic-ai-apis": {
+    "head": "b5435f1ab8d2a16a82409b1cb363fb69152fabfa"
+  },
+  "larksuite/cli": {
+    "head": "c04da4723a0cd7e10a54f9038fc761824bf62f5d"
+  },
+  "memodb-io/Acontext": {
+    "head": "259d73bfdebeed35ec2d4211ddc060a2d4126bc6"
+  },
+  "mistralai/mistral-vibe": {
+    "head": "474a0e4055b210a60c39ed0c89458d904b7f6a7b"
+  },
+  "Munkhin/auto-accept-agent": {
+    "head": "880300e4d77901d488d4a8e11528bd68a2d3790f"
+  },
+  "Nebulock-Inc/agentic-threat-hunting-framework": {
+    "head": "1a95cb511a3e50b05fc4a072ef9d4c1b577d385a"
+  },
+  "nekocode/agent-worktree": {
+    "head": "f9094c4cfe579a0a935a464a9d4f7a79a5b8fe9e"
+  },
+  "Panniantong/Agent-Reach": {
+    "head": "e825f6740d24c6c315c3b0dc41907e6c87ff39a5"
+  },
+  "pbakaus/impeccable": {
+    "head": "a5310c9cdae4df011ad9b56de807484250977e9a"
+  },
+  "referodesign/refero_skill": {
+    "head": "f78b4eccf112d7a179b92afeafdd7e8684560ac2"
+  },
+  "SafelineMan/Agentic-SOC-Simulation": {
+    "head": "0a218abcc185039a895d195e071768ed1472b05b"
+  },
+  "sentrux/sentrux": {
+    "head": "6f8ff3c14b0423e4b58f42d1813d4d5f7fdc1d11"
+  },
+  "VoltAgent/awesome-design-md": {
+    "head": "664b3e78fd1a298ba11973822da988483256d4b4"
+  },
+  "AIM-Research-Lab/Medical-SAM3": {
+    "head": "4164d261b5a8c9fc1015a2e21537280a19c972c5"
+  },
+  "arinnem/stitchSkill": {
+    "head": "d9fc9b1364663350f91a555a93a83a6d0978df23"
+  },
+  "chubbyguan/chubbyskills": {
+    "head": "56c434bd9f8f5d15d540038073aa44c24df39dbd"
+  },
+  "dotanminh/thue-tncn-vietnam": {
+    "head": "5f26222f336853fa83d094d73cb71fc3922450b5"
+  },
+  "feature-sliced/documentation": {
+    "head": "d3583adb65cbf4864d9ef40415afdd273722f36f"
+  },
+  "google-labs-code/stitch-skills": {
+    "head": "3f64079d75d025bc5890c73669f27c26a2d80b31"
+  },
+  "jupediaz/chatgpt-prompt-splitter": {
+    "head": "017961be5b163d93df5d2b241600847f8bc149a2"
+  },
+  "anime-vsub/app": {
+    "head": "8048937223d30bc2006f1aabfe3d2b5ef662a503"
+  },
+  "anl331/goey-toast": {
+    "head": "0dafb8ff4001d2752ee9ad7a4134d3c295fc2ce7"
+  },
+  "Blaizzy/mlx-vlm": {
+    "head": "99c9a59fff283de25e95e8d2f5edba5e469307df"
+  },
+  "greensock/GSAP": {
+    "head": "13e2b790546426a1a2e0e9b409f3f8dc6d6611f2"
+  },
+  "jasperai/Flux.1-dev-Controlnet-Upscaler": {
+    "head": "bf7b77c7e49cffbc37f2e62c05920eaea4ae8649"
+  },
+  "loclv/llm-lean-log": {
+    "head": "86bd7597b4219abde8d660631f1576619f648fc9"
+  },
+  "ml-explore/mlx-lm": {
+    "head": "ab1806e8f5d6aa035973af194a1b9198ab4754dc"
+  },
+  "RVC-Boss/GPT-SoVITS": {
+    "head": "bf81cdb14a38b674b6e9996dabc97340bc9978d2"
+  },
+  "RyanCodrai/turbovec": {
+    "head": "1e7200cfd8f26c92ce2855652db64bc7f85bc039"
+  },
+  "aakriti1318/interview_questions": {
+    "head": "652a3f43ec31a76298e932e320d57da598d90ac1"
+  },
+  "dembrandt/dembrandt": {
+    "head": "4b84d3773e4e690a32b4f31b9e3748a78ce1f5af"
+  },
+  "lfnovo/open-notebook": {
+    "head": "8889087e317177d7b6e286342ab34e0c9c01d43e"
+  },
+  "orf/gping": {
+    "head": "edb335d424a156ca543ae61b0d79361842416fe7"
+  },
+  "primary-theme/obsidian": {
+    "head": "789c99e357d8c0049058ef358a906ea9b350fb09"
+  },
+  "reconurge/flowsint": {
+    "head": "0d092c44f0db5bae76093966f812f8a4073bee36"
+  },
+  "search/nan": {
+    "head": "ab2a5b3a7a8e369f09d6753d825d2760482208df"
+  },
+  "VectifyAI/PageIndex": {
+    "head": "f413c66fee0bfbb7291c389333f9cc1adac68d57"
+  },
+  "xunbu/docutranslate": {
+    "head": "d4040917a71747bc5a3d5fba91378f902b8175d1"
+  },
+  "658jjh/claude-usage-tracker": {
+    "head": "843aa31f7932b040564652a7fd6b4c79fce83406"
+  },
+  "AaronWong1999/hermesclaw": {
+    "head": "e61f997e59c363488595fb949d00928d993192fe"
+  },
+  "agent-ix/wsl2-antigravity-setup": {
+    "head": "3b497e4632f8ed08e2ecfd2c044e20d75e304ced"
+  },
+  "amarullz/kaicodex": {
+    "head": "d286836b3abad30d278c6a10f0e3ca11074f1197"
+  },
+  "AvenalJ/Antigravity-Mobile": {
+    "head": "54345177d146c193dbf6e0c353a915812384512c"
+  },
+  "BigPizzaV3/CodexPlusPlus": {
+    "head": "1f91000e06f822e2b10b3e54ab6b521540315071"
+  },
+  "blader/humanizer": {
+    "head": "1b48564898e999219882660237fde01bf4843a0f"
+  },
+  "Chachamaru127/claude-code-harness": {
+    "head": "c100dbb4bb11a3472f1691a2a9e181bc48bfb11d"
+  },
+  "claude-Workspace/claude-ws": {
+    "head": "efa903828130671709cc614cba5a01ba90fc29db"
+  },
+  "CoderLuii/HolyClaude": {
+    "head": "3224b603a76fa203fe35b05a11be2adaf2052630"
+  },
+  "Curbob/LobsterBoard": {
+    "head": "7e47255371384a85706ea180f5e359495abe8b30"
+  },
+  "Decodo/decodo-openclaw-skill": {
+    "head": "61e6687c4e4c599be64e00ea08c06a9902e353da"
+  },
+  "DenisSergeevitch/agents-best-practices": {
+    "head": "b612ddbcfb710f47ffac117fd327c10a070b3d81"
+  },
+  "elvismdev/claude-wordpress-skills": {
+    "head": "0ac0bbd5fd7c2a91f45af8ec3f5282537e52b075"
+  },
+  "Gentleman-Programming/agent-teams-lite": {
+    "head": "6901875cb1c2387914b57bebfceb686646572253"
+  },
+  "glips/figma-context-mcp": {
+    "head": "c083d65c7e002923e7cb98f4e3bdafb105e90f6d"
+  },
+  "habitual69/gdrive-manager": {
+    "head": "70665bd8ccd9cbd039ef8d3e7d57b620b6b31474"
+  },
+  "hesamsheikh/awesome-openclaw-usecases": {
+    "head": "659895e58e2105c6db8fbef39f446c8a786a480c"
+  },
+  "HKUDS/ClawTeam": {
+    "head": "01198332ef9270c32c5460b8a178f964fc0df451"
+  },
+  "hoavdc/CodexKit": {
+    "head": "3d82db1e75278e0ccf759e1512c397ce9f6bb93d"
+  },
+  "imbad0202/academic-research-skills": {
+    "head": "ad0a7759cee9e7d2db5ca7ea1666096dea8e5d3c"
+  },
+  "Intina47/context-sync": {
+    "head": "235fd51cd85ebb30b1ab2af83a57b3f0575cae21"
+  },
+  "jontsai/openclaw-command-center": {
+    "head": "644cb7e1cad0eab1b24300dc684003870c6ec01a"
+  },
+  "jorgerosal/wordpress-skills": {
+    "head": "8c964424d05ba34b3ea5641f7181d4c13829e06f"
+  },
+  "kangraemin/claude-inspector": {
+    "head": "c2da2d99b48701fe79c3a94fbcafc9e47ba145ee"
+  },
+  "khanhbkqt/spawn-agent": {
+    "head": "288a767d8b251004f7bd7999dcdf408cbbaa86c7"
+  },
+  "LeoYeAI/openclaw-marketing-skills": {
+    "head": "ed6b63ff780e8e82738bab2bd8b7fab7330f8a6a"
+  },
+  "LiuMengxuan04/MiniCode": {
+    "head": "3ec688f297fbc7e3a871113d1aa918d427c5817b"
+  },
+  "markgravity/claudy-registry": {
+    "head": "580928ff9561a5d7c1a5c3f083460104bd1f1e3c"
+  },
+  "mergisi/awesome-openclaw-agents": {
+    "head": "05820c51125e86a979432e21651d34dc9b14621f"
+  },
+  "mithun50/openclaw-termux": {
+    "head": "09e8e7dd85ef7f8b8c010a51c7985dd35cef5b7d"
+  },
+  "moazbuilds/claudeclaw": {
+    "head": "281a28f1cb41a51654dc7b13ad870bb2435a726d"
+  },
+  "mrd9999/antigravity-sync": {
+    "head": "938b24c5c04918bb49bd2fe67c1251cfb56df2d5"
+  },
+  "multica-ai/andrej-karpathy-skills": {
+    "head": "2c606141936f1eeef17fa3043a72095b4765b9c2"
+  },
+  "nadimtuhin/claude-token-optimizer": {
+    "head": "8c9f49aff9ec77181833292dfa23f0efdfa0f5d8"
+  },
+  "nagisanzenin/claude-code-skill-maker-plugin": {
+    "head": "f981db60943e2991eb9e7666c3df6e6e450c77e6"
+  },
+  "nagisanzenin/claude-code-software-engineer-plugin": {
+    "head": "2c61bc183769daca7ada4cb8bebc79bb2a2c100a"
+  },
+  "Neurons-AI/crawbot": {
+    "head": "eb6f07e75c2665f6f05e7ab38454f2f0760c9303"
+  },
+  "NevaMind-AI/memU": {
+    "head": "ff90dac6976bc920667e03d295a75d5da8626f75"
+  },
+  "nexu-io/html-anything": {
+    "head": "aea749837d780f1da6261f2ed777d7e107231f5f"
+  },
+  "NVlabs/SpatialClaw": {
+    "head": "b8ff5f775062fb1268556b2911913927eb20b328"
+  },
+  "oaker-io/wewrite": {
+    "head": "1ec8cfe6141b7640da65a513800a6dbc3e9edb2e"
+  },
+  "omnigent-ai/omnigent": {
+    "head": "aa53f689dfe433d5f4404e09a52b8df55af75c0b"
+  },
+  "onvoyage-ai/gtm-engineer-skills": {
+    "head": "3777930184a10b25ab36bb2fc4da6c0f6cfcc187"
+  },
+  "ooples/token-optimizer-mcp": {
+    "head": "d9338213fb5c2264d67b9ed3f74bf48b226bd601"
+  },
+  "phuryn/awesome-agent-skills": {
+    "head": "e7bac7c743163a6a53921595883d26e14934fdc7"
+  },
+  "pjasicek/OpenClaw": {
+    "head": "5ee5740ca98377c76b13b50c84f610b0066a4717"
+  },
+  "PleasePrompto/notebooklm-mcp": {
+    "head": "50b3e7f67f8535d9899c5e2b1b68f37d17b72aef"
+  },
+  "poco-ai/poco-claw": {
+    "head": "c66da3cf3ae34b471e5f3a4b8e74bd95c3413283"
+  },
+  "psycho-prince/claw-cli": {
+    "head": "1f03704d48b493c5ab05f2d177438bcefbf8432e"
+  },
+  "puaclaw/PUAClaw": {
+    "head": "c2e525d9254d005fa3ccb992ef43d1ccae4343bc"
+  },
+  "robtaylor/google-docs-skill": {
+    "head": "f2bdf75d37fe2f3aaf70f7143d0a4c448e424d41"
+  },
+  "rsts-dev/claude-buddy-marketplace": {
+    "head": "5f633a9b3ed6ae36bfd3fc4299efc20ededd4baf"
+  },
+  "Rune-kit/rune": {
+    "head": "484425fe6cc9be224f6139daf680b1f2ea12099c"
+  },
+  "SawyerHood/gitclaw": {
+    "head": "c54421287cf86550987fff243502d6d53283ecac"
+  },
+  "Sequela02/codex": {
+    "head": "e0a248bfe04ecc536e6bbf5913e0b9d78c6d0fab"
+  },
+  "soongenwong/claudecode": {
+    "head": "843a783d946f96535f320e84bc81eaee7e289bc0"
+  },
+  "spleck/claw-dashboard": {
+    "head": "ee2ba748b24a7a2474b0493d68a8c71e3096e547"
+  },
+  "stellarlinkco/myclaude": {
+    "head": "f2e75c1263a2d5f09cdc4bb3dfe3635c635ff296"
+  },
+  "thanhtantran/openclaw-rag": {
+    "head": "7357c5395fa0ca339ddc0234685be87807411af4"
+  },
+  "TheMattBerman/seo-kit": {
+    "head": "c57d77d182cf3db76cb19cc68c2f7651accc2e9a"
+  },
+  "tuanminhhole/openclaw-setup": {
+    "head": "789c1dead4324fae0bea208a3f4d783654400bd3"
+  },
+  "tuanminhhole/openclaw-skill-infographic": {
+    "head": "b5d861a1f85ce000837c79de5649f40fec6bf105"
+  },
+  "warengonzaga/tinyclaw": {
+    "head": "5fc5f6715590e9c699bd74df53a31c70f88337bb"
+  },
+  "wquguru/harness-books": {
+    "head": "fbf2b43e352443eea00eb9e4a32709a9f2c11a76"
+  },
+  "wusimpl/AntigravityQuotaWatcher": {
+    "head": "55e855650ec34f155154585e7959283106d57e90"
+  },
+  "x1xhlol/system-prompts-and-models-of-ai-tools": {
+    "head": "570364ce8146b24061a7e9ac43d3dc30c7e0f6a4"
+  },
+  "yazinsai/claude-code-remote": {
+    "head": "9f3a71ff4503f8bffe0ab72140391f8ea505005f"
+  },
+  "yazinsai/town": {
+    "head": "8f56f9e30a8b80d347387c50748e89c2fdf2438b"
+  },
+  "ysz/nanoClaw": {
+    "head": "3202c016548a7f1498d439ef4095a8ab2ffa4236"
+  },
+  "zilliztech/claude-context": {
+    "head": "627eb2be339723926d5b468698a8f5cc0da21167"
+  },
+  "zilliztech/memsearch": {
+    "head": "8995fb0ec3a4f9456e3019b2f29ba40333170c50"
+  },
+  "zubair-trabzada/ai-marketing-claude": {
+    "head": "e5aa0ea4c5f30d8bc08771e8ea932463e76d3356"
+  },
+  "zubair-trabzada/geo-seo-claude": {
+    "head": "9eec32f5f700a1e6c3cb1cb735a56ee5ec49a964"
+  },
+  "cclank/lanshu-awesome-ai-video-kit": {
+    "head": "b4ceecc4ca27ded6b6f542b04ac756bf5bd7816d"
+  },
+  "om-patel5/Caveman-Claude": {
+    "head": "c51b635e775df96a56547857686443c80c5212b3"
+  },
+  "getzep/graphiti": {
+    "head": "dfb742dbb94b96cce891a1dc6b101e74732e6f2b"
+  },
+  "GiovanniPasq/Agentic-RAG-for-Dummies": {
+    "head": "8b3e5ff0619f7ede593d728e4a8b459fbbec9b08"
+  },
+  "github/copilot-cli": {
+    "head": "758c2c9cc4bd5a83a8e48837ec62dc2305935ba4"
+  },
+  "goldynlabs/prr-kit": {
+    "head": "3957ae0519df3cc9bf0181bb520b2997646a1924"
+  },
+  "greensock/gsap-skills": {
+    "head": "aed9cfd3277740755f6bfc1155c7aa645403b760"
+  },
+  "h4ckf0r0day/obscura": {
+    "head": "5c3d560d8e1bea1605a60245a6d55e6d27c7c479"
+  },
+  "humanlayer/12-factor-agents": {
+    "head": "d20c728368bf9c189d6d7aab704744decb6ec0cc"
+  },
+  "jacob-bd/notebooklm-mcp-cli": {
+    "head": "ad9882417d4172a09a5dd1f062d73acfdfd82d16"
+  },
+  "netease-youdao/LobsterAI": {
+    "head": "4eece09d8a8c9e5b7dd6c55478a3a6fa58b7278f"
+  },
+  "NVIDIA/OpenShell": {
+    "head": "f7aa3aa3c76b6483c6572cd02a4121cd7f9ded36"
+  },
+  "papers/2605.18747": {
+    "head": "dfb378650f85188c7ab66413919dc7ffc97f04de"
+  },
+  "rasbt/mini-coding-agent": {
+    "head": "717cae4ff10d01773bd12951f62a575825053414"
+  },
+  "anthropics/prompt-eng-interactive-tutorial": {
+    "head": "0d277542e927652da25b0014c9b346723af55881"
+  },
+  "dexhunter/seedance2-skill": {
+    "head": "e06c7c63a766d623004a2807881c30685ce517af"
+  },
+  "github/gitignore": {
+    "head": "dcc0fc7bc2b5ba480cf117ad1be31bafceeaff46"
+  },
+  "jupyter-naas/awesome-notebooks": {
+    "head": "6a270db859084f0ed23323bffc29a42a5cbc8455"
+  },
+  "midudev/autoskills": {
+    "head": "7ebf5ce92e8ed0521949111d8ff91ec5047d7c83"
+  },
+  "Anil-matcha/Open-Generative-AI": {
+    "head": "7d125445f937433e4b063fbab479fa9f43f3d97a"
+  },
+  "anomalyco/models.dev": {
+    "head": "b4e5ca4bcc511e8b128eb4d671b6d6d392a0668e"
+  },
+  "chidiwilliams/buzz": {
+    "head": "191795bab21ee8414fc5479fb8c72d16f457c496"
+  },
+  "DavidHDev/react-bits": {
+    "head": "70f8fe4d4773ca8d7e6e82dfea36dca393442c2b"
+  },
+  "FunAudioLLM/CosyVoice": {
+    "head": "074ca6dc9e80a2f424f1f74b48bdd7d3fea531cc"
+  },
+  "google-gemini/deprecated-generative-ai-python": {
+    "head": "7a7cc5474ddaa0255a4410e05361028a24400abd"
+  },
+  "google-gemini/genai-processors": {
+    "head": "dd023255a24e57eccd638c0092d6dbe7acdb5fc5"
+  },
+  "googleapis/python-genai": {
+    "head": "8c7cee3405fa3a6f23dccf44b0bb120eeb546ae6"
+  },
+  "hbpkillerX/low_light_img_enhancer": {
+    "head": "b83e62b2dfea6a22cdd6b267b61958953939554d"
+  },
+  "jamiepine/voicebox": {
+    "head": "f2cf2a729d733acd7c759d85c6ace2d602f50d6e"
+  },
+  "karpathy/llama2.c": {
+    "head": "350e04fe35433e6d2941dce5a1f53308f87058eb"
+  },
+  "microsoft/winget-cli": {
+    "head": "6b3bc9693e86b79d130416539029bcbab0c18113"
+  },
+  "modelcontextprotocol/servers": {
+    "head": "d31124c982401739917fd817c2a59db344529c16"
+  },
+  "monokaijs/ag-proxy": {
+    "head": "4e8e4f5c2bec1e74a14756c254978c6854d2a293"
+  },
+  "ollama/ollama": {
+    "head": "d47859ce495496196df211e939702364492a2b7f"
+  },
+  "openai/whisper": {
+    "head": "04f449b8a437f1bbd3dba5c9f826aca972e7709a"
+  },
+  "p-e-w/heretic": {
+    "head": "c8a254b8251fcd7eadd061242a725f7338d3296e"
+  },
+  "PaddlePaddle/PaddleSpeech": {
+    "head": "6b25a400008d393f9c3af837b3c692b17f29ee1a"
+  },
+  "pathwaycom/pathway": {
+    "head": "5b50e883b4ffe2e6758f5fd239c91842ccec087e"
+  },
+  "syntropy-ai/Soren-1-Small": {
+    "head": "cf26c463169c9f375672fd667455f88866ef910b"
+  },
+  "TextArena/TextArena": {
+    "head": "a2c896c5c84c8557d78d3d9182a066ff573daf44"
+  },
+  "ysharma3501/LuxTTS": {
+    "head": "28ae6a61151684fffc9d1a7aa15eafa02286fe0b"
+  },
+  "andrei8055/SOAPI": {
+    "head": "647dce7f6a8ac0a1a7055a80fa2251c0db2b1d04"
+  },
+  "coqui-ai/TTS": {
+    "head": "dbf1a08a0d4e47fdad6172e433eeb34bc6b13b4e"
+  },
+  "MemPalace/mempalace": {
+    "head": "18a9788961afce013efc9e2da23ea2b17ab72381"
+  },
+  "milla-jovovich/mempalace": {
+    "head": "18a9788961afce013efc9e2da23ea2b17ab72381"
+  },
+  "PhanTheMinhChau/shopeelivecoin": {
+    "head": "60d47a9b201bccd360d09ba952016cd0e737b5bf"
+  },
+  "yazinsai/OpenOats": {
+    "head": "e0117ad304e1d7c1c35965ff755bed4cb38cf777"
+  },
+  "7WaySecurity/ai_osint": {
+    "head": "7ea0296d162d4c1ba6276fa334e1c0588302bb73"
+  },
+  "Agent-Field/reels-af": {
+    "head": "8fc6cde0f7c90acec899e750674fa4bbdd0840c3"
+  },
+  "alibaba/page-agent": {
+    "head": "3162ac5b45562e35d9586b5f511bbc367294d5dc"
+  },
+  "Arindam200/awesome-ai-apps": {
+    "head": "ec0175e74cf040f87285e2ba822bea6d7a140110"
+  },
+  "awslabs/agentcore-samples": {
+    "head": "1229a4c38586cdfb5b576434efa9ed4278703019"
+  },
+  "browser-use/video-use": {
+    "head": "92c2b34e44c205cbc2acae7f6ca7c1c219d5dd66"
+  },
+  "composiohq/composio": {
+    "head": "914bccf3559bd91b3332d41906784a6c2c2e1bf6"
+  },
+  "cprobe/catpaw": {
+    "head": "967bf1577571ca4131ee62b3be9498a47603060f"
+  },
+  "davebcn87/pi-autoresearch": {
+    "head": "6e1132c8ad83fbd6e3d6c123e0c62a13e7664dcc"
+  },
+  "duckminkbitsness-cmd/SOPAI": {
+    "head": "a62c41e1a2da45d4f114339a40bb35d92f8233da"
+  },
+  "EvanThomasLuke/Awesome-AI-Hacking-Agents": {
+    "head": "3ea14ca75824a26626d0bd47ad3a7514c5c9b696"
+  },
+  "Gentleman-Programming/engram": {
+    "head": "be4b61384ee154abbdea2f8760a5f1e43dd595ab"
+  },
+  "google-labs-code/design.md": {
+    "head": "ea4a3240d4c0d06778b9e39efeb553851be27c17"
+  },
+  "hexo-ai/sia": {
+    "head": "8c503030815fc69eb581f65c4ab02c1fc05062ec"
+  },
+  "HKUDS/CLI-Anything": {
+    "head": "dc7392489222dbcc520817609290755d6dd8b0bb"
+  },
+  "HKUDS/OpenHarness": {
+    "head": "9b2efd795c6aa09f88b0c257d269a9e518da6ae7"
+  },
+  "HKUDS/VideoAgent": {
+    "head": "44611659e43628c5eb7f77158b3b94a32bcbb5c5"
+  },
+  "HKUDS/ViMax": {
+    "head": "0253853cd0a8218b121e4297b243b11d4a454bff"
+  },
+  "joonspk-research/generative_agents": {
+    "head": "fe05a71d3e4ed7d10bf68aa4eda6dd995ec070f4"
+  },
+  "jsegov/autoresearch-win-rtx": {
+    "head": "a4123c6e5c6287f90be04026642ba20b94e424df"
+  },
+  "ksimback/hermes-ecosystem": {
+    "head": "97378faabff87ea555889d2e6745bf46128c28c4"
+  },
+  "langchain-ai/langchain": {
+    "head": "af3de98c4afc4905e9a3fe7431a9bef3e269c556"
+  },
+  "lewislulu/html-ppt-skill": {
+    "head": "f3a8435d3901697d5ac5e64d356c933637e43107"
+  },
+  "Light-Heart-Labs/DreamServer": {
+    "head": "a69dc7c925aa508e9f9be6f2e4b7f915dfe0ddae"
+  },
+  "loerei/HoverSource": {
+    "head": "9ac9b2500b2467c94c1b6dc591c1f1969f2aa123"
+  },
+  "mem0ai/mem0": {
+    "head": "b26469e006f9787410b1ba5fe6b7937d281392f8"
+  },
+  "memvid/memvid": {
+    "head": "fa9efe5127fd807b8a9c14200e8fa59ae2170fd5"
+  },
+  "microsoft/agent-lightning": {
+    "head": "0b40cb724a0ad4f944810f8514884051777bb38b"
+  },
+  "minhtri22/mcp-server": {
+    "head": "abf1bc895d923be237658c4ce9251ea82f09bc1f"
+  },
+  "MiniMax-AI/MiniMax-M2": {
+    "head": "2e575efec12773cdc5d811341089512452bfb468"
+  },
+  "MinorJerry/WebVoyager": {
+    "head": "5a7896738c10bfb8b9edccce6bb0e0411f8ae569"
+  },
+  "mksglu/context-mode": {
+    "head": "43a2066da943572546ff316ceca79026163be0b1"
+  },
+  "mrquangthai278/prr-kit": {
+    "head": "3957ae0519df3cc9bf0181bb520b2997646a1924"
+  },
+  "nexu-io/harness-engineering-guide": {
+    "head": "86fec9bea430cecb29ff10afaae36b96496a8f8e"
+  },
+  "numman-ali/openskills": {
+    "head": "57d933a4f0d5c8659bd8b285f50fb9554360f0b3"
+  },
+  "NVIDIA/cosmos": {
+    "head": "d80caad6cbc1cae8b0f15ee2f10849bbf80162d2"
+  },
+  "NVIDIA/SkillSpector": {
+    "head": "c2d09df019e358d3dc12d980b82c798b87cb9f56"
+  },
+  "oceanbase/seekdb": {
+    "head": "1e9b720c5245dfac180ba8768304315edf42e8ed"
+  },
+  "okx/agent-trade-kit": {
+    "head": "1e027b42690878c4a987e0162cebd669fdfccda5"
+  },
+  "onmax/npm-agentskills": {
+    "head": "713b6aace834458e55196c005bd416e8484c3500"
+  },
+  "OpenHands/openhands": {
+    "head": "1869baf49914309f2115cd8f75d5c7a57a92b371"
+  },
+  "pageel/para-workspace": {
+    "head": "903f1031ef5797b0b1151f96a9132c9e60caaf79"
+  },
+  "paihari/syntropAI": {
+    "head": "47b238f69ddb4f9a6f99566c866dc570d57ffb8d"
+  },
+  "planetscale/database-skills": {
+    "head": "8942f83c3a6c9557868169b965bba5536cde5e91"
+  },
+  "revfactory/harness": {
+    "head": "cceac68ea1d0ad198ef4b7b906cd238375836387"
+  },
+  "RUCAIBox/awesome-agent-harness": {
+    "head": "3d19a0ebd03fb7cabf202671181d71d71a8ae9bc"
+  },
+  "skawld/skawld-sdk": {
+    "head": "7216fab7d7c99f84a40f91f9dcb98dbfdefd4fb1"
+  },
+  "skillhub-club/skillhub-desktop": {
+    "head": "a8726bcb5f5d378843981f23f524569627dd6cbf"
+  },
+  "snarktank/ralph": {
+    "head": "6c53cb0b831ebe8739c6a003e22af14902d8b0b5"
+  },
+  "synapseorch-ai/synapse-ai": {
+    "head": "c07251a99fa746b7a53c6c6aced72c9fec2a9135"
+  },
+  "TencentCloud/TencentDB-Agent-Memory": {
+    "head": "4339e63650920871eb0e8888083a1779d114e3ae"
+  },
+  "tensortrade-org/tensortrade": {
+    "head": "d58afba23deb1fded39793203b7997c3990bb032"
+  },
+  "tintinweb/pi-gitnexus": {
+    "head": "e81629ef47cf23e4ec6021cf6854d563a0c37ad4"
+  },
+  "tinyfish-io/agentql": {
+    "head": "6eac20b7fe876ee8cd89120056abcce756f7d623"
+  },
+  "tinyfish-io/tinyfish-cookbook": {
+    "head": "dc021594dd6e51a8272cada9cf857806736bd4cc"
+  },
+  "tmchow/agent-skills": {
+    "head": "8e74bb235d090064bf1c18b294a4917f73a6cd76"
+  },
+  "tt-a1i/archify": {
+    "head": "b4bd9faa9b3ae2bd483eb2b169425884cc54f07d"
+  },
+  "vercel-labs/ralph-loop-agent": {
+    "head": "7b5acba847d086807a4f94a37d214c5695035793"
+  },
+  "vstorm-co/full-stack-ai-agent-template": {
+    "head": "cb61499051d63cfd5bf75e26d496356becf5a47c"
+  },
+  "walkinglabs/awesome-harness-engineering": {
+    "head": "f84f1701974cf1ad67dd774b025b33e613275cee"
+  },
+  "waooAI/waoowaoo": {
+    "head": "34971db723bb87625033610bb717c6e425d599d9"
+  },
+  "ak-endfield/best-endfield-build": {
+    "head": "5ff0f3d2812175cdac727dd12dbfad5279e48d98"
+  },
+  "BenedictKing/context7-auto-research": {
+    "head": "23ff46058325779273e28fb2f1aa77af8af8c427"
+  },
+  "charlie947/social-media-skills": {
+    "head": "94f72ea2ece388fa30ef49a26fb2e6fd2109e0b1"
+  },
+  "dantech0xff/ui-ux-pro-max-skill-fork": {
+    "head": "1820f2b7b678d5fd1eda5be5c8c9a1f7ac12137a"
+  },
+  "ekimetrics/adaptive-chunking": {
+    "head": "ea87ce8e1a97888f3f179e7f1359ff7f43fb179d"
+  },
+  "FareedKhan-dev/train-llm-from-scratch": {
+    "head": "98f808c4ea9c4e83e16050358e80288642d0cd80"
+  },
+  "HKUSTDial/Supervisor-Skills": {
+    "head": "0b77a1b98794f8341d57685a0e829a3fa175d05f"
+  },
+  "ibelick/ui-skills": {
+    "head": "4f3fd3255ebd9163c5ba46b0a6eeafbef5b64ede"
+  },
+  "kitwork/starter": {
+    "head": "c42a4a4e60fb451d18edf84e30d32f19ddcf0b38"
+  },
+  "LarsCowe/bmalph": {
+    "head": "e7d034161da1c489537a1130f7bbb0b5edeee89e"
+  },
+  "massgravel/Microsoft-Activation-Scripts": {
+    "head": "6401d2f36975dc07bcb6d22ea823a8498a75ec01"
+  },
+  "MaTriXy/auto-skill": {
+    "head": "71d13154782ff4023e885e5c75c27e0a77036090"
+  },
+  "pathwaycom/llm-app": {
+    "head": "beb17f1ea0894b2430727388b78be4b26e37c16f"
+  },
+  "titanwings/colleague-skill": {
+    "head": "47039d08fcf0330794caea14efdb5e183348f7bb"
+  },
+  "vas3k/TaxHacker": {
+    "head": "b6e44358f12c8ee36429fad09e79a1798c1c9459"
+  },
+  "YouMind-OpenLab/awesome-gpt-image-2": {
+    "head": "1686c99232cf6bfcace9e518e94f49a084592ab6"
+  },
+  "0xSero/turboquant": {
+    "head": "7ac9b8d165a3f7d5e6df33b0450bc1f88ec0d4d5"
+  },
+  "allenai/OLMo-Eval-Legacy": {
+    "head": "e77b194ea47c0919039963ccd71ae508ecc70c0d"
+  },
+  "apify/crawlee": {
+    "head": "4739d4886e3c52f90814b9e5342c4ec2cbaa7587"
+  },
+  "appcypher/awesome-mcp-servers": {
+    "head": "280218b4bba97a49facf929f8012dec5e30384b6"
+  },
+  "baidu/ERNIE-4.5-VL-28B-A3B-Thinking": {
+    "head": "8e553b48ea6f327125c053e239028cda4cc87270"
+  },
+  "black-forest-labs/FLUX.1-Kontext-dev": {
+    "head": "a5a9a7197ea41be53130c52c9fab9aaefd32fec3"
+  },
+  "brycebostwick/AnimatedAppIcons": {
+    "head": "c8f2d00c153eda97706fb0fbce07ae7471d78d0e"
+  },
+  "Chleba/ollamaMQ": {
+    "head": "9cbfd98bff3f8f32f2ac8f6096261343e4956c82"
+  },
+  "collections/google": {
+    "head": "5861e2c0105885b2e3a59d22855e6d495729937d"
+  },
+  "distil-labs/distil-text2sql": {
+    "head": "09be7d3a6346a0abb1c846f4ecdc2ec630ee8675"
+  },
+  "django-wiki/django-wiki": {
+    "head": "ebe1bf0f4608b759caf2a21cc19a8eeb041cb4a7"
+  },
+  "gemini-cli-extensions/developer-knowledge": {
+    "head": "3f8b3834dd52de535c2e1a13bbd22039a8e63ecd"
+  },
+  "google-deepmind/gemma": {
+    "head": "09e7b48ae88720f6236b8266c7213eb51bb62b87"
+  },
+  "HarleyCoops/Math-To-Manim": {
+    "head": "d440001782291b2b3cfc531f9bb62cce63d85568"
+  },
+  "HBAI-Ltd/Toonflow-app": {
+    "head": "be64fb790fcc077150feeb33493ef8a9a726617a"
+  },
+  "imskyleen/animate-ui": {
+    "head": "efeb96ffd7a3b7a4868667e4ac3c346620fb3044"
+  },
+  "inference/get-started": {
+    "head": "10bb806e534391bc632d0567f743a82ad2764dbb"
+  },
+  "irkky/u2net-background-remover": {
+    "head": "b559fdce366a39977dc283da627b099653a47592"
+  },
+  "kaixxx/noScribe": {
+    "head": "bc9411032c1fb15cb47fc61a92e1d2bf24688e54"
+  },
+  "karpathy/llm.c": {
+    "head": "f1e2ace651495b74ae22d45d1723443fd00ecd3a"
+  },
+  "lobehub/lobe-icons": {
+    "head": "d7de8926a603276b71f50f139eeb282fe011a35e"
+  },
+  "lyogavin/airllm": {
+    "head": "b9e4337f0362179af12e63b0ef86e6c516bfa3e2"
+  },
+  "mateenahmed/isnet-background-remover": {
+    "head": "babf1d419e389fad2cc123a24be3157538115527"
+  },
+  "MiniMax-AI/MiniMax-01": {
+    "head": "57cf223b177e99636c7711a0f179e9fdc9c38e8a"
+  },
+  "mishushakov/llm-scraper": {
+    "head": "2b43d999a17eac040f7cc315fc21dd526870564f"
+  },
+  "motiondivision/motion": {
+    "head": "61833240e899fbbe4f50484ec5f9f7fe688de843"
+  },
+  "Natxo09/Eris.": {
+    "head": "8e05050576cd8efaa6e7336d99977148960b2814"
+  },
+  "NVIDIA/open-gpu-kernel-modules": {
+    "head": "452cec62d827034798072827d3866d1881662b77"
+  },
+  "opentoonz/opentoonz": {
+    "head": "106243e88f437c0937d81fa94e036bca52fb7881"
+  },
+  "organizations/tinixai": {
+    "head": "122a9fbd7211cbb924fcb8d050a177e866a93af2"
+  },
+  "QwenLM/Qwen3-ASR": {
+    "head": "7c6daf77a2421100f5fb066495372c00129d39ff"
+  },
+  "rednote-hilab/dots.ocr": {
+    "head": "36d7248878f181c6257dc1cbd799ae940970444f"
+  },
+  "RichardErkhov/LLM-LAT_-_llama2-7b-chat-lat-removed-backdoor5-gguf": {
+    "head": "00e3ac64ec667871358502a3fe124537e7415e7f"
+  },
+  "SandAI-org/MagiCompiler": {
+    "head": "bfef5bc70226a0c0740e4c551e4f7245a974fb4f"
+  },
+  "Tencent/AngelSlim": {
+    "head": "3715056a434044f45e080e4411947b9aaabdfafb"
+  },
+  "tmseidel/ai-git-bot": {
+    "head": "298b164240e95bbf52d1d98d303d46c3300ed649"
+  },
+  "unclecode/crawl4ai": {
+    "head": "987541e44188821e7cc8ba544a5c657bfe953ba4"
+  },
+  "vinnie4k/Grabbit": {
+    "head": "ee648cbaa557476bdca37cfc707589d7dad97031"
+  },
+  "yazinsai/quran-validator": {
+    "head": "8bf805317c1d38dd859ed87321f26a2ed8a31a8f"
+  },
+  "zaina-ml/ml_forge": {
+    "head": "7e0637178503330c2e9a50ffd332461da4592188"
+  },
+  "aishwaryanr/awesome-generative-ai-guide": {
+    "head": "9943898220f78bfbbe1338511bb63094ce4af47f"
+  },
+  "bmpi-dev/awesome-seo": {
+    "head": "0518945bc7befdd33f08ce21c6dd3f1da4d00c14"
+  },
+  "c2g-dev/city2graph": {
+    "head": "dcff6711447cf6b9717fa2369c56bb553babf650"
+  },
+  "coleam00/Archon": {
+    "head": "60458483ec933c12bb8cbf6a2b0c7f27b986762d"
+  },
+  "conorrussomanno/BrainCAP_BrainSYNC": {
+    "head": "2a78fe6ee28471d91446f105ec4a0d424bdecdb3"
+  },
+  "Crosstalk-Solutions/project-nomad": {
+    "head": "6a4f02dd4626c64f38ac07e4740bc250ba13fea1"
+  },
+  "David-Crty/databasement": {
+    "head": "199da7ef5a2b9afa56688b73d0ce795559128c71"
+  },
+  "ethanolivertroy/obsidian-markitdown": {
+    "head": "48cf0c114745c2fbf07cb54a5fe55beb98c3f515"
+  },
+  "event-catalog/eventcatalog": {
+    "head": "f963964ec8a33e860117bd6a380a07c548dad6ec"
+  },
+  "event-catalog/fieldtrip": {
+    "head": "5b26f300ff3791e1e35ca29ce451b23381cfc998"
+  },
+  "gabrielchua/open-notebooklm": {
+    "head": "704569b96dedafb51ea8d6164962616b283ef5ff"
+  },
+  "getmaxun/maxun": {
+    "head": "6279ec8255d73f9bbce2c620067c64a6370682ab"
+  },
+  "github/codeql": {
+    "head": "f4773e9dc22ce562e7bb4ca0b4f44805ff894815"
+  },
+  "goenning/google-indexing-script": {
+    "head": "c52c2f8c67ad99594c78021ff4b203decdc74976"
+  },
+  "HKUDS/Auto-Deep-Research": {
+    "head": "9d671a334d22d58b34ea12af08994af393bbe685"
+  },
+  "HKUDS/RAG-Anything": {
+    "head": "32eef6ecc2cc9d84befe9fa042b0559b2a862901"
+  },
+  "jacob-bd/notebooklm-cli": {
+    "head": "88525600b8b765c85a66fc153bd35441c63c14dd"
+  },
+  "kieraneglin/pinchflat": {
+    "head": "67d8bd5598f4461c5435bcc66fc8d02b00c607cb"
+  },
+  "kpumuk/meta-tags": {
+    "head": "6b7e73af02f38e49cb94fbd42d9c314d6e5638c1"
+  },
+  "levz0r/markdown-printer": {
+    "head": "efdc612428ad31a5bd14251bf529e943207d4f5f"
+  },
+  "marcobiedermann/search-engine-optimization": {
+    "head": "a4681ed883e5850018b3ebe566e54e751b9aeacf"
+  },
+  "microprediction/timemachines": {
+    "head": "f101fdf66064d6470e9a161f14c78814aeed45b7"
+  },
+  "microsoft/rag-time": {
+    "head": "69d3d38f9f70a2ddc2a8fd87561b941b32c6ad1e"
+  },
+  "mintlify/writer": {
+    "head": "ea6f0e32f79b16972b82523128071f4f9e7e4700"
+  },
+  "Mohshaikh23/Keyword-Research": {
+    "head": "51f99fa319a98608f787b5b57403ddc03ec310b4"
+  },
+  "nateherkai/hyperframes-student-kit": {
+    "head": "a89e704ffbad02ac71170755526e05432598be59"
+  },
+  "obsidianmd/obsidian-sample-plugin": {
+    "head": "23c165fd362d4049330cb3edad6a52914ff2007a"
+  },
+  "OpsPAI/awesome-AIOps": {
+    "head": "e4c34f2990bfd4f48d8a0319c78832620c6fccb9"
+  },
+  "paradedb/paradedb": {
+    "head": "e0b9f833f2592dc149a84d7bd3a36e7282464417"
+  },
+  "PEt1h/memplace": {
+    "head": "2d7d542d578ea1fffea02e2bfbbb13c0927e2c5e"
+  },
+  "refactoringhq/tolaria": {
+    "head": "136a98b4362dbb23e822c55d284bdffc53ff7de5"
+  },
+  "ScrapeGraphAI/Scrapegraph-ai": {
+    "head": "c9e0bd036a1f5def8ac92759cda90ba52e3b35e5"
+  },
+  "sherifgowaied/Booking.com-Mern-with-Admin-Dashboard": {
+    "head": "a331e7b70cfa369740af4a5b8460b9358473b4a2"
+  },
+  "Sly777/ran": {
+    "head": "9879d908d2a8f79b4cd1d23910db62960a99fef8"
+  },
+  "sourcegraph/awesome-code-ai": {
+    "head": "0a8ba1e760b5a6f2f2dae1956f5a05de0a3a220a"
+  },
+  "surrealdb/surrealdb": {
+    "head": "9d9a5b0693e499e0d030cac6b618062ec02cd2bc"
+  },
+  "towfiqi/serpbear": {
+    "head": "a1328fb4142dde40e0011c646339c4d4dbabdaca"
+  },
+  "typesense/showcase-books-search": {
+    "head": "9d34356f8e10774a427dc89a5f608ad6f23b4824"
+  },
+  "typesense/showcase-recipe-search": {
+    "head": "85a053c19798e16b85fae90a704d0351878f4b51"
+  },
+  "typst/comemo": {
+    "head": "5944487f5e9d11949038662df4b307ec56f153b3"
+  },
+  "VinAIResearch/PhoWhisper": {
+    "head": "b06f1937995cfee75b9e4ad3e2ae0798faf1a562"
+  },
+  "every-app/open-seo": {
+    "head": "95e95d48cb88e60e1277422254e59c59b3e7e2e2"
+  },
+  "P4nda0s/reverse-skills": {
+    "head": "a2baa31c58a3567977188414da68c8c842057152"
+  },
+  "staticpayload/oh-my-codex": {
+    "head": "329bfa4a9a0d275eabec12def85383367298e806"
+  },
+  "usestrix/strix": {
+    "head": "e1940769deebbf3219db5ca39c47c51462f2e81c"
+  },
+  "abus-aikorea/voice-pro": {
+    "head": "b242c3ff9cedcff27a63401ad6ee522b51f789d7"
+  },
+  "scrapy/scrapy": {
+    "head": "9d9950df69477ee1916bb0b9102fb5385e77d027"
+  },
+  "JuliusBrussee/caveman-claude": {
+    "head": "b4116caad9cb36960d6ad77dace816ed9fad0adf"
+  },
+  "carsalgut/reverse-skills": {
+    "head": "45e1d358c05412cdc21acd853ef4be4d68cf8e21"
+  },
+  "AykutSarac/jsoncrack.com": {
+    "head": "3c9af69e23c635356293b6b28cf4cd0af10d1059"
+  },
+  "nghyane/ampcode-connector": {
+    "head": "fce15ff92b604c39636c724b541edfbce731526f"
+  },
+  "dealignai/Gemma-4-31B-JANG_4M-CRACK": {
+    "head": "fc14058b8aeaa546ce6ab2d75d40baf524f6c7be"
+  },
+  "Cur10s1tyByt3/GenP": {
+    "head": "5b7c40a93cfa93db18d33913392c3fc4f7f17f86"
+  },
+  "Kuberwastaken/claude-code": {
+    "head": "656c02b47c023132feab35a9db24385ca7a8cbdf"
+  },
+  "Njengah/claude-code-cheat-sheet": {
+    "head": "4db86541870c6ca2409025421bf6de9eab96e850"
+  },
+  "asgeirtj/system_prompts_leaks": {
+    "head": "24ea0d4eba187e90f51f87a9c393dc712749bc1f"
+  },
+  "NoeFabris/opencode-antigravity-auth": {
+    "head": "9a2cf7e5c05f103a809a8302715d28a2722c8c4a"
+  },
+  "AykutSarac/jsoncrack-vscode": {
+    "head": "779ab1da163311d849e42b980407e52a2dba266a"
+  },
+  "HenryNdubuaku/maths-cs-ai-compendium": {
+    "head": "f7e5fe8841e9d123ba867e96e6bb987afb05ad3a"
+  },
+  "Lu3ky13/Search-for-all-leaked-keys-secrets-using-one-regex-": {
+    "head": "04a6360c300d14946b67d9e9940259651ba6be55"
+  },
+  "nikaiw/VMkatz": {
+    "head": "d725d1896cf25f9a62e4a6e73b97f296c8d8e796"
+  },
+  "GargantuaX/gemini-watermark-remover": {
+    "head": "6fab72e966855a1d0b54168e205224b6a2961497"
+  },
+  "WenyuChiou/awesome-agentic-ai-zh": {
+    "head": "915d6fc517acc30e6ae95f7b89451e3facfcfcab"
+  },
+  "yaojingang/yao-meta-skill": {
+    "head": "4eb11f923dc71173736ebf541a7eebfff942d10e"
+  },
+  "DeusData/codebase-memory-mcp": {
+    "head": "dc7178c8dc91bd14098add339c5d37087d88c9bf"
+  },
+  "Johell1NS/browser-search": {
+    "head": "9bea9f30ac678d7b1c1b4662864497559938b93e"
+  },
+  "krillinai/KrillinAI": {
+    "head": "78ac14a39a55ace483483dbea367e03f7fa71aae"
+  },
+  "calesthio/OpenMontage": {
+    "head": "de348f15e341da732381fbc60b2c850836b0545c"
+  },
+  "mfornos/awesome-microservices": {
+    "head": "8595b7d2cdbcb24a325335369f2d90b9c1b6709f"
+  },
+  "systemdesign42/system-design-academy": {
+    "head": "f804326819d634266114763a1f0093174c624fda"
+  },
+  "EverMind-AI/EverOS": {
+    "head": "56ee9c8e5c3a3aee06aa8e0d2178077b0ce42540"
+  },
+  "CubeStar1/omni-agent": {
+    "head": "baddea41d153b0e17bcbb479f0d450da54711276"
+  },
+  "microsoft/playwright-mcp": {
+    "head": "36ec986b8b1fc6b4d11f2b6971147755e1b0bc84"
+  },
+  "vercel/ai": {
+    "head": "5f0d55306045ad433facb205331bcd0666ecc2ae"
+  },
+  "datalab-to/lift": {
+    "head": "4ff031b8c83b44bb123d7eda42907b22ec1e1e56"
+  },
+  "voocel/ainovel-cli": {
+    "head": "dc6c0d86c67b048ef164687cd3ff8503474d0ad9"
+  },
+  "ksimback/looper": {
+    "head": "48ed5384ebdc2db95822b0bba45afd347e263c79"
+  },
+  "tuanminhhole/openclaw-skill-learning-memory": {
+    "head": "64cf8dffec87da727d83b4616428263b7c55389c"
+  },
+  "SWivid/F5-TTS": {
+    "head": "91f499635cb4f8b8a926e83f1839f5338bc2ef87"
+  },
+  "rany2/edge-tts": {
+    "head": "4bdb8e4c6ea62f151a45a3fceb4cf6ff696bb89f"
+  },
+  "StarTrail-org/PixelRAG": {
+    "head": "2d0ff8aaed1bf4181d655debb4b7b090c7dcb237"
+  },
+  "dantech0xff/daily-news-broadcast": {
+    "head": "2c8abcbca0747b5801a51babb212cd8df1a96b04"
+  },
+  "cjpais/handy": {
+    "head": "87c45f814be4b7e7ee9b0783c1fe74e2c74d99c6"
+  },
+  "NVIDIA/skills": {
+    "head": "153b14bfcb63386a00a5ec187d2208ac0ba52ea2"
+  },
+  "NVIDIA/DeepLearningExamples": {
+    "head": "729963dd47e7c8bd462ad10bfac7a7b0b604e6dd"
+  },
+  "NVIDIA/vid2vid": {
+    "head": "2e6d13755fc2e33200e7d4c0c44f2692d6ab0898"
+  },
+  "LMCache/LMCache": {
+    "head": "3519563f35b20fc78ba2d277aa3685e673ba216b"
+  },
+  "ByteByteGoHq/system-design-101": {
+    "head": "b28380a4710c5ec9638ec037d4168e288f334cba"
+  },
+  "pewdiepie-archdaemon/odysseus": {
+    "head": "d88c8cbacfca4255bcd5d64e76a09c7656c65686"
+  },
+  "QwenLM/Qwen-AgentWorld": {
+    "head": "354f733861065be8a198002749fb87c3fa4465dc"
+  },
+  "therealtimex/zalo-cli": {
+    "head": "60c3e6ed80c830e0bd7076b4e2aac23c58452069"
+  },
+  "renezander030/capcut-cli": {
+    "head": "1e3958ff3b1fdcd0119ad103dd775b733db3db72"
+  },
+  "nemocake/claude-obsidian-assistant": {
+    "head": "cf36d93d646d7191323752040ffb682465152286"
+  },
+  "EpicStaff/EpicStaff": {
+    "head": "66bfdd0801d70c1715b5b1e03b23cb94a36799f9"
+  },
+  "nicobailon/visual-explainer": {
+    "head": "528b71feb85dab5d92b82c3554880826f50a75da"
+  },
+  "palmier-io/palmier-pro": {
+    "head": "5754311664a606d4ce5c87084a537c0ef3e5b5d9"
+  },
+  "JayWebtech/autoshorts": {
+    "head": "0035074d801d9f79b3a416a9f553ddf26d8edef6"
+  },
+  "YennNing/Awesome-Code-as-Agent-Harness-Papers": {
+    "head": "06b0d447951a08b7dd6b9f88001562b718b4f5a8"
+  },
+  "ArcReel/ArcReel": {
+    "head": "39fb4886290613517e5f58cc3126a2d9b8dc80f6"
+  },
+  "yifanfeng97/Hyper-Extract": {
+    "head": "0ed022f53986fbd288915a1faef3cf1ce0909f3a"
+  },
+  "OpenCut-app/OpenCut": {
+    "head": "a2b520fbb620b1313501f8c7529c3ccb8fe84dfe"
+  },
+  "AIDC-AI/Pixelle-Video": {
+    "head": "848b054e4fae40dabc62ec58e960b573e83793ac"
+  },
+  "OpenMOSS/MOSS-TTS": {
+    "head": "ad99ec5f26debf1d6c1a4dc8461b2bcb787ec9af"
+  },
+  "comfy-org/comfyui": {
+    "head": "6cc814437f1da529cc949146775f0a5fd1f7e418"
+  },
+  "digitalsamba/claude-code-video-toolkit": {
+    "head": "9826feb491cffe18367e85f6f759bffcfb93d3da"
+  },
+  "lumina-ai-inc/chunkr": {
+    "head": "1bde59beccf9a429af2c63bccd659316c2b4cf3d"
+  },
+  "welcomyou/sherpa-vietnamese-asr": {
+    "head": "350f5a4c569d714cfe574e36e9a2913b81912ba1"
+  },
+  "facebook/astryx": {
+    "head": "88a690b4ea7cbdb1916615c6d922879a8e77fb25"
+  },
+  "huytranvan2010/AI-auto-generate-video": {
+    "head": "ea3c4d0686c2b0425aa9489e4cee2b9bf0dd5b7f"
+  },
+  "opendatalab/MinerU": {
+    "head": "b2b9c19f95ffe704170268ddd71ec2eca16569e7"
+  },
+  "altic-dev/FluidVoice": {
+    "head": "0a7ee0c6c78b036329e0feba2faa36a0d0d1de1b"
+  },
+  "feicaiclub/video-spec-builder": {
+    "head": "9e73275b35e827b8f7af4bca900790909d86e63e"
+  },
+  "deepflowio/deepflow": {
+    "head": "2026e9de36c652672b9db924c90d00507ce8b169"
+  },
+  "hoquanghai/Auto-Create-Video": {
+    "head": "8c2e04337ca7fb574692c5830dafde35ac2017cd"
+  },
+  "hetpatel-11/Adobe_Premiere_Pro_MCP": {
+    "head": "b646507c9b18ff3d59af767d6a3a9a5613211650"
+  },
+  "resemble-ai/chatterbox": {
+    "head": "65b18437192794391a0308a8f705b1e33e633948"
+  },
+  "GuanYixuan/pyJianYingDraft": {
+    "head": "c3318066d964744e2bfc66f75c71745fe8cea52a"
+  },
+  "sun-guannan/VectCutAPI": {
+    "head": "d90644f52159b8d8392e4260675a8ee1ec67786f"
+  },
+  "mrbuslov/capcut-ai-editor": {
+    "head": "c2cb6472a9d768edfb95ecabf404d31d2c1e9a35"
+  },
+  "knowns-dev/knowns": {
+    "head": "3730df691a5d945399593c113bb003cae84da3e0"
+  },
+  "sharpdeveye/maestro": {
+    "head": "00f9115d446a8ba26b8f18f6ed306bc4a21807c3"
+  },
+  "codertapsu/multilingual-dubbed-video": {
+    "head": "1a2f61c8f12384160deff553b6c3fdbf9ae1de4b"
+  },
+  "walkinglabs/learn-harness-engineering": {
+    "head": "d746cb969e9b313b2c3957937e2a8795024c62b3"
+  },
+  "alexchan197611/ai_media_assistant": {
+    "head": "d8dc446190331a852ef836fcbf2fc60c2619be6f"
+  },
+  "LongNgn204/local-coding-agent": {
+    "head": "e10193ebc8e3b385fa536456a1e5bcc15994a1ba"
+  },
+  "google-research/tabfm": {
+    "head": "633cd265f498e1d20c9625be0639f6305d8e2541"
+  },
+  "lipku/LiveTalking": {
+    "head": "fd5cda269780d410405a08d819074fa9af0db29d"
+  },
+  "TMElyralab/MuseTalk": {
+    "head": "0a89dec45a0192b824e3cf4daf96c239440c5ed8"
+  },
+  "DanielSWolf/rhubarb-lip-sync": {
+    "head": "9b9573cd21b253c9ba58739bbd1aa0b50b991bff"
+  },
+  "Souvic/videodubber": {
+    "head": "561a1f88789a4b84a4b6e8fe654b17c5c67e8596"
+  },
+  "nazdridoy/kokoro-tts": {
+    "head": "3f8f846469704a7fc3ca2ae7d39fb6c9cf0f6dad"
+  },
+  "HITsz-TMG/VideoClaw": {
+    "head": "1324b36020570c279cd9560794a8f5508bf7bb70"
+  },
+  "martin98-afk/CanvasMind": {
+    "head": "fe3c48c6df56989aa4109216935fd6ebe0cc17e6"
+  },
+  "alirezamika/autoscraper": {
+    "head": "eb72f5dc6f7ffb6777684131d082d85f30a42b5a"
+  },
+  "kadevin/ilab-gpt-conjure": {
+    "head": "a02d8954c296aad8eb5a460676315e41f776eb47"
+  },
+  "topviewai/skill": {
+    "head": "d9ec60c04a1bb4c02bfcb4df03a5220285520d1e"
+  },
+  "CameronFoxly/Ascii-Motion": {
+    "head": "9828229fe9becbde7f021f12a3b70f485e1ed65f"
+  },
+  "LingyiChen-AI/AIComicBuilder": {
+    "head": "e01e7dd501131922fb5051ec36926271d394b4d3"
+  },
+  "hans1801/hans-n8n": {
+    "head": "3ed9ec7b9ff031152372519b642fdf34e82e1658"
+  },
+  "weaiw/trove-ai": {
+    "head": "db7757e698771feb3a442084ad9a0a41a10a2385"
+  },
+  "nagisanzenin/engram": {
+    "head": "932843d211a1ba582e68b3e5c4d4b68e8ade1cf5"
+  },
+  "RayVentura/ShortGPT": {
+    "head": "3df4e0f7a422bf7386565d498bf4521a2544c614"
+  },
+  "langchain-ai/open-agent-platform": {
+    "head": "6a2ea0a3d019c20550b8d88ca0ed4d57df774ac8"
+  },
+  "undertheseanlp/underthesea": {
+    "head": "39d7506666144665a01f481956d867c6885f8c95"
+  },
+  "bradautomates/claude-video": {
+    "head": "83da59fa78c3eee9e20f515fe75c438bb5166efd"
+  },
+  "PentesterFlow/agent": {
+    "head": "117c95c224e7ac22df36261b27e1c41e995113d9"
+  },
+  "weirdmachine64/GhidraGPT": {
+    "head": "01d6dcb7a15a4844871bde4f36bb9ba2a250a02d"
+  },
+  "evyatarmeged/Raccoon": {
+    "head": "44024abaa6ca420b6b2c6f06285df306f360eb22"
+  },
+  "NanmiCoder/MediaCrawler": {
+    "head": "076dcba978b102bb12ff69ba226d1d39158481e5"
+  },
+  "firetofficial/Rophim-No-Ads": {
+    "head": "513721abf822149f0d282d276a355590c77e470e"
+  },
+  "YILS-LIN/short-video-factory": {
+    "head": "9ad4c1df201538a3bdd05760e65153a8ce714bf8"
+  },
+  "nexu-io/motion-anything": {
+    "head": "b016900d9ee92fc2d3e4dc520359cc8999d2ed4e"
+  },
+  "tandpfun/wardrobe": {
+    "head": "f44006cce7e4779e595a35b25fbbc8dabc68d7e4"
+  },
+  "krusemediallc/arcads-claude-code": {
+    "head": "0bfafb256cfce3ff4447d7ea1611a37f0af536be"
+  },
+  "boona13/mykonos-island-voxels": {
+    "head": "ca5faeea84fc7dc8e18a6b8e899f432884dfe831"
+  },
+  "lidge-jun/ima2-gen": {
+    "head": "7c26c51bb78b82295068ddd0d6dba9f73d5d7187"
+  },
+  "m-bain/whisperX": {
+    "head": "2cfd7b7c5c7bba144954364db747319b50e8232b"
+  },
+  "SamurAIGPT/AI-Youtube-Shorts-Generator": {
+    "head": "c5a90230ceb3d314fa415e33c4d9284f9bc63611"
+  },
+  "AILab-CVC/VideoGen-Eval": {
+    "head": "4fefbc4073b6353a387a955dff27961cdece9c6f"
+  },
+  "camel-ai/camel": {
+    "head": "ec48f997f3c2a700ae5a4cf0280792838fea81f8"
+  },
+  "302ai/302_video_generator": {
+    "head": "3efab1e3b96e74d75d743031632912cfac0db774"
+  },
+  "anil-matcha/open-generative-ai": {
+    "head": "ab43e9c4d2f5a12db1821e459c80da494508214f"
+  },
+  "lcy362/agnes-video-generator": {
+    "head": "f4576a51ea87c322b03d7bc30a4f8d2e2deebe5f"
+  },
+  "mutonby/openshorts": {
+    "head": "ed3bdc45a857033ac53f8b37dd20b8aa92aa6858"
+  },
+  "Bomx/super-video-maker-skill": {
+    "head": "414667be71aa52d1651633b80cc897ce06453c0a"
+  },
+  "Anil-matcha/vox-ai-motion-graphics-generator": {
+    "head": "cfc272ac184b4416bad482126b450f4d5c702ff4"
+  },
+  "CK42BB/vox-explainer-skill": {
+    "head": "7003225dc3ed1dee9e2ef8b91b05b82c04691aa9"
+  },
+  "Alisa0808/vox-director": {
+    "head": "987be2f42332247a3ad7a244c76e86fca92c1f1d"
+  },
+  "MegaTroll222/VOX-COLLAGE-BROLL": {
+    "head": "2e9b8a93a2834e4d670700ab9e4827a8baf3b668"
+  },
+  "hoainho/img2threejs": {
+    "head": "e8ff28a6ae0cb534c7b2ebc15cb3f06709262d5b"
+  },
+  "direct_memmachine": {
+    "head": "18f1211290c50ae30e9960b90bbe57d89bf68600"
+  },
+  "direct_build-your-own-x": {
+    "head": "aa17439b62f384511a5561ce308e9598b94d8989"
+  },
+  "direct_aliens_eye": {
+    "head": "f102892be184757920b537a9a95b3c8d0381261a"
+  },
+  "direct_audio_cpp": {
+    "head": "365b4f6e322f8f5423f04884a1edcc4a72b5df80"
+  }
+}

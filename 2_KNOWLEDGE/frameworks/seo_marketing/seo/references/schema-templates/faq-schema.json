@@ -1,0 +1,47 @@
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "_comment": "Add multiple Question/Answer pairs to the mainEntity array",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "{question_1}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{answer_1}"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "{question_2}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{answer_2}"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "{question_3}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{answer_3}"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "{question_4}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{answer_4}"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "{question_5}",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{answer_5}"
+      }
+    }
+  ]
+}

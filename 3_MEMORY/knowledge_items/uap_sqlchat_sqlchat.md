@@ -1,0 +1,191 @@
+# KI: sqlchat/sqlchat
+
+## Overview
+![SQL Chat banner](https://raw.githubusercontent.com/sqlchat/sqlchat/main/public/banner.webp)
+
+## Architecture & Tech Stack
+- Node.js / TypeScript / JavaScript
+- **Total files:** 122 files across 25 directories
+- **File types:** .tsx: 55, .webp: 15, .png: 9, .md: 8, .ts: 8, .sql: 6, .json: 4
+
+## Documentation Sections
+- What
+- Why
+- How
+- [sqlchat.ai](https://sqlchat.ai)
+- IP Whitelisting
+- Data Privacy
+- Self-host
+- Docker
+- Startup options
+- TL;DR
+- OpenAI related
+- Database related
+- Local Development
+- Setup database
+- Star History
+- Community
+- Sponsors
+- Common Error Message
+
+## Core Structure
+```
+  .dockerignore
+  .env.nodb
+  .env.usedb
+  .eslintrc.json
+  .gitignore
+  .prettierrc
+  CLAUDE.md
+  CODEOWNERS
+  Dockerfile
+  Dockerfile.sqlchat-ai
+  LICENSE
+  README.es-ES.md
+  README.md
+  README.zh-CN.md
+  auth.d.ts
+  next-env.d.ts
+  next.config.js
+  package.json
+  pnpm-lock.yaml
+  postcss.config.js
+  process.d.ts
+  tailwind.config.js
+  tsconfig.json
+  .github/
+    ISSUE_TEMPLATE/
+      bug_report.yml
+      feature_request.yml
+    workflows/
+      build-and-push-latest-image.yml
+      pr-checks.yml
+  .vscode/
+    settings.json
+  assistants/
+    README.md
+    index.ts
+    migration-bot/
+      index.ts
+    sql-chat-bot/
+      index.ts
+    template/
+      README.md
+      index.ts
+  docs/
+    docker-connection-setting.webp
+  prisma/
+    schema.prisma
+    seed.ts
+    migrations/
+      migration_lock.toml
+      20230502100414_init/
+        migration.sql
+      20230505101306_account_and_payment/
+        migration.sql
+      20230517161946_subscription/
+        migration.sql
+      20230518165639_created_at_to_users_table/
+        migration.sql
+      20230521103659_separate_payment_from_subscription/
+        migration.sql
+      20230521112004_remove_subscription_status_add_cancel_at/
+        migration.sql
+  public/
+    banner.webp
+    bytebase.webp
+    chat-logo-and-text-dark-mode.webp
+    chat-logo-and-text.webp
+    chat-logo-bot.webp
+    chat-logo.webp
+    craft-by-bytebase-dark-mode.webp
+    craft-by-bytebase.webp
+    db-clickhouse.png
+    db-hive.png
+    db-mysql.png
+    db-oceanbase.png
+    db-oracle.png
+    db-postgres.png
+    db-snowflake.png
+    db-sqlserver.png
+    db-tidb.png
+    error-exceed-openai-quota.webp
+    error-network.webp
+    favicon.ico
+    privacy.md
+    screenshot1.webp
+    screenshot2.webp
+    screenshot3.webp
+    terms.md
+    wechat-qrcode.webp
+  src/
+    components/
+      AccountView.tsx
+      ActionConfirmModal.tsx
+      BetaBadge.tsx
+      ClearConversationButton.tsx
+      ClearConversationConfirmModal.tsx
+      ClearDataButton.tsx
+      ClearDataConfirmModal.tsx
+      CodeBlock.tsx
+      ConnectionSidebar.tsx
+      ConversationTabsView.tsx
+      CreateConnectionModal.tsx
+      DBHubBanner.tsx
+      DarkModeSwitch.tsx
+      DataStorageBanner.tsx
+      DebugView.tsx
+      EmptyView.tsx
+      EngineIcon.tsx
+      GitHubStarBadge.tsx
+      Icon.tsx
+      LocaleSelector.tsx
+      MarkdownRenderer.tsx
+      OpenAIApiConfigView.tsx
+      PaymentHistoryTable.tsx
+      PricingView.tsx
+      ProductHuntBanner.tsx
+      QueryDrawer.tsx
+      Quot
+```
+
+## Quick Start
+```bash
+docker run --name sqlchat --platform linux/amd64 --env NEXTAUTH_SECRET="$(openssl rand -hex 5)" --env OPENAI_API_KEY=<<YOUR OPENAI KEY>> -p 3000:3000 --hostname localhost sqlchat/sqlchat
+pnpm i
+pnpm prisma generate
+cp .env.usedb .env
+In `.env` file, assign the connection string to environment variable `DATABASE_URL` and `DATABASE_DIRECT_URL`. [This article](https://www.prisma.io/docs/data-platform/data-proxy/prisma-cli-with-data-proxy#set-a-direct-database-connection-url-in-your-prisma-schema) explains why we need two URLs.
+1. Set up database schema
+```
+
+## Agent Configuration
+
+--- CLAUDE.md ---
+# SQL Chat - Development Guide
+
+## Build/Run Commands
+- Development: `pnpm dev` (or `pnpm nodb` without DB, `pnpm usedb` with DB)
+- Build: `pnpm build`
+- Production: `pnpm start`
+- Lint: `pnpm lint`
+- Database: `pnpm prisma migrate dev` (setup), `pnpm prisma db seed` (seed)
+
+## Code Style Guidelines
+- **Formatting**: 140 char width, double quotes, semicolons (Prettier)
+- **TypeScript**: Strict types, interfaces for structure, generics when appropriate
+- **Components**: Functional components with hooks, PascalCase naming
+- **Imports**: External libs first, followed by internal modules with @/ alias
+- **Naming**: PascalCase for components/interfaces, camelCase for variables/functions
+- **Functions**: Descriptive verb-noun naming (handleClick, fetchData)
+- **Error Handling**: try/catch blocks with toast notifications for user-facing errors
+- **File Structure**: Feature-based organization in /components, /types, /store
+
+## State Management
+- Zustand for global state
+- React hooks for component state
+- TypeScript types for state shape
+
+
+## Analysis Note
+> This KI was generated by **enhanced local structural analysis** (no LLM API was available at generation time). It includes full tech stack detection, README parsing, dependency analysis, and feature extraction. For deeper semantic analysis, re-run with an active Gemini or OpenAI API key.

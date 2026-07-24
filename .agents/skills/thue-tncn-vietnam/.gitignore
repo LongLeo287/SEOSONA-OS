@@ -1,0 +1,12 @@
+# Output files (generated books, PDFs)
+output/
+
+# Web deployment (has its own repo)
+web/
+
+# Node modules
+node_modules/
+
+# Temp files
+~$*
+*.tmp

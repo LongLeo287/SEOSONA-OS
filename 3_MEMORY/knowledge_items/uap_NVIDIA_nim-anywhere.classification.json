@@ -1,0 +1,20 @@
+{
+  "system": "seosona-os",
+  "function": "llm",
+  "score": 41,
+  "matched": [
+    "openai",
+    "rag"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 41,
+    "seosona-video": 0,
+    "seosona-content": 0,
+    "seosona-ux-ui": 33,
+    "seosona-flow": 0
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}

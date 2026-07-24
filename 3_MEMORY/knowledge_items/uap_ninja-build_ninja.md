@@ -1,0 +1,211 @@
+# KI: ninja-build/ninja
+
+## Overview
+Ninja is a small build system with a focus on speed. https://ninja-build.org/
+
+## Architecture & Tech Stack
+- Could not detect automatically
+- **Total files:** 121 files across 9 directories
+- **File types:** .cc: 50, .h: 29, .py: 12, .yml: 6, .md: 4, .sh: 4, .ninja: 3
+
+## Documentation Sections
+- Ninja
+- Building Ninja itself
+- Python
+- CMake
+- Generating documentation
+- Ninja Manual
+- Doxygen documentation
+
+## Core Structure
+```
+  .clang-format
+  .clang-tidy
+  .editorconfig
+  .gitignore
+  CMakeLists.txt
+  CONTRIBUTING.md
+  COPYING
+  README.md
+  RELEASING.md
+  appveyor.yml
+  configure.py
+  .github/
+    dependabot.yml
+    workflows/
+      linux-musl.yml
+      linux.yml
+      macos.yml
+      windows.yml
+  doc/
+    README.md
+    dblatex.xsl
+    docbook.xsl
+    doxygen.config
+    manual.asciidoc
+    style.css
+  misc/
+    bash-completion
+    ci.py
+    inherited-fds.ninja
+    jobserver_pool.py
+    jobserver_pool_test.py
+    jobserver_test.py
+    jobserver_test_helper.py
+    long-slow-build.ninja
+    manifest_fuzzer.cc
+    measure.py
+    ninja.vim
+    ninja_syntax.py
+    ninja_syntax_test.py
+    output_test.py
+    write_fake_manifests.py
+    zsh-completion
+    afl-fuzz/
+      build.ninja
+    afl-fuzz-tokens/
+      kw_build
+      kw_default
+      kw_include
+      kw_pool
+      kw_rule
+      kw_subninja
+      misc_a
+      misc_b
+      misc_colon
+      misc_cont
+      misc_dollar
+      misc_eq
+      misc_indent
+      misc_pipe
+      misc_pipepipe
+      misc_space
+    oss-fuzz/
+      build.sh
+      sample_ninja_build
+    packaging/
+      ninja.spec
+      rpmbuild.sh
+  src/
+    browse.cc
+    browse.h
+    browse.py
+    build.cc
+    build.h
+    build_log.cc
+    build_log.h
+    build_log_perftest.cc
+    build_log_test.cc
+    build_result.h
+    build_test.cc
+    canon_perftest.cc
+    clean.cc
+    clean.h
+    clean_test.cc
+    clparser.cc
+    clparser.h
+    clparser_perftest.cc
+    clparser_test.cc
+    command_collector.h
+    debug_flags.cc
+    debug_flags.h
+    depfile_parser.cc
+    depfile_parser.h
+    depfile_parser.in.cc
+    depfile_parser_perftest.cc
+    depfile_parser_test.cc
+    deps_log.cc
+    deps_log.h
+    deps_log_test.cc
+    disk_interface.cc
+    disk_interface.h
+    disk_interface_test.cc
+    dyndep.cc
+    dyndep.h
+    dyndep_parser.cc
+    dyndep_parser.h
+    dyndep_parser_test.cc
+    edit_distance.cc
+    edit_distance.h
+    edit_distance_test.cc
+    elide_middle.cc
+    elide_middle.h
+    elide_middle_perftest.cc
+    elide_middle_test.cc
+    eval_env.cc
+    eval_env.h
+    exit_status.h
+    explanations.cc
+    explanations.h
+    explanations_test.cc
+    gen_doxygen_mainpage.sh
+    getopt.c
+    getopt.h
+    graph.cc
+    graph.h
+    graph_test.cc
+    graphviz.cc
+    graphviz.h
+    hash_collision_bench.cc
+    hash_map.h
+    includes_normalize-win32.cc
+    includes_normalize.h
+    includes_normalize_test.cc
+    inline.sh
+    jobserver-posix.cc
+    jobserver-win32.cc
+    jobserver.cc
+    job
+```
+
+## Quick Start
+```bash
+./configure.py --bootstrap
+./configure.py --bootstrap --gtest-source-dir=/path/to/googletest
+./ninja all     # build ninja_test and other auxiliary binaries
+./ninja_test    # run the unit-test suite.
+cmake -Bbuild-cmake -DBUILD_TESTING=OFF
+cmake --build build-cmake
+build-cmake/ninja_test
+./configure.py
+ninja manual doc/manual.html
+```
+
+## Agent Configuration
+
+--- CONTRIBUTING.md ---
+# How to successfully make changes to Ninja
+
+We're very wary of changes that increase the complexity of Ninja (in particular,
+new build file syntax or command-line flags) or increase the maintenance burden
+of Ninja. Ninja is already successfully used by hundreds of developers for large
+projects and it already achieves (most of) the goals we set out for it to do.
+It's probably best to discuss new feature ideas on the
+[mailing list](https://groups.google.com/forum/#!forum/ninja-build) or in an
+issue before creating a PR.
+
+## Coding guidelines
+
+Generally it's the
+[Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) with
+a few additions:
+
+* We have used `using namespace std;` a lot in the past. For new contributions,
+  please try to avoid relying on it and instead whenever possible use `std::`.
+  However, please do not change existing code simply to add `std::` unless your
+  contribution already needs to change that line of code anyway.
+* Use `///` for [Doxygen](http://www.doxygen.nl/) (use `\a` to refer to
+  arguments).
+* It's not necessary to document each argument, especially when they're
+  relatively self-evident (e.g. in
+  `CanonicalizePath(string* path, string* err)`, the arguments are hopefully
+  obvious).
+
+If you're unsure about code formatting, please use
+[clang-format](https://clang.llvm.org/docs/ClangFormat.html). However, please do
+not format code that is not otherwise part of your contribution.
+
+
+
+## Analysis Note
+> This KI was generated by **enhanced local structural analysis** (no LLM API was available at generation time). It includes full tech stack detection, README parsing, dependency analysis, and feature extraction. For deeper semantic analysis, re-run with an active Gemini or OpenAI API key.

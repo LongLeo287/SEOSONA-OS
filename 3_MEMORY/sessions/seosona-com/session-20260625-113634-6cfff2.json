@@ -1,0 +1,66 @@
+{
+  "session_id": "session-20260625-113634-6cfff2",
+  "domain": "seosona.com",
+  "timestamp": "2026-06-25T11:36:34.633024",
+  "date": "2026-06-25",
+  "metrics": {
+    "overall_status": "failed",
+    "overall_confidence": "low",
+    "connectors_passed": 6,
+    "connectors_warning": 0,
+    "connectors_failed": 4,
+    "connectors": {
+      "psi": {
+        "status": "passed",
+        "row_count": 2,
+        "confidence": "high"
+      },
+      "keywords": {
+        "status": "passed",
+        "row_count": 1276,
+        "confidence": "high"
+      },
+      "serp_competitor": {
+        "status": "failed",
+        "row_count": 0,
+        "confidence": "low"
+      },
+      "backlinks": {
+        "status": "failed",
+        "row_count": 0,
+        "confidence": "low"
+      },
+      "gsc": {
+        "status": "failed",
+        "row_count": 0,
+        "confidence": "low"
+      },
+      "ga4": {
+        "status": "failed",
+        "row_count": 0,
+        "confidence": "low"
+      },
+      "technical": {
+        "status": "passed",
+        "row_count": 5,
+        "confidence": "high"
+      },
+      "schema": {
+        "status": "passed",
+        "row_count": 4,
+        "confidence": "high"
+      },
+      "eeat": {
+        "status": "passed",
+        "row_count": 5,
+        "confidence": "high"
+      },
+      "aeo": {
+        "status": "passed",
+        "row_count": 14,
+        "confidence": "high"
+      }
+    }
+  },
+  "notes": "Full audit via orchestrator v5.0"
+}

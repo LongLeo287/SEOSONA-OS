@@ -1,0 +1,49 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "{organization_name}",
+  "url": "{website_url}",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{logo_url}",
+    "width": "{logo_width}",
+    "height": "{logo_height}"
+  },
+  "description": "{organization_description}",
+  "email": "{contact_email}",
+  "telephone": "{contact_phone}",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "{contact_phone}",
+      "contactType": "{contact_type}",
+      "_comment_contactType": "e.g., customer service, technical support, billing support, sales",
+      "email": "{contact_email}",
+      "areaServed": "{area_served}",
+      "availableLanguage": ["{language_1}", "{language_2}"]
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{street_address}",
+    "addressLocality": "{city}",
+    "addressRegion": "{state_province}",
+    "postalCode": "{postal_code}",
+    "addressCountry": "{country_code}"
+  },
+  "sameAs": [
+    "{facebook_url}",
+    "{twitter_url}",
+    "{linkedin_url}",
+    "{instagram_url}",
+    "{youtube_url}",
+    "{github_url}"
+  ],
+  "foundingDate": "{founding_date}",
+  "founders": [
+    {
+      "@type": "Person",
+      "name": "{founder_name}"
+    }
+  ]
+}

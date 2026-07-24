@@ -1,0 +1,3 @@
+strategy,performance_score,lcp_ms,lcp_display,cls_score,cls_display,tbt_ms,fcp_ms,field_lcp_p75,field_lcp_category,field_cls_p75,field_cls_category,field_inp_p75,field_inp_category,url,date
+mobile,,,,,,,,,,,,,,,
+desktop,,,,,,,,,,,,,,,

@@ -1,0 +1,551 @@
+{
+  "version": "2026-06-12",
+  "description": "SEOSONA OS catalog of free, no-key, approval-gated, or free-tier APIs relevant to SEO, websites, video, YouTube, social media, marketing research, web crawling, and knowledge retrieval.",
+  "source_repositories": [
+    {
+      "name": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis",
+      "use": "Primary broad public API discovery index."
+    },
+    {
+      "name": "public-api-lists/public-api-lists",
+      "url": "https://github.com/public-api-lists/public-api-lists",
+      "use": "Secondary broad public API discovery index with categorized JSON."
+    },
+    {
+      "name": "cporter202/social-media-scraping-apis",
+      "url": "https://github.com/cporter202/social-media-scraping-apis",
+      "use": "Social/video API discovery and competitive scraping-tool map."
+    }
+  ],
+  "apis": [
+    {
+      "id": "google_autocomplete",
+      "label": "Google Autocomplete",
+      "category": "keyword_research",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": ["keyword_connector", "serp_competitor"],
+      "setup_url": "https://suggestqueries.google.com/complete/search"
+    },
+    {
+      "id": "common_crawl_index",
+      "label": "Common Crawl Index API",
+      "category": "crawl_index",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": ["backlink_connector"],
+      "setup_url": "https://index.commoncrawl.org/"
+    },
+    {
+      "id": "wayback_cdx",
+      "label": "Internet Archive Wayback CDX API",
+      "category": "historical_crawl",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://archive.org/help/wayback_api.php"
+    },
+    {
+      "id": "pagespeed_insights",
+      "label": "Google PageSpeed Insights API",
+      "category": "performance",
+      "cost_model": "free_key_recommended",
+      "auth": "api_key",
+      "env": ["PAGESPEED_API_KEY"],
+      "python_modules": [],
+      "connectors": ["psi_connector"],
+      "setup_url": "https://developers.google.com/speed/docs/insights/v5/get-started"
+    },
+    {
+      "id": "chrome_ux_report",
+      "label": "Chrome UX Report API",
+      "category": "performance",
+      "cost_model": "free_key_required",
+      "auth": "api_key",
+      "env": ["CRUX_API_KEY"],
+      "python_modules": [],
+      "connectors": ["psi_connector"],
+      "setup_url": "https://developer.chrome.com/docs/crux/api"
+    },
+    {
+      "id": "google_search_console",
+      "label": "Google Search Console API",
+      "category": "rankings",
+      "cost_model": "free_verified_property",
+      "auth": "service_account",
+      "env": ["GOOGLE_APPLICATION_CREDENTIALS", "GOOGLE_SERVICE_ACCOUNT_JSON_BASE64"],
+      "python_modules": ["googleapiclient", "google.oauth2"],
+      "connectors": ["gsc_connector", "rank_tracker"],
+      "setup_url": "https://developers.google.com/webmaster-tools"
+    },
+    {
+      "id": "google_analytics_data",
+      "label": "Google Analytics Data API",
+      "category": "analytics",
+      "cost_model": "free_verified_property",
+      "auth": "service_account",
+      "env": ["GA4_PROPERTY_ID", "GOOGLE_APPLICATION_CREDENTIALS", "GOOGLE_SERVICE_ACCOUNT_JSON_BASE64"],
+      "python_modules": ["google.analytics.data"],
+      "connectors": ["ga4_connector"],
+      "setup_url": "https://developers.google.com/analytics/devguides/reporting/data/v1"
+    },
+    {
+      "id": "google_trends_unofficial",
+      "label": "Google Trends via pytrends",
+      "category": "trend_research",
+      "cost_model": "free_no_key_unofficial",
+      "auth": "none",
+      "env": [],
+      "python_modules": ["pytrends", "pandas"],
+      "connectors": ["google_trends_connector"],
+      "setup_url": "https://trends.google.com/trends/"
+    },
+    {
+      "id": "open_pagerank",
+      "label": "Open PageRank API",
+      "category": "authority",
+      "cost_model": "free_key_required",
+      "auth": "api_key",
+      "env": ["OPEN_PAGERANK_KEY"],
+      "python_modules": [],
+      "connectors": ["backlink_connector"],
+      "setup_url": "https://www.domcop.com/openpagerank/documentation"
+    },
+    {
+      "id": "bing_webmaster",
+      "label": "Bing Webmaster URL Submission and Links API",
+      "category": "indexing_backlinks",
+      "cost_model": "free_verified_property",
+      "auth": "api_key",
+      "env": ["BING_WEBMASTER_KEY"],
+      "python_modules": [],
+      "connectors": ["backlink_connector"],
+      "setup_url": "https://www.bing.com/webmasters"
+    },
+    {
+      "id": "tavily",
+      "label": "Tavily Search API",
+      "category": "agent_research",
+      "cost_model": "free_tier_key_required",
+      "auth": "api_key",
+      "env": ["TAVILY_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.tavily.com/pricing"
+    },
+    {
+      "id": "firecrawl",
+      "label": "Firecrawl API",
+      "category": "scraping",
+      "cost_model": "free_tier_key_required",
+      "auth": "api_key",
+      "env": ["FIRECRAWL_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.firecrawl.dev/pricing"
+    },
+    {
+      "id": "serpapi",
+      "label": "SerpApi",
+      "category": "serp_data",
+      "cost_model": "free_tier_key_required",
+      "auth": "api_key",
+      "env": ["SERPAPI_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://serpapi.com/pricing"
+    },
+    {
+      "id": "dataforseo_trial",
+      "label": "DataForSEO Trial Credits",
+      "category": "serp_backlinks_keywords",
+      "cost_model": "free_trial_credit",
+      "auth": "login_password",
+      "env": ["DATAFORSEO_LOGIN", "DATAFORSEO_PASSWORD"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://dataforseo.com/help-center/how-does-your-free-unlimited-trial-work"
+    },
+    {
+      "id": "openalex",
+      "label": "OpenAlex API",
+      "category": "literature_research",
+      "cost_model": "free_key_required_for_scale",
+      "auth": "api_key",
+      "env": ["OPENALEX_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.openalex.org/guides/authentication"
+    },
+    {
+      "id": "crossref",
+      "label": "Crossref REST API",
+      "category": "literature_metadata",
+      "cost_model": "free_no_key_polite_email_recommended",
+      "auth": "none",
+      "env": ["CROSSREF_MAILTO"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/access-and-authentication/"
+    },
+    {
+      "id": "wikidata_query_service",
+      "label": "Wikidata Query Service",
+      "category": "entity_research",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": ["WIKIDATA_USER_AGENT"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.mediawiki.org/wiki/Wikidata_Query_Service/User_Manual"
+    },
+    {
+      "id": "ncbi_eutilities",
+      "label": "NCBI E-utilities",
+      "category": "biomedical_research",
+      "cost_model": "free_no_key_optional_key",
+      "auth": "optional_api_key",
+      "env": ["NCBI_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.ncbi.nlm.nih.gov/books/NBK25497/"
+    },
+    {
+      "id": "openfda",
+      "label": "openFDA API",
+      "category": "medical_regulatory_data",
+      "cost_model": "free_no_key_optional_key",
+      "auth": "optional_api_key",
+      "env": ["FDA_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://open.fda.gov/apis/"
+    },
+    {
+      "id": "youtube_data_api",
+      "label": "YouTube Data API v3",
+      "category": "youtube_video_intelligence",
+      "cost_model": "free_quota_key_required",
+      "auth": "api_key",
+      "env": ["YOUTUBE_API_KEY"],
+      "python_modules": ["googleapiclient"],
+      "connectors": [],
+      "setup_url": "https://developers.google.com/youtube/v3"
+    },
+    {
+      "id": "youtube_iframe_player",
+      "label": "YouTube IFrame Player API",
+      "category": "video_embed",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.google.com/youtube/iframe_api_reference"
+    },
+    {
+      "id": "youtube_oembed",
+      "label": "YouTube oEmbed",
+      "category": "video_metadata",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.youtube.com/oembed"
+    },
+    {
+      "id": "youtube_rss_feeds",
+      "label": "YouTube Channel RSS Feeds",
+      "category": "video_monitoring",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.youtube.com/feeds/videos.xml"
+    },
+    {
+      "id": "sponsorblock",
+      "label": "SponsorBlock Public API",
+      "category": "youtube_video_segments",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://wiki.sponsor.ajay.app/w/API_Docs"
+    },
+    {
+      "id": "piped_api",
+      "label": "Piped Public API",
+      "category": "youtube_alt_frontend",
+      "cost_model": "free_no_key_instance_based",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://docs.piped.video/docs/api-documentation/"
+    },
+    {
+      "id": "invidious_api",
+      "label": "Invidious Public API",
+      "category": "youtube_alt_frontend",
+      "cost_model": "free_no_key_instance_based",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://docs.invidious.io/api/"
+    },
+    {
+      "id": "noembed",
+      "label": "Noembed oEmbed API",
+      "category": "video_social_embed_metadata",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://noembed.com/"
+    },
+    {
+      "id": "pexels",
+      "label": "Pexels API",
+      "category": "stock_video_image",
+      "cost_model": "free_key_required",
+      "auth": "api_key",
+      "env": ["PEXELS_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.pexels.com/api/documentation/"
+    },
+    {
+      "id": "pixabay",
+      "label": "Pixabay API",
+      "category": "stock_video_image",
+      "cost_model": "free_key_required",
+      "auth": "api_key",
+      "env": ["PIXABAY_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://pixabay.com/service/about/api/"
+    },
+    {
+      "id": "vimeo",
+      "label": "Vimeo API",
+      "category": "video_platform",
+      "cost_model": "free_account_token_required_rate_limited",
+      "auth": "api_key",
+      "env": ["VIMEO_ACCESS_TOKEN"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developer.vimeo.com/"
+    },
+    {
+      "id": "dailymotion",
+      "label": "Dailymotion API",
+      "category": "video_platform",
+      "cost_model": "free_account_key_required",
+      "auth": "api_key",
+      "env": ["DAILYMOTION_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.dailymotion.com/"
+    },
+    {
+      "id": "bluesky_public_api",
+      "label": "Bluesky Public API",
+      "category": "social_listening",
+      "cost_model": "free_no_key_rate_limited",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://docs.bsky.app/docs/advanced-guides/rate-limits"
+    },
+    {
+      "id": "bluesky_atproto_auth",
+      "label": "Bluesky AT Protocol Authenticated API",
+      "category": "social_publishing",
+      "cost_model": "free_account_required",
+      "auth": "login_password",
+      "env": ["BLUESKY_IDENTIFIER", "BLUESKY_APP_PASSWORD"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://docs.bsky.app/"
+    },
+    {
+      "id": "mastodon_public_api",
+      "label": "Mastodon Public API",
+      "category": "social_listening",
+      "cost_model": "free_no_key_instance_based",
+      "auth": "none",
+      "env": ["MASTODON_INSTANCE"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://docs.joinmastodon.org/methods/timelines/"
+    },
+    {
+      "id": "telegram_bot_api",
+      "label": "Telegram Bot API",
+      "category": "social_messaging",
+      "cost_model": "free_bot_token_required",
+      "auth": "api_key",
+      "env": ["TELEGRAM_BOT_TOKEN"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://core.telegram.org/bots/api"
+    },
+    {
+      "id": "discord_bot_api",
+      "label": "Discord API",
+      "category": "community_social",
+      "cost_model": "free_bot_token_required",
+      "auth": "api_key",
+      "env": ["DISCORD_BOT_TOKEN"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://discord.com/developers/docs/intro"
+    },
+    {
+      "id": "reddit_api",
+      "label": "Reddit API",
+      "category": "social_listening",
+      "cost_model": "free_app_credentials_required_rate_limited",
+      "auth": "oauth_app",
+      "env": ["REDDIT_CLIENT_ID", "REDDIT_CLIENT_SECRET", "REDDIT_USER_AGENT"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.reddit.com/dev/api/"
+    },
+    {
+      "id": "meta_graph_api",
+      "label": "Meta Graph API",
+      "category": "social_publishing_analytics",
+      "cost_model": "free_approval_or_account_access_required",
+      "auth": "oauth_app",
+      "env": ["META_ACCESS_TOKEN"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.facebook.com/docs/graph-api/"
+    },
+    {
+      "id": "tiktok_api",
+      "label": "TikTok for Developers API",
+      "category": "short_video_social",
+      "cost_model": "free_approval_required",
+      "auth": "oauth_app",
+      "env": ["TIKTOK_CLIENT_KEY", "TIKTOK_CLIENT_SECRET"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.tiktok.com/"
+    },
+    {
+      "id": "pinterest_api",
+      "label": "Pinterest API",
+      "category": "visual_social",
+      "cost_model": "free_account_token_required",
+      "auth": "api_key",
+      "env": ["PINTEREST_ACCESS_TOKEN"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.pinterest.com/docs/api/v5/"
+    },
+    {
+      "id": "w3c_nu_validator",
+      "label": "W3C Nu HTML Checker API",
+      "category": "website_validation",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://validator.w3.org/docs/api.html"
+    },
+    {
+      "id": "ssl_labs_api",
+      "label": "SSL Labs Assessment API",
+      "category": "website_security",
+      "cost_model": "free_no_key_rate_limited",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.ssllabs.com/projects/ssllabs-apis/index.html"
+    },
+    {
+      "id": "http_observatory",
+      "label": "Mozilla HTTP Observatory API",
+      "category": "website_security",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developer.mozilla.org/en-US/observatory"
+    },
+    {
+      "id": "urlscan",
+      "label": "urlscan.io API",
+      "category": "website_security_osint",
+      "cost_model": "free_key_required_rate_limited",
+      "auth": "api_key",
+      "env": ["URLSCAN_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://urlscan.io/docs/api/"
+    },
+    {
+      "id": "google_safe_browsing",
+      "label": "Google Safe Browsing API",
+      "category": "website_security",
+      "cost_model": "free_key_required",
+      "auth": "api_key",
+      "env": ["GOOGLE_SAFE_BROWSING_API_KEY"],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.google.com/safe-browsing"
+    },
+    {
+      "id": "icann_rdap",
+      "label": "ICANN RDAP",
+      "category": "domain_intelligence",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://www.icann.org/rdap"
+    },
+    {
+      "id": "google_dns_over_https",
+      "label": "Google Public DNS over HTTPS",
+      "category": "domain_dns",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.google.com/speed/public-dns/docs/doh"
+    },
+    {
+      "id": "cloudflare_dns_over_https",
+      "label": "Cloudflare DNS over HTTPS",
+      "category": "domain_dns",
+      "cost_model": "free_no_key",
+      "auth": "none",
+      "env": [],
+      "python_modules": [],
+      "connectors": [],
+      "setup_url": "https://developers.cloudflare.com/1.1.1.1/encryption/dns-over-https/"
+    }
+  ]
+}

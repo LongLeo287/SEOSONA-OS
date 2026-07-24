@@ -1,0 +1,1 @@
+scrapling>=0.2  # local adaptive web scraper (connectors/scrapling_scraper.py)

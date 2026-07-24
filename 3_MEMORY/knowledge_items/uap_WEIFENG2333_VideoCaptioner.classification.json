@@ -1,0 +1,23 @@
+{
+  "system": "seosona-video",
+  "function": "subtitle",
+  "score": 84,
+  "matched": [
+    "subtitle",
+    "caption",
+    "dub"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Video",
+  "all_scores": {
+    "seosona-os": 61,
+    "seosona-video": 84,
+    "seosona-content": 66,
+    "seosona-ux-ui": 33,
+    "seosona-flow": 56
+  },
+  "auto_apply": true,
+  "uap_relevant": [
+    "ast"
+  ]
+}

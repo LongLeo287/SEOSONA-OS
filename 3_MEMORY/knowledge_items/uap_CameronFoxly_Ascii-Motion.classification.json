@@ -1,0 +1,22 @@
+{
+  "system": "seosona-content",
+  "function": "seo-metadata",
+  "score": 66,
+  "matched": [
+    "metadata",
+    "thumbnail"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Content",
+  "all_scores": {
+    "seosona-os": 44,
+    "seosona-video": 44,
+    "seosona-content": 66,
+    "seosona-ux-ui": 56,
+    "seosona-flow": 28
+  },
+  "auto_apply": true,
+  "uap_relevant": [
+    "ast"
+  ]
+}

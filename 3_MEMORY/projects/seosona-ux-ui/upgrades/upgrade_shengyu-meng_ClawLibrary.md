@@ -1,0 +1,8 @@
+# Upgrade proposal: shengyu-meng/ClawLibrary -> seosona-ux-ui / accessibility
+
+- **Fit score:** 33/100
+- **Matched evidence:** aria
+- **Source KI:** `knowledge_items/uap_shengyu-meng_ClawLibrary.md`
+
+## How this upgrades `accessibility`
+This repo's code (see the KI's Public API / Dependencies / Key Source Excerpts) maps to the `accessibility` function of `seosona-ux-ui`. Adopt the exported functions/patterns listed in the KI; the KI is factual (code-evidence only, no README). Verify against the project's own tests before wiring in.

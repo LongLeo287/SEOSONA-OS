@@ -1,0 +1,20 @@
+{
+  "system": "seosona-video",
+  "function": "tts",
+  "score": 41,
+  "matched": [
+    "tts",
+    "text-to-speech"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Video",
+  "all_scores": {
+    "seosona-os": 22,
+    "seosona-video": 41,
+    "seosona-content": 0,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 0
+  },
+  "auto_apply": true,
+  "uap_relevant": []
+}

@@ -1,0 +1,22 @@
+{
+  "system": "seosona-content",
+  "function": "prompt",
+  "score": 82,
+  "matched": [
+    "prompt-template",
+    "prompt_template"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Content",
+  "all_scores": {
+    "seosona-os": 41,
+    "seosona-video": 22,
+    "seosona-content": 82,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 0
+  },
+  "auto_apply": true,
+  "uap_relevant": [
+    "ast"
+  ]
+}

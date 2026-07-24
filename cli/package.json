@@ -1,0 +1,39 @@
+{
+  "name": "seosona-cli",
+  "version": "2.1.0",
+  "description": "The Omni-Scanner Setup CLI for SEOSONA OS",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LongLeo287/SEOSONA-OS.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LongLeo287/SEOSONA-OS/issues"
+  },
+  "homepage": "https://github.com/LongLeo287/SEOSONA-OS#readme",
+  "main": "src/index.js",
+  "bin": {
+    "seosona": "./bin/seosona.js"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "scripts/",
+    "assets/",
+    "README.md"
+  ],
+  "scripts": {
+    "prebuild": "node scripts/bundle-soul.js",
+    "prepack": "npm run prebuild",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "seosona",
+    "ai",
+    "cursor",
+    "windsurf",
+    "aider",
+    "copilot"
+  ],
+  "author": "SEOSONA",
+  "license": "MIT"
+}

@@ -1,0 +1,27 @@
+{
+  "system": "seosona-os",
+  "function": "agent",
+  "score": 50,
+  "matched": [
+    "agent",
+    "workflow",
+    "mcp"
+  ],
+  "strong_matched": [
+    "agent",
+    "workflow"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 50,
+    "seosona-video": 0,
+    "seosona-content": 6,
+    "seosona-ux-ui": 22,
+    "seosona-flow": 22
+  },
+  "auto_apply": false,
+  "uap_relevant": [
+    "ast"
+  ]
+}

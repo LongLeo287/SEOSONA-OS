@@ -1,0 +1,195 @@
+{
+  "id": "campaign-sprint",
+  "name": "2-Week Campaign Sprint",
+  "version": "1.0.0",
+  "author": { "name": "ClaudeKit", "url": "https://claudekit.cc" },
+  "tags": ["campaign", "sprint", "growth", "lead-gen"],
+  "estimatedDuration": "2 weeks",
+  "difficulty": "intermediate",
+  "ai_models_used": ["claude-sonnet", "claude-opus"],
+  "inputs": {
+    "required": [
+      { "key": "campaign_name", "type": "string", "prompt": "Name for this campaign" },
+      { "key": "campaign_goal", "type": "string", "prompt": "Primary campaign goal (e.g., 'generate demo requests', 'drive trial signups')" },
+      { "key": "target_audience", "type": "string", "prompt": "Target audience segment for this campaign" },
+      { "key": "budget", "type": "number", "prompt": "Total campaign budget in USD" }
+    ],
+    "optional": [
+      { "key": "channels", "type": "array", "default": ["organic-social", "email"], "prompt": "Marketing channels to activate" },
+      { "key": "existing_assets", "type": "array", "default": [], "prompt": "Existing content assets to leverage" },
+      { "key": "start_date", "type": "date", "default": "", "prompt": "Campaign start date (YYYY-MM-DD)" },
+      { "key": "cta_url", "type": "url", "default": "", "prompt": "Primary CTA destination URL" }
+    ]
+  },
+  "goal_targets": {
+    "leads_generated": { "default": 100, "metric": "manual" },
+    "campaign_cac": { "default": 50, "metric": "manual" },
+    "conversion_rate": { "default": 0.03, "metric": "ga4" },
+    "content_pieces": { "default": 50, "metric": "manual" }
+  },
+  "stages": [
+    {
+      "id": "research",
+      "name": "Research & Strategy",
+      "steps": [
+        {
+          "id": "market-analysis",
+          "name": "Market & Competitive Analysis",
+          "strategy": "Before creating anything, understand the current landscape. What campaigns are competitors running right now? What messaging angles are saturated vs underexplored? Check their ads library, recent blog posts, social activity, and email sequences. Your campaign needs a distinct angle or it drowns in noise.",
+          "ai_execution": "Scan competitor social profiles, ad libraries, and recent content for active campaigns. Map messaging themes and identify saturation points. Analyze trending topics in your niche for timely angles. Generate a competitive campaign landscape overview.",
+          "human_decision": "Choose the campaign angle that balances differentiation with audience relevance. Reject angles that are too clever — clarity beats creativity in direct response. Validate that the angle connects to a real pain point, not just a trend.",
+          "command": "/ckm:competitor",
+          "agent": "researcher",
+          "skills": ["competitor", "marketing-research"],
+          "outputs": ["market-analysis.md", "campaign-angle.md"],
+          "dependsOn": [],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "audience-segmentation",
+          "name": "Audience Segmentation & Targeting",
+          "strategy": "Break your target audience into 2-3 micro-segments with distinct pain points and messaging hooks. A campaign targeting 'marketing managers' is too broad. 'Marketing managers at B2B SaaS companies (50-200 employees) who manage content without a dedicated SEO person' — that specificity is what makes messaging resonate and ads convert.",
+          "ai_execution": "Build detailed micro-segment profiles from persona data. Map each segment's pain points, objections, and buying triggers. Generate segment-specific messaging angles and value propositions. Create audience targeting parameters for paid channels.",
+          "human_decision": "Validate segments against your actual customer data — which segments have the highest LTV? Decide primary vs secondary segments for budget allocation. Ensure segments are large enough to be worth targeting separately.",
+          "command": "/ckm:persona",
+          "agent": "researcher",
+          "skills": ["persona", "marketing-research"],
+          "outputs": ["audience-segments.md", "segment-messaging.md"],
+          "dependsOn": ["market-analysis"],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    },
+    {
+      "id": "creation",
+      "name": "Asset Creation",
+      "steps": [
+        {
+          "id": "campaign-brief",
+          "name": "Campaign Brief & Messaging Framework",
+          "strategy": "The campaign brief is the single source of truth. Define: one primary message, three supporting proof points, one clear CTA, segment-specific variations, and tone guidelines. Every asset should trace back to this brief. If it does not reinforce the primary message, cut it.",
+          "ai_execution": "Generate a comprehensive campaign brief with primary messaging, proof points, CTA copy, and segment variations. Create a messaging hierarchy: headline > subhead > body > CTA for each channel and segment. Draft tone guidelines with do/don't examples.",
+          "human_decision": "Approve the primary message — it must be true, defensible, and compelling. Ensure proof points are backed by real data or customer evidence. Test the CTA by asking: would you click this yourself?",
+          "command": "/ckm:campaign/create",
+          "agent": "campaign-manager",
+          "skills": ["campaign", "copywriting", "marketing-psychology"],
+          "outputs": ["campaign-brief.md", "messaging-framework.md"],
+          "dependsOn": ["audience-segmentation"],
+          "parallel": false,
+          "gate": "brand-review"
+        },
+        {
+          "id": "asset-creation",
+          "name": "Campaign Asset Production",
+          "strategy": "Create assets in a pyramid: one anchor piece (guide, report, or tool), 5-10 derivative social/email assets, 20-30 micro-content pieces (quotes, stats, tips). Every asset drives toward the same CTA. Batch production by format, not by topic — write all social posts at once, then all emails, then all ads. This preserves voice consistency.",
+          "ai_execution": "Generate the full asset pyramid from the campaign brief: anchor content piece, social posts per platform (5 each for Twitter, LinkedIn, 3 for other platforms), email sequence (3-5 emails), ad copy variants (3 per segment), and micro-content pieces. Maintain messaging consistency across all formats.",
+          "human_decision": "Review anchor content for depth and originality. Approve social posts for platform-native tone. Ensure email sequence has genuine value, not just promotion. Cut any asset that feels like filler — quality compounds, quantity dilutes.",
+          "command": "/ckm:write/fast",
+          "agent": "content-creator",
+          "skills": ["copywriting", "social", "email", "content-marketing"],
+          "outputs": ["anchor-content.md", "social-posts/", "email-sequence/", "ad-copy/"],
+          "dependsOn": ["campaign-brief"],
+          "parallel": true,
+          "gate": "brand-review"
+        },
+        {
+          "id": "landing-page",
+          "name": "Campaign Landing Page",
+          "strategy": "One campaign, one page, one CTA. Remove navigation. Hero matches ad/email/social copy exactly — message match is the number one conversion factor. Social proof specific to the campaign offer. Urgency tied to the campaign timeline. Form fields minimal — every additional field drops conversion by 5-10%.",
+          "ai_execution": "Generate landing page copy optimized for conversion: hero section with message-matched headline, benefit bullets, social proof section, FAQ addressing top objections, and CTA variations. Create A/B test variants for headline and CTA. Audit form for unnecessary fields.",
+          "human_decision": "Test the page yourself on mobile — 60%+ of traffic will be mobile. Ensure the form actually works end-to-end. Approve the social proof (only use real testimonials/logos). Decide on urgency mechanism — countdown timers vs limited spots vs early bird pricing.",
+          "command": "/ckm:write/cro",
+          "agent": "copywriter",
+          "skills": ["form-cro", "copywriting", "marketing-psychology"],
+          "outputs": ["landing-page-copy.md", "ab-test-variants.md"],
+          "dependsOn": ["campaign-brief"],
+          "parallel": true,
+          "gate": "human-approval"
+        }
+      ]
+    },
+    {
+      "id": "launch",
+      "name": "Campaign Launch",
+      "steps": [
+        {
+          "id": "soft-launch",
+          "name": "Soft Launch & Testing",
+          "strategy": "Launch to 10-20% of your audience first. Test email deliverability, landing page load times, form submissions, tracking pixels, UTM parameters, and conversion tracking. Fix everything before scaling. A broken funnel at scale is an expensive disaster. Soft launch also reveals which message variants resonate before you commit full budget.",
+          "ai_execution": "Generate a soft-launch checklist covering all technical and messaging validation points. Create UTM parameter scheme for all campaign URLs. Draft monitoring dashboard requirements. Prepare escalation templates for common issues (broken tracking, low deliverability, page errors).",
+          "human_decision": "Personally complete the full user journey from ad/email to conversion. Verify tracking fires correctly at every step. Make go/no-go call based on soft launch metrics. Decide which message variants to scale based on early engagement signals.",
+          "command": "/ckm:campaign/create",
+          "agent": "campaign-manager",
+          "skills": ["campaign", "analytics"],
+          "outputs": ["soft-launch-checklist.md", "utm-scheme.md", "test-results.md"],
+          "dependsOn": ["asset-creation", "landing-page"],
+          "parallel": false,
+          "gate": "human-approval"
+        },
+        {
+          "id": "full-launch",
+          "name": "Full Campaign Launch",
+          "strategy": "Scale to full audience with the winning variants from soft launch. Deploy across all channels simultaneously for maximum impact — multi-channel exposure within 48 hours creates a surround-sound effect. Monitor hourly for the first day, then daily. Have creative fatigue variants ready to rotate in at day 5-7.",
+          "ai_execution": "Schedule all social posts, email sequences, and ad deployments across channels. Generate real-time monitoring alerts for key metrics (CPA, conversion rate, click-through rate). Prepare fatigue-rotation creative variants. Create daily performance summary templates.",
+          "human_decision": "Make real-time budget allocation decisions — shift spend to high-performing channels within 24 hours. Respond to audience engagement personally where possible. Kill underperforming channels quickly rather than hoping they improve.",
+          "command": "/ckm:social/schedule",
+          "agent": "campaign-manager",
+          "skills": ["campaign", "social", "email"],
+          "outputs": ["launch-schedule.md", "monitoring-alerts.md", "fatigue-variants/"],
+          "dependsOn": ["soft-launch"],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    },
+    {
+      "id": "optimize",
+      "name": "Optimization & Learning",
+      "steps": [
+        {
+          "id": "performance-analysis",
+          "name": "Campaign Performance Analysis",
+          "strategy": "Measure against the goals you set, not vanity metrics. Calculate true CAC including your time and AI costs. Map the full funnel: impressions to clicks to page views to conversions to qualified leads. Identify the biggest drop-off point — that is where your next campaign improvement lives. Compare channel performance by cost-per-qualified-lead, not just cost-per-click.",
+          "ai_execution": "Pull data from all channels into a unified performance dashboard. Calculate funnel conversion rates at each stage. Compute CAC by channel and segment. Generate attribution analysis showing which touchpoints influenced conversions. Identify statistical significance of A/B test results.",
+          "human_decision": "Interpret attribution data with business context — last-click attribution undervalues awareness channels. Decide which learnings are campaign-specific vs universally applicable. Set realistic improvement targets for the next sprint based on this baseline.",
+          "command": "/ckm:analyze/report",
+          "agent": "analytics-analyst",
+          "skills": ["analytics", "campaign"],
+          "outputs": ["campaign-report.md", "channel-performance.md", "funnel-analysis.md"],
+          "dependsOn": ["full-launch"],
+          "parallel": false,
+          "gate": null
+        },
+        {
+          "id": "iteration",
+          "name": "Iteration & Next Sprint Planning",
+          "strategy": "Document every learning as a testable hypothesis for the next sprint. 'LinkedIn outperformed Twitter' is an observation. 'Pain-point messaging converts 2x better than feature messaging on LinkedIn for our ICP' is a hypothesis you can build on. Carry forward winning creative, kill losing channels, and identify one new experiment for the next sprint.",
+          "ai_execution": "Transform campaign data into structured learnings and hypotheses. Generate a next-sprint planning document with recommended changes, winning elements to keep, and new experiments to run. Create an updated audience segment profile based on conversion data. Archive all assets with performance annotations.",
+          "human_decision": "Decide which learnings to act on vs which need more data. Set the next sprint's primary goal based on business priorities, not just what performed well. Choose the one big experiment for next sprint — too many variables make learning impossible.",
+          "command": "/ckm:analyze/report",
+          "agent": "analytics-analyst",
+          "skills": ["analytics", "marketing-research", "campaign"],
+          "outputs": ["learnings.md", "next-sprint-plan.md", "hypothesis-backlog.md"],
+          "dependsOn": ["performance-analysis"],
+          "parallel": false,
+          "gate": null
+        }
+      ]
+    }
+  ],
+  "gates": {
+    "brand-review": {
+      "type": "auto",
+      "checker": "content-reviewer",
+      "criteria": ["brand-voice-consistency", "messaging-accuracy", "tone-alignment", "campaign-brief-adherence"],
+      "pass_threshold": 0.8
+    },
+    "human-approval": {
+      "type": "manual",
+      "prompt": "Review outputs and confirm readiness to proceed. Check all links, tracking, and conversion flows.",
+      "blocksAll": true
+    }
+  }
+}

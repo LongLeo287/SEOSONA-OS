@@ -1,0 +1,103 @@
+{
+  "includeCoAuthoredBy": false,
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/session-init.cjs\""
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/subagent-init.cjs\""
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/dev-rules-reminder.cjs\""
+          },
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/usage-context-awareness.cjs\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/descriptive-name.cjs\""
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|Glob|Grep|Read|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/scout-block.cjs\""
+          },
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/privacy-block.cjs\""
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/post-edit-simplify-reminder.cjs\""
+          },
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/memory-logger.cjs\""
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "manual|auto",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/write-compact-marker.cjs\""
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "matcher": "clear",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"~/.seosona/1_CORE/hooks/session-end.cjs\""
+          }
+        ]
+      }
+    ]
+  }
+}

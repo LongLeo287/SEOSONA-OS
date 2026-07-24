@@ -1,0 +1,67 @@
+{
+  "name": "seosona-os",
+  "version": "9.0.0",
+  "description": "SEOSONA OS — the Omni-Brain: a self-improving AI operating system that governs your tools, your projects, and its own knowledge.",
+  "main": "1_CORE/scripts/audit_check.js",
+  "bin": {
+    "seosona-audit": "1_CORE/scripts/audit_check.js"
+  },
+  "scripts": {
+    "lint": "node 1_CORE/scripts/language_linter.js",
+    "postinstall": "node 1_CORE/scripts/setup-hooks.js",
+    "capabilities": "node 1_CORE/scripts/seosona_capability_bridge.js manifest",
+    "capabilities:route": "node 1_CORE/scripts/seosona_capability_bridge.js route",
+    "capabilities:validate": "node 1_CORE/scripts/seosona_capability_bridge.js validate",
+    "capabilities:audit": "node 1_CORE/scripts/seosona_capability_bridge.js audit-portability",
+    "skills:security": "python 1_CORE/scripts/skill_security_scan.py",
+    "skills:validate": "python 1_CORE/scripts/skill_spec_validate.py",
+    "skills:fix": "python 1_CORE/scripts/skill_spec_fix.py",
+    "skills:fetch:science": "python 1_CORE/scripts/fetch_scientific_skills.py",
+    "data:analyze": "python 1_CORE/scripts/data_analyze.py",
+    "pdf:extract": "python 1_CORE/scripts/pdf_extract.py",
+    "project:doctor": "node 1_CORE/scripts/project_connector.js doctor",
+    "seosona:doctor": "node scripts/seosona-project.mjs doctor",
+    "seosona:log": "node scripts/seosona-project.mjs log",
+    "project:init": "node 1_CORE/scripts/project_connector.js init",
+    "project:sync-rules": "node 1_CORE/scripts/project_connector.js sync-rules",
+    "project:test": "node 1_CORE/scripts/project_connector.test.js",
+    "audit:check": "node 1_CORE/scripts/audit_check.js",
+    "status": "npm run status:system",
+    "status:system": "node 1_CORE/scripts/system_status.js",
+    "status:seo": "npm run audit:check",
+    "status:all": "npm run status:system && npm run status:seo",
+    "apis:free": "python 1_CORE/scripts/free_api_status.py",
+    "apis:free:install": "python 1_CORE/scripts/free_api_status.py --install-deps",
+    "git:check": "node 1_CORE/scripts/git_push_check.js",
+    "git:push-check": "node 1_CORE/scripts/git_push_check.js --strict --dry-run",
+    "prepublishOnly": "npm run lint && npm run project:test && npm run status:system && npm run audit:check",
+    "mcp:codegraph": "1_CORE/bin/codebase-memory-mcp/codebase-memory-mcp.exe",
+    "codegraph:index": "node 1_CORE/scripts/codegraph_index.js",
+    "test": "node --test \"1_CORE/hooks/lib/__tests__/*.test.cjs\""
+  },
+  "files": [
+    "1_CORE/scripts/",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "keywords": [
+    "seo",
+    "audit",
+    "seo-analysis",
+    "seo-dashboard",
+    "website-audit",
+    "seosona",
+    "vietnam-seo"
+  ],
+  "author": "longleo <contact@seosona.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LongLeo287/SEOSONA-OS.git"
+  },
+  "homepage": "https://seosona.com"
+}

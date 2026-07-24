@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "~/.seosona/1_CONFIG/schemas/seosona.project.schema.json",
+  "title": "SEOSONA Project Connector Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "name",
+    "displayName",
+    "domain",
+    "stack",
+    "osRoot",
+    "memoryNamespace",
+    "autonomy",
+    "commands",
+    "ruleFiles"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema": {
+      "const": "seosona.project.v1"
+    },
+    "name": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,62}$"
+    },
+    "displayName": {
+      "type": "string",
+      "minLength": 2
+    },
+    "domain": {
+      "type": "string",
+      "minLength": 2
+    },
+    "stack": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "osRoot": {
+      "const": "~/.seosona"
+    },
+    "memoryNamespace": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{1,62}$"
+    },
+    "autonomy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "defaultLevel",
+        "requiresExplicitApproval"
+      ],
+      "properties": {
+        "defaultLevel": {
+          "enum": [
+            "read_only",
+            "project_edit",
+            "os_patch",
+            "os_core_patch",
+            "git_publish"
+          ]
+        },
+        "requiresExplicitApproval": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "os_core_patch",
+              "git_publish",
+              "deploy"
+            ]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "commands": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1
+      },
+      "required": [
+        "typecheck",
+        "build"
+      ]
+    },
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "ruleFiles": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "AGENTS.md",
+          ".clauderules",
+          ".cursorrules"
+        ]
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  }
+}

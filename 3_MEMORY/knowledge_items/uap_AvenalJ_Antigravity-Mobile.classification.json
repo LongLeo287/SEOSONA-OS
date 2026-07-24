@@ -1,0 +1,19 @@
+{
+  "system": "seosona-ux-ui",
+  "function": "component",
+  "score": 33,
+  "matched": [
+    "component"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA UX-UI",
+  "all_scores": {
+    "seosona-os": 20,
+    "seosona-video": 0,
+    "seosona-content": 28,
+    "seosona-ux-ui": 33,
+    "seosona-flow": 0
+  },
+  "auto_apply": true,
+  "uap_relevant": []
+}

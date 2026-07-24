@@ -1,0 +1,187 @@
+# KI: Bash-it/bash-it
+
+## Overview
+No description extracted.
+
+## Architecture & Tech Stack
+- Could not detect automatically
+- **Total files:** 142 files across 7 directories
+- **File types:** .bash: 121, .yml: 7, .sh: 4, .md: 2, .ackrc: 1, .editorconfig: 1, .git-blame-ignore-revs: 1
+
+## Core Structure
+```
+  .ackrc
+  .editorconfig
+  .git-blame-ignore-revs
+  .gitattributes
+  .gitignore
+  .gitmodules
+  .pre-commit-config.yaml
+  .readthedocs.yml
+  CLAUDE.md
+  LICENSE
+  bash_it.sh
+  clean_files.txt
+  install.sh
+  lint_clean_files.sh
+  uninstall.sh
+  .github/
+    PULL_REQUEST_TEMPLATE.md
+    no-response.yml
+    ISSUE_TEMPLATE/
+      bug_report.yml
+      config.yml
+      feature_request.yml
+    workflows/
+      action.yml
+      ci.yml
+  aliases/
+    available/
+      ag.aliases.bash
+      ansible.aliases.bash
+      apt.aliases.bash
+      atom.aliases.bash
+      bash-it.aliases.bash
+      bolt.aliases.bash
+      bundler.aliases.bash
+      clipboard.aliases.bash
+      composer.aliases.bash
+      curl.aliases.bash
+      directory.aliases.bash
+      dnf.aliases.bash
+      docker-compose.aliases.bash
+      docker.aliases.bash
+      editor.aliases.bash
+      emacs.aliases.bash
+      fuck.aliases.bash
+      general.aliases.bash
+      git-omz.aliases.bash
+      git.aliases.bash
+      gitsvn.aliases.bash
+      heroku.aliases.bash
+      hg.aliases.bash
+      homebrew-cask.aliases.bash
+      homebrew.aliases.bash
+      homesick.aliases.bash
+      jitsu.aliases.bash
+      kubectl.aliases.bash
+      laravel.aliases.bash
+      maven.aliases.bash
+      msys2.aliases.bash
+      node.aliases.bash
+      npm.aliases.bash
+      osx.aliases.bash
+      phoenix.aliases.bash
+      puppet.aliases.bash
+      pyrocms.aliases.bash
+      rails.aliases.bash
+      svn.aliases.bash
+      systemd.aliases.bash
+      terraform.aliases.bash
+      terragrunt.aliases.bash
+      textmate.aliases.bash
+      tmux.aliases.bash
+      todo.aliases.bash
+      uuidgen.aliases.bash
+      vagrant.aliases.bash
+      vault.aliases.bash
+      vim.aliases.bash
+      yarn.aliases.bash
+  completion/
+    available/
+      aliases.completion.bash
+      apm.completion.bash
+      artisan.completion.bash
+      awless.completion.bash
+      awscli.completion.bash
+      bash-it.completion.bash
+      brew.completion.bash
+      bundler.completion.bash
+      capistrano.completion.bash
+      cargo.completion.bash
+      composer.completion.bash
+      conda.completion.bash
+      consul.completion.bash
+      crystal.completion.bash
+      dart.completion.bash
+      defaults.completion.bash
+      dirs.completion.bash
+      django.completion.bash
+      dmidecode.completion.bash
+      docker-compose.completion.bash
+      docker-machine.completion.bash
+      docker.completion.bash
+      dotnet.completion.bash
+      drush.completion.bash
+ 
+```
+
+## Agent Configuration
+
+--- CLAUDE.md ---
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project Overview
+
+Bash-it is a collection of community Bash commands and scripts for Bash 3.2+, providing a framework for aliases, themes, plugins, and completions. It's structured as a modular system where components can be individually enabled or disabled.
+
+## Architecture
+
+### Core Components
+
+- **bash_it.sh**: Main entry point that initializes the framework
+- **lib/**: Core libraries providing utilities, logging, helpers, and appearance functions
+- **scripts/reloader.bash**: Component loader that sources enabled components
+- **install.sh**: Installation script with interactive and silent modes
+- **enabled/**: Symlinks to active components from available/ directories
+
+### Component Types
+
+1. **Aliases** (`aliases/available/`): Command shortcuts and convenience functions
+2. **Plugins** (`plugins/available/`): Extended functionality and integrations
+3. **Completions** (`completion/available/`): Tab completion definitions
+4. **Themes** (`themes/`): Prompt customizations and visual styles
+
+### Loading Order
+
+1. Libraries (except appearance)
+2. Global enabled directory
+3. Enabled aliases, plugins, completions
+4. Theme files (if BASH_IT_THEME is set)
+5. Custom files from BASH_IT_CUSTOM directory
+
+## Development Commands
+
+### Testing
+```bash
+# Run all tests using BATS (Bash Automated Testing System)
+test/run
+
+# Run specific test suites
+test/run test/bash_it test/completion test/plugins
+
+# Tests require git submodules to be initialized
+git submodule init && git submodule update
+```
+
+### Linting and Code Quality
+
+The project uses a gradual pre-commit system implementation via `clean_files.txt` allow-list:
+
+```bash
+# Run pre-commit hooks only on allow-listed clean files
+./lint_clean_files.sh
+
+# Run pre-commit hooks on all files (for testing new coverage)
+pre-commit run --all-files
+
+# Manual shellcheck on bash files
+shellcheck **/*.bash
+
+# Format shell scr
+
+
+## Analysis Note
+> This KI was generated by **enhanced local structural analysis** (no LLM API was available at generation time). It includes full tech stack detection, README parsing, dependency analysis, and feature extraction. For deeper semantic analysis, re-run with an active Gemini or OpenAI API key.

@@ -1,0 +1,19 @@
+{
+  "system": "seosona-content",
+  "function": "content-script",
+  "score": 28,
+  "matched": [
+    "manifest.json"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Content",
+  "all_scores": {
+    "seosona-os": 0,
+    "seosona-video": 0,
+    "seosona-content": 28,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 28
+  },
+  "auto_apply": true,
+  "uap_relevant": []
+}

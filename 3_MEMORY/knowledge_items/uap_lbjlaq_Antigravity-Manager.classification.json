@@ -1,0 +1,22 @@
+{
+  "system": "seosona-os",
+  "function": "agent",
+  "score": 44,
+  "matched": [
+    "mcp",
+    "router"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 44,
+    "seosona-video": 0,
+    "seosona-content": 0,
+    "seosona-ux-ui": 44,
+    "seosona-flow": 0
+  },
+  "auto_apply": false,
+  "uap_relevant": [
+    "ast"
+  ]
+}

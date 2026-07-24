@@ -1,0 +1,134 @@
+---
+name: maintenance-guide
+description: When and how to create an in-repo maintenance-rules skill for complex skill repos. Covers trigger conditions (3+ deps, platform paths, scripts, large files), required content (constraints, update triggers, verification protocol, changelog), cross-vendor symlink creation, reference dimension classification (D1 self-maintenance, D2 operational, D3 capability standard), and the relationship between maintenance-rules and the parent skill.
+---
+
+# Maintenance Guide
+
+How to generate a maintenance-rules skill for complex skill repositories. This reference tells skill-forge when and how to create one.
+
+## Execution Procedure
+
+```
+assess_and_create(skill_repo) → maintenance_rules_skill | skip
+
+check triggers: 3+ deps? platform paths? scripts? >300 lines? external URLs?
+if no triggers → skip (simple skill needs no maintenance rules)
+generate .claude/skills/maintenance-rules/SKILL.md with:
+    constraints, update triggers, verification protocol, changelog
+create cross-vendor symlink (.agents/skills/ → relative path)
+```
+
+## TOC
+
+- [What maintenance-rules Is](#what-maintenance-rules-is)
+- [When to Create](#when-to-create)
+- [Generated Skill Structure](#generated-skill-structure)
+- [Required Content](#required-content)
+- [Optional Content](#optional-content)
+- [Reference Dimension Classification](#reference-dimension-classification)
+- [Anti-Patterns](#anti-patterns)
+
+## What maintenance-rules Is
+
+An in-repo rule-skill containing maintenance constraints and procedures. Lives in `.claude/skills/maintenance-rules/` within the skill repo.
+
+Unlike a dead MAINTENANCE.md file, it's discoverable by AI agents through the Agent Skills loading mechanism: description is always visible, body loads on trigger.
+
+## When to Create
+
+Generate when the skill meets **any** of these:
+
+| Condition | Why |
+|-----------|-----|
+| 3+ external dependencies (tools, skills, APIs) | Versions change, APIs deprecate |
+| SKILL.md content references platform-specific paths | Platforms update directories |
+| Has `scripts/` directory | Scripts need update instructions |
+| SKILL.md body > 300 lines | Complexity warrants consistency checklist |
+| Reads external data sources or URLs | Endpoints change |
+
+**Skip** for simple skills: single-purpose, no dependencies, < 200 line SKILL.md.
+
+Note: "platform-specific paths" means the SKILL.md CONTENT references paths like `~/.claude/skills/`, NOT that the skill is installed in platform directories. A simple `code-review` skill installed via symlink does not trigger this condition.
+
+## Generated Skill Structure
+
+```yaml
+---
+name: maintenance-rules
+description: 'Maintenance rules for <skill-name>. MUST [constraint 1]. MUST [constraint 2]. MUST [constraint 3]. Triggers on "update <skill-name>", "maintain <skill-name>".'
+metadata:
+  author: <author>
+---
+```
+
+Directory placement:
+```
+<skill-repo>/
+├── .claude/skills/maintenance-rules/
+│   └── SKILL.md              ← source of truth
+├── .agents/skills/maintenance-rules  → relative symlink
+└── .gitignore                ← .claude/* + !.claude/skills/
+```
+
+## Required Content
+
+### 1. Constraints (top of body)
+
+MUST/NEVER statements — the core rules for maintainers.
+
+### 2. Update Triggers
+
+Table: event → what files to check.
+
+### 3. Verification Steps
+
+How to confirm the skill still works after changes.
+
+### 4. Changelog
+
+Recent changes. Max 5 entries, trim oldest.
+
+## Optional Content
+
+| Section | When |
+|---------|------|
+| Dependency update instructions | 3+ dependencies with own release cycles |
+| Contribution criteria | Skill has collaborators |
+| Self-governance | Skill has self-referential capabilities |
+| Consistency checks | Multiple files must stay aligned |
+
+## Reference Dimension Classification
+
+When a skill repo has multiple references, each reference serves one of three dimensions:
+
+| Dimension | Serves | Validation Coverage | If Wrongly Placed |
+|-----------|--------|--------------------|--------------------|
+| D1: Self-maintenance | The skill repo's own codebase | Not a reference — belongs in maintenance-rules | Occupies reference slot but never serves produced artifacts |
+| D2: Operational | The skill's runtime process | Reference, no validation row needed | Correctly excluded from per-item validation |
+| D3: Capability standard | Artifacts the skill produces or validates | Reference, MUST have validation table row (direct or chain) | Standard exists but never gets checked → silent gap |
+
+### When to Apply
+
+Any skill that **produces or validates other artifacts** (forge, linter, code generator). Skills that only serve end users directly (code-review, deployment) have no D2/D3 distinction — all their references serve users.
+
+### Classification Test
+
+For each reference, ask: *"If I deleted this reference, would the PRODUCED ARTIFACT be worse, or would just the PROCESS of producing it break?"*
+
+- Process breaks, artifact unchanged → **D2** (operational)
+- Produced artifact worse → **D3** (capability standard, needs validation row)
+- Neither — only repo maintenance affected → **D1** (move to maintenance-rules)
+
+### D3 via Chain
+
+A reference's D3 content can be "graduated" into a parent reference that already has a validation row. When this happens:
+- The graduated content IS checked (through the parent's row)
+- The original reference becomes pure D2 or fully redundant
+- Remove redundant references — they waste attention budget without adding information
+
+## Anti-Patterns
+
+- Don't duplicate SKILL.md content — maintain ≠ describe
+- Don't include runtime instructions — maintenance-rules is for maintainers, not users
+- Don't make it a changelog-only file — constraints come first

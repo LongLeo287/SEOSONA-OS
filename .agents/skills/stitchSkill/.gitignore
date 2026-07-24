@@ -1,0 +1,11 @@
+# Runtime project output
+projects/*
+!projects/.gitignore
+!projects/README.md
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db

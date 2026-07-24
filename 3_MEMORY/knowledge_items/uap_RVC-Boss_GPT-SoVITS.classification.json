@@ -1,0 +1,22 @@
+{
+  "system": "seosona-video",
+  "function": "asr",
+  "score": 49,
+  "matched": [
+    "asr",
+    "whisper"
+  ],
+  "push": false,
+  "path": "D:\\SEOSONA AI\\SEOSONA Video",
+  "all_scores": {
+    "seosona-os": 20,
+    "seosona-video": 49,
+    "seosona-content": 0,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 28
+  },
+  "auto_apply": true,
+  "uap_relevant": [
+    "ast"
+  ]
+}

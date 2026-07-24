@@ -1,0 +1,2 @@
+?|?|?|uap_yazinsai_srt-ai
+0:OVE+TRA+ARC|srt_openai_api|"docker run -p 3000:3000 -e OPENAI_API_KEY=<your_api_..."|ORIGIN+CORE+TECHNICAL

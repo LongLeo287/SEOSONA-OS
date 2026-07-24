@@ -1,0 +1,31 @@
+{
+  "sources": [
+    {
+      "name": "Search Engine Land",
+      "url": "https://searchengineland.com/feed",
+      "category": "SEO"
+    },
+    {
+      "name": "Moz Blog",
+      "url": "https://moz.com/blog/feed",
+      "category": "SEO"
+    },
+    {
+      "name": "Google Search Central Blog",
+      "url": "https://developers.google.com/search/blog/feed",
+      "category": "SEO"
+    },
+    {
+      "name": "Hacker News - AI",
+      "url": "https://hnrss.org/newest?q=AI+agent",
+      "category": "AI"
+    },
+    {
+      "name": "The Verge - AI",
+      "url": "https://www.theverge.com/rss/ai-artificial-intelligence/index.xml",
+      "category": "AI"
+    }
+  ],
+  "max_articles_per_source": 5,
+  "output_dir": "3_MEMORY/knowledge_items/dreaming"
+}

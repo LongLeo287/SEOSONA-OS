@@ -1,0 +1,249 @@
+[
+  {
+    "connector": "wp_rest_connector",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 0,
+        "timestamp": "2026-06-11T11:33:08.822530"
+      }
+    ],
+    "started_at": "2026-06-11T11:33:08.822530",
+    "completed_at": "2026-06-11T11:33:08.822530"
+  },
+  {
+    "connector": "wp_rest_connector",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 0,
+        "timestamp": "2026-06-11T11:33:35.401486"
+      }
+    ],
+    "started_at": "2026-06-11T11:33:35.401486",
+    "completed_at": "2026-06-11T11:33:35.401486"
+  },
+  {
+    "connector": "⚡ PSI/CWV",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 55670,
+        "timestamp": "2026-06-21T05:09:17.674945"
+      }
+    ],
+    "started_at": "2026-06-21T05:08:22.004770",
+    "completed_at": "2026-06-21T05:09:17.674945"
+  },
+  {
+    "connector": "🔑 Keywords",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 106714,
+        "timestamp": "2026-06-21T05:11:04.414200"
+      }
+    ],
+    "started_at": "2026-06-21T05:09:17.700290",
+    "completed_at": "2026-06-21T05:11:04.414200"
+  },
+  {
+    "connector": "🕵️  SERP Competitor",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 2332,
+        "timestamp": "2026-06-21T05:11:06.770024"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:04.438644",
+    "completed_at": "2026-06-21T05:11:06.770024"
+  },
+  {
+    "connector": "🔗 Backlinks",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 2680,
+        "timestamp": "2026-06-21T05:11:09.478327"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:06.798798",
+    "completed_at": "2026-06-21T05:11:09.478327"
+  },
+  {
+    "connector": "📈 Rank Tracker",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 2,
+        "timestamp": "2026-06-21T05:11:09.768880"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:09.766313",
+    "completed_at": "2026-06-21T05:11:09.768880"
+  },
+  {
+    "connector": "🔩 Technical SEO",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 8320,
+        "timestamp": "2026-06-21T05:11:18.161316"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:09.841626",
+    "completed_at": "2026-06-21T05:11:18.161316"
+  },
+  {
+    "connector": "🏷️  Schema",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 2062,
+        "timestamp": "2026-06-21T05:11:20.307441"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:18.245493",
+    "completed_at": "2026-06-21T05:11:20.307441"
+  },
+  {
+    "connector": "🏆 E-E-A-T",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 11758,
+        "timestamp": "2026-06-21T05:11:32.149783"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:20.391261",
+    "completed_at": "2026-06-21T05:11:32.149783"
+  },
+  {
+    "connector": "📝 Log Analyzer",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 0,
+        "timestamp": "2026-06-21T05:11:32.181256"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:32.181256",
+    "completed_at": "2026-06-21T05:11:32.181256"
+  },
+  {
+    "connector": "🤖 AEO / AI Search",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 5350,
+        "timestamp": "2026-06-21T05:11:37.557850"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:32.207037",
+    "completed_at": "2026-06-21T05:11:37.557850"
+  },
+  {
+    "connector": "🌐 Dashboard v4",
+    "success": true,
+    "total_attempts": 1,
+    "failure_type": null,
+    "final_error": null,
+    "attempts": [
+      {
+        "attempt_number": 1,
+        "strategy": "initial",
+        "success": true,
+        "error": null,
+        "duration_ms": 94,
+        "timestamp": "2026-06-21T05:11:37.698874"
+      }
+    ],
+    "started_at": "2026-06-21T05:11:37.604519",
+    "completed_at": "2026-06-21T05:11:37.698874"
+  }
+]

@@ -1,0 +1,189 @@
+# KI: skylot/jadx
+
+## Overview
+![Build status](https://img.shields.io/github/actions/workflow/status/skylot/jadx/build-artifacts.yml)
+![GitHub contributors](https://img.shields.io/github/contributors/skylot/jadx)
+![GitHub all releases](https://img.shields.io/github/downloads/skylot/jadx/total)
+![GitHub release (latest by SemVer)](https://img.shields.io/github/downloads/skylot/jadx/latest/total)
+![Latest release](https://img.shields.io/github/release/skylot/jadx.svg)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.skylot/jadx-core)](https://search.maven.org/search?q=g:io.github.skylot%20AND%20jadx)
+![Java 11+](https://img.shields.io/badge/Java-11%2B-blue)
+[![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
+
+## Architecture & Tech Stack
+- Could not detect automatically
+- **Total files:** 87 files across 60 directories
+- **File types:** .java: 34, .yml: 10, .kts: 10, .md: 8, .xml: 4, .smali: 3, .gitignore: 2
+
+## Documentation Sections
+- JADX
+- Download
+- Install
+- Use jadx as a library
+- Build from source
+- Usage
+
+## Core Structure
+```
+  .editorconfig
+  .gitattributes
+  .gitignore
+  .gitlab-ci.yml
+  .jitpack.yml
+  .typos.toml
+  CODE_OF_CONDUCT.md
+  CONTRIBUTING.md
+  LICENSE
+  NOTICE
+  README.md
+  SECURITY.md
+  build.gradle.kts
+  gradle.properties
+  gradlew
+  gradlew.bat
+  settings.gradle.kts
+  .github/
+    dependabot.yml
+    pull_request_template.md
+    ISSUE_TEMPLATE/
+      config.yml
+      decompilation-issue.yml
+      feature-request.yml
+      jadx-gui-issue.yml
+    workflows/
+      build-artifacts.yml
+      build-test.yml
+      release.yml
+  .run/
+    jadx-gui.run.xml
+  buildSrc/
+    build.gradle.kts
+    src/
+      main/
+        kotlin/
+          jadx-java.gradle.kts
+          jadx-kotlin.gradle.kts
+          jadx-library.gradle.kts
+          jadx-rewrite.gradle.kts
+  config/
+    checkstyle/
+      checkstyle.xml
+    code-formatter/
+      eclipse.importorder
+      eclipse.xml
+    jflex/
+      .gitignore
+      README.md
+      SmaliTokenMaker.flex
+      skeleton.default
+  contrib/
+    jadx-gui.desktop
+  gradle/
+    wrapper/
+      gradle-wrapper.jar
+      gradle-wrapper.properties
+  jadx-cli/
+    build.gradle.kts
+    src/
+      main/
+        java/
+          jadx/
+            cli/
+              JCommanderWrapper.java
+              JadxAppCommon.java
+              JadxCLI.java
+              JadxCLIArgs.java
+              JadxCLICommands.java
+              LogHelper.java
+              SingleClassMode.java
+              clst/
+                ConvertToClsSet.java
+              commands/
+                CommandPlugins.java
+                ICommand.java
+              config/
+                IJadxConfig.java
+                JadxConfigAdapter.java
+                JadxConfigExclude.java
+              plugins/
+                JadxFilesGetter.java
+              tools/
+                ConvertArscFile.java
+        resources/
+          logback.xml
+      test/
+        java/
+          jadx/
+            cli/
+              BaseCliIntegrationTest.java
+              JadxCLIArgsTest.java
+              RenameConverterTest.java
+              TestExport.java
+              TestInput.java
+            plugins/
+              tools/
+                utils/
+                  PluginUtilsTest.java
+        resources/
+          samples/
+            HelloWorld.class
+            HelloWorld.smali
+            defpkg.smali
+            hello.dex
+            resources-only.apk
+            small.apk
+            test-lib.aar
+  jadx-commons/
+    jadx-analysis/
+      README.md
+      build.gradle.kts
+      src/
+        main/
+         
+```
+
+## Quick Start
+```bash
+sudo pacman -S jadx
+brew install jadx
+flatpak install flathub com.github.skylot.jadx
+git clone https://github.com/skylot/jadx.git
+cd jadx
+./gradlew dist
+```
+
+## Agent Configuration
+
+--- CONTRIBUTING.md ---
+# Contributing
+
+Please note, we have [code of conduct](CODE_OF_CONDUCT.md), please follow it in all your interactions with the project.
+
+## Open Issue
+
+1. Before proceed, please do:
+    - check [Troubleshooting Q&A](https://github.com/skylot/jadx/wiki/Troubleshooting-Q&A) section on wiki
+    - search existing issues by exception message
+
+2. Describe error:
+    - full name of method or class with error
+    - full java stacktrace (no need to copy method fallback code (commented pseudocode))
+    - **IMPORTANT!:** attach or provide link to apk file (double check apk version)
+
+	  **Note**: GitHub don't allow attaching files with `.apk` extension, but you can change extension by adding `.zip` at the end :)
+
+
+## Pull Request Process
+
+1. Please don't submit any code style fixes or dependencies updates changes.
+
+1. Use only features and API from Java 11 or below.
+
+1. Make sure your code is correctly formatted, see description here: [Code Formatting](https://github.com/skylot/jadx/wiki/Code-Formatting).
+
+1. Make sure your changes are passing build: `./gradlew clean build dist`
+
+
+
+## Analysis Note
+> This KI was generated by **enhanced local structural analysis** (no LLM API was available at generation time). It includes full tech stack detection, README parsing, dependency analysis, and feature extraction. For deeper semantic analysis, re-run with an active Gemini or OpenAI API key.

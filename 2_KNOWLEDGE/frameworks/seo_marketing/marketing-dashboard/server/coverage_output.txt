@@ -1,0 +1,7 @@
+
+> marketing-dashboard-server@1.0.0 test
+> vitest run --coverage
+
+[31m[7m[31m MISSING DEPENDENCY [31m[27m Cannot find dependency '@vitest/coverage-v8'
+
+[39m

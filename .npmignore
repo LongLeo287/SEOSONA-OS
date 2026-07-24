@@ -1,0 +1,31 @@
+# Chỉ publish những gì cần thiết để dùng package
+# Exclude toàn bộ knowledge base, client data, logs
+
+# Knowledge base (nội bộ)
+2_KNOWLEDGE/
+
+# Client audit data (private)
+3_MEMORY/
+
+# Git và IDE
+.git/
+.gitignore
+.vscode/
+
+# Dev artifacts
+*.tgz
+*.log
+SYSTEM_AUDIT.md
+
+# Các file không cần cho người dùng package
+CONTRIBUTING.md
+CODE_OF_CONDUCT.md
+SECURITY.md
+CHANGELOG.md
+assets/
+
+# CLI folder nếu publish riêng
+cli/
+
+# repos folder
+repos/

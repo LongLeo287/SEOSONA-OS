@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Hub | ClaudeKit Marketing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/hub.css">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <h1 class="logo">Content Hub</h1>
+        <span class="badge" id="asset-count">0 assets</span>
+      </div>
+      <div class="header-center">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.35-4.35"></path>
+          </svg>
+          <input type="text" id="search" placeholder="Search assets..." autocomplete="off">
+        </div>
+      </div>
+      <div class="header-right">
+        <select id="type-filter" class="filter-select">
+          <option value="">All Types</option>
+          <option value="banner">Banners</option>
+          <option value="design">Designs</option>
+          <option value="logo">Logos</option>
+          <option value="video">Videos</option>
+          <option value="article">Articles</option>
+          <option value="copy">Copy</option>
+          <option value="campaign">Campaigns</option>
+          <option value="infographic">Infographics</option>
+        </select>
+        <button id="rescan-btn" class="btn btn-secondary" title="Rescan assets">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+            <path d="M3 3v5h5"></path>
+            <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"></path>
+            <path d="M16 21h5v-5"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Layout -->
+    <div class="layout">
+      <!-- Brand Sidebar -->
+      <aside class="sidebar" id="brand-sidebar">
+        <div class="sidebar-section">
+          <h3>Brand</h3>
+          <div id="brand-summary" class="brand-summary">Loading...</div>
+        </div>
+        <div class="sidebar-section" id="color-section">
+          <h4>Colors</h4>
+          <div id="color-palette" class="color-palette"></div>
+        </div>
+        <div class="sidebar-section" id="voice-section">
+          <h4>Voice</h4>
+          <div id="voice-traits" class="voice-traits"></div>
+        </div>
+        <div class="sidebar-actions">
+          <button class="btn btn-primary btn-full" id="generate-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M5 12h14"></path>
+            </svg>
+            Generate New
+          </button>
+        </div>
+      </aside>
+
+      <!-- Gallery -->
+      <main class="gallery">
+        <div class="asset-grid" id="asset-grid">
+          <!-- Assets will be rendered here -->
+        </div>
+        <div class="empty-state" id="empty-state" style="display: none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M3 7v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-6l-2-2H5a2 2 0 0 0-2 2Z"></path>
+          </svg>
+          <p>No assets found</p>
+          <span>Add files to the <code>assets/</code> folder</span>
+        </div>
+      </main>
+    </div>
+
+    <!-- Preview Modal -->
+    <div class="modal" id="preview-modal">
+      <div class="modal-backdrop" id="modal-backdrop"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close">&times;</button>
+        <div class="modal-preview" id="modal-preview"></div>
+        <div class="modal-info">
+          <h2 id="modal-name"></h2>
+          <p id="modal-path" class="modal-path"></p>
+          <div class="modal-meta" id="modal-meta"></div>
+          <div class="modal-actions">
+            <button class="btn btn-primary" id="action-edit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+              </svg>
+              Edit in Claude
+            </button>
+            <button class="btn btn-secondary" id="action-copy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              Copy Path
+            </button>
+            <button class="btn btn-secondary" id="action-r2" disabled title="Coming soon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="17 8 12 3 7 8"></polyline>
+                <line x1="12" y1="3" x2="12" y2="15"></line>
+              </svg>
+              Upload R2
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Editor Modal -->
+    <div class="modal" id="editor-modal">
+      <div class="modal-backdrop" id="editor-backdrop"></div>
+      <div class="modal-content modal-editor">
+        <div class="editor-header">
+          <h2 id="editor-title">Edit File</h2>
+          <div class="editor-status">
+            <span class="ai-status" id="ai-status" title="AI Status">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"></path>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+              <span id="ai-status-text">Checking AI...</span>
+            </span>
+          </div>
+          <button class="modal-close" id="editor-close">&times;</button>
+        </div>
+        <div class="editor-body">
+          <textarea id="editor-content" placeholder="File content..."></textarea>
+        </div>
+        <div class="editor-enhance">
+          <input type="text" id="enhance-instruction" placeholder="Describe how to improve this content...">
+          <button class="btn btn-accent" id="enhance-btn" title="Enhance with AI">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+              <path d="M2 17l10 5 10-5"></path>
+              <path d="M2 12l10 5 10-5"></path>
+            </svg>
+            AI Enhance
+          </button>
+        </div>
+        <div class="editor-footer">
+          <span class="editor-path" id="editor-path"></span>
+          <div class="editor-actions">
+            <button class="btn btn-secondary" id="editor-cancel">Cancel</button>
+            <button class="btn btn-primary" id="editor-save">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <script src="/assets/hub.js"></script>
+</body>
+</html>

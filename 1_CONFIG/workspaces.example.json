@@ -1,0 +1,14 @@
+{
+  "_comment": "Machine-local workspace map. Copy to workspaces.json and set absolute paths for this machine. workspaces.json is gitignored.",
+  "mother_brain": {
+    "name": "SEOSONA OS",
+    "path": "~/.seosona"
+  },
+  "satellites": [
+    {
+      "name": "SEOSONA Video",
+      "path": "/absolute/path/to/SEOSONA Video",
+      "index_paths": ["6_SOP", "4_BRAIN"]
+    }
+  ]
+}
