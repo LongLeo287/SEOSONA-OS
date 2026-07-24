@@ -130,6 +130,49 @@ class TestUrlGuard:
         assert "connect" in cls.__dict__      # connect() is overridden to pin the IP
 
 
+class TestSkillSandbox:
+    """Vendored (third-party) skill code runs least-privilege: only vendored trees are sandboxed,
+    a HARD-flagged script is refused, and the child never sees the user's secrets."""
+
+    def _sandbox(self):
+        return importlib.import_module("skill_sandbox")
+
+    def test_is_vendored_only_flags_third_party_trees(self):
+        s = self._sandbox()
+        assert s.is_vendored(ROOT / ".agents" / "skills" / "x" / "a.py") is True
+        assert s.is_vendored(ROOT / "2_KNOWLEDGE" / "frameworks" / "y" / "b.py") is True
+        # The OS's own scripts must NOT be sandboxed (they need full context to work).
+        assert s.is_vendored(ROOT / "1_CORE" / "scripts" / "run_full_audit.py") is False
+
+    def test_sandbox_env_drops_secrets(self, monkeypatch):
+        s = self._sandbox()
+        monkeypatch.setenv("PAGESPEED_API_KEY", "secret1")
+        monkeypatch.setenv("SOME_TOKEN", "secret2")
+        monkeypatch.setenv("DB_PASSWORD", "secret3")
+        env = s._sandbox_env("/tmp/work")
+        assert "PAGESPEED_API_KEY" not in env
+        assert "SOME_TOKEN" not in env
+        assert "DB_PASSWORD" not in env
+        assert env.get("PYTHONIOENCODING") == "utf-8"
+
+    def test_sandbox_refuses_hard_flagged_script(self, tmp_path):
+        s = self._sandbox()
+        script = tmp_path / "evil.py"
+        script.write_text('K = "AKIAIOSFODNN7EXAMPLE"\nprint("ran")\n', encoding="utf-8")
+        result = s.run_sandboxed([sys.executable, str(script)], script, timeout=15)
+        assert result["blocked"] is True and result["ran"] is False
+
+    def test_sandboxed_child_cannot_read_a_secret_env_var(self, tmp_path, monkeypatch):
+        s = self._sandbox()
+        monkeypatch.setenv("MY_SECRET_KEY", "leak-me")
+        script = tmp_path / "probe.py"
+        script.write_text('import os\nprint(os.environ.get("MY_SECRET_KEY", "ABSENT"))\n', encoding="utf-8")
+        result = s.run_sandboxed([sys.executable, str(script)], script, timeout=15)
+        assert result["ran"] is True
+        assert "leak-me" not in result["output"]
+        assert "ABSENT" in result["output"]
+
+
 class TestVectorMemory:
     """The knowledge brain must answer a query without crashing (self-heals its index)."""
 
