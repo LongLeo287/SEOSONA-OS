@@ -24,9 +24,12 @@ from collections import defaultdict
 try:
     import os as _os, sys as _sys
     _sys.path.append(_os.path.dirname(__file__))
-    from url_guard import assert_safe_url
+    from url_guard import assert_safe_url, safe_urlopen
 except Exception:
     def assert_safe_url(u):  # fail closed if the guard can't load
+        raise RuntimeError("url_guard unavailable — refusing to fetch unsafely")
+
+    def safe_urlopen(*_a, **_k):
         raise RuntimeError("url_guard unavailable — refusing to fetch unsafely")
 
 
@@ -100,7 +103,7 @@ def get_status_only(url, timeout=10):
         return 0
     try:
         req = urllib.request.Request(url, headers=HEADERS, method="HEAD")
-        with urllib.request.urlopen(req, timeout=timeout, context=CTX) as resp:
+        with safe_urlopen(req, timeout=timeout, context=CTX) as resp:
             return resp.status
     except urllib.error.HTTPError as e:
         return e.code

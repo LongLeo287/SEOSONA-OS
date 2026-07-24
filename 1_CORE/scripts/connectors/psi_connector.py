@@ -22,6 +22,14 @@ ROOT = Path(__file__).parent.parent.parent.parent
 CONFIG_PATH = ROOT / "3_MEMORY" / "specs" / "config.json"
 sys.path.insert(0, str(ROOT / "scripts"))
 
+# SSRF-hardened fetch (validates the initial URL AND every redirect hop). Fail closed if the guard
+# module can't be imported.
+try:
+    from url_guard import safe_urlopen
+except Exception:  # pragma: no cover
+    def safe_urlopen(*_a, **_k):
+        raise RuntimeError("url_guard unavailable — refusing to fetch unsafely")
+
 def load_config():
     if not CONFIG_PATH.exists():
         return {"defaults": {"target_domain": "", "target_url": "", "output_dir": "3_MEMORY/seo_exports"}}
@@ -40,9 +48,7 @@ def fetch_psi(url, strategy, api_key):
     full_url = f"{endpoint}?{params}"
     print(f"   [PSI] {strategy.upper()}: {url}")
     try:
-        from url_guard import assert_safe_url
-        assert_safe_url(full_url)  # SSRF guard: block private/loopback/metadata hosts
-        with urllib.request.urlopen(full_url, timeout=50) as resp:
+        with safe_urlopen(full_url, timeout=50) as resp:
             return json.loads(resp.read())
     except Exception as e:
         print(f"   [XX] PSI error ({strategy}): {e}")

@@ -13,6 +13,8 @@ development (e.g. testing against a WordPress instance on localhost/LAN).
 import os
 import ipaddress
 import socket
+import urllib.request
+import urllib.error
 from urllib.parse import urlparse
 
 
@@ -70,3 +72,41 @@ def assert_safe_url(url: str) -> str:
             )
 
     return url
+
+
+class _ValidatingRedirectHandler(urllib.request.HTTPRedirectHandler):
+    """Re-run the SSRF guard on every 3xx target before following it.
+
+    ``assert_safe_url`` on the initial URL is not enough: a public URL can 302 to
+    ``http://169.254.169.254/`` or ``http://localhost/``. urllib follows redirects
+    automatically, so without this the guard is bypassed on the second hop. Here we
+    validate ``newurl`` and let a rejection propagate as ``UnsafeURLError``.
+    """
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        assert_safe_url(newurl)
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+def safe_urlopen(url_or_req, *, timeout=30, context=None, **kwargs):
+    """SSRF-hardened drop-in for ``urllib.request.urlopen``.
+
+    Validates the initial URL (and, via the opener, every redirect hop) against the
+    guard before any bytes are fetched. Accepts a URL string or a ``Request``; an
+    optional ``context`` (ssl.SSLContext) is honoured like ``urlopen``'s, and any
+    other kwargs pass through to ``opener.open``. Use this instead of
+    ``urllib.request.urlopen`` anywhere the target host is influenced by external data.
+    """
+    if isinstance(url_or_req, urllib.request.Request):
+        req = url_or_req
+        target = req.full_url
+    else:
+        target = url_or_req
+        req = urllib.request.Request(url_or_req)
+
+    assert_safe_url(target)
+    handlers = [_ValidatingRedirectHandler()]
+    if context is not None:
+        handlers.append(urllib.request.HTTPSHandler(context=context))
+    opener = urllib.request.build_opener(*handlers)
+    return opener.open(req, timeout=timeout, **kwargs)

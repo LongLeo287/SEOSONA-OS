@@ -11,9 +11,12 @@ from datetime import datetime
 try:
     import os as _os, sys as _sys
     _sys.path.append(_os.path.dirname(__file__))
-    from url_guard import assert_safe_url
+    from url_guard import assert_safe_url, safe_urlopen
 except Exception:
     def assert_safe_url(u):
+        raise RuntimeError("url_guard unavailable")
+
+    def safe_urlopen(*_a, **_k):
         raise RuntimeError("url_guard unavailable")
 
 class AEOParser(HTMLParser):
@@ -106,10 +109,9 @@ class AEOParser(HTMLParser):
 
 def analyze_url(url):
     print(f"   [AEO] Scanning {url} for AI-Search Readiness...")
-    assert_safe_url(url)
     req = urllib.request.Request(url, headers={'User-Agent': 'SEOSONA AEO-Bot/4.0'})
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with safe_urlopen(req, timeout=10) as response:
             html = response.read().decode('utf-8')
             parser = AEOParser()
             parser.feed(html)
@@ -142,10 +144,9 @@ def analyze_url(url):
 def get_internal_links(domain, start_url, max_links=5):
     # Very simple crawler just to get a few pages to test AEO
     links = {start_url}
-    assert_safe_url(start_url)
     req = urllib.request.Request(start_url, headers={'User-Agent': 'Mozilla/5.0'})
     try:
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with safe_urlopen(req, timeout=10) as response:
             html = response.read().decode('utf-8')
             # Rudimentary link extraction
             import re
