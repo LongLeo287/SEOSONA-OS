@@ -119,7 +119,9 @@ def dispatch_match(match: Dict[str, Any], reason: str = "", execute: bool = True
 
 
 def _extract_domain(task: str) -> Optional[str]:
-    m = re.search(r"\b([a-z0-9-]+(?:\.[a-z0-9-]+)+)\b", task.lower())
+    # Require a real alphabetic TLD (>=2 letters) so version numbers like "2.0" or "v3.5" are not
+    # mistaken for a domain and dispatched as an audit target.
+    m = re.search(r"\b([a-z0-9-]+(?:\.[a-z0-9-]+)*\.[a-z]{2,})\b", task.lower())
     return m.group(1) if m else None
 
 

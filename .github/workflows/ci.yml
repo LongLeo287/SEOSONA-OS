@@ -1,0 +1,47 @@
+name: CI
+
+# Fast, first-party checks on every push/PR — the gate that would have caught the CLI-syntax
+# regression. Scans only the OS's own code (lint + bridge + syntax + tests); it does NOT run CodeQL
+# over the vendored skill/knowledge tree (that was intentionally removed — wrong fit for this repo).
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint — English-only policy
+        run: npm run lint
+
+      - name: Capability bridge validates
+        run: node 1_CORE/scripts/seosona_capability_bridge.js validate
+
+      - name: JS syntax — CLI must load
+        run: node --check cli/src/localInit.js && node --check cli/bin/seosona.js
+
+      - name: Python compiles
+        run: python -m compileall -q 1_CORE/scripts
+
+      - name: Hooks unit tests
+        run: npm test
+
+      - name: Security-critical Python tests
+        run: pip install --quiet pytest && python -m pytest tests/ -q
