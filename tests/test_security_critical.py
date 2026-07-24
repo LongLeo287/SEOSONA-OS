@@ -9,6 +9,8 @@ import importlib
 import sys
 from pathlib import Path
 
+import pytest
+
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "1_CORE" / "scripts"))
 sys.path.insert(0, str(ROOT / "1_CORE" / "scripts" / "uap_pipeline"))
@@ -76,6 +78,9 @@ class TestVectorMemory:
     """The knowledge brain must answer a query without crashing (self-heals its index)."""
 
     def test_query_returns_a_list(self):
+        # The brain needs scikit-learn (TF-IDF). Skip where it isn't installed (e.g. minimal CI);
+        # the security-critical guard tests above never depend on it and always run.
+        pytest.importorskip("sklearn")
         from vector_memory import query_semantic_memory
         result = query_semantic_memory("vietnamese asr", 3)
         assert isinstance(result, list)
