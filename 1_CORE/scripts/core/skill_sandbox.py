@@ -28,6 +28,7 @@ import shutil
 import subprocess
 import sys
 import tempfile
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -127,15 +128,79 @@ def _posix_limits():
     os.setsid()
 
 
+def _truthy(value: Optional[str]) -> bool:
+    return (value or "").strip().lower() in ("1", "true", "yes", "on")
+
+
+@lru_cache(maxsize=1)
+def _docker_available() -> bool:
+    """True only if the docker CLI exists AND its daemon answers — so a broken/socket-less docker
+    never wedges a run; we just fall back to the in-process sandbox."""
+    exe = shutil.which("docker")
+    if not exe:
+        return False
+    try:
+        return subprocess.run([exe, "info"], capture_output=True, timeout=15).returncode == 0
+    except Exception:
+        return False
+
+
+def _docker_run_cmd(interp: str, script: Path, args: List[str], image: str) -> List[str]:
+    """Build a hardened ``docker run`` argv: no network, read-only rootfs, dropped caps, non-root,
+    resource caps, no inherited env, and the skill dir mounted READ-ONLY at /skill. This is the
+    isolation the in-process sandbox can't give on its own (true network + FS containment)."""
+    skill_dir = str(Path(script).resolve().parent)
+    relname = Path(script).name
+    return [
+        "docker", "run", "--rm",
+        "--network", "none",                       # no egress — kills exfiltration + SSRF entirely
+        "--read-only",                             # immutable rootfs
+        "--tmpfs", "/work:rw,size=64m",            # only writable area
+        "-v", f"{skill_dir}:/skill:ro",            # the skill's own files, read-only
+        "-w", "/work",
+        "--memory", "1g", "--cpus", "1", "--pids-limit", "128",
+        "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
+        "--user", "65534:65534",                   # nobody:nogroup
+        "-e", "PYTHONIOENCODING=utf-8", "-e", "HOME=/work",
+        image,
+        interp, f"/skill/{relname}", *args,
+    ]
+
+
+def _run_docker(script: Path, args: List[str], timeout: int) -> Dict[str, Any]:
+    is_py = str(script).endswith(".py")
+    interp = "python" if is_py else "node"
+    image = (os.getenv("SEOSONA_SANDBOX_PY_IMAGE", "python:3.11-slim") if is_py
+             else os.getenv("SEOSONA_SANDBOX_JS_IMAGE", "node:20-slim"))
+    cmd = _docker_run_cmd(interp, script, args, image)
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", timeout=timeout)
+        out = (proc.stdout or "") + (("\n" + proc.stderr) if proc.returncode and proc.stderr else "")
+        return {"ran": True, "ok": proc.returncode == 0, "exit_code": proc.returncode,
+                "sandboxed": True, "backend": "docker", "output": out.strip()[-_MAX_OUTPUT:]}
+    except subprocess.TimeoutExpired:
+        return {"ran": True, "ok": False, "exit_code": None, "sandboxed": True, "backend": "docker",
+                "output": f"sandboxed (docker) timeout after {timeout}s"}
+    except Exception as e:  # noqa: BLE001
+        return {"ran": False, "ok": False, "exit_code": None, "sandboxed": True, "backend": "docker",
+                "output": f"docker sandbox error: {e}"}
+
+
 def run_sandboxed(cmd: List[str], script: Path, timeout: int = 600,
                   root: Path = ROOT) -> Dict[str, Any]:
     """Run a vendored script's ``cmd`` under the sandbox. Returns the same dict shape as the
-    dispatcher's trusted ``run_script`` (ran/ok/exit_code/output), plus ``sandboxed: True`` and, on
-    a pre-exec refusal, ``blocked: True``."""
+    dispatcher's trusted ``run_script`` (ran/ok/exit_code/output) plus ``sandboxed: True``, a
+    ``backend`` ("docker"|"subprocess"), and, on a pre-exec refusal, ``blocked: True``.
+
+    Backend: opt-in Docker (``SEOSONA_SANDBOX_DOCKER=1`` on a host with a working daemon) gives full
+    network + filesystem isolation; otherwise the in-process least-privilege subprocess is used."""
     hard = _hard_flag(Path(script))
     if hard:
         return {"ran": False, "ok": False, "exit_code": None, "sandboxed": True, "blocked": True,
                 "output": f"sandbox refused to run vendored script — HARD security flag: {hard}"}
+
+    if _truthy(os.getenv("SEOSONA_SANDBOX_DOCKER")) and _docker_available():
+        return _run_docker(Path(script), list(cmd[2:]), timeout)
 
     workdir = tempfile.mkdtemp(prefix="seosona_skill_")
     is_posix = os.name == "posix"
@@ -155,13 +220,14 @@ def run_sandboxed(cmd: List[str], script: Path, timeout: int = 600,
             "ok": proc.returncode == 0,
             "exit_code": proc.returncode,
             "sandboxed": True,
+            "backend": "subprocess",
             "output": out.strip()[-_MAX_OUTPUT:],
         }
     except subprocess.TimeoutExpired:
-        return {"ran": True, "ok": False, "exit_code": None, "sandboxed": True,
+        return {"ran": True, "ok": False, "exit_code": None, "sandboxed": True, "backend": "subprocess",
                 "output": f"sandboxed timeout after {timeout}s"}
     except Exception as e:  # noqa: BLE001
-        return {"ran": False, "ok": False, "exit_code": None, "sandboxed": True,
+        return {"ran": False, "ok": False, "exit_code": None, "sandboxed": True, "backend": "subprocess",
                 "output": f"sandbox error: {e}"}
     finally:
         shutil.rmtree(workdir, ignore_errors=True)

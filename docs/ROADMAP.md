@@ -27,10 +27,12 @@ and the system's architecture. Ordered by return-on-investment. Status: ✅ done
   allowlist-based (only names/paths explicitly marked safe auto-run). *(Deferred by owner: an
   over-tight allowlist risks breaking existing auto-run automation — revisit deliberately.)*
 - ✅ **Sandbox vendored-skill execution** — `core/skill_sandbox.py` confines every vendored-script run
-  (via `dispatcher.run_script`) with a pre-exec HARD re-scan, secret-stripped env, throwaway temp cwd,
-  POSIX RLIMIT caps + timeout; the assimilator's in-process mempalace import is HARD-scanned too. OS
-  scripts still run with full context. **Remaining (needs OS-level sandbox):** network egress and
-  absolute-path FS access aren't blocked — that requires a container/job-object, the documented next step.
+  (via `dispatcher.run_script`): pre-exec HARD re-scan, secret-stripped env, throwaway temp cwd, POSIX
+  RLIMIT caps + timeout; the assimilator's in-process mempalace import is HARD-scanned too. OS scripts
+  still run with full context. **Container backend (done, opt-in):** set `SEOSONA_SANDBOX_DOCKER=1` on a
+  host with a working Docker daemon and vendored scripts run in a `--network none --read-only --cap-drop
+  ALL` non-root container — true network + FS isolation; auto-falls back to the in-process sandbox where
+  Docker is absent (e.g. Windows without Docker Desktop).
 
 ## Tier 3 — Intelligence / architecture
 

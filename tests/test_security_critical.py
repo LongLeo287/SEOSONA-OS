@@ -172,6 +172,26 @@ class TestSkillSandbox:
         assert "leak-me" not in result["output"]
         assert "ABSENT" in result["output"]
 
+    def test_default_backend_is_in_process_subprocess(self, tmp_path, monkeypatch):
+        # With the Docker backend NOT opted in, behaviour is unchanged: the in-process sandbox runs.
+        s = self._sandbox()
+        monkeypatch.delenv("SEOSONA_SANDBOX_DOCKER", raising=False)
+        script = tmp_path / "p.py"
+        script.write_text("print('ok')\n", encoding="utf-8")
+        result = s.run_sandboxed([sys.executable, str(script)], script, timeout=15)
+        assert result["backend"] == "subprocess"
+
+    def test_docker_run_cmd_is_hardened(self):
+        # The opt-in Docker backend must build a locked-down `docker run` (no network, read-only,
+        # dropped caps, non-root, read-only skill mount) and leak no secrets on the argv.
+        s = self._sandbox()
+        cmd = s._docker_run_cmd("python", Path("/x/skills/foo/probe.py"), ["--a"], "python:3.11-slim")
+        joined = " ".join(cmd)
+        for flag in ("--network none", "--read-only", "--cap-drop ALL", "no-new-privileges", ":ro", "65534"):
+            assert flag in joined, flag
+        assert cmd[-3:] == ["python", "/skill/probe.py", "--a"]
+        assert not any(("KEY" in c or "TOKEN" in c or "SECRET" in c) for c in cmd)
+
 
 class TestVectorMemory:
     """The knowledge brain must answer a query without crashing (self-heals its index)."""
