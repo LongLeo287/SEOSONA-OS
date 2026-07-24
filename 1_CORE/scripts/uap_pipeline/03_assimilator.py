@@ -487,69 +487,79 @@ def run_assimilator():
     audited_items = cursor.fetchall()
     print(f"Found {len(audited_items)} audited items ready for assimilation.")
 
-    for row in audited_items:
-        target = dict(row)
-        repo_id = target['id']
-        safe_name = repo_id.replace('/', '_')
-        report_path = AUDIT_REPORTS_DIR / f"audit_{safe_name}.json"
+    try:
+        for row in audited_items:
+            target = dict(row)
+            repo_id = target['id']
+            safe_name = repo_id.replace('/', '_')
+            report_path = AUDIT_REPORTS_DIR / f"audit_{safe_name}.json"
 
-        if not report_path.exists():
-            continue
+            if not report_path.exists():
+                continue
 
-        with open(report_path, 'r', encoding='utf-8') as f:
-            audit_data = json.load(f)
-
-        print(f"Assimilating {repo_id}...")
-
-        # Analyze from source code
-        ki_content = _assimilate(repo_id, audit_data)
-
-        # Classify: which SEOSONA system/function this repo best upgrades (factual, evidence-based).
-        routing = classify(repo_id, audit_data)
-        # Self-improvement flag: does this repo itself improve the UAP pipeline?
-        routing["uap_relevant"] = is_uap_relevant(audit_data)
-        ki_content += (
-            f"\n\n## UAP Routing (auto-classified)\n"
-            f"- **System:** `{routing['system']}` · **Function:** `{routing['function']}` · "
-            f"**Fit:** {routing['score']}/100 · **Auto-apply:** {routing['auto_apply']}\n"
-            f"- **Evidence:** {', '.join(f'`{t}`' for t in routing['matched'][:8]) or 'none (kept as reference)'}\n"
-            f"- **All scores:** {routing['all_scores']}\n"
-        )
-
-        # Save KI
-        ki_path = KI_DIR / f"uap_{safe_name}.md"
-        with open(ki_path, 'w', encoding='utf-8') as f:
-            f.write(ki_content)
-
-        # Routing sidecar for the creator (auto-apply decision + evidence, auditable).
-        with open(KI_DIR / f"uap_{safe_name}.classification.json", 'w', encoding='utf-8') as f:
-            json.dump(routing, f, indent=2)
-
-        # MemPalace AAAK compression
-        if Dialect:
             try:
-                dialect_engine = Dialect()
-                aaak_content = dialect_engine.compress(
-                    ki_content,
-                    metadata={"source_file": str(ki_path)},
+                with open(report_path, 'r', encoding='utf-8') as f:
+                    audit_data = json.load(f)
+
+                print(f"Assimilating {repo_id}...")
+
+                # Analyze from source code
+                ki_content = _assimilate(repo_id, audit_data)
+
+                # Classify: which SEOSONA system/function this repo best upgrades (evidence-based).
+                routing = classify(repo_id, audit_data)
+                # Self-improvement flag: does this repo itself improve the UAP pipeline?
+                routing["uap_relevant"] = is_uap_relevant(audit_data)
+                ki_content += (
+                    f"\n\n## UAP Routing (auto-classified)\n"
+                    f"- **System:** `{routing['system']}` · **Function:** `{routing['function']}` · "
+                    f"**Fit:** {routing['score']}/100 · **Auto-apply:** {routing['auto_apply']}\n"
+                    f"- **Evidence:** {', '.join(f'`{t}`' for t in routing['matched'][:8]) or 'none (kept as reference)'}\n"
+                    f"- **All scores:** {routing['all_scores']}\n"
                 )
-                aaak_path = KI_DIR / f"uap_{safe_name}.aaak"
-                with open(aaak_path, 'w', encoding='utf-8') as f:
-                    f.write(aaak_content)
-                print(f"-> AAAK: {aaak_path}")
+
+                # Save KI
+                ki_path = KI_DIR / f"uap_{safe_name}.md"
+                with open(ki_path, 'w', encoding='utf-8') as f:
+                    f.write(ki_content)
+
+                # Routing sidecar for the creator (auto-apply decision + evidence, auditable).
+                with open(KI_DIR / f"uap_{safe_name}.classification.json", 'w', encoding='utf-8') as f:
+                    json.dump(routing, f, indent=2)
+
+                # MemPalace AAAK compression
+                if Dialect:
+                    try:
+                        dialect_engine = Dialect()
+                        aaak_content = dialect_engine.compress(
+                            ki_content,
+                            metadata={"source_file": str(ki_path)},
+                        )
+                        aaak_path = KI_DIR / f"uap_{safe_name}.aaak"
+                        with open(aaak_path, 'w', encoding='utf-8') as f:
+                            f.write(aaak_content)
+                        print(f"-> AAAK: {aaak_path}")
+                    except Exception as e:
+                        print(f"AAAK failed: {e}")
+
+                cursor.execute(
+                    "UPDATE queue SET status = 'ASSIMILATED' WHERE id = ?",
+                    (repo_id,),
+                )
+                conn.commit()
+                print(f"-> KI: {ki_path}")
             except Exception as e:
-                print(f"AAAK failed: {e}")
+                # One bad repo must neither crash the batch nor strand itself at AUDITED forever.
+                print(f"[!] assimilate {repo_id} failed: {e}; marking FAILED and continuing.")
+                cursor.execute(
+                    "UPDATE queue SET status='FAILED', retry_count = retry_count + 1 WHERE id = ?",
+                    (repo_id,),
+                )
+                conn.commit()
 
-        cursor.execute(
-            "UPDATE queue SET status = 'ASSIMILATED' WHERE id = ?",
-            (repo_id,),
-        )
-        conn.commit()
-        print(f"-> KI: {ki_path}")
-
-        time.sleep(2)
-
-    conn.close()
+            time.sleep(2)
+    finally:
+        conn.close()
 
 
 if __name__ == "__main__":

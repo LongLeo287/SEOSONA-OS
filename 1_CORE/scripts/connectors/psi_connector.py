@@ -40,6 +40,8 @@ def fetch_psi(url, strategy, api_key):
     full_url = f"{endpoint}?{params}"
     print(f"   [PSI] {strategy.upper()}: {url}")
     try:
+        from url_guard import assert_safe_url
+        assert_safe_url(full_url)  # SSRF guard: block private/loopback/metadata hosts
         with urllib.request.urlopen(full_url, timeout=50) as resp:
             return json.loads(resp.read())
     except Exception as e:

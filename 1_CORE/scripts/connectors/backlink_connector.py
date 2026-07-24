@@ -59,6 +59,8 @@ def fetch_open_pagerank(domains, api_key):
 
     try:
         req = urllib.request.Request(full_url, headers=headers)
+        from url_guard import assert_safe_url
+        assert_safe_url(full_url)  # SSRF guard: block private/loopback/metadata hosts
         with urllib.request.urlopen(req, timeout=15) as resp:
             data = json.loads(resp.read())
         results = {}
