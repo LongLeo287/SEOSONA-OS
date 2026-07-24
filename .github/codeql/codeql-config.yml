@@ -1,18 +1,16 @@
 name: "SEOSONA OS — scan the OS's own code only"
 
-# CodeQL must analyze the code SEOSONA OS actually authors and maintains — not the third-party
-# skills, ingested frameworks, or research repos vendored into the tree for reference. Scanning
-# vendored dependencies as if they were our code produced hundreds of alerts for issues in code we
-# don't own and can't fix. `paths` restricts analysis to the OS's own Python + JS.
-paths:
-  - "1_CORE"
-  - "cli/src"
-  - "cli/bin"
-  - "scripts"
-
+# CodeQL should analyze the code SEOSONA OS actually authors — not the third-party skills, ingested
+# frameworks, or research repos vendored into the tree for reference. We use paths-ignore (a denylist)
+# rather than paths (an allowlist): paths-ignore keeps the matrix languages (python, javascript-
+# typescript) and simply filters out vendored files, so it never triggers analysis of a language that
+# only exists in vendored code (e.g. the Ruby files under .agents/skills/google-docs-skill).
 paths-ignore:
+  - ".agents"
+  - "2_KNOWLEDGE"
+  - "3_MEMORY"
+  - "5_RESEARCH"
+  - "cli/assets"
   - "**/node_modules"
   - "**/dist"
   - "**/tests"
-  - "**/test"
-  - "1_CORE/bin"
