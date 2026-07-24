@@ -37,7 +37,8 @@ if (command === 'setup') {
 Usage:
   seosona setup   - Run the Global IDE Scanner (Injects rules into all IDEs on the machine)
   seosona init    - Run the Local Scanner (Drops .rules files in the current project folder)
-  seosona doctor  - Diagnose the current project connector
+  seosona doctor  - Health report: OS-wide (lint, bridge, tests, brain) from the OS repo,
+                    or the project-connector diagnosis from a connected satellite folder
   seosona sync-rules - Refresh generated project rule files
 
 Version ${pkg.version}
