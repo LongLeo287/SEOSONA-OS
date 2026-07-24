@@ -24,6 +24,14 @@ except ImportError:
     def get_secret(key, default=""):
         return os.environ.get(key, default)
 
+# SSRF-hardened fetch (validates the initial URL AND every redirect hop). Fail closed if the guard
+# module can't be imported — refuse to fetch rather than silently fall back to raw urlopen.
+try:
+    from url_guard import safe_urlopen
+except Exception:  # pragma: no cover - guard must be importable in a real install
+    def safe_urlopen(*_a, **_k):
+        raise RuntimeError("url_guard unavailable — refusing to fetch unsafely")
+
 
 def is_configured(value):
     if value is None:
@@ -59,9 +67,7 @@ def fetch_open_pagerank(domains, api_key):
 
     try:
         req = urllib.request.Request(full_url, headers=headers)
-        from url_guard import assert_safe_url
-        assert_safe_url(full_url)  # SSRF guard: block private/loopback/metadata hosts
-        with urllib.request.urlopen(req, timeout=15) as resp:
+        with safe_urlopen(req, timeout=15) as resp:
             data = json.loads(resp.read())
         results = {}
         for item in data.get("response", []):
@@ -91,7 +97,7 @@ def fetch_common_crawl(domain, max_links=100):
     # Fall back to a known stable index if collinfo fails
     index_url = "https://index.commoncrawl.org/CC-MAIN-2025-08-index"
     try:
-        with urllib.request.urlopen(cdx_url, timeout=10) as r:
+        with safe_urlopen(cdx_url, timeout=10) as r:
             indexes = json.loads(r.read())
             if indexes:
                 index_url = indexes[0].get("cdx-api", index_url)
@@ -106,7 +112,7 @@ def fetch_common_crawl(domain, max_links=100):
     full_url = f"{index_url}?{params}"
 
     try:
-        with urllib.request.urlopen(full_url, timeout=30) as resp:
+        with safe_urlopen(full_url, timeout=30) as resp:
             lines = resp.read().decode().strip().split("\n")
         results = []
         for line in lines:
@@ -166,7 +172,7 @@ def fetch_bing_backlinks(domain, api_key, max_links=100):
     full_url = f"{url}?{params}"
 
     try:
-        with urllib.request.urlopen(full_url, timeout=15) as resp:
+        with safe_urlopen(full_url, timeout=15) as resp:
             data = json.loads(resp.read())
         links = data.get("d", {}).get("InLinks", [])
         print(f"   ✅ Got {len(links)} Bing links")
@@ -187,7 +193,7 @@ def check_brand_mentions(brand, keywords=None):
         query = f"{brand} {kw}"
         url = f"https://suggestqueries.google.com/complete/search?client=firefox&q={urllib.parse.quote(query)}&hl=vi"
         try:
-            with urllib.request.urlopen(url, timeout=10) as resp:
+            with safe_urlopen(url, timeout=10) as resp:
                 data = json.loads(resp.read())
             suggestions = data[1] if len(data) > 1 else []
             results[query] = suggestions

@@ -66,7 +66,10 @@ class WPRestConnector:
         if categories:
             payload["categories"] = categories
 
-        response = requests.post(endpoint, headers=self._get_auth_header(), json=payload, timeout=30)
+        # allow_redirects=False: never re-POST the auth header + content to a host the WP site
+        # redirects us to (SSRF / credential-leak defense — the base URL was already SSRF-validated).
+        response = requests.post(endpoint, headers=self._get_auth_header(), json=payload,
+                                 timeout=30, allow_redirects=False)
         
         if response.status_code in (200, 201):
             data = response.json()

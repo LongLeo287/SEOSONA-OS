@@ -19,9 +19,12 @@ from pathlib import Path
 try:
     import os as _os, sys as _sys
     _sys.path.append(_os.path.dirname(__file__))
-    from url_guard import assert_safe_url
+    from url_guard import assert_safe_url, safe_urlopen
 except Exception:
     def assert_safe_url(u):
+        raise RuntimeError("url_guard unavailable")
+
+    def safe_urlopen(*_a, **_k):
         raise RuntimeError("url_guard unavailable")
 
 ROOT = Path(__file__).parent.parent.parent.parent
@@ -39,9 +42,8 @@ def load_config():
 
 def fetch(url, timeout=15):
     try:
-        assert_safe_url(url)
         req = urllib.request.Request(url, headers=HEADERS)
-        with urllib.request.urlopen(req, timeout=timeout, context=CTX) as resp:
+        with safe_urlopen(req, timeout=timeout, context=CTX) as resp:
             return resp.read().decode("utf-8", errors="replace"), resp.status
     except Exception as e:
         return "", 0

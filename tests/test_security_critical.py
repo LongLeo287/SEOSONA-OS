@@ -74,6 +74,46 @@ class TestDispatcherGuard:
         assert resolve_path("~/.seosona/1_CORE/SOUL.md") is not None
 
 
+class TestUrlGuard:
+    """SSRF guard: block private/loopback/metadata hosts before any fetch, and re-validate every
+    redirect hop (a public URL 302-ing to an internal host must still be blocked)."""
+
+    def _guard(self):
+        sys.path.insert(0, str(ROOT / "1_CORE" / "scripts" / "connectors"))
+        return importlib.import_module("url_guard")
+
+    def test_blocks_cloud_metadata_ip(self):
+        g = self._guard()
+        with pytest.raises(g.UnsafeURLError):
+            g.assert_safe_url("http://169.254.169.254/latest/meta-data/")
+
+    def test_blocks_loopback(self):
+        g = self._guard()
+        with pytest.raises(g.UnsafeURLError):
+            g.assert_safe_url("http://localhost:8080/admin")
+
+    def test_rejects_non_http_scheme(self):
+        g = self._guard()
+        with pytest.raises(g.UnsafeURLError):
+            g.assert_safe_url("file:///etc/passwd")
+
+    def test_safe_urlopen_validates_before_fetch(self):
+        # safe_urlopen must reject an internal target WITHOUT opening a socket.
+        g = self._guard()
+        with pytest.raises(g.UnsafeURLError):
+            g.safe_urlopen("http://127.0.0.1:1/", timeout=1)
+
+    def test_redirect_handler_revalidates_hop(self):
+        # The opener's redirect handler re-runs the guard on the 3xx target: a redirect to an
+        # internal host raises rather than being followed.
+        g = self._guard()
+        import urllib.request
+        h = g._ValidatingRedirectHandler()
+        req = urllib.request.Request("https://public.example.com/")
+        with pytest.raises(g.UnsafeURLError):
+            h.redirect_request(req, None, 302, "Found", {}, "http://169.254.169.254/")
+
+
 class TestVectorMemory:
     """The knowledge brain must answer a query without crashing (self-heals its index)."""
 

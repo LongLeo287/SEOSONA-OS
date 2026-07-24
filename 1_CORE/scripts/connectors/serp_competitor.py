@@ -19,9 +19,12 @@ from pathlib import Path
 try:
     import os as _os, sys as _sys
     _sys.path.append(_os.path.dirname(__file__))
-    from url_guard import assert_safe_url
+    from url_guard import assert_safe_url, safe_urlopen
 except Exception:
     def assert_safe_url(u):
+        raise RuntimeError("url_guard unavailable")
+
+    def safe_urlopen(*_a, **_k):
         raise RuntimeError("url_guard unavailable")
 
 os.environ.setdefault("PYTHONIOENCODING", "utf-8")
@@ -36,9 +39,8 @@ def fetch_autocomplete(query: str, lang="vi", country="vn") -> list:
     })
     url = f"https://www.google.com/complete/search?{params}"
     try:
-        assert_safe_url(url)
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=10) as resp:
+        with safe_urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode("utf-8"))
             return [s[0] for s in data[1]] if len(data) > 1 else []
     except Exception:
@@ -53,7 +55,7 @@ def fetch_page_info(url: str) -> dict:
             url,
             headers={"User-Agent": "Mozilla/5.0 (compatible; SEOSONA/1.0)"}
         )
-        with urllib.request.urlopen(req, timeout=10, context=ctx) as resp:
+        with safe_urlopen(req, timeout=10, context=ctx) as resp:
             html = resp.read().decode("utf-8", errors="replace")
         title_m = re.search(r"<title[^>]*>(.*?)</title>", html, re.I | re.S)
         desc_m  = re.search(r'<meta[^>]+name=["\']description["\'][^>]+content=["\']([^"\']+)', html, re.I)
