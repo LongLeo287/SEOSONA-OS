@@ -31,12 +31,40 @@ RESEARCH_DIR = SEOSONA_ROOT / "5_RESEARCH"
 ENV_PATH = SEOSONA_ROOT / "1_CONFIG" / ".env"
 
 # -- MemPalace Integration --
+# `dialect` is VENDORED skill code, and Python runs a module's top-level body on import — so this is
+# an execution of third-party code that bypasses the dispatcher sandbox. Re-scan the payload with the
+# ingest security guard first; a HARD flag means we refuse to import it (Dialect stays None, which the
+# assimilator already tolerates) instead of executing a compromised payload in-process.
 import sys
-sys.path.append(str(SEOSONA_ROOT / ".agents" / "skills" / "_TIER_1_CORE" / "mempalace" / "payload"))
-try:
-    from dialect import Dialect
-except ImportError:
-    Dialect = None
+_MEMPALACE_PAYLOAD = SEOSONA_ROOT / ".agents" / "skills" / "_TIER_1_CORE" / "mempalace" / "payload"
+
+
+def _payload_is_safe(payload_dir: Path) -> bool:
+    dialect_py = payload_dir / "dialect.py"
+    if not dialect_py.exists():
+        return False
+    try:
+        import importlib
+        guard_dir = str(Path(__file__).resolve().parent)  # 02b_security_guard is a sibling module
+        if guard_dir not in sys.path:
+            sys.path.insert(0, guard_dir)
+        _guard = importlib.import_module("02b_security_guard")
+        res = _guard.scan_file_for_threats(dialect_py)
+        if res and res[0] == "HARD":
+            print(f"[Assimilator] MemPalace payload BLOCKED (HARD: {res[1]}) — skipping dialect import.")
+            return False
+    except Exception:
+        pass  # scanner unavailable -> fall through; a known first-party payload, best-effort scan only
+    return True
+
+
+Dialect = None
+if _payload_is_safe(_MEMPALACE_PAYLOAD):
+    sys.path.append(str(_MEMPALACE_PAYLOAD))
+    try:
+        from dialect import Dialect
+    except ImportError:
+        Dialect = None
 
 sys.path.append(str(Path(__file__).parent))
 from classifier import classify

@@ -64,9 +64,22 @@ def resolve_path(portable: str) -> Optional[Path]:
 
 
 def run_script(path: Path, args: Optional[List[str]] = None, timeout: int = DEFAULT_TIMEOUT) -> Dict[str, Any]:
-    """Run a .py/.js script via argv (no shell). Returns status/exit/output."""
+    """Run a .py/.js script via argv (no shell). Returns status/exit/output.
+
+    Vendored (third-party) skill/framework scripts are routed through the least-privilege sandbox
+    (secret-stripped env, temp cwd, resource caps, pre-exec malware re-scan); the OS's own trusted
+    scripts run directly with full context. See core.skill_sandbox.
+    """
     interp = sys.executable if path.suffix == ".py" else "node"
     cmd = [interp, str(path), *(args or [])]
+
+    try:
+        from skill_sandbox import is_vendored, run_sandboxed
+    except ImportError:  # imported as part of the `core` package
+        from .skill_sandbox import is_vendored, run_sandboxed
+    if is_vendored(path):
+        return run_sandboxed(cmd, path, timeout=timeout, root=ROOT)
+
     # Force the CHILD to write UTF-8: with captured stdout (a pipe) Python defaults to the
     # OS encoding (cp1252 on Windows), so scripts that print emoji crash with
     # UnicodeEncodeError when run here. PYTHONIOENCODING makes the child encode UTF-8.
