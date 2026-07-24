@@ -72,7 +72,7 @@ session ends. SEOSONA OS fixes that at the operating-system level:
 | Capability | What it does |
 |---|---|
 | 🧬 **SOUL doctrine injection** | A single master intelligence layer (`1_CORE/SOUL.md`) is anchored to every detected AI tool via a portable `~/.seosona` junction — zero hardcoded paths. |
-| 🔎 **Shared knowledge brain** | `seosona-knowledge` MCP does semantic (TF-IDF) search over `3_MEMORY/knowledge_items`; `codebase-memory` MCP serves a deterministic code knowledge-graph. |
+| 🔎 **Shared knowledge brain** | `seosona-knowledge` MCP does hybrid (BM25 + TF-IDF) search over `3_MEMORY/knowledge_items`; `codebase-memory` MCP serves a deterministic code knowledge-graph. |
 | 🛰️ **UAP — self-ingestion** | The Universal Assimilation Pipeline clones → security-scans → analyzes → classifies → assimilates external repos into skills/knowledge, one repo at a time, with dedup + version checks. |
 | 🗺️ **Skills router + dispatch** | 280+ skills are auto-indexed into `SKILLS_ROUTER.md`; the context engine selects the most relevant per task; the dispatcher can execute them behind a hard side-effect guard. |
 | 🌐 **Capability bridge** | A validated registry that routes a task to the right skill/connector/persona and flags what is safe to auto-run. |
