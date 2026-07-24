@@ -122,6 +122,28 @@ function runSetup() {
     injectDirectoryAssistant("Codex CLI", path.join(home, ".codex"));
     injectDirectoryAssistant("SecureCoder", path.join(home, ".securecoder"));
 
+    // Portable-path root: when `seosona setup` is run from inside a cloned OS repo, link
+    // ~/.seosona -> repo so every `~/.seosona/...` path resolves (mcp, capability bridge, KIs, the
+    // project connector `seosona doctor` calls). A global npm install can't know the repo location —
+    // there the repo's own `npm install` postinstall already created the link, so we skip quietly.
+    console.log("");
+    console.log(colors.yellow("[Portable Root] Linking ~/.seosona ..."));
+    const repoRoot = path.resolve(__dirname, "..", "..");
+    if (fs.existsSync(path.join(repoRoot, "1_CORE", "SOUL.md"))) {
+        try {
+            const { ensureJunction } = require(path.join(repoRoot, "1_CORE", "scripts", "lib", "ensure-junction.js"));
+            const r = ensureJunction(repoRoot);
+            if (r.status === "created") console.log(`  -> ${colors.green(`Linked ${r.link} -> ${r.target}`)}`);
+            else if (r.status === "exists") console.log(`  -> ${colors.green("Already linked.")}`);
+            else if (r.status === "occupied") console.log(`  -> ${colors.yellow(`${r.link} is a real folder — left untouched.`)}`);
+            else console.log(`  -> ${colors.yellow(`Could not link: ${r.error}`)}`);
+        } catch (e) {
+            console.log(`  -> ${colors.yellow(`Skipped: ${e.message}`)}`);
+        }
+    } else {
+        console.log(`  -> ${colors.gray("Global install — link is managed by the OS repo's own `npm install`.")}`);
+    }
+
     console.log("");
     console.log(colors.cyan("=========================================="));
     console.log(`  SETUP COMPLETE!`);

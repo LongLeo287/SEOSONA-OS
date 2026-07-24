@@ -7,8 +7,22 @@
 
 const fs = require('fs');
 const path = require('path');
+const { ensureJunction } = require('./lib/ensure-junction');
 
-const HOOKS_DIR = path.join(__dirname, '..', '..', '.git', 'hooks');
+const REPO_ROOT = path.join(__dirname, '..', '..');
+const HOOKS_DIR = path.join(REPO_ROOT, '.git', 'hooks');
+
+// Portable-path root: make ~/.seosona point at this clone so every `~/.seosona/...` path (mcp,
+// capability bridge, KIs, CLI connector) resolves on a fresh install. Best-effort — never fatal.
+try {
+  const r = ensureJunction(REPO_ROOT);
+  if (r.status === 'created') console.log(`🔗 Portable root linked: ${r.link} -> ${r.target}`);
+  else if (r.status === 'exists') console.log('🔗 Portable root ~/.seosona already linked.');
+  else if (r.status === 'occupied') console.warn(`⚠️  ${r.link} exists as a real folder — left untouched. Remove it and rerun to enable portable paths.`);
+  else if (r.status === 'error') console.warn(`⚠️  Could not link ~/.seosona: ${r.error}`);
+} catch (e) {
+  console.warn('⚠️  Portable-root link step skipped:', e.message);
+}
 const PRE_PUSH_PATH = path.join(HOOKS_DIR, 'pre-push');
 const PRE_COMMIT_PATH = path.join(HOOKS_DIR, 'pre-commit');
 
