@@ -1,0 +1,18 @@
+name: "SEOSONA OS — scan the OS's own code only"
+
+# CodeQL must analyze the code SEOSONA OS actually authors and maintains — not the third-party
+# skills, ingested frameworks, or research repos vendored into the tree for reference. Scanning
+# vendored dependencies as if they were our code produced hundreds of alerts for issues in code we
+# don't own and can't fix. `paths` restricts analysis to the OS's own Python + JS.
+paths:
+  - "1_CORE"
+  - "cli/src"
+  - "cli/bin"
+  - "scripts"
+
+paths-ignore:
+  - "**/node_modules"
+  - "**/dist"
+  - "**/tests"
+  - "**/test"
+  - "1_CORE/bin"
