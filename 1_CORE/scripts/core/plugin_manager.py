@@ -79,7 +79,10 @@ def build_skills_router():
             if not target_file:
                 continue
             meta = parse_yaml_frontmatter(os.path.join(root, target_file))
-            rel_path = os.path.relpath(root, start=ROOT_DIR).replace("\\", "/") + "/"
+            # Router paths are resolved relative to 2_KNOWLEDGE (the router's own dir), like the
+            # framework entries — so an agent skill at ROOT/.agents/skills/<name> must be written as
+            # ../.agents/skills/<name>/ for the capability bridge to resolve it.
+            rel_path = os.path.relpath(root, start=os.path.join(FRAMEWORKS_DIR, "..")).replace("\\", "/") + "/"
             if meta:
                 name_clean = meta["name"].strip("\"'")
                 kw_set = {name_clean.replace("-", " "), name_clean, skill_dir}
