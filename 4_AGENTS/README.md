@@ -19,3 +19,14 @@
 1. **Role Playing:** When an agent is invoked via the Context Engine, it must strictly adhere to the boundaries of its assigned persona. A Frontend Engineer agent should not attempt to restructure Python core logic.
 2. **Dynamic Generation:** If a new operational domain emerges, the system can autonomously generate and define a new agent profile here.
 3. **Collaboration:** Multi-agent workflows (orchestrated by `1_CORE`) use this directory to understand the capabilities and limitations of the team.
+
+## Contents
+
+| Folder | What's inside |
+|---|---|
+| `personas/` | Individual agent persona definitions (specialists the OS can adopt for a task). |
+
+| File | Purpose |
+|---|---|
+| `ROSTER.md` | The full roster of available agent personas. |
+| `AGENT_CAPABILITIES.md` | What each agent can do — capability map. |

@@ -22,3 +22,18 @@
 1. **Restricted Access:** Normal operational agents (e.g., Frontend coder, SEO writer) are strictly **FORBIDDEN** from modifying `1_CORE`. Only the System Architect or explicit user commands can alter these files.
 2. **Backward Compatibility:** Any update to `scripts/` (such as the plugin manager or context engine) must ensure that existing skills in `2_KNOWLEDGE` do not break.
 3. **No Bloat:** Do not store data, logs, or raw outputs here. They belong in `3_MEMORY`.
+
+## Contents
+
+| Folder | What's inside |
+|---|---|
+| `scripts/` | The engine room — context engine, dispatcher, UAP pipeline, connectors, capability bridge, MCP servers, daemons, `core/`. |
+| `bin/` | Vendored binaries (the `codebase-memory-mcp` code-nav server — fetched via its `install.ps1`). |
+| `hooks/` | Git hook logic (integrity guard, English-only lint) installed by `postinstall`. |
+| `workflows/` | Reusable OS workflow definitions (agent creation, ingestion, maintenance). |
+| `agents/` | Core agent definitions used by the runtime. |
+
+| File | Purpose |
+|---|---|
+| `SOUL.md` | The master doctrine injected into every AI tool — the OS's operating philosophy + always-on rules. |
+| `PORTABLE_CAPABILITY_CONTRACT.md` | The contract every portable capability must satisfy to be routable. |

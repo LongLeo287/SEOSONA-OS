@@ -22,3 +22,21 @@
 1. **State Persistence:** Always record critical decisions, bug solutions, or major architectural shifts into `specs/` or `errors/`. This prevents future agents from repeating the same mistakes.
 2. **Project Isolation:** Do not mix context. Context for "Project A" strictly belongs in `projects/Project_A/`, protecting it from leaking into other projects.
 3. **No Code Files:** Do not store actual execution scripts here. This is a passive storage system for knowledge states, not a logic engine.
+
+## Contents
+
+| Folder | What's inside |
+|---|---|
+| `knowledge_items/` | The knowledge base — 3,000+ analyzed KIs (`.md` + compact `.aaak` + classification sidecars). Served by the `seosona-knowledge` MCP. |
+| `projects/` | Per-satellite memory namespaces (seosona-video, -content, -ux-ui, -workflow). |
+| `plans/` · `sessions/` · `episodic/` · `drafts/` | Planning, session records, episodic memory, work drafts. |
+| `logs/` · `audit_reports/` · `eval_results/` · `issues/` · `errors/` | Operational history + QA. |
+| `knowledge_graph/` · `vector_index/` | The code/knowledge graph + the TF-IDF semantic index (index is gitignored — self-heals). |
+| `ingestion_zone/` · `mcp_server/` · `specs/` · `screenshots/` · `seo_exports/` | Ingestion staging, MCP state, specs, captures, SEO export outputs. |
+
+| File | Purpose |
+|---|---|
+| `uap_versions.json` | UAP dedup ledger — processed repo commit-SHAs (NEW/CURRENT/UPDATE). |
+| `uap_function_champions.json` | Best-of-breed pick per function across ingested repos. |
+| `uap_security_review.md` | Security-scan log from the UAP pipeline. |
+| `uap_self_upgrade_queue.md` | Queue of self-improvement flags UAP raised for the OS. |

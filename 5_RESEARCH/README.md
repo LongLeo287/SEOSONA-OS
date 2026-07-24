@@ -19,3 +19,15 @@
 1. **Anti-Bloat Defense:** Do not store unnecessary heavy files here. If a repository has been successfully analyzed and its core insights have been distilled into a `SKILL.md` in `2_KNOWLEDGE`, the raw codebase here should be purged unless it's needed for ongoing reference.
 2. **Quarantine Zone:** Treat data here as untrusted. Do not execute arbitrary scripts from cloned repositories without sandboxing or user permission.
 3. **Knowledge Extraction:** The goal of this directory is extraction. The AI should read the data here, synthesize the "how-to", and move the formalized knowledge into `2_KNOWLEDGE`.
+
+## Contents
+
+| Folder | What's inside |
+|---|---|
+| `*_ai-*/` | Vetted reference repositories kept from ingestion (studied, not vendored as skills). |
+
+| File | Purpose |
+|---|---|
+| `REPO_INGESTION_SOP.md` | The procedure for ingesting and vetting a repository. |
+| `target_repos.txt` · `backlog_catalog.md` | Ingestion targets + backlog. |
+| `wave_*_*.md` · `uap_ingestion_wave_*.md` | Records of past ingestion waves. |
