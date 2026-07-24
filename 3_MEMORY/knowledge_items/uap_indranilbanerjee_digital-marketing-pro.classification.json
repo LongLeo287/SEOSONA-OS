@@ -1,0 +1,27 @@
+{
+  "system": "seosona-os",
+  "function": "seo",
+  "score": 50,
+  "matched": [
+    "seo",
+    "keyword",
+    "backlink"
+  ],
+  "strong_matched": [
+    "seo",
+    "keyword"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 50,
+    "seosona-video": 0,
+    "seosona-content": 12,
+    "seosona-ux-ui": 0,
+    "seosona-flow": 0
+  },
+  "auto_apply": false,
+  "uap_relevant": [
+    "ast"
+  ]
+}
