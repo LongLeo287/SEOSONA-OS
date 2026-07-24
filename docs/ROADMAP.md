@@ -42,7 +42,7 @@ and the system's architecture. Ordered by return-on-investment. Status: ✅ done
 - ⬜ **V1 → V2 harvest** — `seosona-video-os` (V2) is the future; V1 (`SEOSONA Video`) is its read-only
   engine host. Build the Phase 4 (qa) / Phase 5 (publish/analytics) workers per V2's own phase gates —
   don't build ahead. V1 is the reference + cautionary spec.
-- ⬜ **Dependabot** — replaces the removed CodeQL for dependency-vuln coverage (npm + python).
+- ✅ **Dependabot** — replaces the removed CodeQL for dependency-vuln coverage (npm + python).
 
 ## Tier 5 — Process
 
