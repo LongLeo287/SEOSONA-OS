@@ -11,6 +11,18 @@ KI_DIR = ROOT / "3_MEMORY" / "knowledge_items"
 INDEX_DIR = ROOT / "3_MEMORY" / "vector_index"
 INDEX_FILE = INDEX_DIR / "ki_tfidf.joblib"
 
+
+def _rrf(rankings, k=60):
+    """Reciprocal-rank fusion: combine several best-first rankings (lists of doc indices) into one
+    score per index. A doc ranked high in ANY signal surfaces — this is what lets BM25 catch exact
+    terms TF-IDF's cosine misses, and vice-versa."""
+    scores = {}
+    for ranking in rankings:
+        for rank, idx in enumerate(ranking):
+            scores[int(idx)] = scores.get(int(idx), 0.0) + 1.0 / (k + rank + 1)
+    return scores
+
+
 class SemanticMemoryEngine:
     def __init__(self):
         self.vectorizer = TfidfVectorizer(stop_words='english')
@@ -18,6 +30,7 @@ class SemanticMemoryEngine:
         self.paths = []
         self.titles = []
         self.vectors = None
+        self.bm25 = None          # lexical BM25 model, fused with TF-IDF at query time
         self.is_built = False
 
     def build_index(self):
@@ -68,6 +81,13 @@ class SemanticMemoryEngine:
             self.titles = titles
             # Fit and transform documents to vector space
             self.vectors = self.vectorizer.fit_transform(self.documents)
+            # Also build a lexical BM25 model over the same corpus (best-effort — a missing
+            # rank_bm25 just means TF-IDF-only retrieval, never a failure).
+            try:
+                from rank_bm25 import BM25Okapi
+                self.bm25 = BM25Okapi([d.lower().split() for d in self.documents])
+            except Exception:
+                self.bm25 = None
             self.is_built = True
 
     def save_index(self):
@@ -79,7 +99,7 @@ class SemanticMemoryEngine:
         INDEX_DIR.mkdir(parents=True, exist_ok=True)
         joblib.dump(
             {"vectorizer": self.vectorizer, "vectors": self.vectors,
-             "paths": self.paths, "titles": self.titles},
+             "paths": self.paths, "titles": self.titles, "bm25": self.bm25},
             INDEX_FILE,
         )
         return True
@@ -95,6 +115,7 @@ class SemanticMemoryEngine:
             self.vectors = d["vectors"]
             self.paths = d["paths"]
             self.titles = d["titles"]
+            self.bm25 = d.get("bm25")  # may be absent in an older index -> TF-IDF-only until rebuild
             self.documents = self.titles  # non-empty marker; query() only needs vectors/paths/titles
             self.is_built = True
             return True
@@ -117,26 +138,33 @@ class SemanticMemoryEngine:
         if not self.is_built or not self.documents:
             return []
             
-        # Convert task to vector
-        query_vec = self.vectorizer.transform([task])
-        
-        # Compute cosine similarity between query and all documents
-        similarities = cosine_similarity(query_vec, self.vectors).flatten()
-        
-        # Get top_k indices
-        top_indices = similarities.argsort()[-top_k:][::-1]
-        
+        # TF-IDF cosine ranking (semantic-ish over the whole doc).
+        tfidf_sims = cosine_similarity(self.vectorizer.transform([task]), self.vectors).flatten()
+        pool = min(50, len(self.titles))
+        rankings = [list(tfidf_sims.argsort()[::-1][:pool])]
+
+        # Fuse in BM25 lexical ranking when available — it catches exact terms cosine dilutes.
+        if self.bm25 is not None:
+            try:
+                bm25_scores = self.bm25.get_scores(task.lower().split())
+                rankings.append(list(np.argsort(bm25_scores)[::-1][:pool]))
+            except Exception:
+                pass
+
+        fused = _rrf(rankings)
+        if not fused:
+            return []
+        ordered = sorted(fused.items(), key=lambda kv: kv[1], reverse=True)[:top_k]
+
         results = []
-        for idx in top_indices:
-            score = float(similarities[idx])
-            if score > 0.05: # Threshold for relevance
-                results.append({
-                    "title": self.titles[idx],
-                    "portablePath": self.paths[idx].replace(str(ROOT), "~/.seosona").replace("\\", "/"),
-                    "score": round(score, 4),
-                    "matchedTerms": ["<semantic_match>"]
-                })
-                
+        for idx, _score in ordered:
+            cos = float(tfidf_sims[idx])
+            results.append({
+                "title": self.titles[idx],
+                "portablePath": self.paths[idx].replace(str(ROOT), "~/.seosona").replace("\\", "/"),
+                "score": round(cos, 4),
+                "matchedTerms": ["<hybrid_bm25+tfidf>"] if self.bm25 is not None else ["<semantic_match>"],
+            })
         return results
 
 # Singleton instance

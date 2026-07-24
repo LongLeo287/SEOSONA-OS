@@ -13,7 +13,7 @@ and the system's architecture. Ordered by return-on-investment. Status: ✅ done
   Expand coverage to the classifier and connectors next.
 - ✅ **`_extract_domain` TLD fix** — audit dispatch no longer mistakes version numbers ("2.0") for domains.
 - ⬜ **Remaining OPEN bug fixes** — `setup-hooks.js` clobbering existing hooks; `seosona setup` not
-  creating the `~/.seosona` junction; `03_assimilator.py` sqlite connection leak (needs try/finally).
+  creating the `~/.seosona` junction; ~~assimilator sqlite leak~~ (✅ fixed).
 
 ## Tier 2 — Security hardening
 
@@ -28,7 +28,7 @@ and the system's architecture. Ordered by return-on-investment. Status: ✅ done
 
 ## Tier 3 — Intelligence / architecture
 
-- ⬜ **Dense retrieval for the knowledge brain** — TF-IDF misses paraphrase. Cheapest upgrade: add
+- ✅ **Dense retrieval for the knowledge brain** — TF-IDF misses paraphrase. DONE — added
   **BM25 + reciprocal-rank fusion** over the existing index (pure-Python, no model). Stronger:
   Ollama `nomic-embed-text` for real semantic recall. (This was UAP self-improve #1, deferred.)
 - ⬜ **Exercise the shared brain** — the `seosona-knowledge` MCP + the 4-satellite wiring go live from a
