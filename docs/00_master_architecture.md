@@ -29,17 +29,20 @@ graph TD
     end
     
     subgraph UAP [🏭 Universal Assimilation Pipeline]
-        EXCEL[(Inventory.xlsx)]:::ingestion --> FINDER[1. Finder]:::ingestion
-        FINDER --> AUDITOR[2. Auditor]:::ingestion
-        AUDITOR --> SEC_GUARD{3. Security Guard}:::ingestion
-        SEC_GUARD -->|Safe| ASSIMILATOR[4. Assimilator]:::ingestion
-        SEC_GUARD -->|Malicious| QUARANTINE[🛑 Quarantine]
-        ASSIMILATOR --> CREATOR[5. Creator]:::ingestion
-        CREATOR --> CLEANUP[6. Cleanup]:::ingestion
+        QUEUE[(uap_queue.db<br/>SQLite work-queue)]:::ingestion --> MANAGER{{uap_manager<br/>daemon loop}}:::ingestion
+        MANAGER --> FINDER[01 Finder · clone]:::ingestion
+        FINDER --> AUDITOR[02 Auditor · profile]:::ingestion
+        AUDITOR --> SEC_GUARD{02b Security Guard}:::ingestion
+        SEC_GUARD -->|HARD flag| QUARANTINE[🛑 Drop / Quarantine]
+        SEC_GUARD -->|Safe / SOFT| ASSIMILATOR[03 Assimilator]:::ingestion
+        ASSIMILATOR --> CLASSIFIER{{classifier<br/>evidence-tiered fit}}:::ingestion
+        CLASSIFIER -->|fit ≥ threshold| CREATOR[04 Creator · skill gen]:::ingestion
+        CLASSIFIER -->|below threshold| SHELVE[📥 KI only, no skill]
+        CREATOR --> CLEANUP[05 Cleanup · reclaim disk]:::ingestion
     end
     
     %% Connections
-    ASSIMILATOR -.->|Generates AAAK| MEMORY
+    ASSIMILATOR -.->|Generates KI / AAAK| MEMORY
     CREATOR -.->|Registers| SKILLS
     
     subgraph Execution Layer [⚡ IDE & AI Tools]
@@ -71,4 +74,20 @@ SEOSONA OS is compartmentalized into 5 distinct operational zones, each governed
 ## 🔒 Security Posture
 
 > [!CAUTION]
-> **Air-Gapped Analysis:** The `5_RESEARCH` zone is strictly isolated. All downloaded code is scanned by `02b_security_guard.py` for destructive commands (e.g., `rm -rf /`) and reverse shells **before** any AI is allowed to process the context. Malicious repos are instantly dropped.
+> **Air-Gapped Analysis:** The `5_RESEARCH` zone is strictly isolated. Every cloned repo is scanned by `02b_security_guard.py` **before** assimilation. It raises a **HARD** flag on leaked secrets (AWS/Google/GitHub keys, private keys) and outright-destructive payloads → the repo is dropped and never processed; a **SOFT** flag on suspicious-but-common patterns (`curl … | sh`, prompt-injection strings) → warn and continue. Only clean/SOFT repos reach the Assimilator.
+
+### The pipeline in reality
+
+Work is driven by `uap_manager.py`, a daemon that pulls repos from a SQLite queue (`3_MEMORY/uap_queue.db`, statuses `PENDING → AUDITED → ASSIMILATED → CREATED → COMPLETED`, with `FAILED`/`BLOCKED` error terminals) — **not** from a spreadsheet. A HARD security block is a fast-path drop: the guard marks the repo `CREATED` so Cleanup reclaims its clone without ever assimilating it or generating a skill. Each surviving repo flows through numbered stages:
+
+| Stage | Script | Does |
+| :--- | :--- | :--- |
+| 01 Finder | `01_finder.py` | Clones the queued repo into `5_RESEARCH`. |
+| 02 Auditor | `02_auditor.py` | Profiles structure, language, and intent. |
+| 02b Security Guard | `02b_security_guard.py` | HARD/SOFT threat scan (see above). |
+| 03 Assimilator | `03_assimilator.py` | Compresses the repo into a Knowledge Item (KI/AAAK) in `3_MEMORY`. |
+| — Classifier | `classifier.py` | Evidence-tiered fit score (strong signals weighted ~22× vs weak ~6×); only repos at/above the fit threshold graduate to a generated skill. |
+| 04 Creator | `04_creator.py` | Generates a runnable skill + registers it. |
+| 05 Cleanup | `05_cleanup.py` | Reclaims the `5_RESEARCH` clone to free disk. |
+
+A crash mid-flight marks only the oldest in-flight repo `FAILED` (with a retry counter) so the queue never wedges.
