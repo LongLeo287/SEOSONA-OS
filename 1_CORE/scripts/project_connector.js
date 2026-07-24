@@ -312,7 +312,105 @@ function checkPackageScripts(projectRoot) {
     : { severity: 'warn', message: `Recommended npm script missing: ${script}` });
 }
 
+// Run a command from OS_ROOT, best-effort. Returns {ok, out, code}. Never throws.
+function _run(cmd, args, timeout = 120000) {
+  try {
+    const out = execFileSync(cmd, args, {
+      cwd: OS_ROOT, encoding: 'utf8', timeout,
+      stdio: ['ignore', 'pipe', 'pipe'],
+    });
+    return { ok: true, out };
+  } catch (error) {
+    return { ok: false, out: `${error.stdout || ''}${error.stderr || ''}` || error.message, code: error.status };
+  }
+}
+
+// OS-wide health report — the checks a maintainer wants from `seosona doctor` at the repo root:
+// portable-root link, English-only lint, capability bridge, the security pytest suite, and a live
+// knowledge-brain query. Each check is independent and best-effort so one missing tool (e.g. no
+// pytest) degrades to a warn instead of aborting the report.
+function osHealth() {
+  const findings = [];
+
+  // 1) Portable-root junction resolves to THIS repo.
+  try {
+    const link = path.join(os.homedir(), '.seosona');
+    const real = fs.realpathSync(link);
+    if (path.resolve(real) === path.resolve(OS_ROOT)) {
+      findings.push({ severity: 'ok', message: `Portable root ~/.seosona -> ${toPosix(OS_ROOT)}` });
+    } else {
+      findings.push({ severity: 'fail', message: `~/.seosona points to ${toPosix(real)}, not this repo`, fix: 'Run `npm install` (postinstall relinks it) or `seosona setup`.' });
+    }
+  } catch (error) {
+    findings.push({ severity: 'fail', message: '~/.seosona portable root missing', fix: 'Run `npm install` or `seosona setup` to create it.' });
+  }
+
+  // 2) English-only cognitive-language lint.
+  const lint = _run('node', ['1_CORE/scripts/language_linter.js'], 60000);
+  findings.push(lint.ok
+    ? { severity: 'ok', message: 'Language lint passed (English-only policy)' }
+    : { severity: 'fail', message: 'Language lint failed — non-English content in system files', fix: 'Run `npm run lint` for the offending files.' });
+
+  // 3) Capability bridge.
+  const bridge = runBridgeValidate();
+  findings.push(bridge.ok
+    ? { severity: 'ok', message: `Capability bridge valid: ${bridge.resourceCount} resources, ${bridge.capabilityCount} skills` }
+    : { severity: 'fail', message: `Capability bridge failed: ${(bridge.errors || []).join('; ')}` });
+
+  // 4) Security-critical pytest suite (best-effort — a missing python/pytest is a warn, not a fail).
+  const py = process.platform === 'win32' ? 'python' : 'python3';
+  const tests = _run(py, ['-m', 'pytest', 'tests/', '-q'], 180000);
+  if (tests.ok) {
+    const m = /(\d+) passed/.exec(tests.out);
+    findings.push({ severity: 'ok', message: `Security pytest suite passed${m ? ` (${m[1]} tests)` : ''}` });
+  } else if (/No module named pytest|not found|cannot find|No such file/i.test(tests.out)) {
+    findings.push({ severity: 'warn', message: 'pytest not installed — security suite skipped', fix: 'pip install pytest, then `python -m pytest tests/`.' });
+  } else {
+    const m = /(\d+) failed/.exec(tests.out);
+    findings.push({ severity: 'fail', message: `Security pytest suite failing${m ? ` (${m[1]} failed)` : ''}`, fix: 'Run `python -m pytest tests/ -q` to see details.' });
+  }
+
+  // 5) Knowledge-brain smoke query (does the shared brain answer?).
+  const smoke = _run(py, ['1_CORE/scripts/mcp_knowledge_server.py', '--query', 'seo audit'], 90000);
+  if (smoke.ok) {
+    try {
+      const parsed = JSON.parse(smoke.out.trim().split('\n').pop());
+      const n = Array.isArray(parsed.results) ? parsed.results.length : 0;
+      findings.push(n > 0
+        ? { severity: 'ok', message: `Knowledge brain answered: ${n} hits via ${parsed.backend}` }
+        : { severity: 'warn', message: `Knowledge brain returned 0 hits (backend ${parsed.backend}) — index may be empty`, fix: 'Rebuild: see .mcp.json seosona-knowledge note.' });
+    } catch {
+      findings.push({ severity: 'warn', message: 'Knowledge brain ran but output was unparseable' });
+    }
+  } else {
+    findings.push({ severity: 'warn', message: 'Knowledge brain smoke query failed', fix: 'Check python + sklearn; run the query in .mcp.json manually.' });
+  }
+
+  const failCount = findings.filter((f) => f.severity === 'fail').length;
+  const warnCount = findings.filter((f) => f.severity === 'warn').length;
+  return {
+    ok: failCount === 0,
+    status: failCount ? 'broken' : warnCount ? 'partial' : 'healthy',
+    scope: 'os',
+    osRoot: toPosix(OS_ROOT),
+    findings,
+  };
+}
+
+// True when two paths point at the same directory, resolving junctions/symlinks (so the OS repo
+// reached via the ~/.seosona junction still matches its real on-disk path).
+function _samePath(a, b) {
+  const real = (p) => { try { return fs.realpathSync(p); } catch { return path.resolve(p); } };
+  const norm = (p) => (process.platform === 'win32' ? path.resolve(real(p)).toLowerCase() : path.resolve(real(p)));
+  return norm(a) === norm(b);
+}
+
 function doctor(projectRoot) {
+  // Run from the OS repo root itself -> full OS health report (not the satellite-manifest checks,
+  // which would spuriously fail on the OS repo that has no seosona.project.json).
+  if (_samePath(projectRoot, OS_ROOT)) {
+    return osHealth();
+  }
   const findings = [];
   const manifestPath = path.join(projectRoot, 'seosona.project.json');
   const bridge = runBridgeValidate();
@@ -388,10 +486,13 @@ function printDoctor(result, json) {
     process.stdout.write(`${JSON.stringify(result, null, 2)}\n`);
     return;
   }
-  console.log(`SEOSONA project connection: ${result.status}`);
+  console.log(result.scope === 'os'
+    ? `SEOSONA OS health: ${result.status}`
+    : `SEOSONA project connection: ${result.status}`);
   for (const finding of result.findings) {
     const label = finding.severity.toUpperCase().padEnd(4, ' ');
     console.log(`[${label}] ${finding.message}`);
+    if (finding.fix && finding.severity !== 'ok') console.log(`       ↳ fix: ${finding.fix}`);
   }
 }
 
