@@ -28,7 +28,7 @@
 *,*::before,*::after{box-sizing:border-box}
 :root{
   --bg:#0b0a08; --panel:#151209; --panel-2:#1d180e; --line:#2a2318; --line-2:#3d3320;
-  --text:#faf7ef; --muted:#b0a692; --dim:#7d7361;
+  --text:#faf7ef; --muted:#b0a692; --dim:#8a7f6b;
   --gold:#f0a63c; --amber:#fcd34d; --ease:cubic-bezier(.16,1,.3,1);
 }
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -58,7 +58,8 @@ h1,h2,h3{letter-spacing:-.028em;font-weight:600}
 
 /* ---------- điều hướng gọn, căn giữa ---------- */
 .nav{padding:1.1rem 0;display:flex;justify-content:center;gap:1.4rem;font-size:.85rem}
-.nav a{color:var(--muted);text-decoration:none;transition:color .25s var(--ease)}
+.nav a{display:inline-block;padding:.45rem .3rem;color:var(--muted);
+  text-decoration:none;transition:color .25s var(--ease)}
 .nav a:hover{color:var(--amber)}
 .nav .gh{color:var(--text);font-weight:600}
 
@@ -106,7 +107,7 @@ h1 .hl{background:linear-gradient(100deg,var(--gold),var(--amber));
   background:radial-gradient(circle at 34% 30%,var(--amber),var(--gold) 58%,#b8720f);
   color:#1a1206;box-shadow:0 0 90px -12px rgba(240,166,60,.55)}
 .core b{font-size:clamp(1rem,2.6vw,1.35rem);font-weight:700;letter-spacing:-.02em}
-.core em{font-style:normal;font-size:.72rem;opacity:.72;font-weight:500}
+.core em{font-style:normal;font-size:.72rem;opacity:.86;font-weight:600}
 
 /* ---------- ba vòng trí nhớ ---------- */
 section{padding:clamp(2.8rem,6vw,4.5rem) 0}
@@ -185,6 +186,37 @@ footer{border-top:1px solid var(--line);padding:1.8rem 0;color:var(--dim);font-s
 footer a{color:var(--muted);text-decoration:none;padding:.3rem}
 footer a:hover{color:var(--gold)}
 
+/* Sóng lan ra từ lõi — nhắc lại ý mọi thứ toả ra từ một trung tâm. */
+.orbit::before,.orbit::after{content:'';position:absolute;left:50%;top:50%;
+  width:46%;aspect-ratio:1;translate:-50% -50%;border-radius:50%;
+  border:1px solid rgba(240,166,60,.5);pointer-events:none;
+  animation:wave 4.6s ease-out infinite}
+.orbit::after{animation-delay:2.3s}
+@keyframes wave{
+  0%{transform:scale(1);opacity:.55}
+  100%{transform:scale(2.15);opacity:0}
+}
+/* Lõi thở nhẹ — biên độ nhỏ để không thành thứ gây khó chịu khi đọc. */
+.core{animation:breathe 5.5s ease-in-out infinite}
+@keyframes breathe{50%{transform:translate(-50%,-50%) scale(1.035)}}
+
+/* Chấm trên trục sáng dần khi cuộn tới, thay vì sáng sẵn từ đầu. */
+.sp::after{background:var(--line-2);transition:background .5s var(--ease),
+  box-shadow .5s var(--ease)}
+.sp.in::after{background:var(--gold);box-shadow:0 0 0 4px var(--bg),0 0 16px -2px var(--gold)}
+
+/* Thanh tiến độ đọc trang. */
+.prog{position:fixed;top:0;left:0;height:2px;width:100%;z-index:70;transform:scaleX(0);
+  transform-origin:0 50%;background:linear-gradient(90deg,var(--gold),var(--amber))}
+@supports (animation-timeline:scroll()){
+  .prog{animation:pgrow linear;animation-timeline:scroll(root block)}
+  @keyframes pgrow{to{transform:scaleX(1)}}
+}
+
+/* Vệ tinh trôi nhẹ, lệch pha nhau. */
+.sat{animation:float 6s ease-in-out infinite;animation-delay:calc(var(--i) * .7s)}
+@keyframes float{50%{transform:translateY(-5px)}}
+
 .rise{opacity:0;transform:translateY(20px);
   transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .rise.in{opacity:1;transform:none}
@@ -206,6 +238,8 @@ footer a:hover{color:var(--gold)}
 <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "SoftwareSourceCode", "name": "SEOSONA OS", "description": "Một bộ luật, một trí nhớ dùng chung cho Claude Code, Cursor, Codex, Windsurf và Aider. 2.422 file tri thức, 3.560 file bộ nhớ, tự học thêm qua pipeline.", "url": "https://seosona-os.vercel.app/", "image": "https://seosona-os.vercel.app/cover.jpg", "codeRepository": "https://github.com/LongLeo287/SEOSONA-OS", "programmingLanguage": ["Python", "Node.js"], "author": {"@type": "Person", "name": "Hà Đình Long", "alternateName": "Long Leo", "url": "https://portfolio-long-leo.vercel.app/"}}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Khác gì với việc tự viết file quy tắc cho từng công cụ?", "acceptedAnswer": {"@type": "Answer", "text": "Khác ở chỗ chỉ có một bản. Viết riêng cho từng công cụ thì sau vài tháng chúng lệch nhau, và không ai nhớ bản nào mới nhất."}}, {"@type": "Question", "name": "Trí nhớ được lưu thế nào?", "acceptedAnswer": {"@type": "Answer", "text": "Ba tầng đồng tâm: lõi luật, kho tri thức đã phân tích, và bộ nhớ dài hạn theo dự án. Agent truy vấn qua MCP chứ không đọc thẳng file."}}, {"@type": "Question", "name": "Tự học nghĩa là sao?", "acceptedAnswer": {"@type": "Answer", "text": "Có pipeline nạp repo bên ngoài về, phân tích, và biến phần hữu ích thành kỹ năng gọi được — hoàn toàn tự động."}}, {"@type": "Question", "name": "Chạy trên hệ điều hành nào?", "acceptedAnswer": {"@type": "Answer", "text": "Windows, macOS và Linux. Cần Python 3.11 trở lên và Node 18 trở lên."}}]}]}</script>
 </head>
 <body>
+
+<div class="prog" aria-hidden="true"></div>
 
 <nav class="nav">
   <a href="#tri-nho">Trí nhớ</a>
@@ -253,7 +287,7 @@ footer a:hover{color:var(--gold)}
     <h2 class="rise">Bốn dự án vệ tinh</h2>
     <p class="sub rise">Chúng không tự nuôi tri thức riêng. Tất cả nối ngược về đây và truy
       vấn lúc chạy, nên sửa một chỗ là cả bốn đổi theo.</p>
-    <div class="sats"><div class="sat rise"><b>Video AI</b><em>dây chuyền sản xuất video</em></div><div class="sat rise"><b>Content</b><em>nội dung và SRT</em></div><div class="sat rise"><b>UX-UI</b><em>hệ thống thiết kế</em></div><div class="sat rise"><b>Flow</b><em>tự động hoá trình duyệt</em></div></div>
+    <div class="sats"><div class="sat rise" style="--i:0"><b>Video AI</b><em>dây chuyền sản xuất video</em></div><div class="sat rise" style="--i:1"><b>Content</b><em>nội dung và SRT</em></div><div class="sat rise" style="--i:2"><b>UX-UI</b><em>hệ thống thiết kế</em></div><div class="sat rise" style="--i:3"><b>Flow</b><em>tự động hoá trình duyệt</em></div></div>
   </section>
 
   <section class="wrap">
