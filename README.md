@@ -1,3 +1,5 @@
+**[▶ Xem trang giới thiệu dự án](https://seosona-os.vercel.app)**
+
 <div align="center">
 
 <img src="https://raw.githubusercontent.com/LongLeo287/SEOSONA-OS/main/.github/assets/Seosona_Logo.png" alt="SEOSONA OS" width="560">
