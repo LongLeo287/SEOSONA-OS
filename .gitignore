@@ -148,3 +148,6 @@ _QUARANTINE/
 # Skill test cassettes/fixtures + heavy downloadable assets (fetched by setup, not source)
 .agents/skills/*/tests/cassettes/
 .agents/skills/*/.previews/
+
+# Personal Claude Code overrides (project settings.json IS committed — it wires the brain hook)
+.claude/settings.local.json
