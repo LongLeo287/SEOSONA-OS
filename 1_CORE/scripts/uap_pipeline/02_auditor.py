@@ -183,6 +183,23 @@ def _read_source_files(repo_dir):
                 if str(rel) not in source_files:
                     _add_file(rel)
 
+    # Priority 6 — recursive fallback. Everything above uses exact paths or a single-level
+    # iterdir(), so a repo whose content sits one directory deeper yielded NOTHING: measured, 148
+    # repos cloned successfully and produced zero source files (one had 12,126 files on disk).
+    # Those became knowledge items written from filenames alone. Walk the tree only when the
+    # targeted passes came up empty, so the common case keeps its curated ordering.
+    if not source_files:
+        for dirpath, dirnames, filenames in os.walk(repo_dir):
+            dirnames[:] = [d for d in sorted(dirnames) if d not in _TREE_SKIP_DIRS]
+            for fn in sorted(filenames):
+                f = Path(dirpath) / fn
+                # A corpus of agent-skill repos is mostly prose: without .md here, a SKILL.md-only
+                # repo still extracts nothing.
+                if f.suffix.lower() in _CODE_EXTENSIONS or fn in _CONFIG_FILES or f.suffix.lower() == ".md":
+                    _add_file(f.relative_to(repo_dir))
+            if len(source_files) >= MAX_SOURCE_FILES or total_chars >= MAX_TOTAL_SOURCE_CHARS:
+                break
+
     return source_files
 
 

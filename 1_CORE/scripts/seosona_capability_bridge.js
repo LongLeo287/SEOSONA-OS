@@ -330,7 +330,11 @@ function route(query) {
   // Drop function words, but never strip the query down to nothing — a one-word query like "seo"
   // must still route.
   const meaningful = rawTerms.filter((t) => t.length > 1 && !QUERY_STOPWORDS.has(t));
-  const terms = expandVietnamese(normalized, meaningful.length ? meaningful : rawTerms);
+  // Deduplicate: score is a count of matched terms, so a query repeating a word scored it once per
+  // repetition — "audit audit audit" outranked "audit" three to one on the same documents.
+  const terms = Array.from(new Set(
+    expandVietnamese(normalized, meaningful.length ? meaningful : rawTerms)
+  ));
   const matches = buildGraphResources()
     .map((resource) => {
       const haystack = [
