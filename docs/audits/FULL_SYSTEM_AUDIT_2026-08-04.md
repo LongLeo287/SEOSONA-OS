@@ -3,6 +3,11 @@
 
 ---
 
+> **Remediation status (updated 2026-08-04, end of session).** All 9 CRITICAL findings are closed,
+> plus the connector-correctness cluster and the highest-value HIGH items. Test count went 24 → 41,
+> and CI now installs the real dependency set and asserts on the two failure modes that were
+> previously invisible. See §13 for what shipped and what remains.
+
 ## 1. Executive summary
 
 SEOSONA OS is a **~26,000-line** AI operating system (15,376 Python / 10,498 JS) exposing **458 routable skills**, **1,266 knowledge items** and **1,862 indexed resources** through a portable-path capability bridge, a semantic knowledge brain, an 6-stage ingestion pipeline and 21 SEO connectors.
@@ -263,3 +268,63 @@ These make SEO deliverables **actively wrong**, which matters more than any cras
 The system's **engineering instincts are better than its engineering discipline**. Fail-open hooks, path confinement, a security guard, a sandbox, an integrity guard, portable paths — these are the choices of someone who has thought carefully about how things break. But several of those controls were never verified after being written, and two of them (`_scan_output`, the retry ladder) have never executed a single line of their intended logic.
 
 The single highest-leverage change is not any individual fix: it is **making CI install the real dependencies and exercise the real paths**. Every critical finding in this report would have surfaced on the first run of a CI that actually ran the code.
+
+---
+
+## 13. Remediation log
+
+Every fix below was verified by execution — the before/after evidence is in the commit messages.
+
+### Closed — all 9 CRITICAL
+
+| ID | Fix | Verification |
+| :--- | :--- | :--- |
+| C1 | UAP output gate iterated an empty pattern list (`RED_FLAGS` never existed) | 0 → 13 patterns; now detects an AWS key. `assert` added so it cannot silently empty again |
+| C2 | No `requirements.txt`; brain returned empty and reported success | Pinned manifest added; no-sklearn path now returns 5 correct results with `backend: lexical_degraded` + a warning on stderr |
+| C3 | Failed clone ingested as a valid empty repo; retry ladder unreachable | `mkdir`-before-clone removed, `rmtree` on failure, `timeout=600`, `GIT_TERMINAL_PROMPT=0`, empty checkouts refused |
+| C4 | Repo → LLM → KI → auto-injected context, with no output filter | Mitigated by restoring C1; delimiting untrusted content remains open |
+| C5 | `joblib.load` = pickle = persistent RCE in the MCP server | Index is now `.npz` + JSON; a planted pickle with `__reduce__ → os.system` is not read at all |
+| C6 | `safe_urlopen`'s redirect loop was dead code (self-inflicted this session) | `_RaiseOnRedirect` forces the manual loop; both transports pinned per hop; auth headers stripped cross-origin |
+| C7 | Third-party `SKILL.md` could forge repo-escaping routes | Structural characters stripped, containment checked; router now byte-identical across 3 hash seeds |
+| C8 | `seosona setup` destroyed IDE settings (array replaced with string) | Type-aware merge; Copilot array keeps its entries; `.seosona-backup` + temp-file rename |
+| C9 | Project manifest wrote outside the project and at drive root | `../../ESCAPED.md`, `/etc/passwd` and absolute paths all rejected; hand-authored files backed up |
+
+### Closed — HIGH / product correctness
+
+- **Connector cluster** — robots.txt substring → line parse with User-agent scoping; `@graph`
+  traversal (Yoast/RankMath now read correctly); valueless-attribute crash that aborted whole scans;
+  relative links counted as internal; E-E-A-T `by`-inside-words and the literal space in the `<time>`
+  regex; serp suggestion parsing returning single characters; and `analyze_keyword_overlap`, which
+  asserted "content gap: Yes" for every keyword **without consulting a single SERP** — now reported
+  as Unverified.
+- **8 connectors** no longer crash on a malformed `config.json`.
+- **Source extraction** — `_read_source_files` never recursed; 148 successfully-cloned repos
+  extracted zero source. Bounded `os.walk` fallback added.
+- **Reconciliation** — `uap_manager --reconcile` compares queue state against artefacts on disk.
+  First run found 3 stranded mid-flight rows and 127 `COMPLETED` rows with no knowledge item.
+- **Routing** — 111 placeholder `name: skill` values, an over-broad boost that let a meta-skill
+  hijack every "audit" query, Vietnamese queries matching nothing, and un-deduplicated terms letting
+  repetition inflate the score.
+- **Observability** — the brain reports degraded mode instead of looking empty; the vector index
+  detects a changed corpus instead of going stale forever.
+
+### Test and CI posture
+
+```
+tests      24 → 41      (+11 capability bridge, +3 index-is-not-pickle, +3 routing)
+CI         installs requirements.txt; asserts the brain answers via the real backend;
+           asserts SKILLS_ROUTER.md is reproducible from source
+```
+The bridge — the most-invoked component in the OS — had no tests at all. Writing them immediately
+surfaced a live defect (term deduplication), which is the argument for the whole exercise.
+
+### Still open
+
+| Item | Why it was deferred |
+| :--- | :--- |
+| Backlink Common Crawl measures the wrong thing (`url=*.domain` returns the site's own pages) | Needs a different data source, not a code fix |
+| `is_side_effecting` is a filename denylist flagging 3 of ~70 scripts | Should become an allowlist — a design decision with breakage risk |
+| Sandbox has no live call sites; its scan only blocks leaked credentials, not `curl \| sh` | Requires wiring runnable skill entrypoints into the graph first |
+| Docker sandbox argv is malformed on Windows (drive-letter colon) | Only reachable once the Docker backend is opted into |
+| Multi-tenant model (`config.json` holds one domain) | Product-level change |
+| 645 `print()` calls instead of structured logging | Mechanical but broad |
