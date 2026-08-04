@@ -1,65 +1,98 @@
 # KI: Alisa0808/vox-director
 
 ## Overview
-This repository contains a skill for generating Vox-style paper-collage explainer videos using AI agents. The workflow involves script generation, collage keyframe creation, motion graphics, voice-over, music integration, and captioning, all automated through scripts and leveraging the Atlas Cloud API along with local ffmpeg.  The project is designed to be driven by coding agents like Claude Code or Codex.
+Vox Director — an open-source Agent Skill that turns one topic into a finished Vox-style paper-collage explainer/ad video: script, collage keyframes, motion, voice-over, music and captions, automated end to end on the Atlas Cloud API + local ffmpeg. Works with Claude Code, Codex, and any SKILL.md agent.
 
 ## Tech Stack (from code)
-- **Language:** Python 3 (implied by `scripts/*.py` files).
-- **Build System/Configuration:** The project utilizes a `package.json` file, indicating usage of Node.js and npm for package management.  This suggests the use of JavaScript alongside Python, although its primary purpose appears to be metadata rather than core functionality.
-```json
-{
-  "name": "vox-director",
-  "version": "1.0.0",
-  "description": "Vox Director — an open-source Agent Skill that turns one topic into a finished Vox-style paper-collage explainer/ad video: script, collage keyframes, motion, voice-over, music and captions, automated end to end on the Atlas Cloud API + local ffmpeg. Works with Claude Code, Codex, and any SKILL.md agent.",
-  "keywords": [
-    "vox",
-    "vox-director",
-    "ai-video",
-    "video-generation",
-    "text-to-video",
-    "paper-collage",
-    "collage-video",
-    "motion-graphics",
-    "explainer-video",
-    "ai-ads",
-    "agent-skill",
-    "claude-skill",
-    "claude-code",
-    "codex",
-    "ffmpeg",
-    "tts",
-    "atlas-cloud",
-    "generative-ai"
-  ],
-  "homepage": "https://github.com/Alisa0808/vox-director",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Alisa0808/vox-director.git"
-  },
-  "license": "MIT",
-  "author": "Alisa0808"
-}
+- Python (18 files)
+- **Total:** 42 files, 5 directories
+- **File types:** .py: 18, .md: 10, .jpg: 5, .mp4: 4, .gitignore: 1, .txt: 1, .json: 1, .skill: 1
+
+## File Structure
+```
+  .gitignore
+  AGENTS.md
+  LICENSE
+  README.md
+  README.zh.md
+  SKILL.md
+  SKILL.zh.md
+  llms.txt
+  package.json
+  vox-director.skill
+  assets/
+    showcase-football.mp4
+    showcase-money.mp4
+    showcase-silicon-valley.mp4
+    showcase-tang.mp4
+    thumbs/
+      football.jpg
+      mexican.jpg
+      money.jpg
+      silicon-valley.jpg
+      tang.jpg
+  references/
+    beat-layer.md
+    local-engine.md
+    models-and-gotchas.md
+    prompt-guide.md
+    voices.md
+  scripts/
+    aroll_assemble.py
+    aroll_clips.py
+    asr_beats.py
+    assemble.py
+    atlas_cloud.py
+    audio.py
+    clips.py
+    confetti.py
+    croll_keyframes.py
+    extract_elements.py
+    kenburns.py
+    keyframes.py
+    mg_scrapbook.py
+    motion.py
+    provider.py
+    style_bakeoff.py
+    styles.py
+    text_overlay.py
 ```
 
-## Public API / Exports
-The code does not explicitly define a public API or exported functions in the traditional sense. Instead, it appears to be structured as a series of scripts (`scripts/*.py`) that are executed sequentially by an agent.  These scripts likely contain internal functions and classes used within their respective processes (e.g., `keyframes.py`, `audio.py`). The `AGENTS.md` file outlines the order in which these scripts should be run, suggesting a workflow rather than a library with reusable components.
+## Agent Configuration
+### AGENTS.md
+# Vox Director — Agent Guide
 
-## Dependencies
-- **Atlas Cloud API:**  Required for video generation and voice-over services (referenced in `package.json` description and `AGENTS.md`). Requires an `ATLASCLOUD_API_KEY`.
-- **ffmpeg & ffprobe:** Used for video processing (mentioned in `AGENTS.md`).
-- **Pillow:** A Python imaging library (mentioned in `AGENTS.md`).
-- **Node.js/npm:**  Used to manage project metadata and potentially other tooling, as indicated by the presence of `package.json`.
+This repository is an **agent skill**: a self-contained workflow that turns one
+topic into a finished Vox-style paper-collage video (script → collage keyframes →
+motion → voice-over → music → captions). It is not tied to any single assistant —
+any coding agent that can read instructions and run scripts can drive it.
 
-## Architecture Patterns
-- **Workflow-based architecture:** The core functionality is organized around a defined workflow consisting of multiple scripts executed sequentially. This promotes modularity but introduces dependencies between steps.
-- **Agent-driven execution:**  The system relies on an external agent to orchestrate the entire process, highlighting its design as a skill rather than a standalone application.
-- **Configuration-driven:** The `beats.json` file appears to drive the workflow, suggesting that project parameters and instructions are passed through configuration files.
+## How to use it (for the agent)
 
-## Relevance to SEOSONA OS
-This project's code could benefit SEOSONA OS in several ways:
-- **Modular Video Generation Skill:**  The skill can be integrated as a module within SEOSONA OS for automated video creation from text or data sources.
-- **Agent Integration Framework:** The agent-driven architecture provides insights into how to design and integrate AI agents for complex tasks within the operating system.
-- **Workflow Management System:** The sequential script execution pattern could inform the development of a workflow management system within SEOSONA OS, enabling users to define and automate multi-step processes.
+1. Read **`SKILL.md`** — the full workflow and the two human approval gates.
+   (`SKILL.zh.md` is the same in Chinese.)
+2. Before writing any prompt, read **`references/`** (prompt structures, the
+   vocabulary/theme bank, and the narrative-beat library).
+3. Work one project at a time under `out/<project>/`, driven by a single
+   `beats.json`. Run the stages in **`scripts/`** in order:
+   `style_bakeoff.py → keyframes.py → clips.py → audio.py → assemble.py`.
+
+## Requirements
+
+- `ATLASCLOUD_API_KEY` in the environment — https://www.atlascloud.ai/console/api-keys
+- `ffmpeg` + `ffprobe`
+- Python 3 with `pillow`
+
+## Agent notes
+
+- **Claude Code** auto-loads this as a skill from `SKILL.md`'s frontmatter — just
+  ask for a "vox video".
+- **Codex / other agents**: follow `SKILL.md` as your instructions; this
+  `AGENTS.md` is your entry point.
+
+
+## Analysis Method
+> Factual code-based structural analysis. All data extracted directly from source files. No README. No assumptions.
 
 
 ## UAP Routing (auto-classified)
