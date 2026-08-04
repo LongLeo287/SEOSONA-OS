@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: seo_local
 version: 1.0.0
 evaluation_score: 91
 grade: A

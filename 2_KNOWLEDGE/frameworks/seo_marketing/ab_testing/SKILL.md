@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: ab_testing
 description: "Design and analyze experiments that produce statistically valid, actionable results."
   A/B test design, hypothesis framework, sample size calculation, statistical
   analysis, and experiment documentation. Activate when user wants to test

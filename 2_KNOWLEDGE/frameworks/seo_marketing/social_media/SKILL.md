@@ -1,5 +1,5 @@
 ---
-name: skill
+name: social_media
 description: Social media content creation, scheduling, API integrations for X/Twitter, Facebook, Threads, LinkedIn, YouTube, TikTok, Instagram. Platform-specific workflows, engagement templates, hook writing.
 argument-hint: "[platform] [type] OR [schedule]"
 metadata:

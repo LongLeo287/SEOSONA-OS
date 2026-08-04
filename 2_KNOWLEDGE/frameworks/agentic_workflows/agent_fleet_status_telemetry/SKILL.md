@@ -1,5 +1,5 @@
 ---
-name: skill
+name: agent_fleet_status_telemetry
 description: Guides agents through designing status telemetry for multiple AI coding agents using hooks, wrapper commands, local event ingestion, status aggregation, and notification boundaries. Use when SEOSONA needs to monitor Claude Code, Codex, Gemini CLI, Cursor, OpenCode, Windsurf, Antigravity, or similar agent runtimes.
 ---
 

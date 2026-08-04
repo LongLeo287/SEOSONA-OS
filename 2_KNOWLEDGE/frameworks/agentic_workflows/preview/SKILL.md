@@ -1,5 +1,5 @@
 ---
-name: skill
+name: preview
 description: Path to markdown file, plan directory, or plans collection
 metadata:
   author: claudekit

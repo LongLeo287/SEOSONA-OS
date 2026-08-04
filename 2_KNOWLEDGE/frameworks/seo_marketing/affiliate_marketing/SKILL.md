@@ -1,5 +1,5 @@
 ---
-name: skill
+name: affiliate_marketing
 description: Build high-converting SaaS affiliate programs with 20-40% commissions, KOL/KOC partnerships, and fraud prevention. Covers platform selection (PartnerStack, FirstPromoter, Rewardful), commission structures (recurring vs one-time, tiered), influencer outreach strategies, FTC/GDPR compliance, risk management, and case studies (Dropbox 3900%, PayPal 100M users). Use for designing affiliate programs, recruiting partners, optimizing conversion rates, preventing fraud, or scaling referral revenue.
 argument-hint: "[program or strategy]"
 metadata:

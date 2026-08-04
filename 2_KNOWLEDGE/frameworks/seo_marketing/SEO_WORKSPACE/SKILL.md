@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: SEO_WORKSPACE
 description: "This framework defines the **standard methodology** to analyze, evaluate, and compare any website from a comprehensive SEO perspective. Applicable for:"
   SEOSONA OS core SEO Analysis Framework (5 Pillars) for auditing websites, tracking metrics, and scoring. Use this to conduct an end-to-end SEO Audit.
 ---

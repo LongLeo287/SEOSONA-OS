@@ -1,5 +1,5 @@
 ---
-name: skill
+name: email_marketing
 description: Email campaigns, newsletters, drip sequences, automation flows, email copywriting, deliverability, subject line formulas, A/B testing. Generate email content for any marketing purpose.
 argument-hint: "[flow|sequence|newsletter|cold|launch|nurture] [args]"
 metadata:

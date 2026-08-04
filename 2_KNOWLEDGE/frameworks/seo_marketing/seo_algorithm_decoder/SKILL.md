@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: seo_algorithm_decoder
 version: 1.0.0
 evaluation_score: 94
 grade: A

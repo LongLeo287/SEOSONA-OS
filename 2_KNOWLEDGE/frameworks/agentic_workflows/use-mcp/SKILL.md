@@ -1,5 +1,5 @@
 ---
-name: skill
+name: use-mcp
 description: Utilize tools of Model Context Protocol (MCP) servers
 argument-hint: "[task]"
 metadata:

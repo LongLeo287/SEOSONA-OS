@@ -1,5 +1,5 @@
 ---
-name: skill
+name: content_hub
 description: Browser-based asset gallery for managing marketing assets. Visual grid with filter/search, brand context sidebar, and actions (preview, edit, generate). R2-ready manifest for future cloud sync. Use when browsing assets, managing content library, or generating new assets with brand context.
 argument-hint: "[action: open|browse|search]"
 license: MIT

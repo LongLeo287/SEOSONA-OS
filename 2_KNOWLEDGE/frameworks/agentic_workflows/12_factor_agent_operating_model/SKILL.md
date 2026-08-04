@@ -1,5 +1,5 @@
 ---
-name: skill
+name: 12_factor_agent_operating_model
 description: Guides agents through designing production LLM workflows using the 12-factor agents operating model: owned prompts, owned context, structured tool calls, unified state, resumable execution, human contact tools, explicit control flow, error compaction, small agents, universal triggers, and stateless reducers.
 source: humanlayer/12-factor-agents
 license_note: Source repository uses a non-MIT license; this skill stores SEOSONA's distilled operational summary and does not vendor source content.

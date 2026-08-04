@@ -1,6 +1,5 @@
 ---
-name: skill
-
+name: content_creator
 description: "Professional-grade brand voice analysis, SEO optimization, and platform-specific content frameworks."
 category: marketing
 risk: unknown

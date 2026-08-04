@@ -1,5 +1,5 @@
 ---
-name: skill
+name: marketing_planning
 description: Plan marketing strategies, campaigns, content calendars, and initiatives using proven frameworks (RACE, SOSTAC, STP). Activates marketing-research for data-driven insights.
 argument-hint: "[goal or timeframe]"
 license: MIT

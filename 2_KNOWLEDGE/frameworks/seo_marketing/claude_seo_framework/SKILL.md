@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: claude_seo_framework
 description: "The Claude SEO framework uses a **parallel-agent architecture** rather than a single linear scan. When a full audit is requested, the orchestrator spawns multiple specialist agents simultaneously to analyze different facets of a URL or domain."
   Comprehensive, multi-agent SEO analysis framework for AI-first search (GEO), E-E-A-T, Schema, and Technical SEO.
 ---

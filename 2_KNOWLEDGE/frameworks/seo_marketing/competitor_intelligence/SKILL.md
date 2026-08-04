@@ -1,5 +1,5 @@
 ---
-name: skill
+name: competitor_intelligence
 description: Competitive analysis, alternative pages, vs comparisons, SEO competitor content, market positioning, and battlecard generation.
 argument-hint: "[analyze|content|seo|alternatives|list] [url or competitor]"
 metadata:

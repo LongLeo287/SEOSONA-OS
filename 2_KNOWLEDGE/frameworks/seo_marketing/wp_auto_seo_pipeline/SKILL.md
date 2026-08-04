@@ -1,5 +1,5 @@
 ---
-name: skill
+name: wp_auto_seo_pipeline
 description: "Architecture for building automated WordPress SEO pipelines. Features a robust separation of concerns (Generation vs Post-Processing) while strictly enforcing E-E-A-T and Information Gain to survive Google HCU."
 keywords: ["wordpress", "automation", "content-generation", "eeat", "hcu", "pipeline"]
 ---

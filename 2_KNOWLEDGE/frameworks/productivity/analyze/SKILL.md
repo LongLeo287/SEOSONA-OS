@@ -1,5 +1,5 @@
 ---
-name: skill
+name: analyze
 description: 💡💡 Analytics and performance reports
 argument-hint: "[type]"
 metadata:

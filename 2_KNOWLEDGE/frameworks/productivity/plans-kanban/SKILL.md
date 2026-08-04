@@ -1,5 +1,5 @@
 ---
-name: skill
+name: plans-kanban
 description: Plans dashboard server with progress tracking and timeline visualization.
 argument-hint: "[plans-dir]"
 metadata:

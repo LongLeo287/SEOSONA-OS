@@ -1,5 +1,5 @@
 ---
-name: skill
+name: journal
 description: 💡 Write some journal entries.
 metadata:
   author: claudekit

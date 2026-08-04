@@ -1,5 +1,5 @@
 ---
-name: skill
+name: pygwalker_visual_analytics
 description: Guides agents through using PyGWalker for exploratory visual data analysis in notebooks and lightweight apps: pandas/polars/data connectors, drag-and-drop charts, saved specs, Streamlit embedding, kernel computation, chart export, and privacy-safe configuration.
 source: Kanaries/pygwalker
 license: Apache-2.0

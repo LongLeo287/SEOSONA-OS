@@ -1,5 +1,5 @@
 ---
-name: skill
+name: thinking_model_router
 description: Select the right mental model before analysis, planning, debugging, strategy, risk review, product design, or decision-making. Use when a task is ambiguous, high-stakes, cross-functional, or benefits from structured reasoning.
 argument-hint: "[problem, decision, risk, or strategy question]"
 metadata:

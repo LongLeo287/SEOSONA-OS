@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: marketing_analytics
 description: "Performance measurement, attribution modeling, and data-driven optimization."
   Marketing analytics, KPI frameworks, attribution modeling, ROI calculation,
   campaign performance analysis, and reporting. Integrates with SEOSONA's

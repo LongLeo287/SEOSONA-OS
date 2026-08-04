@@ -260,13 +260,57 @@ function buildManifest() {
   };
 }
 
+// Vietnamese → English routing terms. Skills and their descriptions are written in English, so a
+// task phrased in Vietnamese ("phân tích đối thủ", "nghiên cứu từ khóa") matched nothing at all.
+// Rather than translate 458 skills, the QUERY is expanded: any phrase found here contributes its
+// English equivalents as extra search terms. Scoped to this OS's domains — SEO, content, marketing,
+// video — not a general dictionary. Both accented and unaccented forms, since users type both.
+const VI_TERMS = [
+  ['từ khóa', 'tu khoa', 'keyword keywords'],
+  ['đối thủ', 'doi thu', 'competitor competitive'],
+  ['nội dung', 'noi dung', 'content'],
+  ['bài viết', 'bai viet', 'article content post'],
+  ['đề cương', 'de cuong', 'brief outline'],
+  ['kiểm tra', 'kiem tra', 'audit check analysis'],
+  ['phân tích', 'phan tich', 'analysis analyze'],
+  ['nghiên cứu', 'nghien cuu', 'research'],
+  ['tối ưu', 'toi uu', 'optimize optimization'],
+  ['thứ hạng', 'thu hang', 'rank ranking'],
+  ['liên kết', 'lien ket', 'link backlink'],
+  ['trang đích', 'trang dich', 'landing page'],
+  ['chiến dịch', 'chien dich', 'campaign'],
+  ['báo cáo', 'bao cao', 'report'],
+  ['lịch nội dung', 'lich noi dung', 'calendar schedule'],
+  ['mạng xã hội', 'mang xa hoi', 'social media'],
+  ['sơ đồ', 'so do', 'diagram chart flowchart'],
+  ['hình ảnh', 'hinh anh', 'image'],
+  ['video', 'video', 'video'],
+  ['viết lại', 'viet lai', 'rewrite humanize'],
+  ['ngữ pháp', 'ngu phap', 'grammar'],
+  ['giọng văn', 'giong van', 'tone voice style'],
+  ['thương hiệu', 'thuong hieu', 'brand'],
+  ['khách hàng', 'khach hang', 'customer audience'],
+  ['tốc độ', 'toc do', 'speed performance'],
+  ['kỹ thuật', 'ky thuat', 'technical'],
+];
+
+function expandVietnamese(normalized, terms) {
+  const extra = [];
+  for (const [accented, plain, english] of VI_TERMS) {
+    if (normalized.includes(accented) || normalized.includes(plain)) {
+      extra.push(...english.split(' '));
+    }
+  }
+  return extra.length ? Array.from(new Set([...terms, ...extra])) : terms;
+}
+
 function route(query) {
   const normalized = query.trim().toLowerCase();
   if (!normalized) {
     throw new Error('route requires a non-empty query');
   }
 
-  const terms = normalized.split(/\s+/).filter(Boolean);
+  const terms = expandVietnamese(normalized, normalized.split(/\s+/).filter(Boolean));
   const matches = buildGraphResources()
     .map((resource) => {
       const haystack = [
@@ -279,7 +323,12 @@ function route(query) {
       const matchedTerms = terms.filter((term) => haystack.includes(term));
       let score = matchedTerms.length;
 
-      const isSystemTask = terms.some((t) => ['audit', 'system', 'workflow', 'os', 'seosona', 'capability'].includes(t));
+      // Boost the capability-bridge meta-skill only for tasks genuinely ABOUT the OS's own wiring.
+      // The trigger list used to include 'audit' — the single most common word in this repo's SEO
+      // vocabulary — so "seo audit", "content audit", "technical audit" all handed the #1 slot to a
+      // meta-skill instead of the actual SEO skill. 'os' and 'system' were similarly generic.
+      const isSystemTask = terms.some((t) => ['seosona', 'capability'].includes(t))
+        || (terms.includes('system') && terms.some((t) => ['audit', 'workflow', 'health'].includes(t)));
       if (isSystemTask && resource.type === 'skill' && resource.source === 'SKILLS_ROUTER') {
         const boostedSkills = [
           'seosona:portable-capability-bridge'

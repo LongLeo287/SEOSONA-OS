@@ -1,5 +1,5 @@
 ---
-name: skill
+name: ralph_afk_harness
 description: Guides SEOSONA agents through safe autonomous implementation and review loops inspired by Ralph: plan-driven Claude Code execution, implementer/reviewer stages, sandbox boundaries, GitHub issue loops, sentinels, retries, and security hardening for AFK agents.
 source: daonhan/ralph
 ---

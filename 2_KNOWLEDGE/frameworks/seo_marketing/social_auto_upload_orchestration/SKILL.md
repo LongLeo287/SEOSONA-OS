@@ -1,5 +1,5 @@
 ---
-name: skill
+name: social_auto_upload_orchestration
 description: Guides agents through safe multi-platform social publishing orchestration using a CLI-first capability matrix, account/session checks, user-owned login, media metadata contracts, scheduling boundaries, and platform-specific fallbacks. Use when distributing videos or image posts to platforms such as Douyin, Kuaishou, Xiaohongshu, Bilibili, TikTok, YouTube, or similar channels.
 ---
 

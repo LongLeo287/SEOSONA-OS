@@ -1,5 +1,5 @@
 ---
-name: skill
+name: video_audio_ingestion
 description: Build compliant video/audio ingestion pipelines with yt-dlp, ffmpeg, and OpenAI Whisper for transcripts, subtitles, SEO briefs, chaptering, and knowledge indexing.
 argument-hint: "[url|file] [transcribe|translate|metadata|seo-brief]"
 metadata:

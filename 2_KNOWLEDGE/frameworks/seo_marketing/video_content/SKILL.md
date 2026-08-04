@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: video_content
 description: "Video production strategy, scripting, YouTube SEO, and content repurposing."
   Video marketing strategy, script writing, storyboards, YouTube SEO,
   platform optimization, and AI video generation workflows. Activate when

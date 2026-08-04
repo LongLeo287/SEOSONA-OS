@@ -1,5 +1,5 @@
 ---
-name: skill
+name: kanban
 description: AI agent orchestration board (Coming Soon)
 metadata:
   author: claudekit

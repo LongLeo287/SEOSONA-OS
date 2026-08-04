@@ -1,5 +1,5 @@
 ---
-name: skill
+name: campaign
 description: Marketing campaign planning, execution, optimization. Create campaigns, track status, analyze performance, manage budgets, coordinate multi-channel efforts.
 argument-hint: "[create|status|analyze|email] [name]"
 metadata:

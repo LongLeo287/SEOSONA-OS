@@ -1,5 +1,5 @@
 ---
-name: skill
+name: creativity
 description: "Creative direction intelligence. 55 styles, 18 platforms, 12 voiceover types, 17 music genres, 30 campaign categories. Actions: create, design, plan, direct, brief creative campaigns. Projects: ads, videos, social content, commercials, brand films. Styles: minimalist, maximalist, nostalgic, cinematic, UGC, luxury, futuristic, emotional. Topics: visual style, platform specs, voiceover, music, color palette, audience targeting."
 argument-hint: "[style or medium]"
 metadata:

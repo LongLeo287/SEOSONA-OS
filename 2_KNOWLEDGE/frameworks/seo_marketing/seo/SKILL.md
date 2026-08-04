@@ -1,5 +1,5 @@
 ---
-name: skill
+name: seo
 description: SEO audits, keyword research (ReviewWeb.site API), on-page optimization, technical SEO, programmatic SEO (pSEO), JSON+LD schema, Google Search Console API, Core Web Vitals. Used by seo-specialist, attraction-specialist agents.
 argument-hint: "[audit|keywords|pseo|optimize|schema] [target]"
 metadata:

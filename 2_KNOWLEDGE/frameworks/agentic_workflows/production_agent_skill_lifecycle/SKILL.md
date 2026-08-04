@@ -1,5 +1,5 @@
 ---
-name: skill
+name: production_agent_skill_lifecycle
 description: Guides agents through designing, reviewing, and maintaining production-grade agent skills with trigger-focused frontmatter, behavioral workflows, anti-rationalization, and evidence gates. Use when creating or upgrading SEOSONA skills, importing external skill packs, or auditing whether a skill changes agent behavior under pressure.
 ---
 

@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: seo_backlink_intel
 version: 1.0.0
 evaluation_score: 90
 grade: A

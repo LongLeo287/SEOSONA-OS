@@ -1,5 +1,5 @@
 ---
-name: skill
+name: harness_delivery_loop
 description: Guides agents through a file-backed Plan -> Work -> Review -> Release loop with explicit specs, Plans.md task contracts, verification evidence, independent review, and bounded long-running execution. Use for substantial SEOSONA work that must stay auditable across sessions or agents.
 ---
 

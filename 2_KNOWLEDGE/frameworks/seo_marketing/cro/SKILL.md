@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: cro
 description: "Evidence-based optimization for forms, landing pages, onboarding, and checkout."
   Conversion Rate Optimization for forms, landing pages, onboarding flows,
   and checkout. Evidence-based optimization with A/B test hypotheses.

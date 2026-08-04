@@ -1,5 +1,5 @@
 ---
-name: skill
+name: watzup
 description: 💡 Review recent changes and wrap up the work
 metadata:
   author: claudekit
