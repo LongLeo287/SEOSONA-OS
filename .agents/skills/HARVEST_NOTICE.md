@@ -3,6 +3,27 @@
 Skills harvested (2026-07-24) from third-party MIT-licensed repositories during a UAP ingest wave,
 redistributed here under the MIT License with the original copyright/permission notice retained.
 
+## Curated harvest — quality/craft skills (2026-07-24)
+Hand-picked subsets, chosen because they are **domain-neutral** (the bulk of each upstream repo was
+left behind on purpose — see below).
+
+**From `github.com/wanshuiyin/Auto-claude-code-research-in-sleep` (ARIS) — MIT.**
+Only 3 of its ~85 skills are not coupled to academic research (arXiv/LaTeX/patents/experiments):
+- `mermaid-diagram` — generate flowcharts / sequence / ER diagrams (incl. KaTeX math)
+- `web-debug-search` — search GitHub, Stack Exchange, official docs when debugging
+- `system-profile` — profile a script/process for performance
+The other ~82 (paper-write, overleaf-sync, proof-checker, grant-proposal, …) are academic and were
+deliberately NOT vendored — ARIS's real value to SEOSONA is its *methodology*, captured in the KI
+`3_MEMORY/knowledge_items/uap_wanshuiyin_Auto-claude-code-research-in-sleep.md`.
+
+**From `github.com/heygen-com/hyperframes` — Apache-2.0.**
+Its `.agents/skills/` video-craft set, minus `changelog-video` (18 MB of demo mp4/mp3 assets + a
+dependency on the HyperFrames CLI):
+- `motion-doctrine` (+ `scripts/seam-gate.mjs`, `seam-stamp.mjs`) · `cut-the-curve` ·
+  `seam-craft` · `captions-overlay` · `oversized-cursor`
+Note: `motion-doctrine`'s two `.mjs` scripts drive headless Chrome to verify a HyperFrames film; they
+are inert without a HyperFrames project and, being vendored code, run through the OS skill sandbox.
+
 ## Auto-vendored by the UAP creator (2026-07 wave 5)
 The UAP pipeline installs a repo's `SKILL.md` skill when it ingests one. These four came in that way;
 all are permissively licensed (verified against each repo's LICENSE). Redistributed here under their
