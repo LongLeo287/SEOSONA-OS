@@ -320,11 +320,11 @@ surfaced a live defect (term deduplication), which is the argument for the whole
 
 ### Still open
 
-| Item | Why it was deferred |
+| Item | Why it remains |
 | :--- | :--- |
-| Backlink Common Crawl measures the wrong thing (`url=*.domain` returns the site's own pages) | Needs a different data source, not a code fix |
-| `is_side_effecting` is a filename denylist flagging 3 of ~70 scripts | Should become an allowlist — a design decision with breakage risk |
-| Sandbox has no live call sites; its scan only blocks leaked credentials, not `curl \| sh` | Requires wiring runnable skill entrypoints into the graph first |
-| Docker sandbox argv is malformed on Windows (drive-letter colon) | Only reachable once the Docker backend is opted into |
-| Multi-tenant model (`config.json` holds one domain) | Product-level change |
-| 645 `print()` calls instead of structured logging | Mechanical but broad |
+| 123 repos sitting at PENDING | Deferred by the owner — each costs an LLM call. Run `python 1_CORE/scripts/uap_pipeline/uap_manager.py` when ready |
+| Real backlink discovery | The CDX index cannot return referring domains; it needs WARC payload parsing or a paid backlink API. The section is now labelled honestly rather than fabricating one |
+| Sandbox has no live call sites | `buildGraphResources()` yields zero runnable paths, so `run_sandboxed` is never reached in production. Wiring skill entrypoints into the graph is a design change, and the sandbox is correct and tested for when it is |
+| Sandbox scan blocks credentials, not behaviour | `curl \| sh` is classified SOFT because the ingest guard was calibrated for a read-only context. Reclassifying it changes ingest behaviour too — worth doing deliberately, not as a side effect |
+| Multi-tenant model | `config.json` holds one `target_domain`; an agency serving two clients needs `config.clients[]` and `seo_exports/<client>/`. A product decision |
+| 645 `print()` calls | Mechanical but repo-wide; worth one focused pass with a real logger |

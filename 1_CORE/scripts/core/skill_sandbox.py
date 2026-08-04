@@ -24,7 +24,9 @@ next step. On Windows the RLIMIT caps are unavailable (best-effort: timeout + en
 from __future__ import annotations
 
 import os
+import re
 import shutil
+import signal
 import subprocess
 import sys
 import tempfile
@@ -53,7 +55,7 @@ _ENV_ALLOW = {
 _SECRET_HINT = ("KEY", "TOKEN", "SECRET", "PASSWORD", "PASSWD", "CREDENTIAL", "API", "AUTH", "SESSION")
 
 # Resource caps for POSIX children.
-_CPU_SECONDS = 120
+_CPU_SECONDS_MAX = 600
 _MEM_BYTES = 1024 * 1024 * 1024      # 1 GiB address space
 _FSIZE_BYTES = 64 * 1024 * 1024      # 64 MiB max single file written
 _MAX_OUTPUT = 3000
@@ -115,17 +117,38 @@ def _sandbox_env(workdir: str) -> Dict[str, str]:
     return env
 
 
-def _posix_limits():
-    """preexec_fn for POSIX: cap resources and start a new session so timeouts kill the group."""
-    import resource  # POSIX-only
-    resource.setrlimit(resource.RLIMIT_CPU, (_CPU_SECONDS, _CPU_SECONDS))
-    resource.setrlimit(resource.RLIMIT_AS, (_MEM_BYTES, _MEM_BYTES))
-    resource.setrlimit(resource.RLIMIT_FSIZE, (_FSIZE_BYTES, _FSIZE_BYTES))
+def _kill_group(proc):
+    """Kill the child AND everything it spawned."""
+    if proc is None:
+        return
     try:
-        resource.setrlimit(resource.RLIMIT_NPROC, (64, 64))
+        if os.name == "posix":
+            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+        else:
+            proc.kill()
     except Exception:
-        pass
-    os.setsid()
+        try:
+            proc.kill()
+        except Exception:
+            pass
+
+
+def _posix_limits(cpu_seconds: int):
+    """preexec_fn for POSIX: cap CPU and file size, and start a new process group.
+
+    Deliberately NOT set here, both learned from auditing the first version:
+
+    - RLIMIT_AS. It caps VIRTUAL address space, and V8 reserves multiple GiB of it at startup, so a
+      1 GiB cap meant every JavaScript skill failed to boot. Capping resident memory needs cgroups
+      (or the Docker backend above), not RLIMIT_AS.
+    - RLIMIT_NPROC. It is per-UID, not per-process: setting it to 64 counts every process the user
+      already has, so on a busy workstation the child cannot fork at all — and if it can, the limit
+      applies to the user's own shell too.
+    """
+    import resource  # POSIX-only
+    resource.setrlimit(resource.RLIMIT_CPU, (cpu_seconds, cpu_seconds))
+    resource.setrlimit(resource.RLIMIT_FSIZE, (_FSIZE_BYTES, _FSIZE_BYTES))
+    os.setpgrp()
 
 
 def _truthy(value: Optional[str]) -> bool:
@@ -156,7 +179,11 @@ def _docker_run_cmd(interp: str, script: Path, args: List[str], image: str) -> L
         "--network", "none",                       # no egress — kills exfiltration + SSRF entirely
         "--read-only",                             # immutable rootfs
         "--tmpfs", "/work:rw,size=64m",            # only writable area
-        "-v", f"{skill_dir}:/skill:ro",            # the skill's own files, read-only
+        # `-v src:dst:ro` splits on ":" — a Windows path's drive-letter colon turned this into a
+        # four-field value and Docker refused to start, so the only real isolation the module
+        # offers could never run on this repo's primary platform. `--mount` is comma-delimited and
+        # takes the path as a single value.
+        "--mount", f"type=bind,src={skill_dir},dst=/skill,readonly",
         "-w", "/work",
         "--memory", "1g", "--cpus", "1", "--pids-limit", "128",
         "--cap-drop", "ALL", "--security-opt", "no-new-privileges",
@@ -167,11 +194,31 @@ def _docker_run_cmd(interp: str, script: Path, args: List[str], image: str) -> L
     ]
 
 
+_IMAGE_RE = re.compile(r"^[a-z0-9][a-z0-9._/-]*(:[A-Za-z0-9._-]+)?$")
+
+
+def _safe_image(env_name: str, default: str) -> str:
+    """Validate an image reference before it goes into the argv.
+
+    The image sits in a POSITIONAL slot. An env value starting with "-" (say `--privileged`) is
+    parsed by Docker as a FLAG, shifting the interpreter into the image slot — turning an
+    environment variable into sandbox-escape options. Not shell injection, but argv-position
+    injection, and the sandbox is exactly the wrong place to trust input.
+    """
+    value = (os.getenv(env_name) or "").strip()
+    if not value:
+        return default
+    if not _IMAGE_RE.match(value):
+        print(f"[sandbox] Ignoring unsafe {env_name}={value!r}; using {default}.")
+        return default
+    return value
+
+
 def _run_docker(script: Path, args: List[str], timeout: int) -> Dict[str, Any]:
     is_py = str(script).endswith(".py")
     interp = "python" if is_py else "node"
-    image = (os.getenv("SEOSONA_SANDBOX_PY_IMAGE", "python:3.11-slim") if is_py
-             else os.getenv("SEOSONA_SANDBOX_JS_IMAGE", "node:20-slim"))
+    image = (_safe_image("SEOSONA_SANDBOX_PY_IMAGE", "python:3.11-slim") if is_py
+             else _safe_image("SEOSONA_SANDBOX_JS_IMAGE", "node:20-slim"))
     cmd = _docker_run_cmd(interp, script, args, image)
     try:
         proc = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", timeout=timeout)
@@ -206,15 +253,24 @@ def run_sandboxed(cmd: List[str], script: Path, timeout: int = 600,
     is_posix = os.name == "posix"
     kwargs: Dict[str, Any] = {}
     if is_posix:
-        kwargs["preexec_fn"] = _posix_limits
+        # CPU limit tracks the caller's timeout instead of a fixed 120s that silently killed any
+        # legitimately longer skill with a bare negative exit code.
+        cpu = max(30, min(timeout, _CPU_SECONDS_MAX))
+        kwargs["preexec_fn"] = lambda: _posix_limits(cpu)
     else:
         kwargs["creationflags"] = getattr(subprocess, "CREATE_NEW_PROCESS_GROUP", 0)
+
+    proc = None
     try:
-        proc = subprocess.run(
-            cmd, cwd=workdir, capture_output=True, text=True, encoding="utf-8",
-            env=_sandbox_env(workdir), timeout=timeout, **kwargs,
+        # Popen + explicit group kill. `subprocess.run(timeout=...)` calls Popen.kill(), which sends
+        # SIGKILL to the LEADER only — a hostile skill that forks simply outlived the timeout and
+        # kept running unsupervised. Killing the group is the behaviour the docstring always claimed.
+        proc = subprocess.Popen(
+            cmd, cwd=workdir, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            text=True, encoding="utf-8", env=_sandbox_env(workdir), **kwargs,
         )
-        out = (proc.stdout or "") + (("\n" + proc.stderr) if proc.returncode and proc.stderr else "")
+        stdout, stderr = proc.communicate(timeout=timeout)
+        out = (stdout or "") + (("\n" + stderr) if proc.returncode and stderr else "")
         return {
             "ran": True,
             "ok": proc.returncode == 0,
@@ -224,8 +280,9 @@ def run_sandboxed(cmd: List[str], script: Path, timeout: int = 600,
             "output": out.strip()[-_MAX_OUTPUT:],
         }
     except subprocess.TimeoutExpired:
+        _kill_group(proc)
         return {"ran": True, "ok": False, "exit_code": None, "sandboxed": True, "backend": "subprocess",
-                "output": f"sandboxed timeout after {timeout}s"}
+                "output": f"sandboxed timeout after {timeout}s (process group killed)"}
     except Exception as e:  # noqa: BLE001
         return {"ran": False, "ok": False, "exit_code": None, "sandboxed": True, "backend": "subprocess",
                 "output": f"sandbox error: {e}"}
