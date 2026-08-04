@@ -121,9 +121,24 @@ function firstHeading(content) {
   return match ? match[1].trim() : null;
 }
 
+// A name is a label, not a document. Some generated KIs are written as a single long line, so the
+// "first heading" / frontmatter `name` swallows the whole article — that blob then shows up as the
+// resource name in every route result and drowns the real matches. Clamp it to a sane label length
+// and fall back to the file slug when what we found is clearly prose, not a name.
+const MAX_NAME_LENGTH = 120;
+
+function sanitizeName(raw, relativePath) {
+  const flat = (raw || '').replace(/\s+/g, ' ').trim();
+  if (!flat) return slugToName(relativePath);
+  if (flat.length <= MAX_NAME_LENGTH) return flat;
+  const slug = slugToName(relativePath);
+  return slug || `${flat.slice(0, MAX_NAME_LENGTH).trimEnd()}…`;
+}
+
 function makeResource(type, relativePath, source, extra = {}) {
   const content = readFileSafe(relativePath);
-  const declaredName = frontmatterField(content, 'name') || firstHeading(content) || slugToName(relativePath);
+  const rawName = frontmatterField(content, 'name') || firstHeading(content) || slugToName(relativePath);
+  const declaredName = sanitizeName(rawName, relativePath);
   const normalizedName = declaredName.toLowerCase();
   const domain = toPosix(path.dirname(relativePath)).split('/').slice(0, 3).join('/');
   const keywords = Array.from(new Set([
