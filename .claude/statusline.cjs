@@ -15,10 +15,10 @@ const fs = require('fs');
 const path = require('path');
 
 // Import modular components
-const { green, yellow, red, cyan, magenta, dim, coloredBar, RESET, shouldUseColor } = require('./hooks/lib/colors.cjs');
-const { parseTranscript } = require('./hooks/lib/transcript-parser.cjs');
-const { countConfigs } = require('./hooks/lib/config-counter.cjs');
-const { loadConfig } = require('./hooks/lib/ck-config-utils.cjs');
+const { green, yellow, red, cyan, magenta, dim, coloredBar, RESET, shouldUseColor } = require('../1_CORE/hooks/lib/colors.cjs');
+const { parseTranscript } = require('../1_CORE/hooks/lib/transcript-parser.cjs');
+const { countConfigs } = require('../1_CORE/hooks/lib/config-counter.cjs');
+const { loadConfig } = require('../1_CORE/hooks/lib/ck-config-utils.cjs');
 
 // Buffer constant matching /context output (22.5% of 200k)
 const AUTOCOMPACT_BUFFER = 45000;

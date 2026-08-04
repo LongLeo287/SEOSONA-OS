@@ -23,6 +23,19 @@ if (!fs.existsSync(path.join(process.cwd(), '.claude', 'statusline.cjs'))) {
   process.exit(0);
 }
 
+// Every case below feeds JSON through a POSIX pipeline: execSync(`echo '<json>' | node ...`).
+// That depends on the shell stripping single quotes. cmd.exe — execSync's default on Windows —
+// does not, so the statusline receives quote-wrapped garbage, falls back to defaults, and every
+// assertion fails for an environment reason rather than a real defect. Probe the shell once and
+// skip cleanly when it can't run the pipeline, instead of reporting 47 false failures.
+try {
+  const probe = execSync(`echo '{"probe":1}'`, { encoding: 'utf-8' }).trim();
+  JSON.parse(probe);
+} catch {
+  console.log('SKIPPED: statusline integration tests need a POSIX shell for `echo \'<json>\' | node` (cmd.exe does not strip single quotes).');
+  process.exit(0);
+}
+
 function test(name, fn) {
   try {
     fn();

@@ -17,7 +17,13 @@ const fs = require("fs");
 const path = require("path");
 const os = require("os");
 const { execSync } = require("child_process");
-const { isHookEnabled } = require('./lib/ck-config-utils.cjs');
+// Guarded require: this sits at module scope, so main()'s catch cannot reach it. If the lib is
+// missing or throws at load, the process dies with a stack trace on stderr — on UserPromptSubmit
+// that surfaces as a visible error on every single prompt. Fail open to a permissive default.
+let isHookEnabled = () => true;
+try {
+  ({ isHookEnabled } = require('./lib/ck-config-utils.cjs'));
+} catch { /* keep the permissive default */ }
 
 // Early exit if hook disabled in config
 if (!isHookEnabled('usage-context-awareness')) {
