@@ -16,6 +16,7 @@ Run modes:
 import sys
 import json
 import argparse
+import re
 from pathlib import Path
 
 _THIS = Path(__file__).resolve()
@@ -25,44 +26,74 @@ sys.path.insert(0, str(_THIS.parent / "core"))
 
 
 def _semantic_search(query: str, limit: int):
-    """TF-IDF cosine search via the persisted index. Returns [] if the backend is unavailable."""
+    """Hybrid BM25+TF-IDF search via the persisted index.
+
+    Returns ``(results, error)``. The error is surfaced to the caller rather than swallowed: the
+    old version caught every failure — a missing scikit-learn, a corrupt index, an OOM — and
+    returned ``[]``, which is indistinguishable from "nothing matched". On a machine without the
+    dependencies installed that made the brain answer empty forever, silently, with exit 0.
+    """
     try:
         from vector_memory import query_semantic_memory
-        return query_semantic_memory(query, limit) or []
-    except Exception:
-        return []
+        return (query_semantic_memory(query, limit) or []), None
+    except ImportError as e:
+        return [], (
+            f"semantic backend unavailable ({e}). Install dependencies: "
+            "pip install -r requirements.txt — retrieval is running in DEGRADED lexical mode."
+        )
+    except Exception as e:  # noqa: BLE001 - corrupt index, OOM, anything else
+        return [], f"semantic backend failed: {type(e).__name__}: {e}"
 
 
 def _lexical_search(query: str, limit: int):
-    """Substring fallback so the tool degrades gracefully with no index."""
-    results = []
-    if MEMORY_DIR.exists():
-        q = query.lower()
-        for file in MEMORY_DIR.rglob("*.md"):
-            try:
-                content = file.read_text(encoding="utf-8", errors="ignore")
-            except Exception:
-                continue
-            if q in content.lower():
-                results.append({
-                    "title": file.stem,
-                    "portablePath": "~/.seosona/" + str(file.relative_to(SEOSONA_ROOT)).replace("\\", "/"),
-                    "score": None,
-                    "snippet": content[:200].replace("\n", " ") + "...",
-                })
-                if len(results) >= limit:
-                    break
-    return results
+    """Token-overlap fallback for when the semantic backend is unavailable.
+
+    The previous version tested ``if query.lower() in content.lower()`` — the WHOLE query as one
+    substring. A three-word question essentially never appears verbatim in a document, so the
+    "graceful degradation" this docstring promised actually returned nothing, every time. Now each
+    term is scored independently and the best documents are returned, which is what a fallback is for.
+    """
+    terms = [t for t in re.split(r"\W+", query.lower()) if len(t) > 2]
+    if not terms or not MEMORY_DIR.exists():
+        return []
+
+    scored = []
+    for file in MEMORY_DIR.rglob("*.md"):
+        try:
+            content = file.read_text(encoding="utf-8", errors="ignore")
+        except Exception:
+            continue
+        low = content.lower()
+        hits = sum(1 for t in terms if t in low)
+        if hits:
+            scored.append((hits, file, content))
+
+    scored.sort(key=lambda x: -x[0])
+    return [{
+        "title": f.stem,
+        "portablePath": "~/.seosona/" + str(f.relative_to(SEOSONA_ROOT)).replace("\\", "/"),
+        "score": round(hits / len(terms), 4),
+        "snippet": c[:200].replace("\n", " ") + "...",
+    } for hits, f, c in scored[:limit]]
 
 
 def search_knowledge(query: str, limit: int = 5) -> str:
-    """Search the SEOSONA knowledge base (semantic first, lexical fallback)."""
-    hits = _semantic_search(query, limit)
-    backend = "tfidf"
-    if not hits:
+    """Search the SEOSONA knowledge base (semantic first, lexical fallback).
+
+    A degraded backend is reported in the payload AND on stderr, so "the brain is broken" can never
+    again look identical to "nothing matched".
+    """
+    hits, error = _semantic_search(query, limit)
+    backend = "hybrid_bm25_tfidf"
+    if error:
+        print(f"[knowledge] DEGRADED: {error}", file=sys.stderr)
         hits = _lexical_search(query, limit)
-        backend = "lexical"
-    return json.dumps({"query": query, "backend": backend, "results": hits}, ensure_ascii=False)
+        backend = "lexical_degraded"
+
+    payload = {"query": query, "backend": backend, "results": hits}
+    if error:
+        payload["warning"] = error
+    return json.dumps(payload, ensure_ascii=False)
 
 
 def _run_mcp():

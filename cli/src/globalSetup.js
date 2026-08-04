@@ -13,19 +13,43 @@ function injectJsonSettings(name, filePath, properties, globalPrompt) {
             let injected = false;
 
             properties.forEach(prop => {
-                if (json[prop]) {
-                    if (!json[prop].includes("SEOSONA")) {
+                const current = json[prop];
+                if (current === undefined || current === null || current === '') {
+                    json[prop] = globalPrompt;
+                    injected = true;
+                } else if (typeof current === 'string') {
+                    if (!current.includes("SEOSONA")) {
                         json[prop] = globalPrompt;
                         injected = true;
                     }
+                } else if (Array.isArray(current)) {
+                    // Copilot's codeGeneration.instructions is an ARRAY OF OBJECTS. The old code ran
+                    // Array.includes("SEOSONA") — which looks for that exact ELEMENT, never finds it,
+                    // and replaced the whole array with a string: wrong type, and the user's entries
+                    // gone. Append instead, and only once.
+                    const already = current.some(e =>
+                        (typeof e === 'string' && e.includes('SEOSONA')) ||
+                        (e && typeof e === 'object' && JSON.stringify(e).includes('SEOSONA')));
+                    if (!already) {
+                        current.push({ text: globalPrompt });
+                        injected = true;
+                    }
                 } else {
-                    json[prop] = globalPrompt;
-                    injected = true;
+                    // An object or some other shape we don't understand — leave it alone rather
+                    // than guess and destroy it.
+                    console.log(`  -> ${paddedName} ${colors.yellow(`Skipped ${prop}: unexpected type ${typeof current}.`)}`);
                 }
             });
 
             if (injected) {
-                fs.writeFileSync(filePath, JSON.stringify(json, null, 4), 'utf8');
+                // Back up before the first modification. These files represent real user
+                // configuration; there is no undo once we have written over them.
+                const backup = `${filePath}.seosona-backup`;
+                if (!fs.existsSync(backup)) fs.copyFileSync(filePath, backup);
+                // Write via a temp file so an interrupted write cannot truncate the original.
+                const tmp = `${filePath}.seosona-tmp`;
+                fs.writeFileSync(tmp, JSON.stringify(json, null, 4), 'utf8');
+                fs.renameSync(tmp, filePath);
                 console.log(`  -> ${paddedName} ${colors.green('Injected global rules.')}`);
             } else {
                 console.log(`  -> ${paddedName} ${colors.green('Already bound to SEOSONA.')}`);

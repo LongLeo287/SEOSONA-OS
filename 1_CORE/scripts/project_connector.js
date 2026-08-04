@@ -156,8 +156,36 @@ function validateManifestShape(manifest) {
   return errors;
 }
 
+// `memoryNamespace` and `ruleFiles` arrive from a project's own seosona.project.json — a file that
+// ships inside whatever repository the user cloned. Neither was validated before being handed to
+// fs, so a crafted manifest wrote files outside the project and created directories at the drive
+// root (a `"../../../../PWNED"` namespace was reproduced landing there). Both are now contained.
+const NAMESPACE_RE = /^[a-z0-9][a-z0-9-]{1,62}$/;
+
+function assertSafeNamespace(namespace) {
+  if (typeof namespace !== 'string' || !NAMESPACE_RE.test(namespace)) {
+    throw new Error(
+      `Unsafe memoryNamespace ${JSON.stringify(namespace)} — expected a slug matching ${NAMESPACE_RE}`
+    );
+  }
+  return namespace;
+}
+
+// Keep a manifest-supplied relative path inside its project root.
+function assertInside(rootDir, relative) {
+  if (typeof relative !== 'string' || !relative.trim() || path.isAbsolute(relative)) {
+    throw new Error(`Unsafe path in manifest: ${JSON.stringify(relative)}`);
+  }
+  const root = path.resolve(rootDir);
+  const target = path.resolve(root, relative);
+  if (target !== root && !target.startsWith(root + path.sep)) {
+    throw new Error(`Manifest path escapes the project: ${JSON.stringify(relative)}`);
+  }
+  return target;
+}
+
 function memoryRoot(namespace) {
-  return path.join(OS_ROOT, '3_MEMORY', 'projects', namespace);
+  return path.join(OS_ROOT, '3_MEMORY', 'projects', assertSafeNamespace(namespace));
 }
 
 function createMemoryNamespace(namespace) {
@@ -264,7 +292,15 @@ function syncRules(projectRoot, manifest) {
   const content = buildRuleContent(manifest);
   const files = manifest.ruleFiles || DEFAULT_RULE_FILES;
   for (const file of files) {
-    fs.writeFileSync(path.join(projectRoot, file), content, 'utf8');
+    const target = assertInside(projectRoot, file);
+    // Never silently destroy a hand-authored file. AGENTS.md and .github/copilot-instructions.md
+    // are committed, team-owned documents; overwriting them without a copy has cost real work.
+    if (fs.existsSync(target) && !fs.readFileSync(target, 'utf8').includes('SEOSONA')) {
+      fs.copyFileSync(target, `${target}.seosona-backup`);
+      console.warn(`[SEOSONA] Backed up existing ${file} -> ${file}.seosona-backup`);
+    }
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.writeFileSync(target, content, 'utf8');
   }
   return files;
 }

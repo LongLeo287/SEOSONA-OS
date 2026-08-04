@@ -1,0 +1,32 @@
+# SEOSONA OS — Python dependencies
+#
+# Until this file existed, the OS ran only because its imports happened to resolve out of an
+# unrelated application's virtualenv on one machine. A fresh clone got a knowledge brain that
+# returned empty results while reporting success, and a UAP pipeline that could not start.
+#
+#   python -m venv .venv
+#   .venv\Scripts\activate        (Windows)  |  source .venv/bin/activate  (POSIX)
+#   pip install -r requirements.txt
+#
+# Point .mcp.json at that interpreter so the knowledge server always gets the real backend.
+
+# --- Knowledge brain (required: without these, retrieval silently degrades) ---
+scikit-learn==1.9.0        # TF-IDF vectoriser + cosine similarity
+joblib==1.5.3              # index persistence
+numpy==2.4.6
+rank-bm25==0.2.2           # lexical half of the hybrid retrieval
+
+# --- MCP server ---
+mcp==1.26.0                # FastMCP stdio server for knowledge_search
+
+# --- UAP ingestion pipeline ---
+pandas==2.3.3              # 01_finder inventory parsing
+openpyxl==3.1.5            # .xlsx inventory reader used by pandas
+
+# --- Connectors ---
+requests==2.33.0           # wp_rest_connector, github_repo_analyzer
+python-dotenv==1.2.2       # secrets_manager
+beautifulsoup4==4.15.0     # HTML parsing in the SEO connectors
+
+# --- Tests ---
+pytest>=8.0
