@@ -134,9 +134,19 @@ def fetch_common_crawl(domain, max_links=100):
         return []
 
 def parse_common_crawl_backlinks(cc_data, target_domain):
-    """
-    From Common Crawl CDX data, extract domains that link to target.
-    This is a simplified version — for deeper analysis use WARC files.
+    """Extract the target's OWN crawled subdomains from Common Crawl CDX data.
+
+    IMPORTANT — this is not a backlink source, despite the historical name.
+
+    `fetch_common_crawl` queries the CDX index with `url=*.{domain}`, which returns pages BELONGING
+    to the domain, not pages linking to it. Every row here is therefore the target's own crawled
+    URLs, and they were being written into the report under "Referring Domains" — telling clients
+    their own subdomains were backlinks.
+
+    Finding real referring domains from Common Crawl means downloading and parsing WARC payloads to
+    extract outbound anchors, which the CDX API cannot do. Until that exists, this returns crawl
+    coverage — which is genuinely useful (it shows what Common Crawl has indexed for the site) —
+    labelled honestly.
     """
     referring_domains = {}
     for entry in cc_data:
@@ -261,14 +271,19 @@ def write_backlink_report(domain, date_str, pr_data, cc_links, bing_links, outpu
             pr_val = pr.get('page_rank_integer', 'N/A')
             f.write(f"| Open PageRank (0-10) | {pr_val} | — | — |\n")
 
-        f.write(f"## Common Crawl — Referring Domains Found\n\n")
+        f.write("## Common Crawl — Indexed Hosts (crawl coverage, NOT backlinks)\n\n")
+        f.write("> The CDX query `url=*.domain` returns pages **belonging to** the domain, so these\n"
+                "> are the site's own hosts as indexed by Common Crawl. Extracting real referring\n"
+                "> domains requires parsing WARC payloads, which this connector does not do. This\n"
+                "> section previously carried the heading \"Referring Domains\", which told clients\n"
+                "> their own subdomains were backlinks.\n\n")
         if cc_links:
-            f.write(f"*{len(cc_links)} unique referring domains detected via Common Crawl index*\n\n")
-            f.write("| Referring Domain | First Seen | Notes |\n")
-            f.write("|-----------------|------------|-------|\n")
+            f.write(f"*{len(cc_links)} unique hosts of this domain found in the Common Crawl index*\n\n")
+            f.write("| Indexed Host | First Seen | Notes |\n")
+            f.write("|-------------|------------|-------|\n")
             for src, info in list(cc_links.items())[:30]:
                 ts = info.get("timestamp", "")[:8]
-                f.write(f"| {src} | {ts} | Verify manually |\n")
+                f.write(f"| {src} | {ts} | Own host — crawl coverage |\n")
         else:
             f.write("*No Common Crawl data retrieved — may need to retry or check connectivity*\n")
 

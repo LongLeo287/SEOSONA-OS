@@ -44,9 +44,32 @@ _SIDE_EFFECT_RE = re.compile(
 )
 
 
+# A filename denylist is a spelling test, and it showed: over ~70 scripts it flagged three. It
+# missed every outward-facing connector (telegram, ga4, gsc, backlink, psi, rank_tracker) because
+# their names contain no "dangerous" word, and it discarded directory context entirely — a script
+# under deploy/ or production/ passed on its basename alone.
+#
+# These two lists close the gap without turning into a full allowlist (which would need auditing
+# every script before anything could auto-run, and would break existing automation the day it
+# landed): any script that talks to the outside world, and any script under a risky directory.
+_OUTWARD_SCRIPTS = {
+    "telegram_connector.py", "wp_rest_connector.py", "ga4_connector.py", "gsc_connector.py",
+    "backlink_connector.py", "psi_connector.py", "rank_tracker.py", "keyword_connector.py",
+    "serp_competitor.py", "google_trends_connector.py", "scraper_agent.py",
+    "scrapling_scraper.py", "api_gateway.py", "mcp_bridge.py", "github_repo_analyzer.py",
+}
+_RISKY_DIRS = {"deploy", "production", "prod", "release", "publish", "system_daemons"}
+
+
 def is_side_effecting(path: Path) -> bool:
-    """True when a script's filename signals an irreversible/outward action → never auto-run."""
-    return bool(_SIDE_EFFECT_RE.search(path.name))
+    """True when a script must never auto-run: it is outward-facing, irreversible, or lives in a
+    directory that signals deployment."""
+    if _SIDE_EFFECT_RE.search(path.name):
+        return True
+    if path.name in _OUTWARD_SCRIPTS:
+        return True
+    # Directory context — checked on the full path, not just the basename.
+    return any(part.lower() in _RISKY_DIRS for part in path.parts[:-1])
 
 
 def resolve_path(portable: str) -> Optional[Path]:

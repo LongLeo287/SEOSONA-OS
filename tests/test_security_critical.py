@@ -59,8 +59,23 @@ class TestDispatcherGuard:
             assert is_side_effecting(Path(n)) is True, n
 
     def test_allows_analysis_names(self):
-        for n in ("run_full_audit.py", "eeat_analyzer.py", "keyword_connector.py", "vector_memory.py"):
+        for n in ("run_full_audit.py", "eeat_analyzer.py", "schema_validator.py", "vector_memory.py"):
             assert is_side_effecting(Path(n)) is False, n
+
+    def test_blocks_outward_facing_connectors(self):
+        """A filename denylist is a spelling test: it flagged 3 scripts out of ~70 and missed every
+        connector that talks to a third party, because none of their names contain a scary word."""
+        for n in ("telegram_connector.py", "ga4_connector.py", "gsc_connector.py",
+                  "backlink_connector.py", "psi_connector.py", "api_gateway.py"):
+            assert is_side_effecting(Path(n)) is True, n
+
+    def test_directory_context_counts(self):
+        """The guard matched on the basename only, so a script under deploy/ or production/ passed
+        purely because of what it was called."""
+        for p in ("deploy/orchestrator.py", "x/production/run.py",
+                  "1_CORE/scripts/system_daemons/boot.py"):
+            assert is_side_effecting(Path(p)) is True, p
+        assert is_side_effecting(Path("1_CORE/scripts/core/vector_memory.py")) is False
 
     def test_domain_extraction_ignores_version_numbers(self):
         assert _extract_domain("audit example.com now") == "example.com"
@@ -187,10 +202,22 @@ class TestSkillSandbox:
         s = self._sandbox()
         cmd = s._docker_run_cmd("python", Path("/x/skills/foo/probe.py"), ["--a"], "python:3.11-slim")
         joined = " ".join(cmd)
-        for flag in ("--network none", "--read-only", "--cap-drop ALL", "no-new-privileges", ":ro", "65534"):
+        for flag in ("--network none", "--read-only", "--cap-drop ALL", "no-new-privileges", "65534"):
             assert flag in joined, flag
+        # --mount, not -v: `-v src:dst:ro` splits on ":" and a Windows drive letter broke it.
+        assert "--mount" in cmd
+        assert any(c.startswith("type=bind,") and ",readonly" in c for c in cmd)
         assert cmd[-3:] == ["python", "/skill/probe.py", "--a"]
         assert not any(("KEY" in c or "TOKEN" in c or "SECRET" in c) for c in cmd)
+
+    def test_image_from_env_cannot_inject_docker_flags(self, monkeypatch):
+        """The image sits in a POSITIONAL argv slot, so a value starting with '-' would be read by
+        Docker as a FLAG — turning an env var into sandbox-escape options."""
+        s = self._sandbox()
+        monkeypatch.setenv("SEOSONA_SANDBOX_PY_IMAGE", "--privileged")
+        assert s._safe_image("SEOSONA_SANDBOX_PY_IMAGE", "python:3.11-slim") == "python:3.11-slim"
+        monkeypatch.setenv("SEOSONA_SANDBOX_PY_IMAGE", "python:3.12-slim")
+        assert s._safe_image("SEOSONA_SANDBOX_PY_IMAGE", "python:3.11-slim") == "python:3.12-slim"
 
 
 class TestSkillRouting:
