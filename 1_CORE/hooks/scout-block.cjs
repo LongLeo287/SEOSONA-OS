@@ -47,10 +47,11 @@ try {
   // Read stdin synchronously
   const hookInput = fs.readFileSync(0, 'utf-8');
 
-  // Validate input not empty
+  // Validate input not empty. Fail OPEN: every other error path here allows the operation, and an
+  // empty stdin is an environment quirk, not evidence of a blocked path. Exiting 2 here made the
+  // hook block a legitimate tool call whenever stdin arrived empty.
   if (!hookInput || hookInput.trim().length === 0) {
-    console.error('ERROR: Empty input');
-    process.exit(2);
+    process.exit(0);
   }
 
   // Parse JSON
@@ -72,16 +73,23 @@ try {
 
   const toolInput = data.tool_input;
   const toolName = data.tool_name || 'unknown';
-  const claudeDir = path.dirname(__dirname); // Go up from hooks/ to .claude/
+  // These hooks live at <repo>/1_CORE/hooks/, not <repo>/.claude/hooks/, so walking one level up
+  // landed on 1_CORE/ and the .ckignore was never found. Resolve the repo root explicitly and read
+  // the ignore file from <repo>/.claude/.ckignore.
+  const repoRoot = path.resolve(__dirname, '..', '..');
+  const claudeDir = path.join(repoRoot, '.claude');
 
-  // Use shared scout checker
+  // Use shared scout checker.
+  // checkBroadPatterns is OFF: it treats ordinary searches like `**/*.js` as "too broad" and
+  // hard-blocks them (exit 2), which costs an error round-trip on a completely normal Glob. The
+  // directory blocklist below is the part that actually earns its keep.
   const result = checkScoutBlock({
     toolName,
     toolInput,
     options: {
       claudeDir,
       ckignorePath: path.join(claudeDir, '.ckignore'),
-      checkBroadPatterns: true
+      checkBroadPatterns: false
     }
   });
 

@@ -61,6 +61,9 @@ const DEFAULT_CONFIG = {
   },
   assertions: [],
   statusline: 'full',
+  // Keep in sync with 1_CONFIG/schemas/ck-config.schema.json — that schema sets
+  // additionalProperties:false, so a hook missing from BOTH lists cannot be toggled off without
+  // writing a schema-invalid config.
   hooks: {
     'session-init': true,
     'subagent-init': true,
@@ -68,7 +71,12 @@ const DEFAULT_CONFIG = {
     'usage-context-awareness': true,
     'scout-block': true,
     'privacy-block': true,
-    'post-edit-simplify-reminder': true
+    'post-edit-simplify-reminder': true,
+    'brain-inject': true,
+    'memory-logger': true,
+    'session-end': true,
+    'descriptive-name': true,
+    'write-compact-marker': true
   }
 };
 

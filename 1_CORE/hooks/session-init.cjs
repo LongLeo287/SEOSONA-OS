@@ -98,7 +98,9 @@ async function main() {
       user: process.env.USERNAME || process.env.USER || process.env.LOGNAME || os.userInfo().username,
       locale: process.env.LANG || '',
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      claudeSettingsDir: path.resolve(__dirname, '..')
+      // The repo's Claude settings live at <repo>/.claude, not <repo>/1_CORE. Resolving one level
+      // up from hooks/ landed on 1_CORE and handed consumers a directory that holds no settings.
+      claudeSettingsDir: path.join(path.resolve(__dirname, '..', '..'), '.claude')
     };
 
     // Compute base directory for absolute paths (Issue #327: use CWD for subdirectory support)
@@ -169,8 +171,11 @@ async function main() {
       writeEnv(envFile, 'CK_VALIDATION_MAX_QUESTIONS', validation.maxQuestions || 8);
       writeEnv(envFile, 'CK_VALIDATION_FOCUS_AREAS', (validation.focusAreas || ['assumptions', 'risks', 'tradeoffs', 'architecture']).join(','));
 
-      // Coding level config (for output style selection)
-      const codingLevel = config.codingLevel ?? 5;
+      // Coding level config (for output style selection).
+      // Fallback is -1 (disabled), matching loadConfig's own coercion and the second read further
+      // down. The old `?? 5` here meant the env var advertised level 5 while the guidelines block
+      // treated the same config as disabled.
+      const codingLevel = config.codingLevel ?? -1;
       writeEnv(envFile, 'CK_CODING_LEVEL', codingLevel);
       writeEnv(envFile, 'CK_CODING_LEVEL_STYLE', getCodingLevelStyleName(codingLevel));
     }

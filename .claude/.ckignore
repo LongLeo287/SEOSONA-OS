@@ -1,0 +1,22 @@
+# Directories the agent should not browse — they burn context without informing the task.
+# gitignore syntax; `!pattern` re-allows. Read by 1_CORE/hooks/scout-block.cjs.
+#
+# Deliberately NOT listed: 2_KNOWLEDGE/, .agents/skills/, 3_MEMORY/knowledge_items/.
+# Those are the OS's own brain — vendored or not, the agent is supposed to read them.
+
+node_modules/
+.git/
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+.next/
+.turbo/
+coverage/
+
+# Generated / binary artifacts
+1_CORE/bin/codebase-memory-mcp/
+3_MEMORY/vector_index/
+5_RESEARCH/*/
