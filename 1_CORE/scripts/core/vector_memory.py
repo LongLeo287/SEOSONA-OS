@@ -144,14 +144,21 @@ class SemanticMemoryEngine:
         rankings = [list(tfidf_sims.argsort()[::-1][:pool])]
 
         # Fuse in BM25 lexical ranking when available — it catches exact terms cosine dilutes.
+        bm25_scores = None
         if self.bm25 is not None:
             try:
                 bm25_scores = self.bm25.get_scores(task.lower().split())
                 rankings.append(list(np.argsort(bm25_scores)[::-1][:pool]))
             except Exception:
-                pass
+                bm25_scores = None
 
         fused = _rrf(rankings)
+        # argsort always returns `pool` indices, even when every cosine is 0.0 — so a query of pure
+        # gibberish came back with 8 confidently-ranked, entirely unrelated documents, and the
+        # caller's `if not hits: lexical_fallback` could never fire. An engine that cannot say
+        # "I don't know" is a hallucination feeder. Keep only documents some signal actually matched.
+        fused = {i: s for i, s in fused.items()
+                 if float(tfidf_sims[i]) > 0.0 or (bm25_scores is not None and bm25_scores[i] > 0.0)}
         if not fused:
             return []
         ordered = sorted(fused.items(), key=lambda kv: kv[1], reverse=True)[:top_k]

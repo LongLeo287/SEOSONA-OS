@@ -33,7 +33,12 @@ QUARANTINE = (_ROOT / "_QUARANTINE" / "uap_blocked")
 import sys
 sys.path.append(str(Path(__file__).parent))
 _sec = importlib.import_module("02b_security_guard")
-RED_FLAGS = getattr(_sec, "RED_FLAGS", [])
+# 02b exposes HARD_FLAGS / SOFT_FLAGS — there has never been a RED_FLAGS. The old
+# `getattr(_sec, "RED_FLAGS", [])` therefore yielded an empty list, so _scan_output() below looped
+# over nothing and pronounced every generated artefact clean. 951 repos passed through a gate that
+# had never inspected a single byte. Fail loudly if the attribute set ever changes again.
+RED_FLAGS = list(_sec.HARD_FLAGS) + list(_sec.SOFT_FLAGS)
+assert RED_FLAGS, "output security scan has no patterns — refusing to run a no-op gate"
 from uap_intelligence import check_duplicate, pick_champion, record_version
 
 UAP_UPGRADE_QUEUE = (_ROOT / "3_MEMORY" / "uap_self_upgrade_queue.md")

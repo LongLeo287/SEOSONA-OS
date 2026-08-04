@@ -150,6 +150,23 @@ class _PinnedHTTPSHandler(urllib.request.HTTPSHandler):
 
 
 _REDIRECT_CODES = (301, 302, 303, 307, 308)
+# Headers that must never survive a cross-origin redirect — otherwise a 302 hands the caller's
+# credentials to whatever host the attacker names in Location.
+_AUTH_HEADERS = {"authorization", "cookie", "proxy-authorization", "api-opr", "x-api-key"}
+
+
+class _RaiseOnRedirect(urllib.request.HTTPRedirectHandler):
+    """Turn 3xx into an HTTPError instead of following it.
+
+    ``build_opener`` installs the stock ``HTTPRedirectHandler`` unless one is supplied, and that
+    handler consumes redirects *inside* ``opener.open()``. Passing only a pinned transport handler
+    therefore left redirects being followed automatically, with no re-validation and no pinning —
+    the manual hop loop below could never run. This subclass makes every 3xx surface to the caller
+    so that loop is the only thing that follows redirects.
+    """
+
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
 
 
 def safe_urlopen(url_or_req, *, timeout=30, context=None, max_redirects=5, **kwargs):
@@ -188,9 +205,14 @@ def safe_urlopen(url_or_req, *, timeout=30, context=None, max_redirects=5, **kwa
         port = parsed.port or (443 if parsed.scheme == "https" else 80)
         ip = _validated_ips(host, port)[0][1]   # raises if any resolved address is non-public
 
-        handler = (_PinnedHTTPSHandler(ip, context) if parsed.scheme == "https"
-                   else _PinnedHTTPHandler(ip))
-        opener = urllib.request.build_opener(handler)
+        # Pin BOTH transports every hop and suppress automatic redirects. Installing only the
+        # scheme of the current hop left the other scheme on its stock, unpinned, unvalidated
+        # handler — so a single `http -> https` redirect escaped the guard entirely.
+        opener = urllib.request.build_opener(
+            _RaiseOnRedirect(),
+            _PinnedHTTPHandler(ip),
+            _PinnedHTTPSHandler(ip, context),
+        )
         hop = urllib.request.Request(url, data=data, headers=headers, method=method)
         try:
             return opener.open(hop, timeout=timeout, **kwargs)   # 2xx -> done
@@ -201,7 +223,21 @@ def safe_urlopen(url_or_req, *, timeout=30, context=None, max_redirects=5, **kwa
             e.close()
             if not location:
                 raise
-            url = urljoin(url, location)
+            nxt = urljoin(url, location)
+            nxt_parsed = urlparse(nxt)
+            # Location may name any scheme; ftp:/file:/gopher: would leave the validated transports.
+            if nxt_parsed.scheme not in ("http", "https"):
+                raise UnsafeURLError(
+                    f"refusing redirect to unsupported scheme {nxt_parsed.scheme!r} ({nxt})"
+                )
+            # Strip credentials when the origin changes — a redirect must not leak the caller's
+            # auth to a host it never chose to talk to.
+            same_origin = (nxt_parsed.scheme == parsed.scheme
+                           and nxt_parsed.hostname == parsed.hostname
+                           and (nxt_parsed.port or 0) == (parsed.port or 0))
+            if not same_origin:
+                headers = {k: v for k, v in headers.items() if k.lower() not in _AUTH_HEADERS}
+            url = nxt
             # 303 (and legacy 302-after-POST) downgrade to GET; 307/308 preserve method + body.
             if e.code == 303 or (e.code == 302 and method == "POST"):
                 method = "GET"
