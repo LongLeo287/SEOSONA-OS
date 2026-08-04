@@ -50,12 +50,43 @@ HEADERS = {
     "Accept-Language": "vi,en;q=0.9",
 }
 
+def _classify_links(links, base_domain):
+    """Split hrefs into internal vs external, counting relative links as internal.
+
+    Compares the parsed HOST, not a substring of the whole URL, so a third-party link that merely
+    mentions the domain in a query string is not miscounted as internal.
+    """
+    internal = external = 0
+    base = (base_domain or "").lower().lstrip("www.")
+    for link in links:
+        href = (link.get("href") or "").strip()
+        if not href or href.startswith(("#", "mailto:", "tel:", "javascript:", "data:")):
+            continue
+        if href.startswith(("http://", "https://", "//")):
+            host = urllib.parse.urlparse(href if "//" not in href[:2] else "https:" + href).netloc.lower()
+            host = host.split("@")[-1].split(":")[0].lstrip("www.")
+            if host == base or host.endswith("." + base):
+                internal += 1
+            else:
+                external += 1
+        else:
+            internal += 1      # relative -> same site
+    return {"internal_links": internal, "external_links": external}
+
+
 def load_config():
-    if CONFIG_PATH.exists():
-        with open(CONFIG_PATH) as f:
-            return json.load(f)
-    return {"defaults": {"target_domain": "", "target_url": "",
-                         "output_dir": "3_MEMORY/seo_exports"}}
+    # A malformed config.json used to abort the connector with a raw JSONDecodeError
+    # traceback. Report it and fall back to defaults instead.
+    try:
+        if CONFIG_PATH.exists():
+            with open(CONFIG_PATH) as f:
+                return json.load(f)
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[!] config.json unreadable ({e}); using defaults.")
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
 
 def safe_get(url, timeout=15, follow_redirects=True, max_redirects=5):
     """HTTP GET that re-validates EVERY hop (SSRF defense). Redirects are followed manually so a
@@ -132,7 +163,11 @@ class SEOHTMLParser(html.parser.HTMLParser):
         self.script_content = ""
 
     def handle_starttag(self, tag, attrs):
-        attrs = dict(attrs)
+        # HTMLParser yields None as the value of a valueless attribute (`<meta name>`, `<a href>`,
+        # `<link rel>`). Every `.get(...).lower()` below then raised AttributeError, and nothing
+        # caught it up through check_page_seo -> crawl_key_pages -> run: ONE malformed tag anywhere
+        # on a page aborted the entire site scan. Normalise None to "" at the boundary.
+        attrs = {k: (v if v is not None else "") for k, v in attrs}
         if tag == "title":
             self.in_title = True
         elif tag == "script":
@@ -241,8 +276,25 @@ def check_robots_txt(base_url):
             if path:
                 data["disallows"].append(path)
 
-    # Check for blocking everything
-    if "Disallow: /" in content and "Allow: /" not in content:
+    # Check for blocking everything.
+    # This was a SUBSTRING test: "Disallow: /" is contained in "Disallow: /private/", so any site
+    # that blocks a single folder — i.e. most sites — was reported as blocking ALL crawlers. It is
+    # a whole-line match, and only a `Disallow: /` that applies to `User-agent: *` counts.
+    blocks_everything = False
+    applies_to_all = False
+    for raw in content.splitlines():
+        line = raw.split("#", 1)[0].strip()
+        if not line or ":" not in line:
+            continue
+        field, _, value = line.partition(":")
+        field, value = field.strip().lower(), value.strip()
+        if field == "user-agent":
+            applies_to_all = value == "*"
+        elif field == "disallow" and applies_to_all and value == "/":
+            blocks_everything = True
+        elif field == "allow" and applies_to_all and value == "/":
+            blocks_everything = False
+    if blocks_everything:
         issues.append({"severity": "🔴 Critical", "issue": "robots.txt blocks ALL crawlers (Disallow: /)", "fix": "Fix robots.txt — Googlebot cannot crawl"})
     if not data["sitemaps"]:
         issues.append({"severity": "🟡 Medium", "issue": "No Sitemap directive in robots.txt", "fix": "Add: Sitemap: https://yourdomain.com/sitemap.xml"})
@@ -381,8 +433,11 @@ def check_page_seo(url, base_domain):
         "image_count": len(parsed.images),
         "images_no_alt": len(no_alt),
         "images_no_dimensions": len(no_dimensions),
-        "internal_links": len([l for l in parsed.links if base_domain in l["href"]]),
-        "external_links": len([l for l in parsed.links if base_domain not in l["href"] and l["href"].startswith("http")]),
+        # Relative hrefs ("/about", "contact.html") contain no domain and don't start with http, so
+        # the old pair of comprehensions counted them as NEITHER internal nor external — on most
+        # sites that is the majority of links, making internal-link analysis silently meaningless.
+        # `base_domain in href` also matched "https://evil.com/?ref=example.com".
+        **_classify_links(parsed.links, base_domain),
         "hreflang_count": len(parsed.hreflang),
         "issues": issues,
         "issue_count": len(issues)

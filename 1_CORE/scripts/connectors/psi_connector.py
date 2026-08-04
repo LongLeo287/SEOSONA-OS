@@ -31,10 +31,17 @@ except Exception:  # pragma: no cover
         raise RuntimeError("url_guard unavailable — refusing to fetch unsafely")
 
 def load_config():
-    if not CONFIG_PATH.exists():
-        return {"defaults": {"target_domain": "", "target_url": "", "output_dir": "3_MEMORY/seo_exports"}}
-    with open(CONFIG_PATH) as f:
-        return json.load(f)
+    # A malformed config.json used to abort the connector with a raw JSONDecodeError
+    # traceback. Report it and fall back to defaults instead.
+    try:
+        if not CONFIG_PATH.exists():
+            return {"defaults": {"target_domain": "", "target_url": "", "output_dir": "3_MEMORY/seo_exports"}}
+        with open(CONFIG_PATH) as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[!] config.json unreadable ({e}); using defaults.")
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
 
 def fetch_psi(url, strategy, api_key):
     """Call PageSpeed Insights API — free"""
