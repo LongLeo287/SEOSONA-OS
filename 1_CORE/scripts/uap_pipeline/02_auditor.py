@@ -9,6 +9,7 @@ import os
 import json
 import sqlite3
 import subprocess
+import shutil
 from pathlib import Path
 
 QUEUE_DB_PATH = (Path(__file__).resolve().parents[3] / "3_MEMORY" / "uap_queue.db")
@@ -213,20 +214,36 @@ def run_auditor(max_items=1):
         # Clone
         success = True
         if not repo_dir.exists():
-            repo_dir.mkdir(parents=True, exist_ok=True)
+            # Do NOT mkdir before cloning. The old code created the directory first, so a failed
+            # clone left it behind — and on the next pass `repo_dir.exists()` was True, which
+            # skipped this whole block INCLUDING the retry ladder. `success` stayed True and the
+            # auditor happily audited an empty directory. Result: the 3-strike retry was
+            # unreachable (0 of 951 rows ever reached FAILED) and 47 repos shipped knowledge items
+            # reading "Repository with 0 files". git creates the target itself.
             if "github.com" in repo_url and "orgs/" not in repo_url:
                 print(f"Cloning {repo_url}...")
-                res = subprocess.run(
-                    ["git", "clone", "--depth", "1", repo_url, str(repo_dir)],
-                    capture_output=True
-                )
-                if res.returncode != 0:
+                try:
+                    res = subprocess.run(
+                        ["git", "clone", "--depth", "1", "--filter=blob:none", repo_url, str(repo_dir)],
+                        capture_output=True,
+                        timeout=600,
+                        # A private or deleted repo makes git prompt for credentials on stdin and
+                        # hang forever, taking the whole nightly run with it.
+                        env={**os.environ, "GIT_TERMINAL_PROMPT": "0", "GIT_ASKPASS": "echo"},
+                    )
+                    if res.returncode != 0:
+                        success = False
+                        print(f"  git: {res.stderr.decode('utf-8', 'replace').strip()[:160]}")
+                except subprocess.TimeoutExpired:
                     success = False
+                    print("  git clone timed out after 600s.")
             else:
                 print(f"Non-GitHub URL: {repo_url} -- skipping clone.")
                 success = False
 
             if not success:
+                # Leave no partial clone behind, or the next pass mistakes it for a good checkout.
+                shutil.rmtree(repo_dir, ignore_errors=True)
                 print(f"Failed to fetch. Retry count: {target['retry_count']}")
                 new_retry = target['retry_count'] + 1
                 new_status = 'FAILED' if new_retry >= 3 else 'PENDING'
@@ -245,6 +262,21 @@ def run_auditor(max_items=1):
 
             # 2. File statistics
             file_stats = _collect_file_stats(repo_dir)
+
+            # A checkout with no files is not a repository worth ingesting — it is the signature of
+            # a clone that silently failed. Auditing it produced knowledge items reading
+            # "Repository with 0 files across 1 directories", 47 of which shipped. Send it back to
+            # the retry ladder instead of down the pipeline.
+            if file_stats.get("total_files", 0) == 0:
+                print(f"  Empty checkout for {repo_id} — refusing to audit.")
+                shutil.rmtree(repo_dir, ignore_errors=True)
+                new_retry = target['retry_count'] + 1
+                cursor.execute(
+                    "UPDATE queue SET retry_count = ?, status = ? WHERE id = ?",
+                    (new_retry, 'FAILED' if new_retry >= 3 else 'PENDING', repo_id),
+                )
+                conn.commit()
+                continue
 
             # 3. ACTUAL SOURCE CODE (the core change)
             source_files = _read_source_files(repo_dir)
