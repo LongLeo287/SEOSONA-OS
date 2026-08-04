@@ -1,0 +1,23 @@
+{
+  "system": "seosona-os",
+  "function": "reference",
+  "score": 12,
+  "matched": [
+    "agent",
+    "workflow"
+  ],
+  "strong_matched": [],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 12,
+    "seosona-video": 6,
+    "seosona-content": 6,
+    "seosona-ux-ui": 6,
+    "seosona-flow": 12
+  },
+  "auto_apply": false,
+  "uap_relevant": [
+    "ast"
+  ]
+}
