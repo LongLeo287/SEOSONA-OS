@@ -207,3 +207,4 @@
 - direct_memmachine: soft security mentions (kept) — install_guide.mdx: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (doc)
 - yakhyo/uniface: soft security mentions (kept) — CONTRIBUTING.md: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (doc)
 - virgiliojr94/book-to-skill: soft security mentions (kept) — test_scan_generated_skill.py: behavioural ignore\s+(all\s+)?previous\s+instructions (code)
+- AdguardTeam/AdguardFilters: HARD BLOCK — foreign.txt: zero-width smuggling (>10)

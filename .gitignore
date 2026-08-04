@@ -164,3 +164,10 @@ _QUARANTINE/
 .agents/skills/video-shotcraft/template/
 .agents/skills/video-shotcraft/demos/
 .agents/skills/video-shotcraft/gallery/
+
+# Daemon runtime state and per-session records. Regenerated on every run, timestamped to one
+# machine, and meaningless to anyone who clones — they were being committed as if they were source.
+3_MEMORY/errors/daemon_state.json
+3_MEMORY/errors/fix_loop_log.json
+3_MEMORY/errors/linter_report.json
+3_MEMORY/sessions/
