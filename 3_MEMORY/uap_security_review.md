@@ -205,3 +205,5 @@
 - lidge-jun/ima2-gen: soft security mentions (kept) — README.md: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (doc); README.ja.md: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (doc); README.ko.md: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (doc); README.zh-CN.md: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (doc); install-linux.sh: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (code)
 - camel-ai/camel: soft security mentions (kept) — utils.py: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (code)
 - direct_memmachine: soft security mentions (kept) — install_guide.mdx: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (doc)
+- yakhyo/uniface: soft security mentions (kept) — CONTRIBUTING.md: behavioural curl\s+[^\n|]*\|\s*(sudo\s+)?(ba)?sh (doc)
+- virgiliojr94/book-to-skill: soft security mentions (kept) — test_scan_generated_skill.py: behavioural ignore\s+(all\s+)?previous\s+instructions (code)
