@@ -18,7 +18,10 @@ def parse_yaml_frontmatter(file_path):
             if match:
                 yaml_data = match.group(1)
                 name_match = re.search(r"^name:\s*(.+)$", yaml_data, re.MULTILINE)
-                desc_match = re.search(r"^description:\s*(?:>-\s*\n|\s*)([\s\S]*?)(?:^\w+:|\Z)", yaml_data, re.MULTILINE)
+                # `^\w+:` does not match hyphenated YAML keys, so `allowed-tools:` / `argument-hint:`
+                # were swallowed INTO the description and became routing keywords ("hint",
+                # "argument") that crowded out real signal under the 8-keyword cap.
+                desc_match = re.search(r"^description:\s*(?:>-\s*\n|\s*)([\s\S]*?)(?:^[\w-]+:|\Z)", yaml_data, re.MULTILINE)
                 
                 name = name_match.group(1).strip() if name_match else "unknown_skill"
                 desc = desc_match.group(1).strip().replace("\n", " ") if desc_match else "No description available."
@@ -44,6 +47,38 @@ _STOPWORDS = {
     "dùng", "làm", "theo", "không", "phải", "như", "để", "từ", "đến", "sau", "trước", "nếu",
 }
 _MAX_DESC_KEYWORDS = 8
+
+
+# The router is a generated artifact that a human reviews for security (a bad route sends an agent
+# to read an attacker-chosen path). Two things made that review impossible:
+#   - the old sort key `k == name_clean` put the name LAST, not first as its comment claimed, and
+#   - every non-name keyword compared equal, so ordering fell through to set-iteration order, which
+#     Python randomises per process via PYTHONHASHSEED.
+# Result: every regeneration rewrote 422 lines with no semantic change, training reviewers to ignore
+# diffs on exactly the file where a real change matters most.
+def _order_keywords(kw_set, name_clean):
+    """Deterministic order: the canonical name first, then the rest alphabetically."""
+    return sorted(kw_set, key=lambda k: (k != name_clean, k))
+
+
+# Keywords and paths are written into a markdown table that the capability bridge parses with a
+# line/backtick regex. A vendored SKILL.md is third-party input, so a `name:` containing a backtick
+# or an arrow can forge an extra route pointing anywhere — including outside the repo. Strip the
+# structural characters rather than trusting upstream YAML.
+_ROUTER_UNSAFE = str.maketrans({"`": None, "\n": " ", "\r": " ", ",": " ", ">": " ", "|": " "})
+
+
+def _sanitize_router_token(token):
+    return " ".join(str(token).translate(_ROUTER_UNSAFE).split())
+
+
+def _route_path_is_safe(rel_path):
+    """True when a router path stays inside the repo once resolved from 2_KNOWLEDGE/."""
+    resolved = os.path.normpath(os.path.join(FRAMEWORKS_DIR, "..", rel_path))
+    try:
+        return os.path.commonpath([os.path.abspath(resolved), ROOT_DIR]) == ROOT_DIR
+    except ValueError:      # different drive on Windows
+        return False
 
 
 def _strip_accents(word):
@@ -115,7 +150,7 @@ def build_skills_router():
                     # Plus distinctive terms from the description, so the skill is findable by what
                     # it DOES, not only by its exact name.
                     kw_set.update(_description_keywords(meta.get('description')))
-                    keywords = sorted(kw_set, key=lambda k: (k == name_clean))  # original name first
+                    keywords = _order_keywords(kw_set, name_clean)
                     plugins_graph[plugin_group].append({
                         "keywords": keywords,
                         "path": rel_path,
@@ -151,7 +186,7 @@ def build_skills_router():
                 name_clean = meta["name"].strip("\"'")
                 kw_set = {name_clean.replace("-", " "), name_clean, skill_dir}
                 kw_set.update(_description_keywords(meta.get("description")))
-                keywords = sorted(kw_set, key=lambda k: (k == name_clean))
+                keywords = _order_keywords(kw_set, name_clean)
                 plugins_graph["agent_skills"].append({
                     "keywords": keywords,
                     "path": rel_path,
@@ -172,8 +207,16 @@ def build_skills_router():
                 continue
             f.write(f"## {group.replace('_', ' ').title()}\n")
             for skill in skills:
-                keywords_str = ", ".join([f"`{k}`" for k in skill['keywords']])
-                f.write(f"- {keywords_str} -> `{skill['path']}`\n")
+                safe_kws = [s for s in (_sanitize_router_token(k) for k in skill['keywords']) if s]
+                safe_path = _sanitize_router_token(skill['path'])
+                # Router paths resolve relative to 2_KNOWLEDGE, so agent skills legitimately start
+                # with `../.agents/skills/`. Reject only traversal BEYOND that one known prefix —
+                # a blanket ".." ban silently dropped all 51 agent skills.
+                if not _route_path_is_safe(safe_path):
+                    print(f"[SEOSONA] Skipping route with unsafe path: {safe_path!r}")
+                    continue
+                keywords_str = ", ".join([f"`{k}`" for k in safe_kws])
+                f.write(f"- {keywords_str} -> `{safe_path}`\n")
             f.write("\n")
             
     print(f"[OK] Generated SKILLS_ROUTER.md with {sum(len(v) for v in plugins_graph.values())} dynamically loaded skills.")
