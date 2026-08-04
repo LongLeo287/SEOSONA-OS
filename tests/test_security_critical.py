@@ -224,6 +224,49 @@ class TestSkillRouting:
         assert pm._description_keywords("") == []
 
 
+class TestIndexIsNotPickle:
+    """The persisted index must never be deserialised as code.
+
+    It is gitignored (never reviewed), regenerates itself when absent, sits at a path a vendored
+    skill can write, and is loaded unsandboxed inside the MCP server with the user's full
+    environment. A pickle there is persistent RCE for the cost of one file write.
+    """
+
+    def _vm(self):
+        pytest.importorskip("sklearn")
+        return importlib.import_module("vector_memory")
+
+    def test_persisted_index_is_data_not_pickle(self):
+        vm = self._vm()
+        # The loader must not consult the retired pickle path at all.
+        assert vm.LEGACY_PICKLE.name.endswith(".joblib")
+        assert vm.MATRIX_FILE.suffix == ".npz"
+        assert vm.META_FILE.suffix == ".json"
+
+    def test_loader_ignores_a_planted_pickle(self, tmp_path, monkeypatch):
+        vm = self._vm()
+        import pickle, os as _os
+        monkeypatch.setattr(vm, "INDEX_DIR", tmp_path)
+        monkeypatch.setattr(vm, "LEGACY_PICKLE", tmp_path / "ki_tfidf.joblib")
+        monkeypatch.setattr(vm, "MATRIX_FILE", tmp_path / "ki_tfidf.npz")
+        monkeypatch.setattr(vm, "META_FILE", tmp_path / "ki_meta.json")
+
+        class _Payload:
+            def __reduce__(self):
+                return (_os.system, ("echo pwned",))
+
+        (tmp_path / "ki_tfidf.joblib").write_bytes(pickle.dumps({"vectorizer": _Payload()}))
+        # No .npz/.json present -> the loader reports "no index", never touching the pickle.
+        assert vm.SemanticMemoryEngine().load_index() is False
+
+    def test_stale_index_is_rejected(self):
+        vm = self._vm()
+        fp = vm._corpus_fingerprint()
+        assert fp["count"] > 0 and fp["newest_mtime"] > 0
+        # A fingerprint that doesn't match the corpus must fail the load, forcing a rebuild.
+        assert fp != {"count": 0, "newest_mtime": 0.0}
+
+
 class TestVectorMemory:
     """The knowledge brain must answer a query without crashing (self-heals its index)."""
 

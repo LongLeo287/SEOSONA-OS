@@ -9,7 +9,32 @@ import numpy as np
 ROOT = Path(__file__).resolve().parent.parent.parent.parent
 KI_DIR = ROOT / "3_MEMORY" / "knowledge_items"
 INDEX_DIR = ROOT / "3_MEMORY" / "vector_index"
-INDEX_FILE = INDEX_DIR / "ki_tfidf.joblib"
+# Data-only persistence. The sparse matrix goes to .npz and everything else to JSON; nothing is
+# pickled, so loading the index cannot execute code. `ki_tfidf.joblib` is the retired pickle format
+# and is deleted on save so a stale one can never be picked up.
+MATRIX_FILE = INDEX_DIR / "ki_tfidf.npz"
+META_FILE = INDEX_DIR / "ki_meta.json"
+LEGACY_PICKLE = INDEX_DIR / "ki_tfidf.joblib"
+INDEX_FORMAT = 2
+
+
+def _corpus_fingerprint():
+    """Cheap signature of the knowledge corpus: file count + newest mtime.
+
+    Staleness was previously undetectable — the only rebuild trigger was the index file being
+    missing, so every knowledge item added after the first build was invisible to search, silently
+    and indefinitely. Comparing this against the stored value makes a stale index rebuild itself.
+    """
+    newest, count = 0.0, 0
+    if KI_DIR.exists():
+        for ext in ("*.md", "*.aaak"):
+            for p in KI_DIR.rglob(ext):
+                try:
+                    newest = max(newest, p.stat().st_mtime)
+                    count += 1
+                except OSError:
+                    continue
+    return {"count": count, "newest_mtime": round(newest, 3)}
 
 
 def _rrf(rankings, k=60):
@@ -91,32 +116,87 @@ class SemanticMemoryEngine:
             self.is_built = True
 
     def save_index(self):
-        """Persist the fitted TF-IDF index so the MCP server / gate start warm instead of
-        re-fitting over thousands of KIs on every cold process."""
+        """Persist the index as DATA, never as pickle.
+
+        The previous format was `joblib.dump` — i.e. pickle — and `load_index` executed whatever it
+        found. That file is gitignored (never reviewed, never diffed), regenerates itself silently
+        when absent, and lives at a path a vendored skill can write, since the sandbox provides no
+        absolute-path filesystem confinement. Loading it happens inside the MCP server, unsandboxed,
+        with the user's full environment. One file write anywhere on the machine bought persistent
+        code execution.
+
+        Now: the sparse matrix goes to .npz, everything else to JSON, and the vectorizer is REBUILT
+        from its saved vocabulary and idf vector rather than deserialised. Nothing in the payload
+        can execute.
+        """
         if not self.is_built:
             return False
-        import joblib
+        from scipy import sparse
+
         INDEX_DIR.mkdir(parents=True, exist_ok=True)
-        joblib.dump(
-            {"vectorizer": self.vectorizer, "vectors": self.vectors,
-             "paths": self.paths, "titles": self.titles, "bm25": self.bm25},
-            INDEX_FILE,
-        )
+        # Write to temp files then rename: two cold processes racing used to leave a truncated
+        # index that the bare `except` silently rebuilt, reporting a multi-minute stall as nothing.
+        # save_npz appends ".npz" when the name lacks it, so the temp name must already end in
+        # .npz or the written file and the rename source diverge.
+        tmp_npz = INDEX_DIR / "ki_tfidf.tmp.npz"
+        tmp_meta = INDEX_DIR / "ki_meta.tmp.json"
+
+        sparse.save_npz(tmp_npz, self.vectors)
+        meta = {
+            "format": INDEX_FORMAT,
+            "paths": self.paths,
+            "titles": self.titles,
+            "vocabulary": {t: int(i) for t, i in self.vectorizer.vocabulary_.items()},
+            "idf": self.vectorizer.idf_.tolist(),
+            "bm25_corpus": [d.lower().split() for d in self.documents] if self.bm25 is not None else None,
+            "fingerprint": _corpus_fingerprint(),
+        }
+        tmp_meta.write_text(json.dumps(meta), encoding="utf-8")
+
+        os.replace(tmp_npz, MATRIX_FILE)
+        os.replace(tmp_meta, META_FILE)
+        # Remove any pickle left by an older build so nothing can load it later.
+        LEGACY_PICKLE.unlink(missing_ok=True)
         return True
 
     def load_index(self):
-        """Load a persisted index if present. Returns True on success."""
-        if not INDEX_FILE.exists():
+        """Load the persisted index. Returns True on success.
+
+        Rebuilds the vectorizer from saved vocabulary + idf instead of deserialising an object, so
+        a tampered index file can corrupt results but can never execute code. Also refuses a stale
+        index: the old version's ONLY rebuild trigger was the file being absent, so new knowledge
+        items stayed invisible to search forever while `3_MEMORY/README.md` claimed it self-heals.
+        """
+        if not (MATRIX_FILE.exists() and META_FILE.exists()):
             return False
         try:
-            import joblib
-            d = joblib.load(INDEX_FILE)
-            self.vectorizer = d["vectorizer"]
-            self.vectors = d["vectors"]
-            self.paths = d["paths"]
-            self.titles = d["titles"]
-            self.bm25 = d.get("bm25")  # may be absent in an older index -> TF-IDF-only until rebuild
-            self.documents = self.titles  # non-empty marker; query() only needs vectors/paths/titles
+            from scipy import sparse
+
+            meta = json.loads(META_FILE.read_text(encoding="utf-8"))
+            if meta.get("format") != INDEX_FORMAT:
+                return False
+            if meta.get("fingerprint") != _corpus_fingerprint():
+                return False      # corpus changed since this index was written -> rebuild
+
+            self.vectors = sparse.load_npz(MATRIX_FILE)
+            self.paths = list(meta["paths"])
+            self.titles = list(meta["titles"])
+
+            self.vectorizer = TfidfVectorizer(stop_words="english")
+            self.vectorizer.vocabulary_ = {t: int(i) for t, i in meta["vocabulary"].items()}
+            self.vectorizer.idf_ = np.asarray(meta["idf"], dtype=float)
+
+            corpus = meta.get("bm25_corpus")
+            if corpus:
+                try:
+                    from rank_bm25 import BM25Okapi
+                    self.bm25 = BM25Okapi(corpus)
+                except Exception:
+                    self.bm25 = None
+            else:
+                self.bm25 = None
+
+            self.documents = self.titles  # non-empty marker; query() needs vectors/paths/titles
             self.is_built = True
             return True
         except Exception:
