@@ -739,7 +739,7 @@
     "head": "943e403a951a53d2f5c38766a0e6287ace9419b3"
   },
   "mattpocock/skills": {
-    "head": "896f14d9c25659f03b24e08e4efc3ee69bbade08"
+    "head": "2ab958093e83e0ec752e6c1c5932da465bf23e0c"
   },
   "nidhinjs/prompt-master": {
     "head": "d15eabbe5d2122eedc060bae8a771381e9873d1b"
@@ -2269,7 +2269,7 @@
     "head": "7003225dc3ed1dee9e2ef8b91b05b82c04691aa9"
   },
   "Alisa0808/vox-director": {
-    "head": "987be2f42332247a3ad7a244c76e86fca92c1f1d"
+    "head": "8b034354dc443edcde7fdb2622e0491df5142fd3"
   },
   "MegaTroll222/VOX-COLLAGE-BROLL": {
     "head": "2e9b8a93a2834e4d670700ab9e4827a8baf3b668"
@@ -2306,5 +2306,29 @@
   },
   "earthtojake/text-to-cad": {
     "head": "fdbb4b4fb62d95ae298cfe9a46fdc7092bdaf423"
+  },
+  "Vincentwei1021/video-shotcraft": {
+    "head": "d4915443232e89527fdc9d7e79f132ba411fc440"
+  },
+  "Emily2040/seedance-2.0": {
+    "head": "7f22eacb23f233e33afd7a7a450dda2a0307057b"
+  },
+  "thaofvn-coca06/2026": {
+    "head": "cecbc1cf97ba2973230158aebff4638f2aec813d"
+  },
+  "yakhyo/uniface": {
+    "head": "4d6f29a1139a8364c537c1c9a1b9fe68e1bd7756"
+  },
+  "Cuongyd196/remotion-cuongit-template": {
+    "head": "84267998d111f46a329733d6462eb682923cac23"
+  },
+  "Cuongyd196/auto-video-gen": {
+    "head": "ca2ebbf961b1391eaa1f26c007a9407a7f3e2c73"
+  },
+  "Cuongyd196/auto-compare-video": {
+    "head": "d31f50439f823ffe621fd891ef976e1830ddf18f"
+  },
+  "virgiliojr94/book-to-skill": {
+    "head": "b74286d1277ff1ae048e7b7392985bf54aa2987a"
   }
 }

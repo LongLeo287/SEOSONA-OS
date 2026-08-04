@@ -192,3 +192,6 @@
 - direct_audio_cpp (fit 12) — UAP-relevant: ast — review to upgrade the pipeline
 - indranilbanerjee/digital-marketing-pro (fit 50) — UAP-relevant: ast — review to upgrade the pipeline
 - Comfy-Org/ComfyUI (fit 28) — UAP-relevant: ast — review to upgrade the pipeline
+- mattpocock/skills (fit 22) — UAP-relevant: codebase — review to upgrade the pipeline
+- Vincentwei1021/video-shotcraft (fit 12) — UAP-relevant: ast — review to upgrade the pipeline
+- Emily2040/seedance-2.0 (fit 12) — UAP-relevant: ast — review to upgrade the pipeline
