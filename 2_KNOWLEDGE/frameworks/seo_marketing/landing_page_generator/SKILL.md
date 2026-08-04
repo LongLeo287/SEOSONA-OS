@@ -1,6 +1,5 @@
 ---
-name: skill
-
+name: landing_page_generator
 description: "Generates high-converting Next.js/React landing pages with Tailwind CSS. Uses PAS, AIDA, and BAB frameworks for optimized copy/components (Heroes, Features, Pricing). Focuses on Core Web Vitals/SEO."
 category: "front-end"
 risk: "safe"

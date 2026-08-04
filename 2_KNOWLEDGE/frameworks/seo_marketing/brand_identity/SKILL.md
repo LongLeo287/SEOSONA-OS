@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: brand_identity
 description: "Brand voice, visual identity, messaging frameworks, and consistency systems."
   Brand voice, visual identity, messaging framework, and brand consistency.
   Activate when user asks about brand guidelines, tone of voice, brand audit,

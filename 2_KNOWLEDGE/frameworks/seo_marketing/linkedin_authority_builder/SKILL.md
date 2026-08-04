@@ -1,6 +1,5 @@
 ---
-name: skill
-
+name: linkedin_authority_builder
 description: Build a LinkedIn content system for thought leadership. Use when someone needs to establish authority, attract inbound leads, or build a consistent content presence. Covers positioning, content pillars, formats, and posting rhythm.
 ---
 

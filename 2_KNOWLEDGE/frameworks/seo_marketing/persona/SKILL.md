@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: persona
 description: "Building accurate customer personas to drive all marketing decisions."
   Customer persona creation, ICP (Ideal Customer Profile) development,
   audience segmentation, and persona-driven content strategy.

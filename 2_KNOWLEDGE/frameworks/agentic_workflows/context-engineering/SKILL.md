@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: context-engineering
 description: "Context engineering curates the smallest high-signal token set for LLM tasks. The goal: maximize reasoning quality while minimizing token usage."
 argument-hint: "[topic or question]"
   Check context usage limits, monitor time remaining, optimize token consumption, debug context failures.

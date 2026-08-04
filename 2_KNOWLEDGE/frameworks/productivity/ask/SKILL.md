@@ -1,5 +1,5 @@
 ---
-name: skill
+name: ask
 description: 💡 Answer technical and architectural questions.
 argument-hint: "[technical-question]"
 metadata:

@@ -1,5 +1,5 @@
 ---
-name: skill
+name: init
 description: 💡💡💡💡 Initialize marketing project
 argument-hint: "[prompt]"
 metadata:

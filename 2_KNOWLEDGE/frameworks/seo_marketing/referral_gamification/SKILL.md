@@ -1,5 +1,5 @@
 ---
-name: skill
+name: referral_gamification
 description: Build referral programs for SaaS/digital products. Covers reward structures (two-sided, tiered, multi-step), platform selection (Rewardful, ReferralCandy, Viral Loops, FirstPromoter), technical implementation (tracking, attribution, API patterns), fraud prevention, email templates, and KPI metrics. Use for designing viral growth loops, implementing refer-a-friend features, or optimizing existing referral systems.
 argument-hint: "[product or program-type]"
 metadata:

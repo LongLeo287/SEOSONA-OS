@@ -1,5 +1,5 @@
 ---
-name: skill
+name: plan
 description: 💡💡💡 Intelligent plan creation with prompt enhancement
 argument-hint: "[archive|ci|cro|fast|hard|parallel|two|validate] [task]"
 metadata:

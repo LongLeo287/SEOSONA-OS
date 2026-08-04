@@ -1,5 +1,5 @@
 ---
-name: skill
+name: marketing-dashboard
 description: Local-first marketing command center for solopreneurs. Manage campaigns, content, and assets with Claude Code AI automation.
 metadata:
   author: claudekit

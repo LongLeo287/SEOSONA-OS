@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: seo_gsc_integration
 version: 1.0.0
 evaluation_score: 93
 grade: A

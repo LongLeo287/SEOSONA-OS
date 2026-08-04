@@ -1,5 +1,5 @@
 ---
-name: skill
+name: assets-organizing
 description: Organize all outputs from slash commands and subagents in assets/ directory by topics, date format, and slugs.
 argument-hint: "[directory or asset-type]"
 metadata:

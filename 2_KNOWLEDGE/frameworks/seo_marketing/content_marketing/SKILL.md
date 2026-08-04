@@ -1,5 +1,5 @@
 ---
-name: skill
+name: content_marketing
 description: Activate for content strategy, editorial calendars, content pillar mapping, blog planning, and content audit. Use when planning content programs, creating editorial workflows, or building topic clusters.
 argument-hint: "[content-type] [topic]"
 license: MIT

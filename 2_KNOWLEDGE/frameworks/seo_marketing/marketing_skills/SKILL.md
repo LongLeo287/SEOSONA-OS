@@ -1,5 +1,5 @@
 ---
-name: skill
+name: marketing_skills
 description: "Corey Haines Marketing Skills. Patterns and prompts for product positioning, copywriting, growth hacking, and marketing psychology."
 ---
 

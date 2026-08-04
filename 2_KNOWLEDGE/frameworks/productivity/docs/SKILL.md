@@ -1,5 +1,5 @@
 ---
-name: skill
+name: docs
 description: Initialize, update, and summarize project documentation
 argument-hint: "[init|llms|summarize|update] [args]"
 metadata:

@@ -1,5 +1,5 @@
 ---
-name: skill
+name: ga4_ai_assistant
 description: Guides agents through setting up a Google Analytics 4 AI assistant with preflight checks, OS-aware install logic, gcloud authentication, API enablement, Python GA4 client setup, validation queries, dashboard/report generation, and platform-specific error recovery. Use when a user wants plain-English GA4 analysis or a reusable analytics connector setup.
 ---
 

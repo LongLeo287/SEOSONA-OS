@@ -1,5 +1,5 @@
 ---
-name: skill
+name: youtube-thumbnail-design
 description: "Design YouTube thumbnails with 17 styles, niche-specific guides, and CTR optimization. Generate complete thumbnails with text using Gemini Nano Banana Pro (4K text rendering). Actions: design, create, generate thumbnail. Niches: tech, gaming, education, cooking, fitness, business. Styles: facecam, before-after, listicle, diagram, whiteboard, bold-text, mystery, dark-dramatic. Features: AI generation with text baked in, brand identity, reference face, arrows, Google Font support."
 argument-hint: "[niche] [style]"
 license: MIT

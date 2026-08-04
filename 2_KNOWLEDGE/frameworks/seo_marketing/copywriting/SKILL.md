@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: copywriting
 description: "Formulas, templates, and patterns for high-converting, SEO-aware copy."
   High-converting copywriting formulas, headline templates, CTA patterns,
   email subject lines, landing page structures, and SEO-aware copy frameworks.

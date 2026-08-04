@@ -1,5 +1,5 @@
 ---
-name: skill
+name: external_skill_assimilation
 description: Assimilate external skill repositories safely by cloning only into a temporary ingestion buffer, inventorying capabilities, scanning risk, distilling SEOSONA-native knowledge, rebuilding routing, validating status, and deleting all clones.
 argument-hint: "[repo-url ...]"
 metadata:

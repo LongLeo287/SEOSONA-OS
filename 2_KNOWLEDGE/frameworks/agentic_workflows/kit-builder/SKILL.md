@@ -1,5 +1,5 @@
 ---
-name: skill
+name: kit-builder
 description: Build ClaudeKit Marketing components - skills, agents, commands, workflows. Use when creating new automation, extending marketing capabilities, or understanding kit structure. Includes templates, examples, and init scripts.
 argument-hint: "[component-type] [name]"
 license: MIT

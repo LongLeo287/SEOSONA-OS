@@ -1,6 +1,7 @@
 from pathlib import Path
 import os
 import re
+import unicodedata
 import json
 
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
@@ -37,8 +38,19 @@ _STOPWORDS = {
     "run", "runs", "running", "also", "each", "other", "than", "then", "there", "here", "how",
     "based", "given", "over", "after", "before", "such", "only", "more", "most", "via", "per",
     "does", "doing", "done", "make", "makes", "made", "get", "gets", "new", "one", "two",
+    # Vietnamese function words — several skills are described in Vietnamese, and without these
+    # every one of them would be keyed on "của"/"khi"/"các" and match unrelated tasks.
+    "của", "và", "các", "cho", "khi", "này", "một", "được", "trong", "với", "hoặc", "những",
+    "dùng", "làm", "theo", "không", "phải", "như", "để", "từ", "đến", "sau", "trước", "nếu",
 }
 _MAX_DESC_KEYWORDS = 8
+
+
+def _strip_accents(word):
+    """Fold Vietnamese diacritics to plain ASCII ('tự nhiên' -> 'tu nhien'). Đ/đ needs an explicit
+    map — it is a distinct letter, not an accented D, so NFD decomposition leaves it untouched."""
+    word = word.replace("đ", "d").replace("Đ", "D")
+    return "".join(c for c in unicodedata.normalize("NFD", word) if not unicodedata.combining(c))
 
 
 def _description_keywords(description):
@@ -51,7 +63,11 @@ def _description_keywords(description):
     """
     if not description:
         return []
-    words = re.findall(r"[a-zA-Z][a-zA-Z0-9+#.-]{3,}", description.lower())
+    # Unicode-aware: an ASCII-only class truncates accented words at the first diacritic, turning
+    # a Vietnamese description into fragments ("chuyên" -> "chuy", "cliché" -> "clich") that match
+    # nothing. `[^\W\d_]` is "any letter, any script", so Vietnamese terms survive whole — which is
+    # exactly what makes a Vietnamese-described skill findable from a Vietnamese task.
+    words = re.findall(r"[^\W\d_][^\W_]{3,}", description.lower(), flags=re.UNICODE)
     seen, out = set(), []
     for w in words:
         w = w.strip(".-")
@@ -59,6 +75,13 @@ def _description_keywords(description):
             continue
         seen.add(w)
         out.append(w)
+        # Vietnamese is routinely typed without diacritics ("tu nhien" for "tự nhiên"), so a
+        # keyword that only exists in its accented form silently misses half the real queries.
+        # Emit the folded variant alongside it.
+        folded = _strip_accents(w)
+        if folded != w and folded not in seen:
+            seen.add(folded)
+            out.append(folded)
         if len(out) >= _MAX_DESC_KEYWORDS:
             break
     return out

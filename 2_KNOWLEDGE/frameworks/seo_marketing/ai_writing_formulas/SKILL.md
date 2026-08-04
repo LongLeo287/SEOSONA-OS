@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: ai_writing_formulas
 description: "When using AI to generate content, directly pasting a topic and asking it to write results in generic, robotic text. The key to high-quality AI writing is providing a structural framework (formula) and a skeleton outline before letting the AI generate the final prose."
   Standard Operating Procedure for using AI writing formulas like PAS, QUEST, SCAR, AIDA to create high-converting marketing content.
 ---

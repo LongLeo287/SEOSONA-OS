@@ -1,5 +1,5 @@
 ---
-name: skill
+name: write
 description: Write creative copy, blog posts, CRO content, and more
 argument-hint: "[audit|blog|blog-youtube|cro|enhance|fast|good|publish] [args]"
 metadata:

@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: seo_featured_snippet
 version: 1.0.0
 evaluation_score: 92
 grade: A

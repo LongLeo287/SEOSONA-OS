@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: play
 description: "Expert marketing strategy executed at AI speed. `Expert Strategy × AI Execution Speed = 10x Output`."
   Marketing playbook orchestrator with dependency-graph routing, quality gates,
   goal tracking, and smart suggestions. Expert strategy × AI execution speed.

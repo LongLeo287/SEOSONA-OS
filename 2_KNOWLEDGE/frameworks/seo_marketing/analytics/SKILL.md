@@ -1,5 +1,5 @@
 ---
-name: skill
+name: analytics
 description: Activate for marketing analytics, KPI tracking, reporting dashboards, attribution analysis, and performance optimization. Use when analyzing campaign data, creating reports, or measuring marketing ROI.
 argument-hint: "[metric or report-type]"
 license: MIT

@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: osint-graph-investigation
 description: "This skill enables SEOSONA OS to conduct graph-based Open Source Intelligence (OSINT) investigations. It leverages Flowsint (self-hosted, Docker-based graph platform) as the visualization layer and connects it with SEOSONA's existing SEO connectors as data enrichment sources."
   Skill for OSINT graph-based investigations using Flowsint as the visualization
   backend. Maps entity relationships (domains, IPs, emails, backlinks) into a

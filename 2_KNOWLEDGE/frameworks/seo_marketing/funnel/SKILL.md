@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: funnel
 description: "Design and optimize complete marketing funnels integrated with SEOSONA SEO data."
   Marketing funnel design, analysis, and optimization. Maps website traffic
   data from GSC/GA4 to funnel stages. Designs complete conversion funnels

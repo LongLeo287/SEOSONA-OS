@@ -1,5 +1,5 @@
 ---
-name: skill
+name: autonomous_capability_activation
 description: Mandatory SEOSONA preflight for non-trivial tasks. Forces agents to activate available Knowledge Items, context engine blocks, intent router matches, capability bridge routes, knowledge graph routes, personas, skills, workflows, and validation gates before execution.
 ---
 

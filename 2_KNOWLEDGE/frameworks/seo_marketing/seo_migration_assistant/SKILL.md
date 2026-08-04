@@ -1,5 +1,5 @@
 ---
-name: skill
+name: seo_migration_assistant
 description: Guidelines for URL migration, 301 redirect validation, and on-page technical SEO audits for Next.js web applications.
 version: 1.0.0
 platforms: [linux, macos, windows]

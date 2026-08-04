@@ -1,5 +1,5 @@
 ---
-name: skill
+name: youtube
 description: Convert YouTube videos to blog posts, infographics, social content. Download video/audio, get captions/transcripts, generate AI summaries, analyze comments via VidCap.xyz API.
 argument-hint: "[blog|infographic|social] [youtube-url]"
 metadata:

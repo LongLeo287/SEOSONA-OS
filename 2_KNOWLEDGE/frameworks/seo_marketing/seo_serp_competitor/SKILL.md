@@ -1,6 +1,6 @@
 ---
 
-name: skill
+name: seo_serp_competitor
 version: 1.0.0
 evaluation_score: 91
 grade: A

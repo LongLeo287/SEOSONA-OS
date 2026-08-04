@@ -1,5 +1,5 @@
 ---
-name: skill
+name: dashboard
 description: Launch and manage the Marketing Dashboard
 argument-hint: "[subcommand] [args]"
 metadata:

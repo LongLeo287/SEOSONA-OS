@@ -1,5 +1,5 @@
 ---
-name: skill
+name: skill-creator
 description: Create or update Claude skills optimized for Skillmark benchmarks. Use for new skills, skill scripts, references, benchmark optimization, extending Claude's capabilities.
 argument-hint: "[skill-name or description]"
 license: Complete terms in LICENSE.txt

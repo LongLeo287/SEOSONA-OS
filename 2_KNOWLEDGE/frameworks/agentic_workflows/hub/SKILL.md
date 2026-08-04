@@ -1,5 +1,5 @@
 ---
-name: skill
+name: hub
 description: Open Content Hub + Marketing Dashboard
 argument-hint: "[--stop|--scan]"
 metadata:
