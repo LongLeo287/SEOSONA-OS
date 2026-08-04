@@ -106,6 +106,8 @@ def reconcile(apply=False):
     for r in rows:
         safe = r["id"].replace("/", "_")
         has_ki = (ki_dir / f"uap_{safe}.md").exists()
+        if r["status"] == "BLOCKED":
+            continue                            # security rejection is a decision, not a failure
         if r["status"] in ("CURRENT", "AUDITED", "ASSIMILATED", "CREATED"):
             stranded.append(r["id"])            # mid-flight, nothing will ever pick these up
         elif r["status"] == "COMPLETED" and not has_ki:
