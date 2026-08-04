@@ -3,6 +3,17 @@
 Skills harvested (2026-07-24) from third-party MIT-licensed repositories during a UAP ingest wave,
 redistributed here under the MIT License with the original copyright/permission notice retained.
 
+## Auto-vendored by the UAP creator (2026-07 wave 5)
+The UAP pipeline installs a repo's `SKILL.md` skill when it ingests one. These four came in that way;
+all are permissively licensed (verified against each repo's LICENSE). Redistributed here under their
+respective licenses, attribution below:
+
+- `book-to-skill` — `github.com/virgiliojr94/book-to-skill` (MIT)
+- `seedance-2.0` — `github.com/Emily2040/seedance-2.0` (MIT)
+- `vox-director` — `github.com/Alisa0808/vox-director` (MIT)
+- `video-shotcraft` — `github.com/Vincentwei1021/video-shotcraft` (**Apache-2.0** — see that repo's
+  LICENSE/NOTICE upstream; this is a redistribution, modified only by extraction into this tree)
+
 ## Vietnamese writing skills (in this directory)
 From `github.com/longhang2004/vietnamese-humanizer` (MIT).
 Skills: `grammar-checker-vi`, `humanizer-vi`, `style-guide-vi`, `translationese-cleaner-vi`.
