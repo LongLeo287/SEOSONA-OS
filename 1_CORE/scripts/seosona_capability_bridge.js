@@ -294,6 +294,22 @@ const VI_TERMS = [
   ['kỹ thuật', 'ky thuat', 'technical'],
 ];
 
+// Function words carry no routing signal but DO match — "can", "cho", "gọn", "tốt", "the", "with"
+// appear somewhere in almost every skill's text, so a conversational sentence scored 2-3 matches
+// against unrelated skills and looked as confident as a real hit. Stripped before scoring.
+const QUERY_STOPWORDS = new Set([
+  // English
+  'the', 'a', 'an', 'and', 'or', 'for', 'with', 'to', 'of', 'in', 'on', 'at', 'by', 'is', 'are',
+  'be', 'this', 'that', 'it', 'its', 'as', 'from', 'you', 'your', 'me', 'my', 'we', 'our', 'can',
+  'just', 'only', 'need', 'want', 'please', 'help', 'make', 'get', 'good', 'well', 'ok', 'okay',
+  // Vietnamese (accented + folded, since users type both)
+  'chỉ', 'chi', 'cần', 'can', 'cho', 'và', 'va', 'là', 'la', 'của', 'cua', 'các', 'cac', 'một',
+  'mot', 'này', 'nay', 'đó', 'do', 'thì', 'thi', 'được', 'duoc', 'với', 'voi', 'trong', 'khi',
+  'nếu', 'neu', 'nhé', 'nhe', 'ạ', 'à', 'ơi', 'oi', 'tôi', 'toi', 'bạn', 'ban', 'mình', 'minh',
+  'hôm', 'hom', 'nay', 'rồi', 'roi', 'nữa', 'nua', 'không', 'khong', 'có', 'co', 'gì', 'gi',
+  'tốt', 'tot', 'hay', 'rất', 'rat', 'nên', 'nen', 'phải', 'phai', 'hoạt', 'hoat', 'động', 'dong',
+]);
+
 function expandVietnamese(normalized, terms) {
   const extra = [];
   for (const [accented, plain, english] of VI_TERMS) {
@@ -310,7 +326,11 @@ function route(query) {
     throw new Error('route requires a non-empty query');
   }
 
-  const terms = expandVietnamese(normalized, normalized.split(/\s+/).filter(Boolean));
+  const rawTerms = normalized.split(/\s+/).filter(Boolean);
+  // Drop function words, but never strip the query down to nothing — a one-word query like "seo"
+  // must still route.
+  const meaningful = rawTerms.filter((t) => t.length > 1 && !QUERY_STOPWORDS.has(t));
+  const terms = expandVietnamese(normalized, meaningful.length ? meaningful : rawTerms);
   const matches = buildGraphResources()
     .map((resource) => {
       const haystack = [
