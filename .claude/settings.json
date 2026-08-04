@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["1_CORE/hooks/brain-inject.cjs"],
+            "timeout": 10,
+            "statusMessage": "Consulting the SEOSONA brain..."
+          }
+        ]
+      }
+    ]
+  }
+}
