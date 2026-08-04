@@ -1,0 +1,22 @@
+{
+  "system": "seosona-os",
+  "function": "reference",
+  "score": 22,
+  "matched": [
+    "keyword"
+  ],
+  "strong_matched": [
+    "keyword"
+  ],
+  "push": true,
+  "path": "D:\\SEOSONA AI\\SEOSONA OS",
+  "all_scores": {
+    "seosona-os": 22,
+    "seosona-video": 0,
+    "seosona-content": 0,
+    "seosona-ux-ui": 6,
+    "seosona-flow": 6
+  },
+  "auto_apply": false,
+  "uap_relevant": []
+}
