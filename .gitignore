@@ -171,3 +171,6 @@ _QUARANTINE/
 3_MEMORY/errors/fix_loop_log.json
 3_MEMORY/errors/linter_report.json
 3_MEMORY/sessions/
+
+# Upstream self-test screenshots — evidence of the skill author's own runs, read by nothing.
+.agents/skills/*/scripts/verify-output/
