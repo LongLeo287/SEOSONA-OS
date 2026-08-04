@@ -44,4 +44,22 @@ jobs:
         run: npm test
 
       - name: Security-critical Python tests
-        run: pip install --quiet pytest && python -m pytest tests/ -q
+        # Install the REAL dependency set, not just pytest. With sklearn/pandas absent, the brain
+        # test `importorskip`ed itself and the whole retrieval + pipeline surface went unexercised —
+        # a green build meant only "the files parse". Every CRITICAL finding in the 2026-08-04 audit
+        # would have surfaced on the first run of a CI that actually ran the code.
+        run: pip install --quiet -r requirements.txt && python -m pytest tests/ -q
+
+      - name: Knowledge brain answers with the real backend
+        run: |
+          python 1_CORE/scripts/mcp_knowledge_server.py --query "technical seo audit" > brain.json
+          python -c "import json,sys; d=json.load(open('brain.json')); \
+            assert d['backend'] == 'hybrid_bm25_tfidf', f'degraded backend: {d[\"backend\"]} — {d.get(\"warning\")}'; \
+            assert d['results'], 'brain returned no results for a corpus term'; \
+            print(f'brain OK: {len(d[\"results\"])} results via {d[\"backend\"]}')"
+
+      - name: Router regeneration is deterministic
+        run: |
+          python 1_CORE/scripts/core/plugin_manager.py > /dev/null
+          git diff --exit-code --stat 2_KNOWLEDGE/SKILLS_ROUTER.md \
+            || (echo "SKILLS_ROUTER.md is not reproducible from source — regenerate and commit." && exit 1)
