@@ -1,55 +1,155 @@
 # KI: mattpocock/skills
 
 ## Overview
-This repository, `mattpocock/skills`, appears to be a collection of "agent skills" designed for engineering workflows, likely intended to be used with an AI assistant or automation system. The project organizes these skills into buckets based on their purpose and stage of development, with a focus on documentation and integration within a larger ecosystem.  The structure emphasizes clear organization, versioning, and linking between skill definitions and associated documentation.
+Matt Pocock's agent skills for real engineering
 
 ## Tech Stack (from code)
-- **JavaScript/Node.js:** The `package.json` file indicates the project is built using Node.js. It uses npm as its package manager.
-```json
-{
-  "name": "mattpocock-skills",
-  "version": "1.0.1",
-  "private": true,
-  "description": "Matt Pocock's agent skills for real engineering",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mattpocock/skills"
-  },
-  "license": "MIT",
-  "scripts": {
-    "changeset": "changeset",
-    "version": "changeset version"
-  },
-  "devDependencies": {
-    "@changesets/changelog-github": "^0.7.0",
-    "@changesets/cli": "^2.30.0"
-  },
-  "packageManager": "npm@10.9.4"
-}
-```
-
-## Public API / Exports
-Due to the nature of this project (primarily configuration and documentation), there are no readily apparent public APIs or exported functions directly visible in the source code. The `CLAUDE.md` file describes how skills are structured and linked, suggesting that the "public API" is more about the organization and metadata associated with each skill rather than explicit code exports.  The `.claude-plugin/plugin.json` file likely defines the structure of the plugin used by Claude or a similar agent, but its contents are not provided in the given source.
+- Shell (5 files)
+- **Total:** 155 files, 100 directories
+- **File types:** .md: 102, .yaml: 41, .sh: 5, .json: 4, .gitignore: 1, .cjs: 1
 
 ## Dependencies
-Based on `package.json`, the project has the following dependencies:
-- `@changesets/changelog-github`:  Version 0.7.0 - Used for generating changelogs for GitHub releases.
-- `@changesets/cli`: Version 2.30.0 - A command-line tool for managing versioning and changelog generation.
 
-## Architecture Patterns
-- **Bucket-based Organization:** The project utilizes a bucket system (`skills/engineering`, `skills/productivity`, etc.) to categorize skills based on their purpose and development stage. This promotes modularity and organization.
-- **Documentation-Driven Development:**  A strong emphasis is placed on documentation, with each skill having an associated `SKILL.md` file and often a corresponding documentation page in the `docs/` directory. The `CLAUDE.md` file explicitly outlines rules for maintaining this documentation.
-- **Centralized Routing (ask-matt):**  The `ask-matt` skill acts as a central router, mapping user requests to appropriate skills. This suggests a layered architecture where a single entry point manages the flow of interactions.
-- **Symlinking:** The `scripts/link-skills.sh` script uses symlinks to integrate skills into a local harness directory (`~/.claude/skills`, `~/.agents/skills`), indicating an external execution environment for these skills.
+### Dev Dependencies
+- `@changesets/changelog-github`: ^0.7.0
+- `@changesets/cli`: ^2.30.0
 
-## Relevance to SEOSONA OS
-This project's code could benefit SEOSONA OS in several ways:
-- **Skill Management Framework:** The bucket-based organization and documentation practices provide a model for managing and organizing AI agent skills within the SEOSONA OS ecosystem.
-- **Routing Architecture:**  The `ask-matt` skill’s routing pattern can be adapted to create a centralized dispatch mechanism for handling user requests and directing them to appropriate agents or functions within SEOSONA OS.
-- **Documentation Standards:** The project's strict documentation guidelines could serve as a template for establishing consistent documentation standards for skills and components in SEOSONA OS, improving maintainability and usability.
-- **Symlinking Integration:**  The symlinking approach used by `link-skills.sh` offers a potential method for integrating external skill implementations into the core SEOSONA OS environment.
+## Available Commands
+- `npm run changeset` -- `changeset`
+- `npm run version` -- `changeset version`
+
+## File Structure
+```
+  .gitignore
+  AGENTS.md
+  CHANGELOG.md
+  CLAUDE.md
+  CONTEXT.md
+  LICENSE
+  README.md
+  package-lock.json
+  package.json
+  .agents/
+    invocation.md
+    writing-docs.md
+    adr/
+      0001-explicit-setup-pointer-only-for-hard-dependencies.md
+      0002-ship-as-a-claude-code-plugin.md
+  .claude-plugin/
+    marketplace.json
+    plugin.json
+  .out-of-scope/
+    mainstream-issue-trackers-only.md
+    question-limits.md
+    setup-skill-verify-mode.md
+  docs/
+    engineering/
+      ask-matt.md
+      code-review.md
+      codebase-design.md
+      diagnosing-bugs.md
+      domain-modeling.md
+      grill-with-docs.md
+      implement.md
+      improve-codebase-architecture.md
+      prototype.md
+      research.md
+      resolving-merge-conflicts.md
+      setup-matt-pocock-skills.md
+      tdd.md
+      to-spec.md
+      to-tickets.md
+      triage.md
+      wayfinder.md
+    productivity/
+      grill-me.md
+      grilling.md
+      handoff.md
+      teach.md
+      writing-great-skills.md
+  scripts/
+    link-skills.sh
+    list-skills.sh
+  skills/
+    deprecated/
+      README.md
+      design-an-interface/
+        SKILL.md
+        agents/
+          openai.yaml
+      qa/
+        SKILL.md
+        agents/
+          openai.yaml
+      request-refactor-plan/
+        SKILL.md
+        agents/
+          openai.yaml
+      ubiquitous-language/
+        SKILL.md
+        agents/
+          openai.yaml
+    engineering/
+      README.md
+      ask-matt/
+        SKILL.md
+        agents/
+          openai.yaml
+      code-review/
+        SKILL.md
+        agents/
+          openai.yaml
+      codebase-design/
+        DEEPENING.md
+        DESIGN-IT-TWICE.md
+        SKILL.md
+        agents/
+          openai.yaml
+      diagnosing-bugs/
+        SKILL.md
+        agents/
+          openai.yaml
+        scripts/
+          hitl-loop.template.sh
+      domain-modeling/
+        ADR-FORMAT.md
+        CONTEXT-FORMAT.md
+        SKILL.md
+        agents/
+          openai.yaml
+      grill-with-docs/
+        SKILL.md
+        agents/
+   
+```
+
+## Agent Configuration
+### AGENTS.md
+CLAUDE.md
+
+### CLAUDE.md
+Skills are organized into bucket folders under `skills/`:
+
+- `engineering/` — daily code work
+- `productivity/` — daily non-code workflow tools
+- `misc/` — kept around but rarely used, not promoted
+- `personal/` — tied to my own setup, not promoted
+- `in-progress/` — drafts not yet ready to ship
+- `deprecated/` — no longer used
+
+Every skill in `engineering/` or `productivity/` (the **promoted** buckets) must have a reference in the top-level `README.md` and an entry in `.claude-plugin/plugin.json`'s `skills` array (the Claude Code plugin ships exactly the promoted set). Skills in `misc/`, `personal/`, `in-progress/`, and `deprecated/` must not appear in either.
+
+The repo is also its own single-plugin Claude Code marketplace: `.claude-plugin/marketplace.json` lists the one `mattpocock-skills` plugin. When bumping the release version, keep `.claude-plugin/plugin.json`'s `version` in sync with `package.json`'s — Claude uses the plugin `version` to decide when installed users see an update. Run `claude plugin validate . --strict` after touching either manifest. Why a Claude plugin but not (yet) a Codex one lives in [.agents/adr/0002-ship-as-a-claude-code-plugin.md](./.agents/adr/0002-ship-as-a-claude-code-plugin.md).
+
+Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
+
+Each bucket folder has a `README.md` that lists every skill in the bucket with a one-line description, with the skill name linked to its `SKILL.md`. The promoted buckets' `REA
+
+## Analysis Method
+> Factual code-based structural analysis. All data extracted directly from source files. No README. No assumptions.
+
 
 ## UAP Routing (auto-classified)
-- **System:** `seosona-os` · **Function:** `skill` · **Fit:** 82/100 · **Auto-apply:** False
-- **Evidence:** `skill.md`, `plugin`
-- **All scores:** {'seosona-os': 82, 'seosona-video': 0, 'seosona-content': 0, 'seosona-ux-ui': 0, 'seosona-flow': 0}
+- **System:** `seosona-os` · **Function:** `reference` · **Fit:** 22/100 · **Auto-apply:** False
+- **Evidence:** `agent`
+- **All scores:** {'seosona-os': 22, 'seosona-video': 0, 'seosona-content': 0, 'seosona-ux-ui': 0, 'seosona-flow': 0}
