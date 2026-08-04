@@ -1,0 +1,14 @@
+node_modules/
+out/qa/
+template/out/
+# 发帖用社交封面图等本地素材，不进 skill 安装包
+assets/images/
+# 样片 mp4 存 gallery-media release，不进 git（poster 小图仍在 git）；
+# 本地预览用 gallery/fetch-media.sh 拉取
+gallery/media/*.mp4
+.DS_Store
+.synapse/
+__pycache__/
+CLAUDE.md
+AGENT.md
+PRODUCT.md
