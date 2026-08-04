@@ -32,6 +32,7 @@ const TIMEOUT_MS = 4000;
 const MAX_SKILLS = 4;
 const MAX_KIS = 2;
 const MIN_PROMPT_LENGTH = 12;
+const MIN_SCORE = 3;   // matched terms required before a suggestion is worth the context it costs
 
 function readStdin() {
   try {
@@ -75,8 +76,12 @@ function label(match) {
 }
 
 function buildContext(matches) {
-  const skills = matches.filter((m) => m.type === 'skill').slice(0, MAX_SKILLS);
-  const kis = matches.filter((m) => m.type === 'knowledge_item').slice(0, MAX_KIS);
+  // A weak match is worse than no match: it spends context and points the agent at something
+  // unrelated. Anything scoring below MIN_SCORE is a coincidental word overlap, not a capability
+  // that fits the task — drop it and stay silent rather than pad the list.
+  const strong = matches.filter((m) => (m.score || 0) >= MIN_SCORE);
+  const skills = strong.filter((m) => m.type === 'skill').slice(0, MAX_SKILLS);
+  const kis = strong.filter((m) => m.type === 'knowledge_item').slice(0, MAX_KIS);
   if (!skills.length && !kis.length) return '';
 
   const lines = ['[SEOSONA Brain] Capabilities this OS already has for this task:'];
