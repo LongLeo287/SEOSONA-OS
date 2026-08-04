@@ -112,7 +112,10 @@ function main() {
     let additionalContext = '';
     if (shouldRemind) {
       session.lastReminder = Date.now();
-      additionalContext = `\n\n[Code Simplification Reminder] You have modified ${session.modifiedFiles.length} files in this session. Consider using the \`code-simplifier\` agent to refine recent changes before proceeding to code review. This is a MANDATORY step in the workflow.`;
+      // Points at the `simplify` skill, which exists. The original told the model to use a
+      // `code-simplifier` AGENT — no such agent is defined in this repo, so the reminder sent the
+      // model chasing a tool that isn't there. It also called the step "MANDATORY", which it isn't.
+      additionalContext = `\n\n[Simplify Reminder] ${session.modifiedFiles.length} files modified this session. Consider running the \`simplify\` skill over the changed code before review — it looks for reuse, dead abstraction, and altitude problems. Skip it if the changes are trivial.`;
     }
 
     // Save updated session data

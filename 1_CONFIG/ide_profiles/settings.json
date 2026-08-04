@@ -1,4 +1,5 @@
 {
+  "_comment": "Template shipped into connected projects by `seosona init`. Paths use $HOME (NOT ~) because a tilde inside double quotes is never expanded by the shell — the previous form pointed every hook at a literal './~/' directory and silently failed. Hook set is curated: see docs/audits for why dev-rules-reminder, subagent-init, descriptive-name, usage-context-awareness and write-compact-marker are intentionally not registered.",
   "includeCoAuthoredBy": false,
   "hooks": {
     "SessionStart": [
@@ -7,18 +8,8 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/session-init.cjs\""
-          }
-        ]
-      }
-    ],
-    "SubagentStart": [
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/subagent-init.cjs\""
+            "command": "node \"$HOME/.seosona/1_CORE/hooks/session-init.cjs\"",
+            "timeout": 15
           }
         ]
       }
@@ -28,73 +19,54 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/dev-rules-reminder.cjs\""
-          },
-          {
-            "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/usage-context-awareness.cjs\"",
-            "timeout": 30
+            "command": "node \"$HOME/.seosona/1_CORE/hooks/brain-inject.cjs\"",
+            "timeout": 10,
+            "statusMessage": "Consulting the SEOSONA brain..."
           }
         ]
       }
     ],
     "PreToolUse": [
       {
-        "matcher": "Write",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/descriptive-name.cjs\""
-          }
-        ]
-      },
-      {
         "matcher": "Bash|Glob|Grep|Read|Edit|Write",
         "hooks": [
           {
             "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/scout-block.cjs\""
+            "command": "node \"$HOME/.seosona/1_CORE/hooks/scout-block.cjs\"",
+            "timeout": 10
           },
           {
             "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/privacy-block.cjs\""
+            "command": "node \"$HOME/.seosona/1_CORE/hooks/privacy-block.cjs\"",
+            "timeout": 10
           }
         ]
       }
     ],
     "PostToolUse": [
       {
-        "matcher": "Edit|Write|MultiEdit",
+        "matcher": "Edit|Write|NotebookEdit",
         "hooks": [
           {
             "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/post-edit-simplify-reminder.cjs\""
+            "command": "node \"$HOME/.seosona/1_CORE/hooks/post-edit-simplify-reminder.cjs\"",
+            "timeout": 10
           },
           {
             "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/memory-logger.cjs\""
-          }
-        ]
-      }
-    ],
-    "PreCompact": [
-      {
-        "matcher": "manual|auto",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/write-compact-marker.cjs\""
+            "command": "node \"$HOME/.seosona/1_CORE/hooks/memory-logger.cjs\"",
+            "timeout": 10
           }
         ]
       }
     ],
     "SessionEnd": [
       {
-        "matcher": "clear",
         "hooks": [
           {
             "type": "command",
-            "command": "node \"~/.seosona/1_CORE/hooks/session-end.cjs\""
+            "command": "node \"$HOME/.seosona/1_CORE/hooks/session-end.cjs\"",
+            "timeout": 10
           }
         ]
       }

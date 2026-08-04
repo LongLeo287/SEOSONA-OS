@@ -151,3 +151,8 @@ _QUARANTINE/
 
 # Personal Claude Code overrides (project settings.json IS committed — it wires the brain hook)
 .claude/settings.local.json
+
+# Runtime log payloads. memory_logger.py spills full file CONTENT >1500 chars into logs/refs/,
+# and the compact marker is regenerated every compaction — neither belongs in a public repo.
+3_MEMORY/logs/refs/
+3_MEMORY/logs/last_compact.json

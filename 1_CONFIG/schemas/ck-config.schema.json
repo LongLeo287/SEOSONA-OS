@@ -362,6 +362,31 @@
           "type": "boolean",
           "default": true,
           "description": "PostToolUse hook - simplify reminder after edits"
+        },
+        "brain-inject": {
+          "type": "boolean",
+          "default": true,
+          "description": "UserPromptSubmit hook - injects matching skills/knowledge items per prompt"
+        },
+        "memory-logger": {
+          "type": "boolean",
+          "default": true,
+          "description": "PostToolUse hook - logs substantive file writes to 3_MEMORY/logs"
+        },
+        "session-end": {
+          "type": "boolean",
+          "default": true,
+          "description": "SessionEnd hook - writes a session-end marker to the memory log"
+        },
+        "descriptive-name": {
+          "type": "boolean",
+          "default": true,
+          "description": "PreToolUse hook - kebab-case descriptive file-naming reminder"
+        },
+        "write-compact-marker": {
+          "type": "boolean",
+          "default": true,
+          "description": "PreCompact hook - records that a compaction occurred"
         }
       },
       "additionalProperties": false

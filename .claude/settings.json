@@ -1,6 +1,20 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "_comment": "Hooks are audited before registration — see docs/audits/HOOKS_AUDIT_2026-07-24.md. Deliberately NOT registered: dev-rules-reminder (~625 tok/prompt + a 35MB transcript read), subagent-init (targets a plans/ tree this repo doesn't use), descriptive-name (duplicate content, and it used to auto-approve tools), usage-context-awareness (its only consumer, the statusline, isn't wired), write-compact-marker (writes a file nothing reads). Individual hooks can also be toggled via .ck.json hooks.<name>.",
   "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["1_CORE/hooks/session-init.cjs"],
+            "timeout": 15
+          }
+        ]
+      }
+    ],
     "UserPromptSubmit": [
       {
         "hooks": [
@@ -10,6 +24,56 @@
             "args": ["1_CORE/hooks/brain-inject.cjs"],
             "timeout": 10,
             "statusMessage": "Consulting the SEOSONA brain..."
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Glob|Grep|Read|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["1_CORE/hooks/scout-block.cjs"],
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["1_CORE/hooks/privacy-block.cjs"],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["1_CORE/hooks/post-edit-simplify-reminder.cjs"],
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["1_CORE/hooks/memory-logger.cjs"],
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["1_CORE/hooks/session-end.cjs"],
+            "timeout": 10
           }
         ]
       }
