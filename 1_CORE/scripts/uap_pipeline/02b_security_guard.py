@@ -101,8 +101,19 @@ def run_security_guard():
 
         if blocked:
             print(f"[X] {repo_id} MALICIOUS ({blocked}). Dropping.")
-            cursor.execute("UPDATE queue SET status = 'CREATED' WHERE id = ?", (repo_id,))
+            # Was 'CREATED', which flows to COMPLETED — making a known-malicious repo
+            # indistinguishable from a successfully ingested one. Every downstream consumer, and
+            # the reconcile sweep, then read it as a success that had merely lost its knowledge
+            # item, and requeued it: re-clone, re-block, forever. 'BLOCKED' is terminal and honest.
+            cursor.execute("UPDATE queue SET status = 'BLOCKED' WHERE id = ?", (repo_id,))
             conn.commit()
+            # And record it durably. Until now a hard block existed only on stdout, so there was no
+            # answer to "what has this pipeline ever refused?".
+            try:
+                with open(REVIEW_LOG, "a", encoding="utf-8") as f:
+                    f.write(f"- {repo_id}: HARD BLOCK — {blocked}\n")
+            except OSError:
+                pass
         else:
             if soft_hits:
                 # Not a block — record for human review, and let ingestion proceed.

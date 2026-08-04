@@ -43,7 +43,9 @@ def cleanup_created_repos():
     conn = sqlite3.connect(QUEUE_DB_PATH)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM queue WHERE status = 'CREATED'")
+    # BLOCKED is included so a security-rejected repo still gets its clone reclaimed. It used to be
+    # marked CREATED purely to reach this selector, which is what made a block look like a success.
+    cursor.execute("SELECT * FROM queue WHERE status IN ('CREATED', 'BLOCKED')")
     created_items = cursor.fetchall()
 
     if not created_items:
@@ -62,8 +64,11 @@ def cleanup_created_repos():
                 print("-> Cleanup successful.")
             else:
                 print(f"-> ERROR: Could not clean up {repo_dir}")
-        cursor.execute("UPDATE queue SET status = 'COMPLETED' WHERE id = ?", (repo_id,))
-        conn.commit()
+        # BLOCKED is terminal: reclaim the disk, but never promote a security rejection to
+        # COMPLETED — that is precisely what made a block look like a successful ingest.
+        if row["status"] != "BLOCKED":
+            cursor.execute("UPDATE queue SET status = 'COMPLETED' WHERE id = ?", (repo_id,))
+            conn.commit()
     conn.close()
     return cleaned
 
