@@ -156,3 +156,11 @@ _QUARANTINE/
 # and the compact marker is regenerated every compaction — neither belongs in a public repo.
 3_MEMORY/logs/refs/
 3_MEMORY/logs/last_compact.json
+
+# Harvested-skill media. The SKILL.md and its references ARE tracked — the router is generated from
+# them, so a skill missing from git makes SKILLS_ROUTER.md unreproducible on a fresh clone (this is
+# what turned CI red for 8 runs). Only the heavy media stays out.
+.agents/skills/*/assets/
+.agents/skills/video-shotcraft/template/
+.agents/skills/video-shotcraft/demos/
+.agents/skills/video-shotcraft/gallery/

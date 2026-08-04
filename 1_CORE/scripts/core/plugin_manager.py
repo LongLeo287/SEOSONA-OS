@@ -127,15 +127,20 @@ def build_skills_router():
     
     plugins_graph = {}
     
-    for plugin_group in os.listdir(FRAMEWORKS_DIR):
+    # sorted(): os.listdir returns filesystem order, which differs between Windows and Linux. The
+    # router is committed from one machine and regenerated in CI on another, so unsorted iteration
+    # made the file unreproducible across platforms even after the keyword ordering was fixed.
+    for plugin_group in sorted(os.listdir(FRAMEWORKS_DIR)):
         plugin_path = os.path.join(FRAMEWORKS_DIR, plugin_group)
         if not os.path.isdir(plugin_path):
             continue
             
         plugins_graph[plugin_group] = []
         
-        # Traverse subdirectories looking for SKILL.md or DESIGN.md
+        # Traverse subdirectories looking for SKILL.md or DESIGN.md.
+        # dirs is sorted IN PLACE so os.walk descends in a fixed order on every platform.
         for root, dirs, files in os.walk(plugin_path):
+            dirs.sort()
             target_file = "SKILL.md" if "SKILL.md" in files else ("DESIGN.md" if "DESIGN.md" in files else None)
             if target_file:
                 skill_path = os.path.join(root, target_file)
