@@ -180,12 +180,21 @@ async function main() {
       writeEnv(envFile, 'CK_CODING_LEVEL_STYLE', getCodingLevelStyleName(codingLevel));
     }
 
-    console.log(`Session ${source}. ${buildContextOutput(config, detections, resolved, staticEnv.gitRoot)}`);
-
-    // Info: Show git root when running from subdirectory (Issue #327: now supported)
-    if (staticEnv.gitRoot && staticEnv.gitRoot !== process.cwd()) {
-      console.log(`📁 Subdirectory mode: Plans/docs will be created in current directory`);
-      console.log(`   Git root: ${staticEnv.gitRoot}`);
+    // Only announce the plan-naming/subdirectory conventions when a `plans/` tree actually exists.
+    // In a repo that doesn't use that convention (this one uses docs/), the banner advertised a
+    // naming scheme and a "Plans/docs will be created here" mode for a directory that isn't there —
+    // misinformation on every single session start. The project-type guess is dropped for the same
+    // reason: it is inferred from package.json `main`/`exports` and mislabels this OS as a
+    // "library". What remains is the part that is always true: the resolved root.
+    const usesPlans = fs.existsSync(path.join(staticEnv.gitRoot || process.cwd(), 'plans'));
+    if (usesPlans) {
+      console.log(`Session ${source}. ${buildContextOutput(config, detections, resolved, staticEnv.gitRoot)}`);
+      if (staticEnv.gitRoot && staticEnv.gitRoot !== process.cwd()) {
+        console.log(`Subdirectory mode: plans/docs will be created in the current directory`);
+        console.log(`   Git root: ${staticEnv.gitRoot}`);
+      }
+    } else {
+      console.log(`Session ${source}. Root: ${staticEnv.gitRoot || process.cwd()}`);
     }
 
     // MITIGATION: Issue #277 - Auto-compact can bypass AskUserQuestion approval gates
