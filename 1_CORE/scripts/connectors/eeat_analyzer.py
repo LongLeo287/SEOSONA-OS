@@ -34,11 +34,18 @@ CTX = ssl.create_default_context()
 HEADERS = {"User-Agent": "SEOSONA-OS-EEATAnalyzer/1.0"}
 
 def load_config():
-    if CONFIG_PATH.exists():
-        with open(CONFIG_PATH) as f:
-            return json.load(f)
-    return {"defaults": {"target_domain": "", "target_url": "",
-                         "output_dir": "3_MEMORY/seo_exports"}}
+    # A malformed config.json used to abort the connector with a raw JSONDecodeError
+    # traceback. Report it and fall back to defaults instead.
+    try:
+        if CONFIG_PATH.exists():
+            with open(CONFIG_PATH) as f:
+                return json.load(f)
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[!] config.json unreadable ({e}); using defaults.")
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
 
 def fetch(url, timeout=15):
     try:
@@ -147,7 +154,10 @@ def check_eeat_signals(html, url):
     signals = {}
 
     # Author signal
-    author_patterns = [r'(?:author|written by|by)[^<]{3,50}', r'"author"[^}]{20,100}']
+    # `by` had no word boundary, so it matched inside ordinary words — a page containing "Nearby"
+    # or "byte" was credited with having an author, inflating the E-E-A-T score on essentially
+    # every site scanned. Anchor each alternative on word boundaries.
+    author_patterns = [r'\b(?:author|written\s+by|by)\b[^<]{3,50}', r'"author"[^}]{20,100}']
     has_author = any(re.search(p, html, re.IGNORECASE) for p in author_patterns)
     signals["has_author"] = has_author
     if not has_author:
@@ -185,7 +195,9 @@ def check_content_freshness(html):
     """Check for date signals indicating fresh content"""
     patterns = [
         r'(?:updated?|modified|last modified)[^<]*(\d{4})',
-        r'<time[^>]*datetime=["\']( \d{4}-\d{2}-\d{2})',
+        # There was a literal SPACE inside this capture group, so `<time datetime="2026-01-15">`
+        # never matched and content freshness always reported "Unknown".
+        r'<time[^>]*datetime=["\'](\d{4}-\d{2}-\d{2})',
         r'"dateModified"[^"]*"(\d{4}-\d{2}-\d{2})',
         r'"datePublished"[^"]*"(\d{4}-\d{2}-\d{2})',
     ]

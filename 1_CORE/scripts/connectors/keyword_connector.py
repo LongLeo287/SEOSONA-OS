@@ -27,12 +27,19 @@ except Exception:  # pragma: no cover
         raise RuntimeError("url_guard unavailable — refusing to fetch unsafely")
 
 def load_config():
-    if not CONFIG_PATH.exists():
-        print(f"[XX] Config not found: {CONFIG_PATH}")
-        print("     Copy 3_MEMORY/specs/config_template.json -> config.json and fill in values")
-        sys.exit(1)
-    with open(CONFIG_PATH, encoding="utf-8") as f:
-        return json.load(f)
+    # A malformed config.json used to abort the connector with a raw JSONDecodeError
+    # traceback. Report it and fall back to defaults instead.
+    try:
+        if not CONFIG_PATH.exists():
+            print(f"[XX] Config not found: {CONFIG_PATH}")
+            print("     Copy 3_MEMORY/specs/config_template.json -> config.json and fill in values")
+            sys.exit(1)
+        with open(CONFIG_PATH, encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[!] config.json unreadable ({e}); using defaults.")
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
 
 # ── Google Autocomplete ───────────────────────────────────────────────────────
 

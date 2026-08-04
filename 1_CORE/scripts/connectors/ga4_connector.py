@@ -31,11 +31,18 @@ except ImportError:
     sys.exit(1)
 
 def load_config():
-    if not CONFIG_PATH.exists():
-        print(f"❌ Config not found. Copy config_template.json → config.json")
-        sys.exit(1)
-    with open(CONFIG_PATH) as f:
-        return json.load(f)
+    # A malformed config.json used to abort the connector with a raw JSONDecodeError
+    # traceback. Report it and fall back to defaults instead.
+    try:
+        if not CONFIG_PATH.exists():
+            print(f"❌ Config not found. Copy config_template.json → config.json")
+            sys.exit(1)
+        with open(CONFIG_PATH) as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[!] config.json unreadable ({e}); using defaults.")
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
 
 def get_ga4_client(config):
     from secrets_manager import get_secret

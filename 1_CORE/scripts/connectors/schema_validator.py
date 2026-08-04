@@ -59,11 +59,18 @@ ECOMMERCE_RECOMMENDED = ["Product", "Offer", "AggregateRating", "BreadcrumbList"
 
 
 def load_config():
-    if CONFIG_PATH.exists():
-        with open(CONFIG_PATH) as f:
-            return json.load(f)
-    return {"defaults": {"target_domain": "", "target_url": "",
-                         "output_dir": "3_MEMORY/seo_exports"}}
+    # A malformed config.json used to abort the connector with a raw JSONDecodeError
+    # traceback. Report it and fall back to defaults instead.
+    try:
+        if CONFIG_PATH.exists():
+            with open(CONFIG_PATH) as f:
+                return json.load(f)
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[!] config.json unreadable ({e}); using defaults.")
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
 
 def fetch_page(url):
     try:
@@ -75,16 +82,36 @@ def fetch_page(url):
 
 def extract_json_ld(html):
     """Extract all JSON-LD blocks"""
+    # Yoast and RankMath — i.e. the majority of WordPress — emit ONE script containing
+    # {"@context":..., "@graph":[ {...Organization}, {...WebSite}, {...BreadcrumbList} ]}.
+    # Without descending into @graph the outer wrapper has no @type, so every such site was told
+    # "🔴 Critical: Missing @type" and reported as missing all 8 recommended schemas it actually has.
+    def _flatten_graph(node, depth=0):
+        if depth > 4:
+            return []
+        if isinstance(node, list):
+            return [s for item in node for s in _flatten_graph(item, depth + 1)]
+        if not isinstance(node, dict):
+            return []
+        graph = node.get("@graph")
+        if graph is not None:
+            context = node.get("@context")
+            out = []
+            for item in _flatten_graph(graph, depth + 1):
+                # Children inherit the wrapper's @context so the "Missing @context" check stays true.
+                if context and isinstance(item, dict) and "@context" not in item:
+                    item = {"@context": context, **item}
+                out.append(item)
+            return out
+        return [node]
+
     pattern = r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>'
     blocks = re.findall(pattern, html, re.DOTALL | re.IGNORECASE)
     schemas = []
     for block in blocks:
         try:
             data = json.loads(block.strip())
-            if isinstance(data, list):
-                schemas.extend(data)
-            else:
-                schemas.append(data)
+            schemas.extend(_flatten_graph(data))
         except json.JSONDecodeError as e:
             schemas.append({"_parse_error": str(e), "_raw": block[:200]})
     return schemas

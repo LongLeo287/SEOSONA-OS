@@ -42,7 +42,12 @@ def fetch_autocomplete(query: str, lang="vi", country="vn") -> list:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with safe_urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read().decode("utf-8"))
-            return [s[0] for s in data[1]] if len(data) > 1 else []
+            # The client=firefox payload is ["query", ["suggestion one", "suggestion two", ...]] —
+            # data[1] is already a list of STRINGS. `s[0]` took the first character of each, so this
+            # returned ['l','l','l'] instead of the suggestions. (keyword_connector gets this right.)
+            if len(data) < 2 or not isinstance(data[1], list):
+                return []
+            return [s if isinstance(s, str) else (s[0] if s else "") for s in data[1]]
     except Exception:
         return []
 
@@ -89,15 +94,19 @@ def analyze_keyword_overlap(domain: str, competitors: list) -> list:
     gaps = []
     for kw_row in transactional:
         kw = kw_row.get("keyword", "")
+        # This function has never measured anything. It asserted "Not ranked" / "content_gap: Yes"
+        # for EVERY transactional keyword without checking a single SERP, and those fabricated rows
+        # shipped to clients under the heading "Content Gaps (Your Missing Pages)". Until real SERP
+        # data is wired in, report the keyword as UNVERIFIED rather than inventing a finding.
         gap_entry = {
             "keyword": kw,
             "intent": kw_row.get("intent", ""),
             "priority": kw_row.get("priority", ""),
-            "your_page": "Not ranked",
-            "content_gap": "Yes"
+            "your_page": "Unknown — not checked",
+            "content_gap": "Unverified (no SERP data source configured)",
         }
         for comp in competitors[:3]:
-            gap_entry[f"competitor_{comp}"] = "Check manually"
+            gap_entry[f"competitor_{comp}"] = "Unverified"
         gaps.append(gap_entry)
     return gaps
 

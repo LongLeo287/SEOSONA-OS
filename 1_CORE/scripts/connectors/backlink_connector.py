@@ -40,11 +40,18 @@ def is_configured(value):
     return bool(text) and text not in {"''", '""'} and "YOUR_" not in text and text != "USE_SECRETS_MANAGER"
 
 def load_config():
-    if not CONFIG_PATH.exists():
-        print(f"❌ Config not found: {CONFIG_PATH}")
-        sys.exit(1)
-    with open(CONFIG_PATH) as f:
-        return json.load(f)
+    # A malformed config.json used to abort the connector with a raw JSONDecodeError
+    # traceback. Report it and fall back to defaults instead.
+    try:
+        if not CONFIG_PATH.exists():
+            print(f"❌ Config not found: {CONFIG_PATH}")
+            sys.exit(1)
+        with open(CONFIG_PATH) as f:
+            return json.load(f)
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[!] config.json unreadable ({e}); using defaults.")
+        return {"defaults": {"target_domain": "", "target_url": "",
+                             "output_dir": "3_MEMORY/seo_exports"}}
 
 # ── SOURCE 1: Open PageRank (Free, no signup) ─────────────────────────────────
 
