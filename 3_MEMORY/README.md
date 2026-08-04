@@ -31,7 +31,7 @@
 | `projects/` | Per-satellite memory namespaces (seosona-video, -content, -ux-ui, -workflow). |
 | `plans/` · `sessions/` · `episodic/` · `drafts/` | Planning, session records, episodic memory, work drafts. |
 | `logs/` · `audit_reports/` · `eval_results/` · `issues/` · `errors/` | Operational history + QA. |
-| `knowledge_graph/` · `vector_index/` | The code/knowledge graph + the TF-IDF semantic index (index is gitignored — self-heals). |
+| `knowledge_graph/` · `vector_index/` | The code/knowledge graph + the hybrid BM25/TF-IDF semantic index. Gitignored, stored as data (.npz + .json, never pickle), and rebuilt automatically whenever the knowledge corpus changes. |
 | `ingestion_zone/` · `mcp_server/` · `specs/` · `screenshots/` · `seo_exports/` | Ingestion staging, MCP state, specs, captures, SEO export outputs. |
 
 | File | Purpose |

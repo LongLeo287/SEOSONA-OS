@@ -8,7 +8,7 @@
     "seosona-knowledge": {
       "command": "python",
       "args": ["1_CORE/scripts/mcp_knowledge_server.py"],
-      "description": "Semantic (TF-IDF) search over the SEOSONA knowledge base (3_MEMORY/knowledge_items, incl. all ~1,200 UAP-harvested KIs). Tool: knowledge_search(query, limit) -> {backend, results:[{title, portablePath, score}]}. Warm-started from the persisted index at 3_MEMORY/vector_index. Rebuild after big UAP runs: python -c \"import sys;sys.path.insert(0,'1_CORE/scripts/core');from vector_memory import SemanticMemoryEngine as E;e=E();e.build_index();e.save_index()\""
+      "description": "Hybrid BM25 + TF-IDF search over the SEOSONA knowledge base (3_MEMORY/knowledge_items, incl. all UAP-harvested KIs). Tool: knowledge_search(query, limit) -> {backend, results:[{title, portablePath, score}], warning?}. The index rebuilds itself when the corpus changes; a degraded backend is reported as backend=lexical_degraded with a warning rather than silently returning nothing. Requires: pip install -r requirements.txt"
     }
   }
 }
