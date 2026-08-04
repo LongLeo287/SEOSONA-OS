@@ -20,6 +20,7 @@ assimilator = importlib.import_module("03_assimilator")
 creator = importlib.import_module("04_creator")
 cleanup = importlib.import_module("05_cleanup")
 
+ROOT = Path(__file__).resolve().parents[3]
 QUEUE_DB_PATH = (Path(__file__).resolve().parents[3] / "3_MEMORY" / "uap_queue.db")
 
 def run_pipeline(max_loops=10):
@@ -86,5 +87,61 @@ def run_pipeline(max_loops=10):
         
     print("\n=== DAEMON RUN COMPLETE ===")
 
+def reconcile(apply=False):
+    """Find rows whose status lies about what is on disk, and requeue them.
+
+    The manager only ever loops on PENDING, so anything left in another state is stranded forever.
+    Measured on the live queue: rows sitting in CURRENT with their clones never reclaimed, and 129
+    rows marked COMPLETED with no knowledge item — because 04_creator turned a missing KI into
+    `status='CREATED'`, i.e. into success. Nothing anywhere compares queue state against artefacts.
+
+    Read-only by default; pass apply=True to write the requeue.
+    """
+    ki_dir = ROOT / "3_MEMORY" / "knowledge_items"
+    conn = sqlite3.connect(QUEUE_DB_PATH)
+    conn.row_factory = sqlite3.Row
+    rows = conn.execute("SELECT id, status, retry_count FROM queue").fetchall()
+
+    stranded, missing_ki = [], []
+    for r in rows:
+        safe = r["id"].replace("/", "_")
+        has_ki = (ki_dir / f"uap_{safe}.md").exists()
+        if r["status"] in ("CURRENT", "AUDITED", "ASSIMILATED", "CREATED"):
+            stranded.append(r["id"])            # mid-flight, nothing will ever pick these up
+        elif r["status"] == "COMPLETED" and not has_ki:
+            missing_ki.append(r["id"])          # claimed done, produced nothing
+        elif r["status"] == "FAILED" and r["retry_count"] < 3:
+            stranded.append(r["id"])            # retries remained but nothing retries FAILED
+
+    print(f"  stranded mid-flight / retryable FAILED : {len(stranded)}")
+    print(f"  COMPLETED with no knowledge item       : {len(missing_ki)}")
+    for i in (stranded + missing_ki)[:8]:
+        print(f"    - {i}")
+    if len(stranded) + len(missing_ki) > 8:
+        print(f"    … and {len(stranded) + len(missing_ki) - 8} more")
+
+    if apply:
+        ids = stranded + missing_ki
+        conn.executemany(
+            "UPDATE queue SET status='PENDING', retry_count=0 WHERE id=?", [(i,) for i in ids]
+        )
+        conn.commit()
+        print(f"  -> requeued {len(ids)} rows as PENDING")
+    else:
+        print("  (dry run — pass --apply to requeue)")
+    conn.close()
+
+
 if __name__ == "__main__":
-    run_pipeline(max_loops=50) # Process in batches of 50
+    import argparse
+    ap = argparse.ArgumentParser(description="SEOSONA UAP pipeline daemon")
+    ap.add_argument("--reconcile", action="store_true",
+                    help="report rows whose status disagrees with the artefacts on disk")
+    ap.add_argument("--apply", action="store_true", help="with --reconcile, write the requeue")
+    ap.add_argument("--max-loops", type=int, default=50)
+    args = ap.parse_args()
+
+    if args.reconcile:
+        reconcile(apply=args.apply)
+    else:
+        run_pipeline(max_loops=args.max_loops)
