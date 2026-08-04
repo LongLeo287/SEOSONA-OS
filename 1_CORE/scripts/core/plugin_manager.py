@@ -26,6 +26,44 @@ def parse_yaml_frontmatter(file_path):
         print(f"Error reading {file_path}: {e}")
     return None
 
+# Words that carry no routing signal — they appear in almost every SKILL.md description
+# ("Use when the user asks to...") and would make every skill match every task.
+_STOPWORDS = {
+    "the", "and", "for", "with", "when", "this", "that", "use", "used", "using", "user", "users",
+    "should", "would", "could", "from", "into", "your", "you", "are", "was", "were", "has", "have",
+    "not", "any", "all", "can", "will", "its", "their", "them", "they", "what", "which", "who",
+    "asks", "ask", "asked", "want", "wants", "need", "needs", "skill", "skills", "task", "tasks",
+    "helps", "help", "provides", "provide", "creating", "create", "creates", "generate", "generates",
+    "run", "runs", "running", "also", "each", "other", "than", "then", "there", "here", "how",
+    "based", "given", "over", "after", "before", "such", "only", "more", "most", "via", "per",
+    "does", "doing", "done", "make", "makes", "made", "get", "gets", "new", "one", "two",
+}
+_MAX_DESC_KEYWORDS = 8
+
+
+def _description_keywords(description):
+    """Derive routing keywords from a skill's description.
+
+    Without this, a skill is only findable by its exact folder name — `SKILL.md` descriptions are
+    rich ("audit Core Web Vitals, crawlability, indexation...") but were parsed and then thrown
+    away, so a task phrased in real words never matched. Returns a small, de-duplicated set of the
+    most distinctive terms so recall improves without every skill matching every task.
+    """
+    if not description:
+        return []
+    words = re.findall(r"[a-zA-Z][a-zA-Z0-9+#.-]{3,}", description.lower())
+    seen, out = set(), []
+    for w in words:
+        w = w.strip(".-")
+        if len(w) < 4 or w in _STOPWORDS or w in seen:
+            continue
+        seen.add(w)
+        out.append(w)
+        if len(out) >= _MAX_DESC_KEYWORDS:
+            break
+    return out
+
+
 def build_skills_router():
     print("[SEOSONA] Plugin Manager - Scanning plugins...")
     
@@ -51,6 +89,9 @@ def build_skills_router():
                     name_clean = meta['name'].strip('"\'')
                     # Use a set to avoid identical duplicates (e.g. when name has no hyphens)
                     kw_set = {name_clean.replace('-', ' '), name_clean}
+                    # Plus distinctive terms from the description, so the skill is findable by what
+                    # it DOES, not only by its exact name.
+                    kw_set.update(_description_keywords(meta.get('description')))
                     keywords = sorted(kw_set, key=lambda k: (k == name_clean))  # original name first
                     plugins_graph[plugin_group].append({
                         "keywords": keywords,
@@ -86,6 +127,7 @@ def build_skills_router():
             if meta:
                 name_clean = meta["name"].strip("\"'")
                 kw_set = {name_clean.replace("-", " "), name_clean, skill_dir}
+                kw_set.update(_description_keywords(meta.get("description")))
                 keywords = sorted(kw_set, key=lambda k: (k == name_clean))
                 plugins_graph["agent_skills"].append({
                     "keywords": keywords,

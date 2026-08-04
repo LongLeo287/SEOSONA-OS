@@ -193,6 +193,37 @@ class TestSkillSandbox:
         assert not any(("KEY" in c or "TOKEN" in c or "SECRET" in c) for c in cmd)
 
 
+class TestSkillRouting:
+    """Skills must be findable by what they DO, not only by their exact folder name — otherwise
+    every harvested skill is dead weight unless the user already knows its name."""
+
+    def _pm(self):
+        sys.path.insert(0, str(ROOT / "1_CORE" / "scripts" / "core"))
+        return importlib.import_module("plugin_manager")
+
+    def test_description_keywords_extracts_distinctive_terms(self):
+        pm = self._pm()
+        kws = pm._description_keywords(
+            "Audit Core Web Vitals, crawlability and indexation. Use when the user asks to check "
+            "technical SEO health."
+        )
+        assert "crawlability" in kws and "indexation" in kws
+        # Filler that appears in nearly every description must not become a routing keyword.
+        for junk in ("use", "when", "the", "user", "asks", "skill"):
+            assert junk not in kws
+
+    def test_description_keywords_are_bounded_and_deduped(self):
+        pm = self._pm()
+        kws = pm._description_keywords("alpha beta gamma delta epsilon zeta eta theta iota kappa lambda")
+        assert len(kws) <= pm._MAX_DESC_KEYWORDS
+        assert len(kws) == len(set(kws))
+
+    def test_description_keywords_handles_missing_description(self):
+        pm = self._pm()
+        assert pm._description_keywords(None) == []
+        assert pm._description_keywords("") == []
+
+
 class TestVectorMemory:
     """The knowledge brain must answer a query without crashing (self-heals its index)."""
 
