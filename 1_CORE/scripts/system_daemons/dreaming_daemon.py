@@ -148,22 +148,26 @@ def save_as_knowledge(articles: list, source_name: str, category: str, output_di
         "",
     ]
 
+    # Compress each article's PROSE only, never the document skeleton. Compressing the assembled
+    # markdown collapsed every newline, so the whole digest became one long line: the headings
+    # stopped being headings, the file was unreadable, and the capability bridge — which takes the
+    # first heading as a resource name — ended up using the entire article dump as that name, which
+    # then crowded real matches out of every routing result.
+    stats = {}
     for i, article in enumerate(articles, 1):
         content_lines.append(f"## {i}. {article['title']}")
         if article["description"]:
-            content_lines.append(article["description"])
+            squeezed, stats = compress(article["description"])
+            content_lines.append(squeezed if squeezed else article["description"])
         if article["link"]:
             content_lines.append(f"Source: {article['link']}")
         content_lines.append("")
 
-    raw_content = "\n".join(content_lines)
-
-    # Compress via LLMLingua engine
-    compressed, stats = compress(raw_content)
+    content = "\n".join(content_lines)
 
     try:
         with open(filepath, "w", encoding="utf-8") as f:
-            f.write(compressed if compressed else raw_content)
+            f.write(content)
         log_msg(f"Saved {len(articles)} articles -> {filepath.name} (compressed {stats.get('ratio', 0)}%)")
     except Exception as e:
         log_msg(f"Failed to save KI: {e}")
