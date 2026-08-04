@@ -1,6 +1,10 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "_comment": "Hooks are audited before registration — see docs/audits/HOOKS_AUDIT_2026-07-24.md. Deliberately NOT registered: dev-rules-reminder (~625 tok/prompt + a 35MB transcript read), subagent-init (targets a plans/ tree this repo doesn't use), descriptive-name (duplicate content, and it used to auto-approve tools), usage-context-awareness (its only consumer, the statusline, isn't wired), write-compact-marker (writes a file nothing reads). Individual hooks can also be toggled via .ck.json hooks.<name>.",
+  "_comment": "Hooks are audited before registration — see docs/audits/HOOKS_AUDIT_2026-07-24.md. dev-rules-reminder, subagent-init, descriptive-name and write-compact-marker were deleted outright (dead, duplicated, or actively harmful — reasons in the audit). Individual hooks can be toggled via .ck.json hooks.<name>.",
+  "statusLine": {
+    "type": "command",
+    "command": "node .claude/statusline.cjs"
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -24,6 +28,12 @@
             "args": ["1_CORE/hooks/brain-inject.cjs"],
             "timeout": 10,
             "statusMessage": "Consulting the SEOSONA brain..."
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": ["1_CORE/hooks/usage-context-awareness.cjs"],
+            "timeout": 30
           }
         ]
       }
