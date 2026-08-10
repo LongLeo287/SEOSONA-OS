@@ -1,5 +1,152 @@
 {
   "packetVersion": "1.0",
-  "status": "empty_until_verified",
-  "evidence": []
+  "status": "verified",
+  "verifiedAt": "2026-08-10",
+  "reverifyAfter": "2026-11-08",
+  "verificationPolicy": "Use only current primary documentation. Insert the canonical claim verbatim in factual copy, then explain it in Vietnamese.",
+  "evidence": [
+    {
+      "id": "google-search-organic-listing-free",
+      "claim": "Appearing in Google Search results does not cost money.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/essentials",
+      "sourceTitle": "Google Search Essentials",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["search-essentials", "seo-basics"]
+    },
+    {
+      "id": "google-search-no-crawl-index-guarantee",
+      "claim": "Meeting all Google Search requirements and best practices does not guarantee that Google will crawl, index, or serve a page.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/essentials",
+      "sourceTitle": "Google Search Essentials",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["search-essentials", "indexing"]
+    },
+    {
+      "id": "google-search-people-first-content",
+      "claim": "Google lists creating helpful, reliable, people-first content as a key SEO best practice.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/essentials",
+      "sourceTitle": "Google Search Essentials",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["content-quality", "people-first-content"]
+    },
+    {
+      "id": "google-search-prominent-words",
+      "claim": "Google recommends placing searcher language in prominent locations such as page titles, main headings, alt text, and link text.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/essentials",
+      "sourceTitle": "Google Search Essentials",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["on-page-seo", "content-discovery"]
+    },
+    {
+      "id": "google-search-meta-keywords-unused",
+      "claim": "Google Search does not use the keywords meta tag.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+      "sourceTitle": "Search Engine Optimization Starter Guide",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["meta-tags", "seo-myths"]
+    },
+    {
+      "id": "google-search-no-magic-word-count",
+      "claim": "Content length alone does not matter for ranking, and Google has no magical minimum or maximum word count.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/fundamentals/seo-starter-guide",
+      "sourceTitle": "Search Engine Optimization Starter Guide",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["content-length", "seo-myths"]
+    },
+    {
+      "id": "google-search-cwv-lcp-target",
+      "claim": "A good LCP target is within the first 2.5 seconds after the page starts loading.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/appearance/core-web-vitals",
+      "sourceTitle": "Understanding Core Web Vitals and Google search results",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["core-web-vitals", "lcp"]
+    },
+    {
+      "id": "google-search-cwv-inp-target",
+      "claim": "A good INP target is less than 200 milliseconds.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/appearance/core-web-vitals",
+      "sourceTitle": "Understanding Core Web Vitals and Google search results",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["core-web-vitals", "inp"]
+    },
+    {
+      "id": "google-search-cwv-cls-target",
+      "claim": "A good CLS target is less than 0.1.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/appearance/core-web-vitals",
+      "sourceTitle": "Understanding Core Web Vitals and Google search results",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2025-12-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["core-web-vitals", "cls"]
+    },
+    {
+      "id": "google-search-rich-result-not-guaranteed",
+      "claim": "Correct structured data does not guarantee that Google will show a rich result.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "sourceTitle": "General structured data guidelines",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2026-07-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["structured-data", "rich-results"]
+    },
+    {
+      "id": "google-search-structured-data-manual-action",
+      "claim": "A structured data manual action removes rich-result eligibility but does not affect the page's ranking in Google web search.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "sourceTitle": "General structured data guidelines",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2026-07-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["structured-data", "manual-actions"]
+    },
+    {
+      "id": "google-search-structured-data-formats",
+      "claim": "Google supports JSON-LD, Microdata, and RDFa for structured data used for rich-result eligibility.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "sourceTitle": "General structured data guidelines",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2026-07-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["structured-data", "implementation"]
+    },
+    {
+      "id": "google-search-structured-data-visible-content",
+      "claim": "Structured data must accurately represent the content visible on the page.",
+      "language": "en",
+      "source": "https://developers.google.com/search/docs/appearance/structured-data/sd-policies",
+      "sourceTitle": "General structured data guidelines",
+      "sourceType": "official_documentation",
+      "sourceLastUpdated": "2026-07-10",
+      "verifiedAt": "2026-08-10",
+      "topics": ["structured-data", "content-quality"]
+    }
+  ]
 }
