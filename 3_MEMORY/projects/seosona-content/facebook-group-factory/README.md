@@ -10,6 +10,6 @@ the context remains self-describing. The Companion resolves the physical file
 only from `SEOSONA_BRAND_KIT_FILE` and rejects version or digest drift. Do not
 copy the Video asset collection into this OS namespace.
 
-Keep `evidence-packet.v1.json` empty until each factual claim has a verified source. An evidence item must have a stable `id`, the exact supported claim, a source URL or internal evidence reference, and verification metadata. Content blocks any draft claim that references a missing evidence id.
+Keep every `evidence-packet.v1.json` claim atomic and traceable to current primary documentation. An evidence item must have a stable `id`, the exact supported claim, a source URL or internal evidence reference, and verification metadata. Reverify the packet by `reverifyAfter`; do not silently extend that date. Content blocks any draft claim that references a missing evidence id or alters the canonical claim.
 
 Do not add access tokens, provider cookies, local paths, or Facebook credentials to these files.
