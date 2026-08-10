@@ -1,0 +1,23 @@
+{
+  "profileVersion": "1.0",
+  "brand": {
+    "id": "seosona",
+    "name": "SEOSONA",
+    "voice": [
+      "practical",
+      "evidence-led",
+      "clear",
+      "respectful"
+    ],
+    "visual": {
+      "imageStyle": "clean editorial illustration or realistic workspace photography",
+      "textInImage": "avoid",
+      "brandMark": "do not invent logos or wordmarks",
+      "brandKit": {
+        "ref": "seosona-brand://video/SEOSONA/brand-kit.v1.json",
+        "version": "1.0.0",
+        "sha256": "4a678f77b800dcbc5509ce15786d2a3cf426ce6297691f05ed7bd2bd90654f14"
+      }
+    }
+  }
+}

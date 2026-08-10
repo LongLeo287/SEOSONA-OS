@@ -1,0 +1,12 @@
+{
+  "schemaVersion": "1.0",
+  "id": "seosona-unified-brand-kit",
+  "owner": "seosona-video",
+  "ref": "seosona-brand://video/SEOSONA/brand-kit.v1.json",
+  "version": "1.0.0",
+  "sha256": "4a678f77b800dcbc5509ce15786d2a3cf426ce6297691f05ed7bd2bd90654f14",
+  "resolution": {
+    "env": "SEOSONA_BRAND_KIT_FILE",
+    "required": true
+  }
+}
