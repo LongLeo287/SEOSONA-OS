@@ -17,6 +17,23 @@ async function readCanonicalPolicy() {
   };
 }
 
+function canonicalize(value) {
+  if (Array.isArray(value)) return value.map(canonicalize);
+  if (value && typeof value === "object") {
+    return Object.keys(value).sort().reduce((output, key) => {
+      output[key] = canonicalize(value[key]);
+      return output;
+    }, {});
+  }
+  return value;
+}
+
+function canonicalDigest(value) {
+  return createHash("sha256")
+    .update(JSON.stringify(canonicalize(value)))
+    .digest("hex");
+}
+
 test("OS publishes a portable versioned BrandKit reference", async () => {
   const { reference, brandProfile } = await readCanonicalPolicy();
   const result = validateBrandReference({ reference, brandProfile });
@@ -67,6 +84,28 @@ test("reference detects BrandKit digest drift", async () => {
 
   assert.equal(result.valid, false);
   assert.ok(result.errors.some((error) => error.includes("digest mismatch")));
+});
+
+test("reference digest ignores harmless JSON formatting differences", () => {
+  const brandKit = { version: "1.0.0", palette: { blue: "#003CA6" } };
+  const reference = {
+    ref: "seosona-brand://video/SEOSONA/brand-kit.v1.json",
+    version: "1.0.0",
+    sha256: canonicalDigest(brandKit),
+    resolution: { env: "SEOSONA_BRAND_KIT_FILE" },
+  };
+  const brandProfile = { brand: { visual: { brandKit: {
+    ref: reference.ref,
+    version: reference.version,
+    sha256: reference.sha256,
+  } } } };
+  const reformatted = Buffer.from(
+    `${JSON.stringify(brandKit, null, 4)}\n`.replace(/\n/g, "\r\n"),
+  );
+
+  const result = validateBrandReference({ reference, brandProfile, brandKitBuffer: reformatted });
+
+  assert.equal(result.valid, true, result.errors.join("\n"));
 });
 
 test("reference accepts the live Video BrandKit when the environment provides it", async (t) => {

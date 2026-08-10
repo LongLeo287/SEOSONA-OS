@@ -6,8 +6,21 @@ import { pathToFileURL } from "node:url";
 const LOGICAL_REFERENCE =
   "seosona-brand://video/SEOSONA/brand-kit.v1.json";
 
-function sha256(buffer) {
-  return createHash("sha256").update(buffer).digest("hex");
+function canonicalize(value) {
+  if (Array.isArray(value)) return value.map(canonicalize);
+  if (value && typeof value === "object") {
+    return Object.keys(value).sort().reduce((output, key) => {
+      output[key] = canonicalize(value[key]);
+      return output;
+    }, {});
+  }
+  return value;
+}
+
+function canonicalDigest(value) {
+  return createHash("sha256")
+    .update(JSON.stringify(canonicalize(value)))
+    .digest("hex");
 }
 
 export function validateBrandReference({
@@ -43,11 +56,11 @@ export function validateBrandReference({
   }
 
   if (brandKitBuffer) {
-    if (sha256(brandKitBuffer) !== reference?.sha256) {
-      errors.push("BrandKit digest mismatch");
-    }
     try {
       const brandKit = JSON.parse(brandKitBuffer.toString("utf8"));
+      if (canonicalDigest(brandKit) !== reference?.sha256) {
+        errors.push("BrandKit digest mismatch");
+      }
       if (brandKit.version !== reference?.version) {
         errors.push("BrandKit version mismatch");
       }
