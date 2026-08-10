@@ -1,0 +1,9 @@
+{
+  "contractVersion": "1.0",
+  "sources": {
+    "brand": "brand-profile.v1.json",
+    "group": "group-profile.v1.json",
+    "policy": "content-policy.v1.json",
+    "evidence": "evidence-packet.v1.json"
+  }
+}

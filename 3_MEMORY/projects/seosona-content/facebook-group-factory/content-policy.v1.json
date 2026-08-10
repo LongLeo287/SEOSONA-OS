@@ -1,0 +1,14 @@
+{
+  "policyVersion": "1.0",
+  "policy": {
+    "requiredEvidence": true,
+    "cadencePerWeek": 5,
+    "claimsWithoutEvidence": "block",
+    "copyLanguage": "vi",
+    "facebookPublishing": "not_supported_in_v1",
+    "visualQuality": {
+      "retryLimit": 2,
+      "unjudged": "asset_needs_review"
+    }
+  }
+}
