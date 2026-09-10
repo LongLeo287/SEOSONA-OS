@@ -1,0 +1,14 @@
+{
+  "name": "SEOSONA OS",
+  "slug": "seosona-os",
+  "tagline": "Bộ não trung tâm & hệ điều hành tri thức",
+  "repo": "https://github.com/LongLeo287/SEOSONA-OS",
+  "portfolio": "https://portfolio-long-leo.vercel.app",
+  "lead": {
+    "title": "Nhận bản doctrine mẫu",
+    "field": "email",
+    "endpoint": "/api/lead"
+  },
+  "updated": "2026-09-10",
+  "note": "Đọc lúc chạy, không nhúng vào HTML — sửa file này là trang đổi theo mà không cần dựng lại."
+}
